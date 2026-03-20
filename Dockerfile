@@ -10,7 +10,7 @@ RUN yarn build
 
 FROM nginx:1.27-alpine
 
-ENV INCUS_BACKEND=https://host.docker.internal:8443
+ENV INCUS_BACKEND=https://127.0.0.1:8443
 ENV INCUS_TLS_VERIFY=off
 
 COPY docker/nginx/default.conf.template /etc/incus-ui/default.conf.template
