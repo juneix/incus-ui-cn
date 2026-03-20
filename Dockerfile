@@ -1,14 +1,14 @@
-FROM node:22-alpine AS build
+FROM node:24-alpine AS build
 WORKDIR /app
 
 COPY package.json yarn.lock ./
-RUN npm install -g yarn@1.22.22
+RUN corepack enable && corepack prepare yarn@1.22.22 --activate
 RUN yarn install --frozen-lockfile
 
 COPY . .
 RUN yarn build
 
-FROM nginx:1.27-alpine
+FROM nginx:1.28.2-alpine
 
 ENV INCUS_BACKEND=https://127.0.0.1:8443
 ENV INCUS_TLS_VERIFY=off
