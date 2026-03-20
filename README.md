@@ -20,13 +20,17 @@ services:
     restart: always
     network_mode: host
     environment:
-      INCUS_TLS_VERIFY: off
+      port: 5566
+      tls_verify: off
 ```
+
 访问网页控制台：
 
 ```bash
 http://ip:5566/ui/
 ```
+
+修改 `port` 后，对应替换访问端口即可。
 
 ## License
 

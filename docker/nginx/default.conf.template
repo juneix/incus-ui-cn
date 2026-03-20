@@ -4,7 +4,7 @@ map $http_upgrade $connection_upgrade {
 }
 
 server {
-  listen 5566;
+  listen ${port};
   server_name _;
 
   root /usr/share/nginx/html;
@@ -18,7 +18,7 @@ server {
   }
 
   location /1.0 {
-    proxy_pass ${INCUS_BACKEND};
+    proxy_pass ${backend};
     proxy_http_version 1.1;
     proxy_set_header Host $host;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -28,12 +28,12 @@ server {
     proxy_buffering off;
     proxy_read_timeout 3600s;
     proxy_send_timeout 3600s;
-    proxy_ssl_verify ${INCUS_TLS_VERIFY};
-${INCUS_CLIENT_CERT_BLOCK}
+    proxy_ssl_verify ${tls_verify};
+${client_cert_block}
   }
 
   location /oidc {
-    proxy_pass ${INCUS_BACKEND};
+    proxy_pass ${backend};
     proxy_http_version 1.1;
     proxy_set_header Host $host;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -43,12 +43,12 @@ ${INCUS_CLIENT_CERT_BLOCK}
     proxy_buffering off;
     proxy_read_timeout 3600s;
     proxy_send_timeout 3600s;
-    proxy_ssl_verify ${INCUS_TLS_VERIFY};
-${INCUS_CLIENT_CERT_BLOCK}
+    proxy_ssl_verify ${tls_verify};
+${client_cert_block}
   }
 
   location /documentation {
-    proxy_pass ${INCUS_BACKEND};
+    proxy_pass ${backend};
     proxy_http_version 1.1;
     proxy_set_header Host $host;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -58,7 +58,7 @@ ${INCUS_CLIENT_CERT_BLOCK}
     proxy_buffering off;
     proxy_read_timeout 3600s;
     proxy_send_timeout 3600s;
-    proxy_ssl_verify ${INCUS_TLS_VERIFY};
-${INCUS_CLIENT_CERT_BLOCK}
+    proxy_ssl_verify ${tls_verify};
+${client_cert_block}
   }
 }
