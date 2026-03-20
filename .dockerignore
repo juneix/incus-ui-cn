@@ -1,0 +1,11 @@
+.git
+.github
+incus-ui-backup
+node_modules
+build
+coverage
+playwright-report
+test-results
+tests
+*.log
+.env.local

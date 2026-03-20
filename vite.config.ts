@@ -13,8 +13,10 @@ if (fs.existsSync(".env.local")) {
 // Provide the SCSS settings from the _settings.scss file.
 // SCSS in react-components can reference variables like customized $breakpoint-large and should use our settings.
 const scssSettings = fs.readFileSync("src/sass/_settings.scss", "utf-8").trim();
+const incusTarget = process.env.INCUS_DEV_SERVER ?? "https://127.0.0.1:8443";
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  base: command === "build" ? "/ui/" : "/",
   css: {
     preprocessorOptions: {
       scss: {
@@ -26,18 +28,25 @@ export default defineConfig({
   },
   plugins: [tsconfigPaths(), react()],
   server: {
-    port: process.env.VITE_PORT ? Number(process.env.VITE_PORT) : 3000,
+    port: process.env.VITE_PORT ? Number(process.env.VITE_PORT) : 5566,
     strictPort: true,
     hmr: process.env.CI ? false : undefined,
     proxy: {
-      "/ui/assets": {
-        target: "https://localhost:8407/",
-        rewrite: (path) => path.replace(/^\/ui/, ""),
+      "/1.0": {
+        target: incusTarget,
+        changeOrigin: true,
         secure: false,
+        ws: true,
       },
-      "/ui/monaco-editor": {
-        target: "https://localhost:8407/node_modules",
-        rewrite: (path) => path.replace(/^\/ui/, ""),
+      "/oidc": {
+        target: incusTarget,
+        changeOrigin: true,
+        secure: false,
+        ws: true,
+      },
+      "/documentation": {
+        target: incusTarget,
+        changeOrigin: true,
         secure: false,
       },
     },
@@ -46,9 +55,4 @@ export default defineConfig({
     outDir: "./build/ui",
     minify: "esbuild",
   },
-  experimental: {
-    renderBuiltUrl(filename: string) {
-      return "/ui/" + filename;
-    },
-  },
-});
+}));

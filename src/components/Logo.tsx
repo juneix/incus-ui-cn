@@ -12,7 +12,7 @@ const Logo: FC<Props> = ({ light }) => {
   const { project, isLoading } = useCurrentProject();
   const { data: settings } = useSettings();
 
-  const src = "/ui/assets/img/incus-logo.svg";
+  const src = `${import.meta.env.BASE_URL}assets/img/incus-logo.svg`;
   const heading = "Incus UI";
 
   const getLogoLink = () => {

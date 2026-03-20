@@ -25,27 +25,27 @@ const BrowserImport: FC<Props> = ({ sendPfx }) => {
   const windowsDialogSteps = (
     <>
       <li className="p-list__item">
-        This opens a certificate management dialog. Click <code>Import...</code>
-        then <code>Next</code> and select the <code>incus-ui.pfx</code> file you
-        just downloaded. Enter your password, or leave the field empty if you
-        have not set one. Click <code>Next</code>.
+        这会打开证书管理对话框。点击 <code>Import...</code>，然后点击
+        <code>Next</code>，并选择刚刚下载的 <code>incus-ui.pfx</code>
+        文件。输入你的密码；如果未设置密码，可以留空。然后点击
+        <code>Next</code>。
       </li>
       <li className="p-list__item">
-        Select <code>Automatically select the certificate store</code> and click{" "}
-        <code>Next</code>, then click <code>Finish</code>.
+        选择 <code>Automatically select the certificate store</code>，点击
+        <code>Next</code>，然后点击 <code>Finish</code>。
       </li>
       <li className="p-list__item">
-        Restart the browser and open the Incus UI. Select the Incus UI certificate.
+        重启浏览器并打开 Incus UI，然后选择 Incus UI 证书。
       </li>
     </>
   );
 
   const downloadPfx = (
     <li className="p-list__item u-clearfix">
-      Download the <code>.pfx</code> file for importing to your browser.
+      下载用于导入浏览器的 <code>.pfx</code> 文件。
       {sendPfx && (
         <div className="u-float-right--large">
-          <Button onClick={sendPfx}>Download pfx</Button>
+          <Button onClick={sendPfx}>下载 pfx</Button>
         </div>
       )}
     </li>
@@ -69,7 +69,7 @@ const BrowserImport: FC<Props> = ({ sendPfx }) => {
             <ul className="p-list--divided u-no-margin--bottom">
               {downloadPfx}
               <li className="p-list__item">
-                Paste this link into the address bar:
+                将以下链接粘贴到地址栏：
                 <div className="p-code-snippet u-no-margin--bottom">
                   <pre className="p-code-snippet__block">
                     <code>about:preferences#privacy</code>
@@ -77,20 +77,19 @@ const BrowserImport: FC<Props> = ({ sendPfx }) => {
                 </div>
               </li>
               <li className="p-list__item">
-                Scroll down to the certificates section and click the{" "}
-                <code>View Certificates</code> button.
+                向下滚动到证书部分，然后点击 <code>View Certificates</code>
+                按钮。
               </li>
               <li className="p-list__item">
-                In the popup click <code>Your certificates</code> and then{" "}
-                <code>Import</code>.
+                在弹窗中点击 <code>Your certificates</code>，然后点击
+                <code>Import</code>。
               </li>
               <li className="p-list__item">
-                Select the <code>.pfx</code> file you just downloaded. Enter
-                your password, or leave the field empty if you have not set one.
+                选择刚刚下载的 <code>.pfx</code>
+                文件。输入你的密码；如果未设置密码，可以留空。
               </li>
               <li className="p-list__item">
-                Restart the browser and open the Incus UI. Select the Incus UI
-                certificate.
+                重启浏览器并打开 Incus UI，然后选择 Incus UI 证书。
               </li>
             </ul>
           </div>
@@ -101,7 +100,7 @@ const BrowserImport: FC<Props> = ({ sendPfx }) => {
             <ul className="p-list--divided u-no-margin--bottom">
               {downloadPfx}
               <li className="p-list__item">
-                Paste into the address bar:
+                将以下内容粘贴到地址栏：
                 <div className="p-code-snippet u-no-margin--bottom">
                   <pre className="p-code-snippet__block">
                     <code>chrome://settings/certificates</code>
@@ -109,13 +108,12 @@ const BrowserImport: FC<Props> = ({ sendPfx }) => {
                 </div>
               </li>
               <li className="p-list__item">
-                Click the <code>Import</code> button and select the{" "}
-                <code>incus-ui.pfx</code> file you just downloaded. Enter your
-                password, or leave the field empty if you have not set one.
+                点击 <code>Import</code> 按钮并选择刚刚下载的
+                <code>incus-ui.pfx</code>
+                文件。输入你的密码；如果未设置密码，可以留空。
               </li>
               <li className="p-list__item">
-                Restart the browser and open Incus-UI. Select the Incus-UI
-                certificate.
+                重启浏览器并打开 Incus UI，然后选择 Incus UI 证书。
               </li>
             </ul>
           </div>
@@ -126,7 +124,7 @@ const BrowserImport: FC<Props> = ({ sendPfx }) => {
             <ul className="p-list--divided u-no-margin--bottom">
               {downloadPfx}
               <li className="p-list__item">
-                Paste into the address bar:
+                将以下内容粘贴到地址栏：
                 <div className="p-code-snippet u-no-margin--bottom">
                   <pre className="p-code-snippet__block">
                     <code>chrome://settings/security</code>
@@ -134,7 +132,7 @@ const BrowserImport: FC<Props> = ({ sendPfx }) => {
                 </div>
               </li>
               <li className="p-list__item">
-                Scroll down to the <code>Advanced settings</code> and click{" "}
+                向下滚动到 <code>Advanced settings</code>，然后点击
                 <code>Manage device certificates</code>
               </li>
               {windowsDialogSteps}
@@ -147,7 +145,7 @@ const BrowserImport: FC<Props> = ({ sendPfx }) => {
             <ul className="p-list--divided u-no-margin--bottom">
               {downloadPfx}
               <li className="p-list__item">
-                Paste into the address bar:
+                将以下内容粘贴到地址栏：
                 <div className="p-code-snippet u-no-margin--bottom">
                   <pre className="p-code-snippet__block">
                     <code>edge://settings/privacy</code>
@@ -155,7 +153,7 @@ const BrowserImport: FC<Props> = ({ sendPfx }) => {
                 </div>
               </li>
               <li className="p-list__item">
-                Scroll to the <code>Security</code> section and click{" "}
+                滚动到 <code>Security</code> 部分，然后点击
                 <code>Manage Certificates</code>
               </li>
               {windowsDialogSteps}
@@ -171,26 +169,22 @@ const BrowserImport: FC<Props> = ({ sendPfx }) => {
                   severity="caution"
                   className="u-no-margin--bottom"
                 >
-                  The certificate must be protected by password. An empty
-                  password will fail to be imported on macOS.
+                  证书必须设置密码保护；空密码在 macOS 上会导致导入失败。
                 </Notification>
               </li>
               {downloadPfx}
               <li className="p-list__item">
-                Start the Keychain Access app on your Mac, select the login
-                keychain.
+                在 Mac 上打开 Keychain Access 应用，然后选择 login
+                keychain。
               </li>
               <li className="p-list__item">
-                Drag the <code>incus-ui.pfx</code> file onto the Keychain Access
-                app.
+                将 <code>incus-ui.pfx</code> 文件拖到 Keychain Access 应用中。
               </li>
               <li className="p-list__item">
-                If you are asked to provide a name and password, type the name
-                and password for an administrator user on this computer.
+                如果系统要求输入名称和密码，请输入这台电脑上一位管理员用户的名称和密码。
               </li>
               <li className="p-list__item">
-                Restart the browser and open Incus-UI. Select the Incus-UI
-                certificate.
+                重启浏览器并打开 Incus UI，然后选择 Incus UI 证书。
               </li>
             </ul>
           </div>

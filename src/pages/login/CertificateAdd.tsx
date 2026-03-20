@@ -11,14 +11,13 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "context/auth";
 import CertificateAddForm from "pages/login/CertificateAddForm";
 import NotificationRow from "components/NotificationRow";
-import HelpLink from "components/HelpLink";
 
 const CertificateAdd: FC = () => {
   const { isAuthenticated, isAuthLoading } = useAuth();
   const notify = useNotify();
 
   if (isAuthLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="正在加载..." isMainComponent />;
   }
 
   if (isAuthenticated) {
@@ -31,7 +30,7 @@ const CertificateAdd: FC = () => {
       header={
         <div className="p-panel__header is-sticky">
           <h1 className="p-panel__title">
-              Add existing certificate
+              添加已有证书
           </h1>
         </div>
       }
@@ -41,7 +40,7 @@ const CertificateAdd: FC = () => {
       ) : (
         <Row>
           <Notification severity="caution">
-            A client certificate must be present and selected in your browser.
+            浏览器中必须已存在并选中了客户端证书。
             <br />
           </Notification>
         </Row>
@@ -53,12 +52,12 @@ const CertificateAdd: FC = () => {
               <Row>
                 <Col size={3}>
                   <h2 className="p-stepped-list__title p-heading--5">
-                    Create token
+                    创建 Token
                   </h2>
                 </Col>
                 <Col size={6}>
                   <div className="p-stepped-list__content">
-                    <p>Generate a token on the command line</p>
+                    <p>在命令行中生成 Token</p>
                     <div className="p-code-snippet">
                       <pre className="p-code-snippet__block--icon">
                         <code>incus config trust add incus-ui</code>
@@ -71,7 +70,7 @@ const CertificateAdd: FC = () => {
             <li className="p-stepped-list__item">
               <Row>
                 <Col size={3}>
-                  <h2 className="p-stepped-list__title p-heading--5">Import</h2>
+                  <h2 className="p-stepped-list__title p-heading--5">导入</h2>
                 </Col>
                 <Col size={6}>
                   <div className="p-stepped-list__content">
@@ -83,11 +82,11 @@ const CertificateAdd: FC = () => {
             <li className="p-stepped-list__item u-no-margin--bottom">
               <Row>
                 <Col size={3}>
-                  <h2 className="p-stepped-list__title p-heading--5">Done</h2>
+                  <h2 className="p-stepped-list__title p-heading--5">完成</h2>
                 </Col>
                 <Col size={6}>
                   <div className="p-stepped-list__content">
-                    <p>Enjoy Incus UI.</p>
+                    <p>开始使用 Incus UI。</p>
                   </div>
                 </Col>
               </Row>

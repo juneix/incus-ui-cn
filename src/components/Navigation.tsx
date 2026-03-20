@@ -63,7 +63,7 @@ const initialiseOpenNavMenus = (location: Location) => {
   return initialOpenMenus;
 };
 
-const ALL_PROJECTS = "All projects";
+const ALL_PROJECTS = "所有项目";
 
 const initializeProjectName = (
   isAllProjectsFromUrl: boolean,
@@ -205,10 +205,10 @@ const Navigation: FC = () => {
 
   const getNavTitle = (title: string) => {
     if (isAllProjects) {
-      return `Select a project to explore ${title}`;
+      return `选择项目以查看${title}`;
     }
 
-    return `${capitalizeFirstLetter(title)} (${projectName})`;
+    return `${capitalizeFirstLetter(title)}（${projectName}）`;
   };
 
   const isDark = isAuthenticated || isDarkTheme(loadTheme());
@@ -231,14 +231,14 @@ const Navigation: FC = () => {
                 className="p-panel__toggle"
                 onClick={hardToggleMenu}
               >
-                Menu
+                菜单
               </Button>
             </div>
           </div>
         </div>
       </header>
       <nav
-        aria-label="main navigation"
+        aria-label="主导航"
         className={classnames("l-navigation", {
           "is-collapsed": menuCollapsed,
           "is-pinned": !menuCollapsed,
@@ -259,7 +259,7 @@ const Navigation: FC = () => {
                   appearance="base"
                   hasIcon
                   className="u-no-margin"
-                  aria-label="close navigation"
+                  aria-label="关闭导航"
                   onClick={hardToggleMenu}
                 >
                   <Icon name="close" />
@@ -293,20 +293,20 @@ const Navigation: FC = () => {
                               ? "/ui/all-projects/instances"
                               : `/ui/project/${encodeURIComponent(projectName)}/instances`
                           }
-                          title={`Instances (${projectName})`}
+                          title={`实例（${projectName}）`}
                           onClick={softToggleMenu}
                         >
                           <Icon
                             className="is-light p-side-navigation__icon"
                             name="pods"
                           />{" "}
-                          Instances
+                          实例
                         </NavLink>
                       </SideNavigationItem>
                       <SideNavigationItem>
                         <NavLink
                           to={`/ui/project/${encodeURIComponent(projectName)}/profiles`}
-                          title={getNavTitle("profiles")}
+                          title={getNavTitle("配置模板")}
                           disabled={isAllProjects}
                           onClick={softToggleMenu}
                         >
@@ -314,17 +314,17 @@ const Navigation: FC = () => {
                             className="is-light p-side-navigation__icon"
                             name="repository"
                           />{" "}
-                          Profiles
+                          配置模板
                         </NavLink>
                       </SideNavigationItem>
 
                       <SideNavigationItem>
                         <NavAccordion
                           baseUrl={`/ui/project/${encodeURIComponent(projectName)}/network`}
-                          title={getNavTitle("networking")}
+                          title={getNavTitle("网络")}
                           disabled={isAllProjects}
                           iconName="exposed"
-                          label="Networking"
+                          label="网络"
                           onOpen={() => {
                             toggleAccordionNav("networking");
                           }}
@@ -336,7 +336,7 @@ const Navigation: FC = () => {
                             >
                               <NavLink
                                 to={`/ui/project/${encodeURIComponent(projectName)}/networks`}
-                                title={`Networks (${projectName})`}
+                                title={`网络（${projectName}）`}
                                 onClick={softToggleMenu}
                                 className="accordion-nav-secondary"
                                 ignoreUrlMatches={[
@@ -345,7 +345,7 @@ const Navigation: FC = () => {
                                   "network-ipam",
                                 ]}
                               >
-                                Networks
+                                网络
                               </NavLink>
                             </SideNavigationItem>,
                             <SideNavigationItem
@@ -353,11 +353,11 @@ const Navigation: FC = () => {
                             >
                               <NavLink
                                 to={`/ui/project/${encodeURIComponent(projectName)}/network-acls`}
-                                title={`ACLs (${projectName})`}
+                                title={`ACL（${projectName}）`}
                                 onClick={softToggleMenu}
                                 className="accordion-nav-secondary"
                               >
-                                ACLs
+                                ACL
                               </NavLink>
                             </SideNavigationItem>,
                             <SideNavigationItem
@@ -365,7 +365,7 @@ const Navigation: FC = () => {
                             >
                               <NavLink
                                 to={`/ui/project/${encodeURIComponent(projectName)}/network-ipam`}
-                                title={`IPAM (${projectName})`}
+                                title={`IPAM（${projectName}）`}
                                 onClick={softToggleMenu}
                                 className="accordion-nav-secondary"
                               >
@@ -378,10 +378,10 @@ const Navigation: FC = () => {
                       <SideNavigationItem>
                         <NavAccordion
                           baseUrl={`/ui/project/${encodeURIComponent(projectName)}/storage`}
-                          title={getNavTitle("storage")}
+                          title={getNavTitle("存储")}
                           disabled={isAllProjects}
                           iconName="switcher-dashboard"
-                          label="Storage"
+                          label="存储"
                           onOpen={() => {
                             toggleAccordionNav("storage");
                           }}
@@ -393,7 +393,7 @@ const Navigation: FC = () => {
                             >
                               <NavLink
                                 to={`/ui/project/${encodeURIComponent(projectName)}/storage/pools`}
-                                title="Pools"
+                                title="存储池"
                                 onClick={softToggleMenu}
                                 className="accordion-nav-secondary"
                                 ignoreUrlMatches={[
@@ -401,7 +401,7 @@ const Navigation: FC = () => {
                                   "/bucket/",
                                 ]}
                               >
-                                Pools
+                                存储池
                               </NavLink>
                             </SideNavigationItem>,
                             <SideNavigationItem
@@ -409,12 +409,12 @@ const Navigation: FC = () => {
                             >
                               <NavLink
                                 to={`/ui/project/${encodeURIComponent(projectName)}/storage/volumes`}
-                                title="Volumes"
+                                title="存储卷"
                                 onClick={softToggleMenu}
                                 className="accordion-nav-secondary"
                                 activeUrlMatches={["volumes/custom"]}
                               >
-                                Volumes
+                                存储卷
                               </NavLink>
                             </SideNavigationItem>,
                             ...(hasCustomVolumeIso
@@ -424,11 +424,11 @@ const Navigation: FC = () => {
                                   >
                                     <NavLink
                                       to={`/ui/project/${encodeURIComponent(projectName)}/storage/custom-isos`}
-                                      title="Custom ISOs"
+                                      title="自定义 ISO"
                                       onClick={softToggleMenu}
                                       className="accordion-nav-secondary"
                                     >
-                                      Custom ISOs
+                                      自定义 ISO
                                     </NavLink>
                                   </SideNavigationItem>,
                                 ]
@@ -438,12 +438,12 @@ const Navigation: FC = () => {
                             >
                               <NavLink
                                 to={`/ui/project/${encodeURIComponent(projectName)}/storage/buckets`}
-                                title="Buckets"
+                                title="存储桶"
                                 onClick={softToggleMenu}
                                 className="accordion-nav-secondary"
                                 activeUrlMatches={["/bucket/"]}
                               >
-                                Buckets
+                                存储桶
                               </NavLink>
                             </SideNavigationItem>,
                           ]}
@@ -452,7 +452,7 @@ const Navigation: FC = () => {
                       <SideNavigationItem>
                         <NavLink
                           to={`/ui/project/${encodeURIComponent(projectName)}/images`}
-                          title={getNavTitle("images")}
+                          title={getNavTitle("镜像")}
                           disabled={isAllProjects}
                           onClick={softToggleMenu}
                         >
@@ -460,13 +460,13 @@ const Navigation: FC = () => {
                             className="is-light p-side-navigation__icon"
                             name="image"
                           />{" "}
-                          Images
+                          镜像
                         </NavLink>
                       </SideNavigationItem>
                       <SideNavigationItem>
                         <NavLink
                           to={`/ui/project/${encodeURIComponent(projectName)}/configuration`}
-                          title={getNavTitle("configuration")}
+                          title={getNavTitle("配置")}
                           disabled={isAllProjects}
                           onClick={softToggleMenu}
                         >
@@ -474,7 +474,7 @@ const Navigation: FC = () => {
                             className="is-light p-side-navigation__icon"
                             name="switcher-environments"
                           />{" "}
-                          Configuration
+                          配置
                         </NavLink>
                       </SideNavigationItem>
                       <hr
@@ -486,9 +486,9 @@ const Navigation: FC = () => {
                         <SideNavigationItem>
                           <NavAccordion
                             baseUrl="/ui/cluster"
-                            title={getNavTitle("clustering")}
+                            title={getNavTitle("集群")}
                             iconName="cluster-host"
-                            label="Clustering"
+                            label="集群"
                             onOpen={() => {
                               toggleAccordionNav("clustering");
                             }}
@@ -498,21 +498,21 @@ const Navigation: FC = () => {
                               <SideNavigationItem key="members">
                                 <NavLink
                                   to="/ui/cluster/members"
-                                  title="Members"
+                                  title="成员"
                                   onClick={softToggleMenu}
                                   className="accordion-nav-secondary"
                                 >
-                                  Members
+                                  成员
                                 </NavLink>
                               </SideNavigationItem>,
                               <SideNavigationItem key="groups">
                                 <NavLink
                                   to="/ui/cluster/groups"
-                                  title="Groups"
+                                  title="分组"
                                   onClick={softToggleMenu}
                                   className="accordion-nav-secondary"
                                 >
-                                  Groups
+                                  分组
                                 </NavLink>
                               </SideNavigationItem>,
                             ]}
@@ -523,42 +523,42 @@ const Navigation: FC = () => {
                         <SideNavigationItem>
                           <NavLink
                             to="/ui/server"
-                            title="Server"
+                            title="服务器"
                             onClick={softToggleMenu}
                           >
                             <Icon
                               className="is-light p-side-navigation__icon"
                               name="cluster-host"
                             />{" "}
-                            Server
+                            服务器
                           </NavLink>
                         </SideNavigationItem>
                       )}
                       <SideNavigationItem>
                         <NavLink
                           to={`/ui/operations`}
-                          title={`Operations (${projectName})`}
+                          title={`操作（${projectName}）`}
                           onClick={softToggleMenu}
                         >
                           <Icon
                             className="is-light p-side-navigation__icon"
                             name="status"
                           />{" "}
-                          Operations
+                          操作
                         </NavLink>
                       </SideNavigationItem>
                       {!isRestricted && (
                         <SideNavigationItem>
                           <NavLink
                             to="/ui/warnings?status=new"
-                            title="Warnings"
+                            title="警告"
                             onClick={softToggleMenu}
                           >
                             <Icon
                               className="is-light p-side-navigation__icon"
                               name="warning-grey"
                             />{" "}
-                            Warnings
+                            警告
                           </NavLink>
                         </SideNavigationItem>
                       )}
@@ -566,9 +566,9 @@ const Navigation: FC = () => {
                         <SideNavigationItem>
                           <NavAccordion
                             baseUrl="/ui/permissions"
-                            title={`Permissions`}
+                            title="权限"
                             iconName="user"
-                            label="Permissions"
+                            label="权限"
                             onOpen={() => {
                               toggleAccordionNav("permissions");
                             }}
@@ -578,34 +578,34 @@ const Navigation: FC = () => {
                               <SideNavigationItem key="/ui/permissions/identities">
                                 <NavLink
                                   to="/ui/permissions/identities?system-identities=hide"
-                                  title="Identities"
+                                  title="身份"
                                   onClick={softToggleMenu}
                                   activeUrlMatches={[
                                     "/ui/permissions/identities",
                                   ]}
                                   className="accordion-nav-secondary"
                                 >
-                                  Identities
+                                  身份
                                 </NavLink>
                               </SideNavigationItem>,
                               <SideNavigationItem key="/ui/permissions/groups">
                                 <NavLink
                                   to="/ui/permissions/groups"
-                                  title="Groups"
+                                  title="分组"
                                   onClick={softToggleMenu}
                                   className="accordion-nav-secondary"
                                 >
-                                  Groups
+                                  分组
                                 </NavLink>
                               </SideNavigationItem>,
                               <SideNavigationItem key="/ui/permissions/idp-groups">
                                 <NavLink
                                   to="/ui/permissions/idp-groups"
-                                  title="Identity provider groups"
+                                  title="身份提供方分组"
                                   onClick={softToggleMenu}
                                   className="accordion-nav-secondary"
                                 >
-                                  IDP groups
+                                  IDP 分组
                                 </NavLink>
                               </SideNavigationItem>,
                             ]}
@@ -615,14 +615,14 @@ const Navigation: FC = () => {
                       <SideNavigationItem>
                         <NavLink
                           to="/ui/settings"
-                          title="Settings"
+                          title="设置"
                           onClick={softToggleMenu}
                         >
                           <Icon
                             className="is-light p-side-navigation__icon"
                             name="settings"
                           />{" "}
-                          Settings
+                          设置
                         </NavLink>
                       </SideNavigationItem>
                     </>
@@ -637,7 +637,7 @@ const Navigation: FC = () => {
                       <SideNavigationItem>
                         <NavLink
                           to="/ui/os"
-                          title="OS"
+                          title="操作系统"
                           onClick={softToggleMenu}
                           ignoreUrlMatches={["operations"]}
                         >
@@ -645,7 +645,7 @@ const Navigation: FC = () => {
                             className="is-light p-side-navigation__icon"
                             name="desktop"
                           />{" "}
-                          OS
+                          操作系统
                         </NavLink>
                       </SideNavigationItem>
                     </>
@@ -662,7 +662,7 @@ const Navigation: FC = () => {
                           href="/oidc/login"
                         >
                           <Icon name="security" />
-                          <span>Login with SSO instead</span>
+                          <span>改为使用 SSO 登录</span>
                         </a>
                       )}
                       <Stepper
@@ -673,7 +673,7 @@ const Navigation: FC = () => {
                               navigate("/ui/login/certificate-generate");
                             }}
                             index={1}
-                            title="Browser certificate"
+                            title="浏览器证书"
                             hasProgressLine={false}
                             enabled
                             iconName="number"
@@ -686,7 +686,7 @@ const Navigation: FC = () => {
                               navigate("/ui/login/certificate-add");
                             }}
                             index={2}
-                            title="Identity trust token"
+                            title="身份认证 Token"
                             hasProgressLine={false}
                             enabled
                             iconName="number"
@@ -748,7 +748,7 @@ const Navigation: FC = () => {
                   <SideNavigationItem>
                     <DocLink
                       className="p-side-navigation__link"
-                      title="Documentation"
+                      title="文档"
                       docPath="/"
                     >
                       <Icon
@@ -757,7 +757,7 @@ const Navigation: FC = () => {
                         })}
                         name="book"
                       />
-                      Documentation
+                      文档
                     </DocLink>
                   </SideNavigationItem>
                   <SideNavigationItem>
@@ -766,7 +766,7 @@ const Navigation: FC = () => {
                       href="https://discuss.linuxcontainers.org"
                       target="_blank"
                       rel="noopener noreferrer"
-                      title="Discussion"
+                      title="讨论"
                     >
                       <Icon
                         className={classnames("p-side-navigation__icon", {
@@ -774,7 +774,7 @@ const Navigation: FC = () => {
                         })}
                         name="share"
                       />
-                      Discussion
+                      讨论
                     </a>
                   </SideNavigationItem>
                   <SideNavigationItem>
@@ -783,7 +783,7 @@ const Navigation: FC = () => {
                       href={getReportBugURL()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      title="Report a bug"
+                      title="报告问题"
                     >
                       <Icon
                         className={classnames("p-side-navigation__icon", {
@@ -791,14 +791,14 @@ const Navigation: FC = () => {
                         })}
                         name="submit-bug"
                       />
-                      Report a bug
+                      报告问题
                     </a>
                   </SideNavigationItem>
                   {isOidc && (
                     <SideNavigationItem>
                       <a
                         className="p-side-navigation__link"
-                        title="Log out"
+                        title="退出登录"
                         onClick={() => {
                           logout();
 
@@ -809,7 +809,7 @@ const Navigation: FC = () => {
                           className="is-light p-side-navigation__icon p-side-logout"
                           name="export"
                         />
-                        Log out
+                        退出登录
                       </a>
                     </SideNavigationItem>
                   )}
@@ -823,8 +823,8 @@ const Navigation: FC = () => {
                   <Button
                     appearance="base"
                     aria-label={`${
-                      menuCollapsed ? "expand" : "collapse"
-                    } main navigation`}
+                      menuCollapsed ? "展开" : "折叠"
+                    }主导航`}
                     hasIcon
                     dense
                     className={classnames(

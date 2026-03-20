@@ -18,7 +18,7 @@ const CertificateAddForm: FC = () => {
       .then(() => {
         location.reload();
       })
-      .catch((e) => notify.failure("Error using token", e));
+      .catch((e) => notify.failure("使用 Token 时出错", e));
   };
 
   return (
@@ -26,8 +26,8 @@ const CertificateAddForm: FC = () => {
       <Textarea
         id="token"
         name="token"
-        label="Paste the token from the previous step"
-        placeholder="Paste your token here"
+        label="粘贴上一步生成的 Token"
+        placeholder="在这里粘贴 Token"
         rows={3}
         onChange={(e) => {
           setToken(e.target.value);
@@ -39,7 +39,7 @@ const CertificateAddForm: FC = () => {
         type="button"
         onClick={submitCertificateToken}
       >
-        Import
+        导入
       </Button>
     </Form>
   );

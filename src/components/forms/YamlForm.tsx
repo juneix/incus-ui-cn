@@ -31,7 +31,7 @@ const YamlForm: FC<Props> = ({
   const [editor, setEditor] = useState<IStandaloneCodeEditor | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  loader.config({ paths: { vs: "/ui/monaco-editor/min/vs" } });
+  loader.config({ paths: { vs: `${import.meta.env.BASE_URL}monaco-editor/min/vs` } });
 
   const updateFormHeight = () => {
     if (!editor || !containerRef.current) {

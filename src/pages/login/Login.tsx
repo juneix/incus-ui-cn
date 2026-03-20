@@ -3,8 +3,6 @@ import { Button, CustomLayout, Icon, Spinner } from "@canonical/react-components
 import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "context/auth";
 import { useSettings } from "context/useSettings";
-import DocLink from "components/DocLink";
-import classnames from "classnames";
 
 const Login: FC = () => {
   const { isAuthenticated, isAuthLoading } = useAuth();
@@ -13,7 +11,7 @@ const Login: FC = () => {
   const hasSSOOnly = settings?.config?.["user.ui.sso_only"] == "true";
 
   if (isAuthLoading) {
-    return <Spinner className="u-loader" text="Loading resources..." />;
+    return <Spinner className="u-loader" text="正在加载资源..." />;
   }
 
   if (isAuthenticated) {
@@ -24,17 +22,17 @@ const Login: FC = () => {
     <>
       <CustomLayout>
         <div className="empty-state login-page">
-          <h1 className="p-heading--4 u-sv-2">Login</h1>
+          <h1 className="p-heading--4 u-sv-2">登录</h1>
 
           <>
             {!hasSSOOnly && (
-            <p className="u-sv1">Choose your login method</p>
+            <p className="u-sv1">选择登录方式</p>
             )}
             <div className="auth-container">
               {hasOidc && (
                 <a className="p-button--positive has-icon" href="/oidc/login">
                   <Icon name="security" light />
-                  <span>Login with SSO</span>
+                  <span>使用 SSO 登录</span>
                 </a>
               )}
               {!hasSSOOnly && (
@@ -44,7 +42,7 @@ const Login: FC = () => {
                   to="/ui/login/certificate-generate"
                 >
                   <Icon name="certificate" />
-                  <span>Login with TLS</span>
+                  <span>使用 TLS 证书登录</span>
                 </Link>
               </>
               )}

@@ -4,9 +4,7 @@ import { Button, Col, CustomLayout, Icon, Row, Spinner } from "@canonical/react-
 import BrowserImport from "pages/login/BrowserImport";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "context/auth";
-import Loader from "components/Loader";
 import PasswordModal from "pages/login/PasswordModal";
-import HelpLink from "components/HelpLink";
 
 interface Certs {
   crt: string;
@@ -20,7 +18,7 @@ const CertificateGenerate: FC = () => {
   const { isAuthenticated, isAuthLoading } = useAuth();
 
   if (isAuthLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="正在加载..." isMainComponent />;
   }
 
   if (isAuthenticated) {
@@ -86,7 +84,7 @@ const CertificateGenerate: FC = () => {
       header={
         <div className="p-panel__header is-sticky">
           <h1 className="p-panel__title">
-              Setup Incus UI
+              设置 Incus UI
           </h1>
         </div>
       }
@@ -98,12 +96,12 @@ const CertificateGenerate: FC = () => {
               <Row>
                 <Col size={3}>
                   <h2 className="p-stepped-list__title p-heading--5">
-                    Generate
+                    生成
                   </h2>
                 </Col>
                 <Col size={6}>
                   <div className="p-stepped-list__content">
-                    <p>Create a new certificate</p>
+                    <p>创建新证书</p>
                   </div>
                 </Col>
                 <Col size={3}>
@@ -119,8 +117,8 @@ const CertificateGenerate: FC = () => {
                     disabled={isGenerating || certs !== null}
                     hasIcon={isGenerating}
                     aria-label={`${
-                      isGenerating ? "Generating" : "Generate"
-                    } certificate`}
+                      isGenerating ? "正在生成" : "生成"
+                    }证书`}
                   >
                     {isGenerating && (
                       <Icon
@@ -128,7 +126,7 @@ const CertificateGenerate: FC = () => {
                         name="spinner"
                       />
                     )}
-                    <span>{isGenerating ? "Generating" : "Generate"}</span>
+                    <span>{isGenerating ? "正在生成" : "生成"}</span>
                   </Button>
                   {certs !== null && <Icon name="success" />}
                 </Col>
@@ -137,15 +135,15 @@ const CertificateGenerate: FC = () => {
             <li className="p-stepped-list__item">
               <Row>
                 <Col size={3}>
-                  <h2 className="p-stepped-list__title p-heading--5">Trust</h2>
+                  <h2 className="p-stepped-list__title p-heading--5">信任</h2>
                 </Col>
                 <Col size={8}>
                   <div className="p-stepped-list__content">
                     <Row>
                       <Col size={6}>
                         <p>
-                          Download the <code>.crt</code> file and add it to the
-                          Incus trust store
+                          下载 <code>.crt</code> 文件，并将其添加到 Incus
+                          信任列表
                         </p>
                       </Col>
                       {certs && (
@@ -156,7 +154,7 @@ const CertificateGenerate: FC = () => {
                               downloadText(crtFileName, certs.crt);
                             }}
                           >
-                            Download&nbsp;crt
+                            下载&nbsp;crt
                           </Button>
                         </Col>
                       )}
@@ -176,7 +174,7 @@ const CertificateGenerate: FC = () => {
             <li className="p-stepped-list__item">
               <Row>
                 <Col size={3}>
-                  <h2 className="p-stepped-list__title p-heading--5">Import</h2>
+                  <h2 className="p-stepped-list__title p-heading--5">导入</h2>
                 </Col>
                 <Col size={8}>
                   <BrowserImport
@@ -197,11 +195,11 @@ const CertificateGenerate: FC = () => {
             <li className="p-stepped-list__item u-no-margin--bottom">
               <Row>
                 <Col size={3}>
-                  <h2 className="p-stepped-list__title p-heading--5">Done</h2>
+                  <h2 className="p-stepped-list__title p-heading--5">完成</h2>
                 </Col>
                 <Col size={6}>
                   <div className="p-stepped-list__content">
-                    <p>Enjoy Incus UI.</p>
+                    <p>开始使用 Incus UI。</p>
                   </div>
                 </Col>
               </Row>

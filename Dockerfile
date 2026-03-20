@@ -1,40 +1,23 @@
-# Build js / css
-FROM node:22 AS yarn-dependencies
-WORKDIR /srv
+FROM node:22-alpine AS build
+WORKDIR /app
+
+COPY package.json yarn.lock ./
+RUN npm install -g yarn@1.22.22
+RUN yarn install --frozen-lockfile
+
 COPY . .
-RUN yarn --network-concurrency 2
-RUN yarn run build
-RUN mkdir /srv/deploy
-RUN mv build /srv/deploy/
-RUN mv entrypoint /srv/deploy/
-RUN mv haproxy-demo.cfg /srv/deploy/
+RUN yarn build
 
-# Build the demo image
-FROM ubuntu:noble
+FROM nginx:1.27-alpine
 
-# Set up environment
-ENV LANG C.UTF-8
-WORKDIR /srv
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        haproxy \
-        apt-transport-https \
-        build-essential \
-        ca-certificates \
-        curl \
-        git \
-        libssl-dev \
-        wget
+ENV INCUS_BACKEND=https://host.docker.internal:8443
+ENV INCUS_TLS_VERIFY=off
 
-# Install serve
-ENV NVM_DIR /usr/local/nvm
-RUN mkdir /usr/local/nvm \
-    && wget --no-check-certificate https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh \
-    && bash install.sh \
-    && . $NVM_DIR/nvm.sh \
-    && nvm install v16 \
-    && npm install --global serve
+COPY docker/nginx/default.conf.template /etc/incus-ui/default.conf.template
+COPY docker/nginx/render-config.sh /docker-entrypoint.d/40-render-incus-ui-config.sh
+RUN chmod +x /docker-entrypoint.d/40-render-incus-ui-config.sh
 
-# Import code
-COPY --from=yarn-dependencies /srv/deploy /srv
+COPY --from=build /app/build/ui /usr/share/nginx/html/ui
+COPY --from=build /app/build/index.html /usr/share/nginx/html/index.html
 
-ENTRYPOINT ["./entrypoint"]
+EXPOSE 5566
