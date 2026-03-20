@@ -1,39 +1,36 @@
 # Incus UI CN Lite
 
-`incus-ui-cn` 是基于 [zabbly/incus-ui-canonical](https://github.com/zabbly/incus-ui-canonical) 整理的轻量分支。
+`incus-ui-cn` 基于 [zabbly/incus-ui-canonical](https://github.com/zabbly/incus-ui-canonical) 整理。
 
 项目用途：
 
-- 保留适合自托管的 Incus Web UI 前端
-- 提供轻量 Docker 镜像构建与运行方式
-- 后续在这个分支上继续做中文化
+- 提供一个轻量的 Incus Web UI 前端
+- 支持直接从源码构建静态文件
+- 支持宿主机部署或 Docker 部署
+- 后续继续做中文化
 
 ## Docker Compose
-
-下面是一个开箱即用的 `docker-compose.yml` 示例：
 
 ```yaml
 services:
   incus-ui-cn:
-    image: ghcr.io/juneix/incus-ui-cn
+    image: ghcr.io/juneix/incus-ui-cn:latest
     container_name: incus-ui-cn
     restart: always
     network_mode: host
     environment:
       port: 5566
       tls_verify: off
+    volumes:
+      - ./config:/run/incus:ro
 ```
 
-访问网页控制台：
+访问：
 
 ```bash
 http://ip:5566/ui/
 ```
 
-修改 `port` 后，对应替换访问端口即可。
-
 ## License
-
-本仓库保留上游许可证文件：
 
 - [LICENSE](LICENSE)

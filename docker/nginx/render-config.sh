@@ -1,12 +1,15 @@
 #!/bin/sh
 set -eu
 
-client_cert_block=""
-if [ -f /run/incus/client.crt ] && [ -f /run/incus/client.key ]; then
-  client_cert_block="    proxy_ssl_certificate /run/incus/client.crt;\n    proxy_ssl_certificate_key /run/incus/client.key;"
+if [ -f /run/incus/incus-ui.crt ] && [ -f /run/incus/incus-ui.key ]; then
+  cat > /etc/nginx/conf.d/incus-client-cert.conf <<'EOF'
+proxy_ssl_certificate /run/incus/incus-ui.crt;
+proxy_ssl_certificate_key /run/incus/incus-ui.key;
+EOF
+else
+  : > /etc/nginx/conf.d/incus-client-cert.conf
 fi
 
-export client_cert_block
-envsubst '${port} ${backend} ${tls_verify} ${client_cert_block}' \
+envsubst '${port} ${backend} ${tls_verify}' \
   < /etc/incus-ui/default.conf.template \
   > /etc/nginx/conf.d/default.conf

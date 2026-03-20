@@ -29,7 +29,7 @@ server {
     proxy_read_timeout 3600s;
     proxy_send_timeout 3600s;
     proxy_ssl_verify ${tls_verify};
-${client_cert_block}
+    include /etc/nginx/conf.d/incus-client-cert.conf;
   }
 
   location /oidc {
@@ -44,7 +44,7 @@ ${client_cert_block}
     proxy_read_timeout 3600s;
     proxy_send_timeout 3600s;
     proxy_ssl_verify ${tls_verify};
-${client_cert_block}
+    include /etc/nginx/conf.d/incus-client-cert.conf;
   }
 
   location /documentation {
@@ -59,6 +59,6 @@ ${client_cert_block}
     proxy_read_timeout 3600s;
     proxy_send_timeout 3600s;
     proxy_ssl_verify ${tls_verify};
-${client_cert_block}
+    include /etc/nginx/conf.d/incus-client-cert.conf;
   }
 }
