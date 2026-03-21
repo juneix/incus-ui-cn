@@ -4,9 +4,10 @@
 
 
 ## 💡 项目用途
-- Incus 是 LXD 的社区版，他们都是基于 LXC 项目的。
-- Incus 支持 LXC 容器和 VM 虚拟机。
-- 提供一个轻量的中文版 Incus Web UI 前端
+Incus 是 LXD 的社区分支版本，二者均基于 LXC 项目。Incus 默认没有 Web UI，本项目提供一个轻量的 **Incus UI 中文定制版前端**。
+> Incus 支持 LXC 容器与 VM 虚拟机。
+- 中文版 Docker 镜像体积约 80 MB
+- 原版 incus-ui-canonical 的 apt 依赖包体积约 500 MB
 
 ## 🚀 快速开始
 
