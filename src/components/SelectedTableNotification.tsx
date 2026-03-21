@@ -43,7 +43,7 @@ const SelectedTableNotification: FC<Props> = ({
               className="u-no-margin--bottom u-no-padding--top"
               onClick={selectNone}
             >
-              清除选择
+              取消
             </Button>
           )}
         </>

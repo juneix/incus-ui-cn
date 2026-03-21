@@ -21,13 +21,13 @@ const InstanceUsageMemory: FC<Props> = ({ memory }) => {
         secondaryPercentage={(100 / memory.total) * memory.cached}
         text={
           humanFileSize(memory.total - memory.free) +
-          " of " +
+          " / " +
           humanFileSize(memory.total)
         }
         hoverText={
-          `free: ${humanFileSize(memory.free)}\n` +
-          `used: ${humanFileSize(used)}\n` +
-          `cached: ${humanFileSize(memory.cached)}\n`
+          `空闲：${humanFileSize(memory.free)}\n` +
+          `已用：${humanFileSize(used)}\n` +
+          `缓存：${humanFileSize(memory.cached)}\n`
         }
       />
     </div>

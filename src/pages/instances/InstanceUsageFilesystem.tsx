@@ -20,10 +20,10 @@ const InstanceUsageFilesystem: FC<Props> = ({ filesystem }) => {
         percentage={(100 / filesystem.total) * used}
         text={
           humanFileSize(filesystem.total - filesystem.free) +
-          " of " +
+          " / " +
           humanFileSize(filesystem.total)
         }
-        hoverText={`free: ${humanFileSize(filesystem.free)}\nused: ${humanFileSize(used)}`}
+        hoverText={`空闲：${humanFileSize(filesystem.free)}\n已用：${humanFileSize(used)}`}
       />
     </div>
   );

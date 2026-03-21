@@ -29,7 +29,7 @@ const Version: FC = () => {
           </Tooltip>
         )}
         Version {serverVersion}-ui-{UI_VERSION} {" "}
-        🇨🇳 汉化 by <a
+        🇨🇳 中文定制版 by <a
           href="https://juneix.github.io/"
           target="_blank"
           rel="noopener noreferrer"

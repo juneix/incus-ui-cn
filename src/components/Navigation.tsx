@@ -748,7 +748,7 @@ const Navigation: FC = () => {
                   <SideNavigationItem>
                     <DocLink
                       className="p-side-navigation__link"
-                      title="文档"
+                      title="文档中心"
                       docPath="/"
                     >
                       <Icon
@@ -757,41 +757,41 @@ const Navigation: FC = () => {
                         })}
                         name="book"
                       />
-                      文档
+                      文档中心
                     </DocLink>
                   </SideNavigationItem>
                   <SideNavigationItem>
                     <a
                       className="p-side-navigation__link"
-                      href="https://discuss.linuxcontainers.org"
+                      href="https://qm.qq.com/q/ZzOD5Qbhce"
                       target="_blank"
                       rel="noopener noreferrer"
-                      title="讨论"
+                      title="交流反馈"
                     >
                       <Icon
                         className={classnames("p-side-navigation__icon", {
                           "is-light": isAuthenticated,
                         })}
-                        name="share"
+                        name="user-group"
                       />
-                      讨论
+                      交流反馈*
                     </a>
                   </SideNavigationItem>
                   <SideNavigationItem>
                     <a
                       className="p-side-navigation__link"
-                      href={getReportBugURL()}
+                      href="https://5nav.eu.org/power/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      title="报告问题"
+                      title="打赏鼓励"
                     >
                       <Icon
                         className={classnames("p-side-navigation__icon", {
                           "is-light": isAuthenticated,
                         })}
-                        name="submit-bug"
+                        name="plans"
                       />
-                      报告问题
+                      打赏鼓励*
                     </a>
                   </SideNavigationItem>
                   {isOidc && (

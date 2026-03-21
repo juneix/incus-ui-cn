@@ -90,10 +90,10 @@ const InstanceUsageCpu: FC<Props> = ({ instance }) => {
         className="u-text--muted p-text--small"
         key={loadingSeconds > 0 ? loadingSeconds : "long"}
       >
-        loading
+        加载中
         {loadingSeconds > 0
-          ? `, ${loadingSeconds} seconds remaining to first CPU snapshot`
-          : " takes longer than expected"}
+          ? `，距离首个 CPU 快照还需 ${loadingSeconds} 秒`
+          : "，所需时间比预期更长"}
       </div>
     );
   }

@@ -37,8 +37,8 @@ const MigrateInstanceBtn: FC<Props> = ({ instance, classname }) => {
         disabled={isDisabled || !canEditInstance(instance) || isLoading}
         title={
           canEditInstance()
-            ? "Migrate instance"
-            : "You do not have permission to migrate this instance"
+            ? "迁移实例"
+            : "你没有迁移此实例的权限"
         }
       >
         <Icon name="machines" />

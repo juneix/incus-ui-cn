@@ -7,7 +7,6 @@ import type {
 } from "types/instance";
 import {
   instanceAction,
-  pluralize,
   statusLabel,
 } from "util/instanceBulkActions";
 import { ConfirmationButton, Icon } from "@canonical/react-components";
@@ -46,8 +45,7 @@ const InstanceBulkAction: FC<Props> = ({
   const hasDifferentStates = selectedStates.size > 1;
   const selectedSummary = hasDifferentStates ? (
     <>
-      <b>{instances.length}</b> {pluralize("instance", instances.length)}{" "}
-      selected:
+      已选择 <b>{instances.length}</b> 个实例：
       <br />
       <br />
     </>
@@ -75,12 +73,9 @@ const InstanceBulkAction: FC<Props> = ({
     const actionRaw = instanceAction(desiredAction, currentState);
 
     if (actionRaw === undefined) {
-      const instance = count === 1 ? "instance that is" : "instances that are";
-      const already = desiredAction !== "restart" ? "already " : "";
       return (
         <Fragment key={currentState + desiredAction}>
-          - No action for <b>{count}</b> {instance} {already}
-          {currentState.toLowerCase()}.
+          - <b>{count}</b> 个实例当前为{status}，无需执行操作。
           <br />
         </Fragment>
       );
@@ -91,8 +86,7 @@ const InstanceBulkAction: FC<Props> = ({
     return (
       <Fragment key={currentState + desiredAction}>
         {indent}
-        This will {desiredAction} <b>{count}</b>
-        {` ${status} ${pluralize("instance", count)}.`}
+        将对 <b>{count}</b> 个{status}实例执行{confirmLabel}。
         <br />
       </Fragment>
     );
@@ -122,9 +116,8 @@ const InstanceBulkAction: FC<Props> = ({
 
     return (
       <Fragment key="restricted">
-        - No action for <b>{restrictedInstances.length}</b>{" "}
-        {pluralize("instance", restrictedInstances.length)} that you do not have
-        permission to {confirmLabel.toLowerCase()}.
+        - 你没有对 <b>{restrictedInstances.length}</b> 个实例执行{confirmLabel}
+        的权限。
         <br />
       </Fragment>
     );
@@ -147,7 +140,7 @@ const InstanceBulkAction: FC<Props> = ({
         "u-no-margin--right u-no-margin--bottom bulk-action",
       )}
       confirmationModalProps={{
-        title: `Confirm ${confirmLabel.toLowerCase()}`,
+        title: `确认${confirmLabel}`,
         children: (
           <p>
             {selectedSummary}
@@ -164,7 +157,7 @@ const InstanceBulkAction: FC<Props> = ({
       showShiftClickHint
       onHoverText={
         allRestricted
-          ? `You do not have permission to ${confirmLabel.toLowerCase()} the selected ${pluralize("instance", instances.length)}`
+          ? `你没有对所选实例执行${confirmLabel}的权限`
           : confirmLabel
       }
     >
