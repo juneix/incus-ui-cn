@@ -1,12 +1,14 @@
 # Incus UI 中文定制版
 
-`incus-ui-cn` 基于 [zabbly/incus-ui-canonical](https://github.com/zabbly/incus-ui-canonical) 整理。
+`incus-ui-cn` 基于 [zabbly/incus-ui-canonical](https://github.com/zabbly/incus-ui-canonical) 整理，提供了一个轻量的 Incus UI 中文定制版前端。
 
 
-## 💡 项目用途
-Incus 是 LXD 的社区分支版本，二者均基于 LXC 项目。Incus 默认没有 Web UI，本项目提供一个轻量的 **Incus UI 中文定制版前端**。
-> Incus 支持 LXC 容器与 VM 虚拟机。
-- 中文版 Docker 镜像体积约 80 MB
+## 💡 Incus 介绍
+> Incus 是下一代系统容器、应用容器和虚拟机管理器。它提供的用户体验类似于公共云。借助它，你可以轻松混合搭配 LXC 容器和 VM 虚拟机，共享相同的底层存储和网络。
+
+Incus 是 LXD 的社区分支版本，二者均基于 LXC 项目。因为 Incus 默认不包括 Web UI，所以有了本项目。
+
+- 中文定制版 Docker 镜像体积约 80 MB
 - 原版 incus-ui-canonical 的 apt 依赖包体积约 500 MB
 
 ## 🚀 快速开始
