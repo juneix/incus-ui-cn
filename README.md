@@ -3,14 +3,14 @@
 `incus-ui-cn` 基于 [zabbly/incus-ui-canonical](https://github.com/zabbly/incus-ui-canonical) 整理。
 
 
-## 💡 项目用途：
+## 💡 项目用途
 - Incus 是 LXD 的社区版，他们都是基于 LXC 项目的。
 - Incus 支持 LXC 容器和 VM 虚拟机。
 - 提供一个轻量的中文版 Incus Web UI 前端
 
 ## 🚀 快速开始
 
-### 推荐 Docker Compose
+### Docker Compose
 
 ```yaml
 services:
@@ -23,10 +23,26 @@ services:
       port: 5566
       tls_verify: off
     volumes:
-      - ./config:/run/incus:ro
+      - /opt/incus/cert:/run/incus:ro
 ```
 
-访问 web 面板：
+### 内网登录验证
+
+```bash
+# 创建证书目录
+sudo mkdir -p /opt/incus/cert
+
+# 生成证书
+sudo openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
+  -keyout /opt/incus/cert/incus-ui.key \
+  -out /opt/incus/cert/incus-ui.crt \
+  -subj "/CN=incus-ui-cn"
+
+# 加入 Incus 信任列表
+sudo incus config trust add-certificate /opt/incus/cert/incus-ui.crt
+```
+
+### 访问 web 面板
 
 ```bash
 http://ip:5566/ui/
