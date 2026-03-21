@@ -1,6 +1,8 @@
 .page-header {
   display: flex;
-  padding: $spv--x-small $sph--x-large calc($spv--small - 1px) $sph--x-large;
+  // 全局控制页面首行内容离上边缘的距离。
+  // 第 1 个值越大，子页面标题、搜索栏、添加按钮这整排就越往下。
+  padding: $spv--medium $sph--x-large calc($spv--small - 1px) $sph--x-large;
 
   .page-header__left {
     display: flex;

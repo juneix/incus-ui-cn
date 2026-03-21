@@ -10,7 +10,6 @@ import {
   Row,
   ScrollableTable,
   Spinner,
-  TablePagination,
   useListener,
   useNotify,
   visibleHeaderColumns,
@@ -84,6 +83,7 @@ import { getInstanceKey, getInstanceType } from "util/instances";
 import DocLink from "components/DocLink";
 import { useSettings } from "context/useSettings";
 import { isClusteredServer } from "util/settings";
+import LocalizedTablePagination from "components/LocalizedTablePagination";
 
 const loadHidden = () => {
   const saved = localStorage.getItem("instanceListHiddenColumns");
@@ -105,7 +105,7 @@ const InstanceList: FC = () => {
   const { project, isAllProjects } = useCurrentProject();
   const { data: defaultProject } = useProject("default", isAllProjects);
   const [createButtonLabel, _setCreateButtonLabel] =
-    useState<string>("Create instance");
+    useState<string>("创建实例");
   const [searchParams, setSearchParams] = useSearchParams();
   const { data: settings } = useSettings();
   const isClustered = isClusteredServer(settings);
@@ -119,7 +119,7 @@ const InstanceList: FC = () => {
   const isMediumScreen = useIsScreenBelow(mediumScreenBreakpoint);
 
   if (!project && !isAllProjects) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
 
   useEffect(() => {
@@ -150,11 +150,11 @@ const InstanceList: FC = () => {
   } = useInstances(project?.name ?? null, encodeServerFilters(serverFilters));
 
   if (error) {
-    notify.failure("Loading instances failed", error);
+    notify.failure("加载实例失败", error);
   }
 
   const setCreateButtonLabel = () => {
-    _setCreateButtonLabel(isMediumScreen ? "Create" : "Create instance");
+    _setCreateButtonLabel(isMediumScreen ? "创建" : "创建实例");
   };
   useListener(window, setCreateButtonLabel, "resize", true);
 
@@ -183,7 +183,7 @@ const InstanceList: FC = () => {
   });
 
   if (operationError) {
-    notify.failure("Loading operations failed", error);
+    notify.failure("加载操作记录失败", error);
   }
 
   const creationNames: string[] = [];
@@ -365,7 +365,7 @@ const InstanceList: FC = () => {
                 {
                   content: (
                     <>
-                      <Spinner className="status-icon" /> Setting up
+                      <Spinner className="status-icon" /> 正在创建
                     </>
                   ),
                   role: "cell",
@@ -420,7 +420,7 @@ const InstanceList: FC = () => {
           {
             content: <InstanceLink instance={instance} />,
             className: "u-truncate",
-            title: `Instance ${instance.name}`,
+            title: `实例 ${instance.name}`,
             role: "rowheader",
             style: { width: `${COLUMN_WIDTHS[NAME]}px` },
             "aria-label": NAME,
@@ -614,7 +614,7 @@ const InstanceList: FC = () => {
   const projectForCreationName = projectForCreation?.name ?? "default";
   const createInstanceRestriction = canCreateInstances(projectForCreation)
     ? ""
-    : `You do not have permission to create instances in project ${projectForCreationName}`;
+    : `你没有在项目 ${projectForCreationName} 中创建实例的权限`;
 
   return (
     <>
@@ -629,9 +629,9 @@ const InstanceList: FC = () => {
               <PageHeader.Title>
                 <HelpLink
                   docPath="/explanation/instances/#expl-instances"
-                  title="Learn more about instances"
+                  title="了解更多实例信息"
                 >
-                  Instances
+                  实例
                 </HelpLink>
               </PageHeader.Title>
               {hasInstances && selectedNames.length === 0 && (
@@ -695,19 +695,18 @@ const InstanceList: FC = () => {
                   tableId="instances-table"
                   belowIds={["status-bar"]}
                 >
-                  <TablePagination
+                  <LocalizedTablePagination
                     data={sortedRows}
                     id="pagination"
-                    itemName="instance"
+                    itemName="实例"
                     className="u-no-margin--top"
-                    aria-label="Table pagination control"
                     description={
                       selectedNames.length > 0 && (
                         <SelectedTableNotification
                           totalCount={totalInstanceCount}
-                          itemName="instance"
+                          itemName="实例"
                           parentName={
-                            project ? `project: ${project?.name}` : undefined
+                            project ? `项目：${project?.name}` : undefined
                           }
                           selectedNames={selectedNames}
                           setSelectedNames={setSelectedNames}
@@ -739,29 +738,29 @@ const InstanceList: FC = () => {
                         isLoading ? (
                           <Spinner
                             className="u-loader"
-                            text="Loading instances..."
+                            text="正在加载实例..."
                           />
                         ) : (
-                          <>No instance found matching this search</>
+                          <>没有找到匹配当前搜索条件的实例</>
                         )
                       }
-                      itemName="instance"
-                      parentName="project"
+                      itemName="实例"
+                      parentName="项目"
                       selectedNames={selectedNames}
                       setSelectedNames={setSelectedNames}
                       disabledNames={processingNames}
                       filteredNames={filteredInstances.map(getInstanceKey)}
                       onUpdateSort={updateSort}
                     />
-                  </TablePagination>
+                  </LocalizedTablePagination>
                 </ScrollableTable>
                 <div id="instance-table-measure">
                   <SelectableMainTable
                     headers={visibleHeaderColumns(headers, userHidden)}
                     rows={getRows(userHidden)}
                     className="scrollable-table"
-                    itemName="instance"
-                    parentName="project"
+                    itemName="实例"
+                    parentName="项目"
                     selectedNames={selectedNames}
                     setSelectedNames={setSelectedNames}
                     disabledNames={processingNames}
@@ -774,17 +773,17 @@ const InstanceList: FC = () => {
               <EmptyState
                 className="empty-state"
                 image={<Icon name="pods" className="empty-state-icon" />}
-                title="No instances found"
+                title="未找到实例"
               >
                 <p>
-                  There are no instances in {project ? "this" : "any"} project.
+                  {project ? "当前项目中还没有实例。" : "当前没有任何项目实例。"}
                   {canCreateInstances(project)
-                    ? " Spin up your first instance!"
+                    ? " 现在就创建第一个实例吧！"
                     : ""}
                 </p>
                 <p>
                   <DocLink docPath="/howto/instances_create/" hasExternalIcon>
-                    How to create instances
+                    如何创建实例
                   </DocLink>
                 </p>
                 <Button
@@ -798,7 +797,7 @@ const InstanceList: FC = () => {
                   disabled={!!createInstanceRestriction}
                   title={createInstanceRestriction}
                 >
-                  Create instance
+                  创建实例
                 </Button>
               </EmptyState>
             )}

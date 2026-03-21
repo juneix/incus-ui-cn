@@ -34,10 +34,10 @@ const StorageVolumeHeader: FC<Props> = ({ volume, project }) => {
 
   const getDisabledReason = (volume: LxdStorageVolume) => {
     if ((volume.used_by?.length ?? 0) > 0) {
-      return "Can not rename, volume is currently in use.";
+      return "存储卷正在使用中，无法重命名。";
     }
     if (!canEditVolume(volume)) {
-      return "You do not have permission to rename this volume";
+      return "你没有重命名此存储卷的权限";
     }
     return undefined;
   };
@@ -52,7 +52,7 @@ const StorageVolumeHeader: FC<Props> = ({ volume, project }) => {
           volume,
         ),
       )
-      .required("This field is required"),
+      .required("该字段不能为空"),
   });
 
   const handleSuccess = (values: RenameHeaderValues) => {
@@ -63,7 +63,7 @@ const StorageVolumeHeader: FC<Props> = ({ volume, project }) => {
     navigate(url);
     toastNotify.success(
       <>
-        Storage volume <strong>{volume.name}</strong> renamed to{" "}
+        存储卷 <strong>{volume.name}</strong> 已重命名为{" "}
         <ResourceLink type="volume" value={values.name} to={url} />.
       </>,
     );
@@ -71,7 +71,7 @@ const StorageVolumeHeader: FC<Props> = ({ volume, project }) => {
   };
 
   const handleFailure = (error: unknown) => {
-    notify.failure("Renaming failed", error);
+    notify.failure("重命名失败", error);
   };
 
   const handleFinish = () => {
@@ -120,7 +120,7 @@ const StorageVolumeHeader: FC<Props> = ({ volume, project }) => {
           to={`/ui/project/${encodeURIComponent(project)}/storage/volumes`}
           key={1}
         >
-          Storage volumes
+          存储卷
         </Link>,
       ]}
       controls={

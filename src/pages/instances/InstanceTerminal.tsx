@@ -105,23 +105,23 @@ const InstanceTerminal: FC<Props> = ({ instance, refreshInstance }) => {
 
   usePrompt({
     when: userInteracted,
-    message: "Are you sure you want to leave this page?",
+    message: "你确定要离开当前页面吗？",
   });
 
   const handleCloseTab = (e: BeforeUnloadEvent) => {
     if (userInteracted) {
-      e.returnValue = "Are you sure you want to leave this page?";
+      e.returnValue = "你确定要离开当前页面吗？";
     }
   };
   useListener(window, handleCloseTab, "beforeunload");
 
   const openWebsockets = async (payload: TerminalConnectPayload) => {
     if (!name) {
-      notify.failure("Missing name", new Error());
+      notify.failure("缺少实例名称", new Error());
       return;
     }
     if (!project) {
-      notify.failure("Missing project", new Error());
+      notify.failure("缺少项目参数", new Error());
       return;
     }
 
@@ -129,7 +129,7 @@ const InstanceTerminal: FC<Props> = ({ instance, refreshInstance }) => {
     const result = await connectInstanceExec(name, project, payload).catch(
       (e) => {
         setLoading(false);
-        notify.failure("Connection failed", e);
+        notify.failure("连接失败", e);
       },
     );
     if (!result) {
@@ -286,8 +286,8 @@ const InstanceTerminal: FC<Props> = ({ instance, refreshInstance }) => {
 
   if (!canExec) {
     return (
-      <Notification severity="caution" title="Restricted permissions">
-        You do not have permission to use the terminal for this instance.
+      <Notification severity="caution" title="权限受限">
+        你没有使用此实例终端的权限。
       </Notification>
     );
   }
@@ -299,11 +299,11 @@ const InstanceTerminal: FC<Props> = ({ instance, refreshInstance }) => {
     xtermRef.current?.element
       ?.requestFullscreen()
       .then(handleResize)
-      .then(() => {
-        xtermRef.current?.focus();
-      })
-      .catch((e) => {
-        notify.failure("Failed to enter full-screen mode", e);
+        .then(() => {
+          xtermRef.current?.focus();
+        })
+        .catch((e) => {
+        notify.failure("进入全屏模式失败", e);
       });
   };
 
@@ -317,7 +317,7 @@ const InstanceTerminal: FC<Props> = ({ instance, refreshInstance }) => {
               onClick={handleFullscreen}
               disabled={isLoading || !controlWs}
             >
-              Fullscreen
+              全屏
             </Button>
             <ReconnectTerminalBtn
               reconnect={setPayload}
@@ -327,7 +327,7 @@ const InstanceTerminal: FC<Props> = ({ instance, refreshInstance }) => {
           </div>
           <NotificationRow />
           {isLoading && (
-            <Spinner className="u-loader" text="Loading terminal session..." />
+            <Spinner className="u-loader" text="正在加载终端会话..." />
           )}
           {controlWs && (
             <Xterm
@@ -348,12 +348,12 @@ const InstanceTerminal: FC<Props> = ({ instance, refreshInstance }) => {
         <EmptyState
           className="empty-state"
           image={<Icon name="pods" className="empty-state-icon" />}
-          title={isBooting ? "Instance starting" : "Instance stopped"}
+          title={isBooting ? "实例启动中" : "实例已停止"}
         >
           <p>
             {isBooting
-              ? "Terminal will be ready once the instance has finished booting."
-              : "Start the instance to access the terminal."}
+              ? "实例完成启动后即可使用终端。"
+              : "启动实例后即可访问终端。"}
           </p>
           <ActionButton
             appearance="positive"
@@ -363,10 +363,10 @@ const InstanceTerminal: FC<Props> = ({ instance, refreshInstance }) => {
             title={
               canUpdateInstanceState(instance)
                 ? ""
-                : "You do not have permission to start this instance."
+                : "你没有启动此实例的权限。"
             }
           >
-            Start instance
+            启动实例
           </ActionButton>
         </EmptyState>
       )}

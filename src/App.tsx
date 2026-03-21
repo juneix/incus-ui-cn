@@ -116,7 +116,7 @@ const App: FC = () => {
   }, []);
 
   if (isAuthLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="加载中..." isMainComponent />;
   }
 
   if (!isAuthenticated) {
@@ -130,7 +130,7 @@ const App: FC = () => {
   return (
     <Suspense
       fallback={
-        <Spinner className="u-loader" text="Loading..." isMainComponent />
+        <Spinner className="u-loader" text="加载中..." isMainComponent />
       }
     >
       <Routes>

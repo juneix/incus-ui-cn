@@ -22,7 +22,7 @@ const CreateStoragePoolBtn: FC<Props> = ({ project, className }) => {
       title={
         canCreateStoragePools()
           ? ""
-          : "You do not have permission to create storage pools"
+          : "你没有创建存储池的权限"
       }
       onClick={async () =>
         navigate(
@@ -32,7 +32,7 @@ const CreateStoragePoolBtn: FC<Props> = ({ project, className }) => {
       disabled={!canCreateStoragePools()}
     >
       {!isSmallScreen && <Icon name="plus" light />}
-      <span>Create pool</span>
+      <span>创建存储池</span>
     </Button>
   );
 };

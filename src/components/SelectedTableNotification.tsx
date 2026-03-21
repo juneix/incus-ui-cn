@@ -1,6 +1,5 @@
 import type { FC } from "react";
 import { Button } from "@canonical/react-components";
-import { pluralize } from "util/instanceBulkActions";
 
 interface Props {
   totalCount: number;
@@ -35,40 +34,32 @@ const SelectedTableNotification: FC<Props> = ({
     <div>
       {isAllSelected ? (
         <>
-          {filteredNames.length === 1 ? (
-            <>
-              <b>1</b> {itemName} is selected.{" "}
-            </>
-          ) : (
-            <>
-              All <b>{filteredNames.length}</b>{" "}
-              {pluralize(itemName, filteredNames.length)} selected.{" "}
-            </>
-          )}
+          <>
+            共 <b>{filteredNames.length}</b> 个{itemName}
+          </>
           {!hideActions && (
             <Button
               appearance="link"
               className="u-no-margin--bottom u-no-padding--top"
               onClick={selectNone}
             >
-              Clear selection
+              清除选择
             </Button>
           )}
         </>
       ) : (
         <>
-          <b>{selectedNames.length}</b>{" "}
-          {pluralize(itemName, selectedNames.length)} selected.{" "}
+          已选择 <b>{selectedNames.length}</b> 个{itemName}{" "}
           {!hideActions && (
             <Button
               appearance="link"
               className="u-no-margin--bottom u-no-padding--top"
               onClick={selectAll}
             >
-              Select all <b>{filteredNames.length}</b>{" "}
+              选择全部 <b>{filteredNames.length}</b> 个
               {filteredNames.length === totalCount
-                ? `${pluralize(itemName, filteredNames.length)} ${parentName ? `in ${parentName}` : ""}`
-                : `filtered ${pluralize(itemName, filteredNames.length)}`}
+                ? `${itemName}${parentName ? `（${parentName}）` : ""}`
+                : `已筛选的${itemName}`}
             </Button>
           )}
         </>

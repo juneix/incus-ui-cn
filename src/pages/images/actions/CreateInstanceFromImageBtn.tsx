@@ -34,8 +34,8 @@ const CreateInstanceFromImageBtn: FC<Props> = ({ image, projectName }) => {
       type="button"
       title={
         canCreateInstances(project)
-          ? "Create instance"
-          : "You do not have permission to create instances"
+          ? "创建实例"
+          : "你没有创建实例的权限"
       }
       hasIcon
       disabled={!canCreateInstances(project)}

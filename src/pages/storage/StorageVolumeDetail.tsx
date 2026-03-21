@@ -15,7 +15,11 @@ import StorageVolumeSnapshots from "./StorageVolumeSnapshots";
 import { useStorageVolume } from "context/useVolumes";
 import { linkForVolumeDetail } from "util/storageVolume";
 
-const tabs: string[] = ["Overview", "Configuration", "Snapshots"];
+const tabs = [
+  { label: "概览", path: "overview" },
+  { label: "配置", path: "configuration" },
+  { label: "快照", path: "snapshots" },
+];
 
 const StorageVolumeDetail: FC = () => {
   const notify = useNotify();
@@ -36,16 +40,16 @@ const StorageVolumeDetail: FC = () => {
   }>();
 
   if (!pool) {
-    return <>Missing storage pool</>;
+    return <>缺少存储池参数</>;
   }
   if (!project) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
   if (!type) {
-    return <>Missing type</>;
+    return <>缺少类型参数</>;
   }
   if (!volumeName) {
-    return <>Missing volume</>;
+    return <>缺少存储卷名称</>;
   }
 
   const {
@@ -55,13 +59,13 @@ const StorageVolumeDetail: FC = () => {
   } = useStorageVolume(pool, project, type, volumeName, member);
 
   if (error) {
-    notify.failure("Loading storage volume failed", error);
+    notify.failure("加载存储卷失败", error);
   }
 
   if (isLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="正在加载..." isMainComponent />;
   } else if (!volume) {
-    return <>Loading storage volume failed</>;
+    return <>加载存储卷失败</>;
   }
 
   return (
@@ -77,19 +81,19 @@ const StorageVolumeDetail: FC = () => {
         />
         <NotificationRow />
         {!activeTab && (
-          <div role="tabpanel" aria-labelledby="overview">
+          <div role="tabpanel" aria-labelledby="概览">
             <StorageVolumeOverview volume={volume} project={project} />
           </div>
         )}
 
         {activeTab === "configuration" && (
-          <div role="tabpanel" aria-labelledby="configuration">
+          <div role="tabpanel" aria-labelledby="配置">
             <EditStorageVolume volume={volume} />
           </div>
         )}
 
         {activeTab === "snapshots" && (
-          <div role="tabpanel" aria-labelledby="snapshots">
+          <div role="tabpanel" aria-labelledby="快照">
             <StorageVolumeSnapshots volume={volume} />
           </div>
         )}

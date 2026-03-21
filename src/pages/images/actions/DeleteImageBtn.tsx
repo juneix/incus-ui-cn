@@ -41,11 +41,11 @@ const DeleteImageBtn: FC<Props> = ({ image, project }) => {
             queryClient.invalidateQueries({
               queryKey: [queryKeys.projects, project],
             });
-            toastNotify.success(<>Image {imageLabel} deleted.</>);
+            toastNotify.success(<>镜像 {imageLabel} 已删除。</>);
           },
           (msg) =>
             toastNotify.failure(
-              `Image ${description} deletion failed`,
+              `删除镜像 ${description} 失败`,
               new Error(msg),
               imageLabel,
             ),
@@ -56,7 +56,7 @@ const DeleteImageBtn: FC<Props> = ({ image, project }) => {
       })
       .catch((e) => {
         toastNotify.failure(
-          `Image ${description} deletion failed`,
+          `删除镜像 ${description} 失败`,
           e,
           imageLabel,
         );
@@ -68,17 +68,17 @@ const DeleteImageBtn: FC<Props> = ({ image, project }) => {
     <ConfirmationButton
       loading={isLoading}
       confirmationModalProps={{
-        title: "Confirm delete",
+        title: "确认删除",
         children: (
           <p>
-            This will permanently delete image{" "}
+            这将永久删除镜像{" "}
             <ResourceLabel type="image" value={description} bold />.<br />
-            This action cannot be undone, and can result in data loss.
+            此操作无法撤销，并且可能导致数据丢失。
           </p>
         ),
         confirmButtonLabel: canDeleteImage(image)
-          ? "Delete"
-          : "You do not have permission to delete this image",
+          ? "删除"
+          : "你没有删除此镜像的权限",
         onConfirm: handleDelete,
       }}
       className="has-icon"

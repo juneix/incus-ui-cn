@@ -47,12 +47,12 @@ const StopInstanceBtn: FC<Props> = ({ instance }) => {
         eventQueue.set(
           operation.metadata.id,
           () => {
-            toastNotify.success(<>Instance {instanceLink} stopped.</>);
+            toastNotify.success(<>实例 {instanceLink} 已停止。</>);
             clearCache();
           },
           (msg) => {
             toastNotify.failure(
-              "Instance stop failed",
+              "停止实例失败",
               new Error(msg),
               instanceLink,
             );
@@ -67,7 +67,7 @@ const StopInstanceBtn: FC<Props> = ({ instance }) => {
         );
       })
       .catch((e) => {
-        toastNotify.failure("Instance stop failed", e, instanceLink);
+        toastNotify.failure("停止实例失败", e, instanceLink);
         instanceLoading.setFinish(instance);
       });
   };
@@ -86,23 +86,23 @@ const StopInstanceBtn: FC<Props> = ({ instance }) => {
       loading={isLoading}
       disabled={isDisabled}
       confirmationModalProps={{
-        title: "Confirm stop",
+        title: "确认停止",
         children: (
           <p>
-            This will stop instance{" "}
+            这将停止实例{" "}
             <ResourceLabel type={instance.type} value={instance.name} bold />.
           </p>
         ),
         confirmExtra: (
-          <ConfirmationForce label="Force stop" force={[isForce, setForce]} />
+          <ConfirmationForce label="强制停止" force={[isForce, setForce]} />
         ),
         onConfirm: handleStop,
         close: () => {
           setForce(false);
         },
         confirmButtonLabel: canUpdateInstanceState(instance)
-          ? "Stop"
-          : "You do not have permission to stop this instance",
+          ? "停止"
+          : "你没有停止此实例的权限",
       }}
       className="has-icon is-dense"
       shiftClickEnabled

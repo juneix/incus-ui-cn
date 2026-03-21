@@ -28,7 +28,14 @@ const Version: FC = () => {
             <Icon name="warning" className="version-warning-icon" />
           </Tooltip>
         )}
-        Version {serverVersion}-ui-{UI_VERSION}
+        Version {serverVersion}-ui-{UI_VERSION} {" "}
+        🇨🇳 汉化 by <a
+          href="https://juneix.github.io/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+        谢週五
+        </a>
       </span>
     </>
   );

@@ -25,8 +25,8 @@ const OpenTerminalBtn: FC<Props> = ({ instance }) => {
       hasIcon
       onClick={handleOpen}
       disabled={isDisabled}
-      title="Terminal"
-      aria-label="Open Terminal"
+      title="终端"
+      aria-label="打开终端"
     >
       <Icon name="code" />
     </Button>

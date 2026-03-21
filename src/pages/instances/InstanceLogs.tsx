@@ -18,10 +18,10 @@ const InstanceLogs: FC<Props> = ({ instance }) => {
 
   return (
     <>
-      {isLoading && <Spinner className="u-loader" text="Loading logs..." />}
+      {isLoading && <Spinner className="u-loader" text="正在加载日志..." />}
       {!isLoading && logs.length === 0 && (
         <div className="u-align-text--center">
-          There are no log files for this instance.
+          当前实例没有日志文件。
         </div>
       )}
       {!isLoading &&

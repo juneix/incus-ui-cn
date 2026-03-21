@@ -87,12 +87,12 @@ const InstanceSnapshots = (props: Props) => {
     {
       content: isSmallScreen ? (
         <>
-          Name
+          名称
           <br />
-          <div className="header-second-row">Date created</div>
+          <div className="header-second-row">创建时间</div>
         </>
       ) : (
-        "Name"
+        "名称"
       ),
       sortKey: isSmallScreen ? "created_at" : "name",
       className: "name",
@@ -101,17 +101,17 @@ const InstanceSnapshots = (props: Props) => {
       ? []
       : [
           {
-            content: "Date created",
+            content: "创建时间",
             sortKey: "created_at",
             className: "created",
           },
         ]),
     {
-      content: "Expiry date",
+      content: "过期时间",
       sortKey: "expires_at",
       className: "expiration",
     },
-    { content: "Stateful", sortKey: "stateful", className: "stateful" },
+    { content: "有状态", sortKey: "stateful", className: "stateful" },
     { "aria-label": "Actions", className: "actions" },
   ];
 
@@ -133,7 +133,7 @@ const InstanceSnapshots = (props: Props) => {
         {
           content: (
             <>
-              <div className="u-truncate" title={`Snapshot ${snapshot.name}`}>
+              <div className="u-truncate" title={`快照 ${snapshot.name}`}>
                 <ItemName item={snapshot} />
               </div>
               {isSmallScreen && (
@@ -144,7 +144,7 @@ const InstanceSnapshots = (props: Props) => {
             </>
           ),
           role: "rowheader",
-          "aria-label": "Name",
+          "aria-label": "名称",
           className: "name",
         },
         ...(isSmallScreen
@@ -153,20 +153,20 @@ const InstanceSnapshots = (props: Props) => {
               {
                 content: isoTimeToString(snapshot.created_at),
                 role: "cell",
-                "aria-label": "Created at",
+                "aria-label": "创建时间",
                 className: "created",
               },
             ]),
         {
           content: isoTimeToString(snapshot.expires_at),
           role: "cell",
-          "aria-label": "Expires at",
+          "aria-label": "过期时间",
           className: "expiration",
         },
         {
-          content: snapshot.stateful ? "Yes" : "No",
+          content: snapshot.stateful ? "是" : "否",
           role: "cell",
-          "aria-label": "Stateful",
+          "aria-label": "有状态",
           className: "stateful",
         },
         {
@@ -210,9 +210,9 @@ const InstanceSnapshots = (props: Props) => {
                   onChange={(value) => {
                     setQuery(value);
                   }}
-                  placeholder="Search for snapshots"
+                  placeholder="搜索快照"
                   value={query}
-                  aria-label="Search for snapshots"
+                  aria-label="搜索快照"
                 />
               </div>
               <InstanceConfigureSnapshotsBtn
@@ -258,15 +258,15 @@ const InstanceSnapshots = (props: Props) => {
             <TablePagination
               data={sortedRows}
               id="pagination"
-              itemName="snapshot"
+              itemName="快照"
               className="u-no-margin--top"
-              aria-label="Table pagination control"
+              aria-label="表格分页控件"
               description={
                 selectedNames.length > 0 && (
                   <SelectedTableNotification
                     totalCount={instance.snapshots?.length ?? 0}
-                    itemName="snapshot"
-                    parentName="instance"
+                    itemName="快照"
+                    parentName="实例"
                     selectedNames={selectedNames}
                     setSelectedNames={setSelectedNames}
                     filteredNames={filteredSnapshots.map((item) => item.name)}
@@ -280,9 +280,9 @@ const InstanceSnapshots = (props: Props) => {
                 rows={sortedRows}
                 responsive
                 sortable
-                emptyStateMsg="No snapshot found matching this search"
-                itemName="snapshot"
-                parentName="instance"
+                emptyStateMsg="没有找到匹配当前搜索条件的快照"
+                itemName="快照"
+                parentName="实例"
                 selectedNames={selectedNames}
                 setSelectedNames={setSelectedNames}
                 disabledNames={processingNames}
@@ -300,21 +300,21 @@ const InstanceSnapshots = (props: Props) => {
         <EmptyState
           className="empty-state"
           image={<Icon name="snapshot" className="empty-state-icon" />}
-          title="No snapshots found"
+          title="未找到快照"
         >
           <p>
             {project && snapshotsDisabled ? (
               <>
-                Snapshots are disabled for project{" "}
+                项目{" "}
                 <ResourceLink
                   type="project"
                   value={project.name}
                   to={`/ui/project/${project.name}/configuration`}
                 />
-                .
+                已禁用快照。
               </>
             ) : (
-              "There are no snapshots of this instance."
+              "当前实例还没有快照。"
             )}
           </p>
           <p>
@@ -322,7 +322,7 @@ const InstanceSnapshots = (props: Props) => {
               docPath="/howto/storage_backup_volume/#storage-backup-snapshots"
               hasExternalIcon
             >
-              Learn more about snapshots
+              了解更多快照信息
             </DocLink>
           </p>
           <InstanceConfigureSnapshotsBtn

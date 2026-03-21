@@ -45,12 +45,12 @@ const FreezeInstanceBtn: FC<Props> = ({ instance }) => {
         eventQueue.set(
           operation.metadata.id,
           () => {
-            toastNotify.success(<>Instance {instanceLink} frozen.</>);
+            toastNotify.success(<>实例 {instanceLink} 已冻结。</>);
             clearCache();
           },
           (msg) => {
             toastNotify.failure(
-              "Instance freeze failed",
+              "冻结实例失败",
               new Error(msg),
               instanceLink,
             );
@@ -65,7 +65,7 @@ const FreezeInstanceBtn: FC<Props> = ({ instance }) => {
         );
       })
       .catch((e) => {
-        toastNotify.failure("Instance freeze failed", e, instanceLink);
+        toastNotify.failure("冻结实例失败", e, instanceLink);
         instanceLoading.setFinish(instance);
       });
   };
@@ -80,17 +80,17 @@ const FreezeInstanceBtn: FC<Props> = ({ instance }) => {
       appearance="base"
       loading={isLoading}
       confirmationModalProps={{
-        title: "Confirm freeze",
+        title: "确认冻结",
         children: (
           <p>
-            This will freeze instance{" "}
+            这将冻结实例{" "}
             {<ResourceLabel type={instance.type} value={instance.name} bold />}.
           </p>
         ),
         onConfirm: handleFreeze,
         confirmButtonLabel: canUpdateInstanceState(instance)
-          ? "Freeze"
-          : "You do not have permission to freeze this instance",
+          ? "冻结"
+          : "你没有冻结此实例的权限",
       }}
       className="has-icon is-dense"
       disabled={isDisabled || !canUpdateInstanceState(instance) || isLoading}

@@ -37,15 +37,15 @@ const YamlNotification: FC<Props> = ({ entity, docPath }) => {
   return (
     <Notification
       severity="information"
-      title="YAML Configuration"
+      title="YAML 配置"
       onDismiss={handleClose}
       actions={[
         <DocLink docPath={docPath} key="learn-more-link">
-          Learn more about {pluralize(entity, 2)}
+          了解更多{pluralize(entity, 2)}
         </DocLink>,
       ]}
     >
-      This is the YAML representation of the {entity}.
+      这是该{entity}的 YAML 表示。
     </Notification>
   );
 };

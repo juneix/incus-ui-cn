@@ -43,10 +43,10 @@ const InstanceConfigureSnapshotsBtn: FC<Props> = ({
         title={
           canEditInstance()
             ? ""
-            : "You do not have permission to configure this instance"
+            : "你没有配置此实例的权限"
         }
       >
-        See configuration
+        查看配置
       </Button>
     </>
   );

@@ -37,13 +37,13 @@ const ProjectSelector: FC<Props> = ({ activeProject }): React.JSX.Element => {
 
   return (
     <>
-      <div className="project-select-label">Project</div>
+      <div className="project-select-label">项目</div>
       <ContextualMenu
-        dropdownProps={{ "aria-label": "select project" }}
+        dropdownProps={{ "aria-label": "选择项目" }}
         toggleClassName="toggle is-dark"
         toggleLabel={activeProject}
         hasToggleIcon
-        title={`Select project (${activeProject})`}
+        title={`选择项目（${activeProject}）`}
         className="project-select is-dark"
       >
         <div className="list is-dark" key="my-div">
@@ -54,7 +54,7 @@ const ProjectSelector: FC<Props> = ({ activeProject }): React.JSX.Element => {
               autoFocus={true}
               autocomplete="off"
               name="query"
-              placeholder="Search"
+              placeholder="搜索"
               onChange={(val) => {
                 updateQuery(val);
               }}
@@ -69,7 +69,7 @@ const ProjectSelector: FC<Props> = ({ activeProject }): React.JSX.Element => {
             hasIcon
           >
             <Icon name="folder" light />
-            <span>All projects</span>
+            <span>全部项目</span>
           </Button>
           <ProjectSelectorList projects={projects} onMount={onChildMount} />
           <hr className="is-dark" />
@@ -83,11 +83,11 @@ const ProjectSelector: FC<Props> = ({ activeProject }): React.JSX.Element => {
             title={
               canCreateProjects()
                 ? ""
-                : "You do not have permission to create projects"
+                : "你没有创建项目的权限"
             }
           >
             <Icon name="plus" light />
-            <span>Create project</span>
+            <span>创建项目</span>
           </Button>
         </div>
       </ContextualMenu>

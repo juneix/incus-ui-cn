@@ -11,6 +11,18 @@ interface Props {
 const InstanceStatusIcon: FC<Props> = ({ instance }) => {
   const instanceLoading = useInstanceLoading();
   const loadingType = instanceLoading.getType(instance);
+  const labelMap: Record<string, string> = {
+    Error: "错误",
+    Frozen: "已冻结",
+    Freezing: "冻结中",
+    Ready: "就绪",
+    Running: "运行中",
+    Stopped: "已停止",
+    Starting: "启动中",
+    Stopping: "停止中",
+    Restarting: "重启中",
+    Migrating: "迁移中",
+  };
 
   const getIconNameForStatus = (status: string) => {
     return (
@@ -28,7 +40,7 @@ const InstanceStatusIcon: FC<Props> = ({ instance }) => {
   return loadingType ? (
     <>
       <Icon className="u-animation--spin status-icon" name="spinner" />
-      <i>{loadingType}</i>
+      <i>{labelMap[loadingType] ?? loadingType}</i>
     </>
   ) : (
     <>
@@ -38,7 +50,7 @@ const InstanceStatusIcon: FC<Props> = ({ instance }) => {
           "u-animation--spin": instance.status === "Freezing",
         })}
       />
-      {instance.status}
+      {labelMap[instance.status] ?? instance.status}
     </>
   );
 };

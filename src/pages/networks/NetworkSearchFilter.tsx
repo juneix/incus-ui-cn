@@ -39,21 +39,21 @@ const NetworkSearchFilter: FC = () => {
   const searchAndFilterData: SearchAndFilterData[] = [
     {
       id: 1,
-      heading: "Type",
+      heading: "类型",
       chips: ["OVN", "Bridge", "Physical"].map((type) => {
         return { lead: TYPE, value: type };
       }),
     },
     {
       id: 2,
-      heading: "Managed",
-      chips: ["Yes", "No"].map((managed) => {
+      heading: "受管",
+      chips: ["是", "否"].map((managed) => {
         return { lead: MANAGED, value: managed };
       }),
     },
     {
       id: 3,
-      heading: "State",
+      heading: "状态",
       chips: ["Created", "Pending", "Unknown", "Unavailable", "Errored"].map(
         (state) => {
           return { lead: STATE, value: state };
@@ -64,8 +64,8 @@ const NetworkSearchFilter: FC = () => {
       ? [
           {
             id: 4,
-            heading: "Cluster member",
-            chips: ["Cluster-wide"].concat(memberSet).map((location) => {
+            heading: "集群成员",
+            chips: ["集群范围"].concat(memberSet).map((location) => {
               return { lead: MEMBER, value: location };
             }),
           },
@@ -87,7 +87,7 @@ const NetworkSearchFilter: FC = () => {
 
   return (
     <>
-      <h2 className="u-off-screen">Search and filter</h2>
+      <h2 className="u-off-screen">搜索和筛选</h2>
       <SearchAndFilter
         existingSearchData={searchParamsToChips(searchParams, QUERY_PARAMS)}
         filterPanelData={searchAndFilterData}

@@ -2,12 +2,15 @@
 
 `incus-ui-cn` 基于 [zabbly/incus-ui-canonical](https://github.com/zabbly/incus-ui-canonical) 整理。
 
-项目用途：
 
-- 提供一个轻量的 Incus Web UI 前端
-- 支持直接从源码构建静态文件
+## 简单科普：
+- Incus 是 LXD 的社区版，他们都是基于 LXC 项目的。
+- 支持 LXC 容器和 VM 虚拟机。
+
+## 项目用途：
+
+- 提供一个轻量的中文版 Incus Web UI 前端
 - 支持宿主机部署或 Docker 部署
-- 后续继续做中文化
 
 ## Docker Compose
 

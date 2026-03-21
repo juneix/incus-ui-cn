@@ -40,17 +40,17 @@ const InstanceAddSnapshotBtn: FC<Props> = ({
         title={
           canManageInstanceSnapshots(instance)
             ? ""
-            : "You do not have permission to create snapshots for this instance"
+            : "你没有为此实例创建快照的权限"
         }
       >
         {isDisabled ? (
           <Tooltip
-            message={`Snapshot creation has been disabled for instances in the project ${instance.project}`}
+            message={`项目 ${instance.project} 中的实例已禁用快照创建`}
           >
-            Create snapshot
+            创建快照
           </Tooltip>
         ) : (
-          "Create snapshot"
+          "创建快照"
         )}
       </Button>
     </>

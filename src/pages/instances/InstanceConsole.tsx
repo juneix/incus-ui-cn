@@ -52,8 +52,8 @@ const InstanceConsole: FC<Props> = ({ instance }) => {
 
   const showNotRunningInfo = () => {
     notify.info(
-      "Start the instance to interact with the text console.",
-      "Instance not running",
+      "请先启动实例，再使用文本控制台。",
+      "实例未运行",
     );
   };
 
@@ -81,8 +81,8 @@ const InstanceConsole: FC<Props> = ({ instance }) => {
 
   if (!canAccessInstanceConsole(instance)) {
     return (
-      <Notification severity="caution" title="Restricted permissions">
-        You do not have permission to access the console for this instance.
+      <Notification severity="caution" title="权限受限">
+        你没有访问此实例控制台的权限。
       </Notification>
     );
   }
@@ -131,7 +131,7 @@ const InstanceConsole: FC<Props> = ({ instance }) => {
               onClick={() => handleConnection()}
               >
                 <Icon name="connected" />
-                <span>Reconnect</span>
+                <span>重新连接</span>
               </Button>}
         </div>
       )}
@@ -140,14 +140,14 @@ const InstanceConsole: FC<Props> = ({ instance }) => {
           <div className="console-radio-wrapper">
             <RadioInput
               labelClassName="right-margin"
-              label="Graphic"
+              label="图形"
               checked={isGraphic}
               onChange={() => {
                 setGraphicConsole(true);
               }}
             />
             <RadioInput
-              label="Text console"
+              label="文本控制台"
               checked={!isGraphic}
               onChange={() => {
                 setGraphicConsole(false);
@@ -162,7 +162,7 @@ const InstanceConsole: FC<Props> = ({ instance }) => {
               onClick={() => handleConnection()}
               >
                 <Icon name="connected" />
-                <span>Reconnect</span>
+                <span>重新连接</span>
               </Button>}
               {isGraphic && hasCustomVolumeIso && <AttachIsoBtn instance={instance} />}
               {isGraphic &&
@@ -172,52 +172,52 @@ const InstanceConsole: FC<Props> = ({ instance }) => {
                   handleFullScreen();
                 }}
               >
-                <span>Fullscreen</span>
+                <span>全屏</span>
               </Button>}
               {isGraphic &&
               <ContextualMenu
                 hasToggleIcon
-                toggleLabel="Shortcuts"
+                toggleLabel="快捷键"
                 toggleClassName="u-no-margin--bottom"
                 links={[
                   {
-                    children: "Send Ctrl + Alt + Del",
+                    children: "发送 Ctrl + Alt + Del",
                     onClick: () => {
                       sendKey(window.spice_connection, KeyNames.KEY_KP_Decimal, [ KeyNames.KEY_LCtrl, KeyNames.KEY_Alt ]);
                     },
                   },
                   {
-                    children: "Send Alt + TAB",
+                    children: "发送 Alt + TAB",
                     onClick: () => {
                       sendKey(window.spice_connection, KeyNames.KEY_Tab, [ KeyNames.KEY_Alt ]);
                     },
                   },
                   {
-                    children: "Send Alt + F4",
+                    children: "发送 Alt + F4",
                     onClick: () => {
                       sendKey(window.spice_connection, KeyNames.KEY_F4, [ KeyNames.KEY_Alt]);
                     },
                   },
                   {
-                    children: "Send Ctrl + Alt + F1",
+                    children: "发送 Ctrl + Alt + F1",
                     onClick: () => {
                       sendKey(window.spice_connection, KeyNames.KEY_F1, [ KeyNames.KEY_LCtrl, KeyNames.KEY_Alt ]);
                     },
                   },
                   {
-                    children: "Send Ctrl + Alt + F2",
+                    children: "发送 Ctrl + Alt + F2",
                     onClick: () => {
                       sendKey(window.spice_connection, KeyNames.KEY_F2, [ KeyNames.KEY_LCtrl, KeyNames.KEY_Alt]);
                     },
                   },
                   {
-                    children: "Send Ctrl + Alt + F3",
+                    children: "发送 Ctrl + Alt + F3",
                     onClick: () => {
                       sendKey(window.spice_connection, KeyNames.KEY_F3, [ KeyNames.KEY_LCtrl, KeyNames.KEY_Alt]);
                     },
                   },
                   {
-                    children: "Send Ctrl + Alt + F4",
+                    children: "发送 Ctrl + Alt + F4",
                     onClick: () => {
                       sendKey(window.spice_connection, KeyNames.KEY_F4, [ KeyNames.KEY_LCtrl, KeyNames.KEY_Alt]);
                     },
@@ -233,9 +233,9 @@ const InstanceConsole: FC<Props> = ({ instance }) => {
         <EmptyState
           className="empty-state"
           image={<Icon name="pods" className="empty-state-icon" />}
-          title="Instance stopped"
+          title="实例已停止"
         >
-          <p>Start the instance to access the graphic console.</p>
+          <p>启动实例后即可访问图形控制台。</p>
           <ActionButton
             appearance="positive"
             loading={isLoading}
@@ -245,10 +245,10 @@ const InstanceConsole: FC<Props> = ({ instance }) => {
             title={
               canUpdateInstanceState(instance)
                 ? ""
-                : "You do not have permission to start this instance."
+                : "你没有启动此实例的权限。"
             }
           >
-            Start instance
+            启动实例
           </ActionButton>
         </EmptyState>
       )}

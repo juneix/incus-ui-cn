@@ -28,23 +28,23 @@ const NetworkDetail: FC = () => {
   }>();
 
   if (!name) {
-    return <>Missing name</>;
+    return <>缺少网络名称</>;
   }
 
   if (!project) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
 
   const { data: network, error, isLoading } = useNetwork(name, project, member);
 
   useEffect(() => {
     if (error) {
-      notify.failure("Loading network failed", error);
+      notify.failure("加载网络失败", error);
     }
   }, [error]);
 
   if (isLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="正在加载..." isMainComponent />;
   }
 
   const isManagedNetwork = network?.managed;
@@ -52,14 +52,23 @@ const NetworkDetail: FC = () => {
   const getTabs = () => {
     const type = network?.type ?? "";
     if (!typesWithForwards.includes(type) || !isManagedNetwork) {
-      return ["Configuration"];
+      return [{ label: "配置", path: "configuration" }];
     }
 
     if (network?.type === ovnType) {
-      return ["Configuration", "Forwards", "Load balancers", "Leases"];
+      return [
+        { label: "配置", path: "configuration" },
+        { label: "转发", path: "forwards" },
+        { label: "负载均衡", path: "load-balancers" },
+        { label: "租约", path: "leases" },
+      ];
     }
 
-    return ["Configuration", "Forwards", "Leases"];
+    return [
+      { label: "配置", path: "configuration" },
+      { label: "转发", path: "forwards" },
+      { label: "租约", path: "leases" },
+    ];
   };
 
   return (
@@ -77,24 +86,24 @@ const NetworkDetail: FC = () => {
         />
         <NotificationRow />
         {!activeTab && (
-          <div role="tabpanel" aria-labelledby="configuration">
+          <div role="tabpanel" aria-labelledby="配置">
             {network && <EditNetwork network={network} project={project} />}
           </div>
         )}
         {activeTab === "forwards" && (
-          <div role="tabpanel" aria-labelledby="forwards">
+          <div role="tabpanel" aria-labelledby="转发">
             {network && <NetworkForwards network={network} project={project} />}
           </div>
         )}
         {activeTab === "load-balancers" && (
-          <div role="tabpanel" aria-labelledby="load-balancers">
+          <div role="tabpanel" aria-labelledby="负载均衡">
             {network && (
               <NetworkLoadBalancers network={network} project={project} />
             )}
           </div>
         )}
         {activeTab === "leases" && (
-          <div role="tabpanel" aria-labelledby="leases">
+          <div role="tabpanel" aria-labelledby="租约">
             {network && <NetworkLeases network={network} project={project} />}
           </div>
         )}

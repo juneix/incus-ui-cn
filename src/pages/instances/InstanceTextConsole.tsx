@@ -41,12 +41,12 @@ const InstanceTextConsole: FC<Props> = ({
 
   usePrompt({
     when: userInteracted,
-    message: "Are you sure you want to leave this page?",
+    message: "你确定要离开当前页面吗？",
   });
 
   const handleCloseTab = (e: BeforeUnloadEvent) => {
     if (userInteracted) {
-      e.returnValue = "Are you sure you want to leave this page?";
+      e.returnValue = "你确定要离开当前页面吗？";
     }
   };
   useListener(window, handleCloseTab, "beforeunload");
@@ -54,16 +54,16 @@ const InstanceTextConsole: FC<Props> = ({
   const isRunning = isInstanceRunning(instance);
 
   const handleError = (e: object) => {
-    onFailure("Error", e);
+    onFailure("错误", e);
   };
 
   const openWebsockets = async () => {
     if (!name) {
-      onFailure("Missing name", new Error());
+      onFailure("缺少实例名称", new Error());
       return;
     }
     if (!project) {
-      onFailure("Missing project", new Error());
+      onFailure("缺少项目参数", new Error());
       return;
     }
 
@@ -72,9 +72,9 @@ const InstanceTextConsole: FC<Props> = ({
       .then(setTextBuffer)
       .catch(console.error);
     const result = await connectInstanceConsole(name, project).catch((e) => {
-      setLoading(false);
+        setLoading(false);
       if (isRunning) {
-        onFailure("Connection failed", e);
+        onFailure("连接失败", e);
       } else {
         showNotRunningInfo();
       }
@@ -99,7 +99,7 @@ const InstanceTextConsole: FC<Props> = ({
 
     control.onclose = (event) => {
       if (1005 !== event.code) {
-        onFailure("Error", event.reason, getWsErrorMsg(event.code));
+        onFailure("错误", event.reason, getWsErrorMsg(event.code));
       }
     };
 
@@ -111,7 +111,7 @@ const InstanceTextConsole: FC<Props> = ({
 
     data.onclose = (event) => {
       if (1005 !== event.code) {
-        onFailure("Error", event.reason, getWsErrorMsg(event.code));
+        onFailure("错误", event.reason, getWsErrorMsg(event.code));
       }
       setDataWs(null);
       setUserInteracted(false);
@@ -176,7 +176,7 @@ const InstanceTextConsole: FC<Props> = ({
   return (
     <>
       {isLoading ? (
-        <Spinner className="u-loader" text="Loading text console..." />
+        <Spinner className="u-loader" text="正在加载文本控制台..." />
       ) : (
         <Xterm
           ref={xtermRef}

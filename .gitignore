@@ -18,7 +18,9 @@ coverage/
 # Local environment
 .env
 .env.local
+.env.*
 .envrc
+local/
 .venv/
 venv/
 

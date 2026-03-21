@@ -18,12 +18,12 @@ const OpenConsoleBtn: FC<Props> = ({ instance }) => {
 
   return (
     <Button
-      aria-label="Open console"
+      aria-label="打开控制台"
       appearance="base"
       dense
       hasIcon
       onClick={handleOpen}
-      title="Console"
+      title="控制台"
     >
       <Icon name="canvas" />
     </Button>

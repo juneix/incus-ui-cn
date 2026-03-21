@@ -53,10 +53,10 @@ const InstanceDetailActions: FC<Props> = ({ instance, project, isLoading }) => {
       {isSmallScreen ? (
         <ContextualMenu
           closeOnOutsideClick={false}
-          toggleLabel="Actions"
+          toggleLabel="操作"
           position="left"
           hasToggleIcon
-          title="actions"
+          title="操作"
         >
           {(close: () => void) => (
             <span>

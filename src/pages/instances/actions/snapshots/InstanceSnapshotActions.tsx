@@ -40,7 +40,7 @@ const InstanceSnapshotActions: FC<Props> = ({
   const { canManageInstanceSnapshots } = useInstanceEntitlements();
   const disabledReason = canManageInstanceSnapshots(instance)
     ? undefined
-    : "You do not have permission to manage snapshots for this instance";
+    : "你没有管理此实例快照的权限";
 
   const handleDelete = () => {
     setDeleting(true);
@@ -51,14 +51,14 @@ const InstanceSnapshotActions: FC<Props> = ({
           () => {
             onSuccess(
               <>
-                Snapshot{" "}
+                快照{" "}
                 <ResourceLabel bold type="snapshot" value={snapshot.name} />{" "}
-                deleted for instance <InstanceLinkChip instance={instance} />.
+                已从实例 <InstanceLinkChip instance={instance} /> 中删除。
               </>,
             );
           },
           (msg) => {
-            onFailure("Snapshot deletion failed", new Error(msg));
+            onFailure("删除快照失败", new Error(msg));
           },
           () => {
             setDeleting(false);
@@ -69,7 +69,7 @@ const InstanceSnapshotActions: FC<Props> = ({
         );
       })
       .catch((e) => {
-        onFailure("Snapshot deletion failed", e);
+        onFailure("删除快照失败", e);
         setDeleting(false);
       });
   };
@@ -83,17 +83,17 @@ const InstanceSnapshotActions: FC<Props> = ({
           () => {
             onSuccess(
               <>
-                Snapshot{" "}
+                快照{" "}
                 <InstanceSnapshotLinkChip
                   name={snapshot.name}
                   instance={instance}
                 />{" "}
-                restored for instance <InstanceLinkChip instance={instance} />.
+                已恢复到实例 <InstanceLinkChip instance={instance} />。
               </>,
             );
           },
           (msg) => {
-            onFailure("Snapshot restore failed", new Error(msg));
+            onFailure("恢复快照失败", new Error(msg));
           },
           () => {
             setRestoring(false);
@@ -104,7 +104,7 @@ const InstanceSnapshotActions: FC<Props> = ({
         );
       })
       .catch((e) => {
-        onFailure("Snapshot restore failed", e);
+        onFailure("恢复快照失败", e);
         setRestoring(false);
       });
   };
@@ -131,24 +131,24 @@ const InstanceSnapshotActions: FC<Props> = ({
             appearance="base"
             loading={isRestoring}
             className="has-icon is-dense"
-            title="Confirm restore"
+            title="确认恢复"
             confirmationModalProps={{
-              title: "Confirm restore",
+              title: "确认恢复",
               children: (
                 <p>
-                  This will restore snapshot{" "}
+                  这将恢复快照{" "}
                   <ResourceLabel type="snapshot" value={snapshot.name} bold />.
                   <br />
-                  This action cannot be undone, and can result in data loss.
+                  此操作无法撤销，并且可能导致数据丢失。
                 </p>
               ),
               confirmExtra: snapshot.stateful ? (
                 <ConfirmationForce
-                  label="Restore the instance state"
+                  label="恢复实例状态"
                   force={[restoreState, setRestoreState]}
                 />
               ) : undefined,
-              confirmButtonLabel: disabledReason ?? "Restore snapshot",
+              confirmButtonLabel: disabledReason ?? "恢复快照",
               confirmButtonAppearance: "positive",
               close: () => {
                 setRestoreState(true);
@@ -181,16 +181,16 @@ const InstanceSnapshotActions: FC<Props> = ({
             loading={isDeleting}
             className="has-icon is-dense"
             confirmationModalProps={{
-              title: "Confirm delete",
+              title: "确认删除",
               children: (
                 <p>
-                  This will permanently delete snapshot{" "}
+                  这将永久删除快照{" "}
                   <ResourceLabel type="snapshot" value={snapshot.name} bold />.
                   <br />
-                  This action cannot be undone, and can result in data loss.
+                  此操作无法撤销，并且可能导致数据丢失。
                 </p>
               ),
-              confirmButtonLabel: disabledReason ?? "Delete snapshot",
+              confirmButtonLabel: disabledReason ?? "删除快照",
               onConfirm: handleDelete,
             }}
             disabled={isDeleting || isRestoring || !!disabledReason}

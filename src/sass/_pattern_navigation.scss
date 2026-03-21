@@ -38,6 +38,20 @@
 }
 
 @include desktop {
+  .p-panel__logo {
+    .p-panel__logo-image {
+      // 电脑端图标下移位置。
+      // 这里的 `margin-top` 越大，图标越往下。
+      margin-top: 6px;
+    }
+
+    .logo-text {
+      // 电脑端 "Incus UI" 文字下移位置。
+      // 把这里的 `8px` 改大，文字会继续往下。
+      top: calc(#{$spv--x-small} + 10px);
+    }
+  }
+
   .l-navigation.is-collapsed .logo-text {
     display: none;
   }
@@ -99,11 +113,20 @@
 }
 
 .l-navigation .p-panel__content {
+  // 去掉侧边栏内容区顶部留白，消除 Logo 下方的空白区域。
+  padding-top: 10px;
   padding-bottom: 0;
 }
 
 .l-navigation .p-panel__header {
   z-index: 1001;
+}
+
+@include desktop {
+  .l-navigation .p-panel__header {
+    // 仅给桌面端导航头部增加顶部留白，避免影响手机版布局。
+    padding-top: $spv--small;
+  }
 }
 
 .l-navigation {

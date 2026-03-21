@@ -21,13 +21,13 @@ import type { TabLink } from "@canonical/react-components/dist/components/Tabs/T
 import { useInstance } from "context/useInstances";
 import { buildGrafanaUrl } from "util/grafanaUrl";
 
-const tabs: string[] = [
-  "Overview",
-  "Configuration",
-  "Snapshots",
-  "Terminal",
-  "Console",
-  "Logs",
+const tabs = [
+  { label: "概览", path: "overview" },
+  { label: "配置", path: "configuration" },
+  { label: "快照", path: "snapshots" },
+  { label: "终端", path: "terminal" },
+  { label: "控制台", path: "console" },
+  { label: "日志", path: "logs" },
 ];
 
 const InstanceDetail: FC = () => {
@@ -40,10 +40,10 @@ const InstanceDetail: FC = () => {
   }>();
 
   if (!name) {
-    return <>Missing name</>;
+    return <>缺少实例名称</>;
   }
   if (!project) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
 
   const {
@@ -60,7 +60,7 @@ const InstanceDetail: FC = () => {
     renderTabs.push({
       label: (
         <div>
-          <Icon name="external-link" /> Metrics
+          <Icon name="external-link" /> 监控
         </div>
       ) as unknown as string,
       href: grafanaUrl,
@@ -82,12 +82,12 @@ const InstanceDetail: FC = () => {
       contentClassName="detail-page"
     >
       {isLoading && (
-        <Spinner className="u-loader" text="Loading instance details..." />
+        <Spinner className="u-loader" text="正在加载实例详情..." />
       )}
-      {!isLoading && !instance && !error && <>Loading instance failed</>}
+      {!isLoading && !instance && !error && <>加载实例详情失败</>}
       {error && (
         <Strip>
-          <Notification severity="negative" title="Error">
+          <Notification severity="negative" title="错误">
             {error.message}
           </Notification>
         </Strip>
@@ -101,25 +101,25 @@ const InstanceDetail: FC = () => {
           />
 
           {!activeTab && (
-            <div role="tabpanel" aria-labelledby="overview">
+            <div role="tabpanel" aria-labelledby="概览">
               <InstanceOverview instance={instance} />
             </div>
           )}
 
           {activeTab === "configuration" && (
-            <div role="tabpanel" aria-labelledby="configuration">
+            <div role="tabpanel" aria-labelledby="配置">
               <EditInstance instance={instance} />
             </div>
           )}
 
           {activeTab === "snapshots" && (
-            <div role="tabpanel" aria-labelledby="snapshots">
+            <div role="tabpanel" aria-labelledby="快照">
               <InstanceSnapshots instance={instance} />
             </div>
           )}
 
           {activeTab === "terminal" && (
-            <div role="tabpanel" aria-labelledby="terminal">
+            <div role="tabpanel" aria-labelledby="终端">
               <InstanceTerminal
                 instance={instance}
                 refreshInstance={refreshInstance}
@@ -128,13 +128,13 @@ const InstanceDetail: FC = () => {
           )}
 
           {activeTab === "console" && (
-            <div role="tabpanel" aria-labelledby="console">
+            <div role="tabpanel" aria-labelledby="控制台">
               <InstanceConsole instance={instance} />
             </div>
           )}
 
           {activeTab === "logs" && (
-            <div role="tabpanel" aria-labelledby="logs">
+            <div role="tabpanel" aria-labelledby="日志">
               <InstanceLogs instance={instance} />
             </div>
           )}

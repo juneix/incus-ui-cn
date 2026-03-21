@@ -26,7 +26,7 @@ const InstanceDetailPanel: FC = () => {
   } = useInstance(panelParams.instance ?? "", panelParams.project, enable);
 
   if (error) {
-    notify.failure("Loading instance failed", error);
+    notify.failure("加载实例失败", error);
   }
 
   return (
@@ -39,14 +39,14 @@ const InstanceDetailPanel: FC = () => {
     >
       <SidePanel.Sticky>
         <SidePanel.Header>
-          <SidePanel.HeaderTitle>Instance summary</SidePanel.HeaderTitle>
+          <SidePanel.HeaderTitle>实例摘要</SidePanel.HeaderTitle>
           <SidePanel.HeaderControls>
             <Button
               appearance="base"
               className="u-no-margin--bottom"
               hasIcon
               onClick={panelParams.clear}
-              aria-label="Close"
+              aria-label="关闭"
             >
               <Icon name="close" />
             </Button>

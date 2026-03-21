@@ -17,13 +17,13 @@ const InstanceOverviewProfiles: FC<Props> = ({ instance, onFailure }) => {
   } = useProfiles(instance.project);
 
   if (error) {
-    onFailure("Loading profiles failed", error);
+    onFailure("加载配置文件失败", error);
   }
 
   const profileHeaders = [
-    { content: "Name", sortKey: "name", className: "u-text--muted" },
+    { content: "名称", sortKey: "name", className: "u-text--muted" },
     {
-      content: "Description",
+      content: "描述",
       sortKey: "description",
       className: "u-text--muted",
     },
@@ -48,13 +48,13 @@ const InstanceOverviewProfiles: FC<Props> = ({ instance, onFailure }) => {
             />
           ),
           role: "rowheader",
-          "aria-label": "Name",
+          "aria-label": "名称",
         },
         {
           content: description,
           role: "cell",
-          title: `Description ${description}`,
-          "aria-label": "Description",
+          title: `描述 ${description}`,
+          "aria-label": "描述",
         },
       ],
       sortData: {
@@ -65,7 +65,7 @@ const InstanceOverviewProfiles: FC<Props> = ({ instance, onFailure }) => {
   });
 
   if (isLoading) {
-    return <Spinner className="u-loader" text="Loading profiles..." />;
+    return <Spinner className="u-loader" text="正在加载配置文件..." />;
   }
 
   return <MainTable headers={profileHeaders} rows={profileRows} sortable />;

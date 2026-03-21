@@ -27,6 +27,19 @@ interface Props {
   isLoading: boolean;
 }
 
+const statusLabel: Record<string, string> = {
+  Error: "错误",
+  Frozen: "已冻结",
+  Freezing: "冻结中",
+  Ready: "就绪",
+  Running: "运行中",
+  Stopped: "已停止",
+  Starting: "启动中",
+  Stopping: "停止中",
+  Restarting: "重启中",
+  Migrating: "迁移中",
+};
+
 const InstanceDetailHeader: FC<Props> = ({
   name,
   instance,
@@ -42,7 +55,7 @@ const InstanceDetailHeader: FC<Props> = ({
 
   const RenameSchema = Yup.object().shape({
     name: instanceNameValidation(project, controllerState, name).required(
-      "Instance name is required",
+      "实例名称不能为空",
     ),
   });
 
@@ -77,16 +90,15 @@ const InstanceDetailHeader: FC<Props> = ({
               );
               toastNotify.success(
                 <>
-                  Instance{" "}
-                  <strong>{getInstanceName(operation.metadata)}</strong> renamed
-                  to {instanceLink}.
+                  实例 <strong>{getInstanceName(operation.metadata)}</strong>{" "}
+                  已重命名为 {instanceLink}。
                 </>,
               );
               formik.setFieldValue("isRenaming", false);
             },
             (msg) =>
               toastNotify.failure(
-                "Renaming instance failed.",
+                "重命名实例失败。",
                 new Error(msg),
                 instanceLinkFromOperation({
                   operation,
@@ -102,7 +114,7 @@ const InstanceDetailHeader: FC<Props> = ({
         .catch((e) => {
           formik.setSubmitting(false);
           toastNotify.failure(
-            `Renaming instance failed.`,
+            `重命名实例失败。`,
             e,
             instance && <InstanceLinkChip instance={instance} />,
           );
@@ -112,15 +124,15 @@ const InstanceDetailHeader: FC<Props> = ({
 
   const getDisabledReason = () => {
     if (!canEditInstance(instance)) {
-      return "You do not have permission to rename this instance";
+      return "你没有重命名此实例的权限";
     }
 
     if (!instance) {
-      return "Invalid Instance: Cannot be renamed";
+      return "无效实例，无法重命名";
     }
 
     if (instance.status !== "Stopped") {
-      return "Stop the instance to rename";
+      return "请先停止实例再重命名";
     }
 
     return undefined;
@@ -140,14 +152,16 @@ const InstanceDetailHeader: FC<Props> = ({
             }
             key={1}
           >
-            Instances
+            实例
           </Link>,
         ]}
         renameDisabledReason={getDisabledReason()}
         centerControls={
           instance ? (
             <div className="instance-header-state-controls">
-              <i className="status u-text--muted">{instance.status}</i>
+              <i className="status u-text--muted">
+                {statusLabel[instance.status] ?? instance.status}
+              </i>
               <InstanceStateActions key="state" instance={instance} />
             </div>
           ) : null

@@ -17,6 +17,11 @@ import { useStoragePool } from "context/useStoragePools";
 import classnames from "classnames";
 import { cephObject, isBucketCompatibleDriver } from "util/storageOptions";
 
+interface LocalTab {
+  label: string;
+  path: string;
+}
+
 const StoragePoolDetail: FC = () => {
   const notify = useNotify();
   const { name, project, activeTab } = useParams<{
@@ -26,10 +31,10 @@ const StoragePoolDetail: FC = () => {
   }>();
 
   if (!name) {
-    return <>Missing name</>;
+    return <>缺少存储池名称</>;
   }
   if (!project) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
 
   const { data: pool, error, isLoading } = useStoragePool(name);
@@ -37,18 +42,18 @@ const StoragePoolDetail: FC = () => {
   const isBucketCompatible = isBucketCompatibleDriver(pool?.driver || "");
 
   if (error) {
-    notify.failure("Loading storage details failed", error);
+    notify.failure("加载存储详情失败", error);
   }
 
   if (isLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="正在加载..." isMainComponent />;
   } else if (!pool) {
-    return <>Loading storage details failed</>;
+    return <>加载存储详情失败</>;
   }
 
-  const tabs: (string | TabLink)[] = [
-    "Overview",
-    "Configuration",
+  const tabs: (LocalTab | TabLink)[] = [
+    { label: "概览", path: "overview" },
+    { label: "配置", path: "configuration" },
     {
       component: () => {
         return (
@@ -63,15 +68,15 @@ const StoragePoolDetail: FC = () => {
             })}
             title={
               isVolumeCompatible
-                ? "Volumes"
-                : "Volumes are not supported on this pool"
+              ? "存储卷"
+              : "该存储池不支持存储卷"
             }
           >
-            Volumes <Icon name="external-link" />
+            存储卷 <Icon name="external-link" />
           </Link>
         );
       },
-      label: "Volumes",
+      label: "存储卷",
     },
     {
       component: () => (
@@ -86,14 +91,14 @@ const StoragePoolDetail: FC = () => {
           })}
           title={
             isBucketCompatible
-              ? "Buckets"
-              : "Buckets are not supported on this pool"
+              ? "存储桶"
+              : "该存储池不支持存储桶"
           }
         >
-          Buckets <Icon name="external-link" />
+          存储桶 <Icon name="external-link" />
         </Link>
       ),
-      label: "Buckets",
+      label: "存储桶",
     },
   ];
 
@@ -111,13 +116,13 @@ const StoragePoolDetail: FC = () => {
         />
 
         {!activeTab && (
-          <div role="tabpanel" aria-labelledby="overview">
+          <div role="tabpanel" aria-labelledby="概览">
             <StoragePoolOverview pool={pool} project={project} />
           </div>
         )}
 
         {activeTab === "configuration" && (
-          <div role="tabpanel" aria-labelledby="configuration">
+          <div role="tabpanel" aria-labelledby="配置">
             <EditStoragePool pool={pool} />
           </div>
         )}

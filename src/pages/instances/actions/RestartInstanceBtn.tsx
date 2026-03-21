@@ -39,10 +39,10 @@ const RestartInstanceBtn: FC<Props> = ({ instance }) => {
       .then((operation) => {
         eventQueue.set(
           operation.metadata.id,
-          () => toastNotify.success(<>Instance {instanceLink} restarted.</>),
+          () => toastNotify.success(<>实例 {instanceLink} 已重启。</>),
           (msg) =>
             toastNotify.failure(
-              "Instance restart failed",
+              "重启实例失败",
               new Error(msg),
               instanceLink,
             ),
@@ -55,7 +55,7 @@ const RestartInstanceBtn: FC<Props> = ({ instance }) => {
         );
       })
       .catch((e) => {
-        toastNotify.failure("Instance restart failed", e, instanceLink);
+        toastNotify.failure("重启实例失败", e, instanceLink);
         instanceLoading.setFinish(instance);
       });
   };
@@ -72,10 +72,10 @@ const RestartInstanceBtn: FC<Props> = ({ instance }) => {
       loading={isLoading}
       className="has-icon is-dense"
       confirmationModalProps={{
-        title: "Confirm restart",
+        title: "确认重启",
         children: (
           <p>
-            This will restart instance{" "}
+            这将重启实例{" "}
             <ResourceLabel type="instance" value={instance.name} bold />.
           </p>
         ),
@@ -84,11 +84,11 @@ const RestartInstanceBtn: FC<Props> = ({ instance }) => {
           setForce(false);
         },
         confirmButtonLabel: canUpdateInstanceState(instance)
-          ? "Restart"
-          : "You do not have permission to restart this instance",
+          ? "重启"
+          : "你没有重启此实例的权限",
         confirmExtra: (
           <ConfirmationForce
-            label="Force restart"
+            label="强制重启"
             force={[isForce, setForce]}
           />
         ),

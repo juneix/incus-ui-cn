@@ -26,7 +26,7 @@ const StoragePoolHeader: FC<Props> = ({ name, pool, project }) => {
   const RenameSchema = Yup.object().shape({
     name: Yup.string()
       .test(...testDuplicateStoragePoolName(project, controllerState))
-      .required("This field is required"),
+      .required("该字段不能为空"),
   });
 
   const formik = useFormik<RenameHeaderValues>({
@@ -47,14 +47,14 @@ const StoragePoolHeader: FC<Props> = ({ name, pool, project }) => {
           navigate(url);
           toastNotify.success(
             <>
-              Storage pool <strong>{name}</strong> renamed to{" "}
+              存储池 <strong>{name}</strong> 已重命名为{" "}
               <ResourceLink type="pool" value={values.name} to={url} />.
             </>,
           );
           formik.setFieldValue("isRenaming", false);
         })
         .catch((e) => {
-          notify.failure("Renaming failed", e);
+          notify.failure("重命名失败", e);
         })
         .finally(() => {
           formik.setSubmitting(false);
@@ -70,7 +70,7 @@ const StoragePoolHeader: FC<Props> = ({ name, pool, project }) => {
           to={`/ui/project/${encodeURIComponent(project)}/storage/pools`}
           key={1}
         >
-          Storage pools
+          存储池
         </Link>,
       ]}
       controls={[
@@ -82,7 +82,7 @@ const StoragePoolHeader: FC<Props> = ({ name, pool, project }) => {
         />,
       ]}
       isLoaded
-      renameDisabledReason="Cannot rename storage pools"
+      renameDisabledReason="暂不支持重命名存储池"
     />
   );
 };

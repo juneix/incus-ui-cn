@@ -31,7 +31,7 @@ const CreateImageFromInstanceBtn: FC<Props> = ({
 
   const getDisabledReason = () => {
     if (!canCreateImages(project)) {
-      return `You do not have permission to create images in this project`;
+      return `你没有在当前项目中创建镜像的权限`;
     }
 
     const isDisabled =
@@ -39,7 +39,7 @@ const CreateImageFromInstanceBtn: FC<Props> = ({
       Boolean(instanceLoading.getType(instance));
 
     if (isDisabled) {
-      return "Stop the instance to create an image";
+      return "请先停止实例再创建镜像";
     }
 
     return "";
@@ -59,12 +59,12 @@ const CreateImageFromInstanceBtn: FC<Props> = ({
         appearance="default"
         className={classNames("u-no-margin--bottom has-icon", classname)}
         onClick={openPortal}
-        aria-label="Create image"
-        title={getDisabledReason() || "Create image"}
+        aria-label="创建镜像"
+        title={getDisabledReason() || "创建镜像"}
         disabled={Boolean(getDisabledReason())}
       >
         <Icon name="plus" />
-        <span>Create Image</span>
+        <span>创建镜像</span>
       </ActionButton>
     </>
   );

@@ -5,20 +5,20 @@ import { Button, useListener, useNotify } from "@canonical/react-components";
 import { updateMaxHeight } from "util/updateMaxHeight";
 import { useSupportedFeatures } from "context/useSupportedFeatures";
 
-export const MAIN_CONFIGURATION = "Main configuration";
-export const DISK_DEVICES = "Disk";
-export const NETWORK_DEVICES = "Network";
+export const MAIN_CONFIGURATION = "基础配置";
+export const DISK_DEVICES = "磁盘";
+export const NETWORK_DEVICES = "网络";
 export const GPU_DEVICES = "GPU";
-export const PROXY_DEVICES = "Proxy";
-export const OTHER_DEVICES = "Other";
-export const RESOURCE_LIMITS = "Resource limits";
-export const SECURITY_POLICIES = "Security policies";
-export const MIGRATION = "Migration";
-export const SNAPSHOTS = "Snapshots";
-export const BOOT = "Boot";
-export const CLOUD_INIT = "Cloud init";
-export const USER_PROPERTIES = "User properties";
-export const YAML_CONFIGURATION = "YAML configuration";
+export const PROXY_DEVICES = "代理";
+export const OTHER_DEVICES = "其他";
+export const RESOURCE_LIMITS = "资源限制";
+export const SECURITY_POLICIES = "安全策略";
+export const MIGRATION = "迁移";
+export const SNAPSHOTS = "快照";
+export const BOOT = "启动";
+export const CLOUD_INIT = "Cloud-init";
+export const USER_PROPERTIES = "用户属性";
+export const YAML_CONFIGURATION = "YAML 配置";
 
 interface Props {
   isDisabled: boolean;
@@ -40,7 +40,7 @@ const InstanceFormMenu: FC<Props> = ({
   const { hasMetadataConfiguration } = useSupportedFeatures();
 
   const disableReason = isDisabled
-    ? "Please select an image before adding custom configuration"
+    ? "请先选择镜像，再添加自定义配置"
     : undefined;
 
   const menuItemProps = {
@@ -57,7 +57,7 @@ const InstanceFormMenu: FC<Props> = ({
 
   return (
     <div className="p-side-navigation--accordion form-navigation">
-      <nav aria-label="Instance form navigation">
+      <nav aria-label="实例表单导航">
         <ul className="p-side-navigation__list">
           <MenuItem label={MAIN_CONFIGURATION} {...menuItemProps} />
           <li className="p-side-navigation__item">
@@ -73,7 +73,7 @@ const InstanceFormMenu: FC<Props> = ({
               disabled={isDisabled}
               title={disableReason}
             >
-              Devices
+              设备
             </Button>
             <ul
               className="p-side-navigation__list"

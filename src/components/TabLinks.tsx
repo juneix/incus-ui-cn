@@ -4,8 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { slugify } from "util/slugify";
 import type { TabLink } from "@canonical/react-components/dist/components/Tabs/Tabs";
 
+interface LocalTab {
+  label: string;
+  path?: string;
+}
+
 interface Props {
-  tabs: (string | TabLink)[];
+  tabs: (string | TabLink | LocalTab)[];
   activeTab?: string;
   tabUrl: string;
 }
@@ -17,17 +22,20 @@ const TabLinks: FC<Props> = ({ tabs, activeTab, tabUrl }) => {
   return (
     <Tabs
       links={tabs.map((tab) => {
-        if (typeof tab !== "string") {
+        if (typeof tab !== "string" && !("path" in tab)) {
           return tab;
         }
 
-        const tabPath = slugify(tab);
-        const href = tab === tabs[0] ? tabUrl : `${tabUrl}/${tabPath}`;
+        const label = typeof tab === "string" ? tab : tab.label;
+        const tabPath =
+          typeof tab === "string" ? slugify(tab) : (tab.path ?? slugify(tab.label));
+        const isDefaultTab = tab === tabs[0];
+        const href = isDefaultTab ? tabUrl : `${tabUrl}/${tabPath}`;
 
         return {
-          label: tab,
+          label,
           id: tabPath,
-          active: tabPath === activeTab || (tab === tabs[0] && !activeTab),
+          active: tabPath === activeTab || (isDefaultTab && !activeTab),
           onClick: (e) => {
             e.preventDefault();
             notify.clear();

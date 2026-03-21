@@ -21,11 +21,11 @@ const StartInstanceBtn: FC<Props> = ({ instance }) => {
       disabled={isDisabled || !canUpdateInstanceState(instance)}
       onClick={handleStart}
       type="button"
-      aria-label={isLoading ? "Starting" : "Start"}
+      aria-label={isLoading ? "启动中" : "启动"}
       title={
         canUpdateInstanceState(instance)
-          ? "Start"
-          : "You do not have permission to start this instance"
+          ? "启动"
+          : "你没有启动此实例的权限"
       }
     >
       <Icon

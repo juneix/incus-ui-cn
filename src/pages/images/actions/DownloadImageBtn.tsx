@@ -39,13 +39,12 @@ const DownloadImageBtn: FC<Props> = ({ image, project }) => {
 
       toastNotify.success(
         <>
-          Image {imageLink} download started. Please check your downloads
-          folder.
+          镜像 {imageLink} 已开始下载，请检查下载文件夹。
         </>,
       );
     } catch (e) {
       toastNotify.failure(
-        `Image ${description} was unable to download.`,
+        `镜像 ${description} 下载失败。`,
         e,
         imageLink,
       );
@@ -57,9 +56,9 @@ const DownloadImageBtn: FC<Props> = ({ image, project }) => {
   return (
     <ActionButton
       title={
-        isUnifiedTarball ? "Export image" : "Cannot export this image format."
+        isUnifiedTarball ? "导出镜像" : "当前镜像格式不支持导出。"
       }
-      aria-label="export image"
+      aria-label="导出镜像"
       loading={isLoading}
       onClick={handleExport}
       className="has-icon"

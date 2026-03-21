@@ -1,5 +1,7 @@
 .project-select-label {
   margin-left: $sph--large;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .project-select {
@@ -7,6 +9,7 @@
 
   .toggle {
     margin-left: $sph--large;
+    margin-top: 0;
     width: 12rem;
 
     .p-icon--chevron-down {
@@ -80,6 +83,12 @@
 @include desktop {
   .project-select-label {
     margin-left: $sph--x-large;
+    // 电脑端“项目”标签上下位置。
+    // 这里的 `margin-top` 越小越靠上，越大越靠下。
+    margin-top: $spv--x-small;
+    // 电脑端“项目”与下拉框的间距。
+    // 这里的 `margin-bottom` 越大，下面的下拉框离得越远。
+    margin-bottom: $spv--small;
   }
 
   .project-select {
