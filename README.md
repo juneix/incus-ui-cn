@@ -1,4 +1,4 @@
-# Incus UI CN Lite
+# Incus UI 中文定制版
 
 `incus-ui-cn` 基于 [zabbly/incus-ui-canonical](https://github.com/zabbly/incus-ui-canonical) 整理。
 
@@ -51,7 +51,7 @@ http://ip:5566/ui/
 ## ❤️ 支持项目
 
 - 打赏鼓励：支持我开发更多有趣应用
-- 互动群聊：加入 💬 [QQ 群](https://qm.qq.com/q/ZzOD5Qbhce)可在线催更
+- 互动群聊：加入 💬 [QQ 群](https://qm.qq.com/q/ZzOD5Qbhce) 可在线催更
 - 更多内容：访问 ➡️ [谢週五の藏经阁](https://5nav.eu.org)
 
 <div align="center">
