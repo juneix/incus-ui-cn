@@ -156,7 +156,7 @@ const PermissionSelector: FC<Props> = ({ onAddPermission, disableReason }) => {
   };
 
   if (permissionsError) {
-    notify.failure("Loading permissions failed", permissionsError);
+    notify.failure("加载权限失败", permissionsError);
   }
 
   const resourceOptions = generateResourceOptions(
@@ -187,10 +187,10 @@ const PermissionSelector: FC<Props> = ({ onAddPermission, disableReason }) => {
       <CustomSelect
         id="resourceType"
         name="resourceType"
-        label={<strong>Resource Type</strong>}
+        label={<strong>资源类型</strong>}
         options={getResourceTypeOptions(metadata)}
         toggleClassName="u-no-margin--bottom"
-        aria-label="Resource type"
+        aria-label="资源类型"
         onChange={handleResourceTypeChange}
         value={resourceType}
         selectRef={resourceTypeRef as SelectRef}
@@ -200,10 +200,10 @@ const PermissionSelector: FC<Props> = ({ onAddPermission, disableReason }) => {
       <CustomSelect
         id="resource"
         name="resource"
-        label={<strong>Resource</strong>}
+        label={<strong>资源</strong>}
         options={!hasResourceOptions ? [noneAvailableOption] : resourceOptions}
         toggleClassName="u-no-margin--bottom"
-        aria-label="Resource"
+        aria-label="资源"
         onChange={handleResourceChange}
         value={resource}
         disabled={
@@ -220,10 +220,10 @@ const PermissionSelector: FC<Props> = ({ onAddPermission, disableReason }) => {
       <CustomSelect
         id="entitlement"
         name="entitlement"
-        label={<strong>Entitlement</strong>}
+        label={<strong>操作权限</strong>}
         options={entitlementOptions}
         toggleClassName="u-no-margin--bottom"
-        aria-label="Entitlement"
+        aria-label="操作权限"
         onChange={handleEntitlementChange}
         value={entitlement}
         disabled={isLoading || (!resource && !isServerResourceType)}
@@ -241,7 +241,7 @@ const PermissionSelector: FC<Props> = ({ onAddPermission, disableReason }) => {
           disabled={!entitlement}
           tabIndex={!entitlement ? -1 : undefined}
         >
-          Add
+          添加
         </Button>
       </div>
     </div>

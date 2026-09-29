@@ -40,27 +40,27 @@ const DeleteProfileBtn: FC<Props> = ({ profile, project }) => {
         navigate(`/ui/project/${encodeURIComponent(project)}/profiles`);
         toastNotify.success(
           <>
-            Profile <ResourceLabel bold type="profile" value={profile.name} />{" "}
-            deleted.
+            配置模板 <ResourceLabel bold type="profile" value={profile.name} />{" "}
+            已删除。
           </>,
         );
       })
       .catch((e) => {
         setLoading(false);
-        notify.failure("Profile deletion failed", e);
+        notify.failure("删除配置模板失败", e);
       });
   };
 
   const isDefaultProfile = profile.name === "default";
   const getHoverText = () => {
     if (!canDeleteProfile(profile)) {
-      return "You do not have permission to delete this profile";
+      return "你没有权限删除此配置模板";
     }
 
     if (isDefaultProfile) {
-      return "The default profile cannot be deleted";
+      return "默认配置模板无法被删除";
     }
-    return "Delete profile";
+    return "删除配置模板";
   };
 
   return (
@@ -72,14 +72,14 @@ const DeleteProfileBtn: FC<Props> = ({ profile, project }) => {
       disabled={!canDeleteProfile(profile) || isDefaultProfile || isLoading}
       loading={isLoading}
       confirmationModalProps={{
-        title: "Confirm delete",
-        confirmButtonLabel: "Delete",
+        title: "确认删除",
+        confirmButtonLabel: "删除",
         onConfirm: handleDelete,
         children: (
           <p>
-            This will permanently delete profile{" "}
-            <ResourceLabel type="profile" value={profile.name} bold />.<br />
-            This action cannot be undone, and can result in data loss.
+            这将永久删除配置模板{" "}
+            <ResourceLabel type="profile" value={profile.name} bold />。<br />
+            此操作无法撤销，并可能导致数据丢失。
           </p>
         ),
       }}
@@ -87,7 +87,7 @@ const DeleteProfileBtn: FC<Props> = ({ profile, project }) => {
       showShiftClickHint
     >
       {!isSmallScreen && <Icon name="delete" />}
-      <span>Delete</span>
+      <span>删除</span>
     </ConfirmationButton>
   );
 };

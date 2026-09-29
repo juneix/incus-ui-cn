@@ -46,19 +46,25 @@ const MigrateInstanceModal: FC<Props> = ({ close, instance }) => {
     }
   };
 
+  const typeNames: Record<string, string> = {
+    "cluster member": "集群成员",
+    "root storage pool": "根存储池",
+    project: "项目",
+  };
+
   const selectStepTitle = (
     <>
-      Choose {type} for instance <strong>{instance.name}</strong>
+      为实例 <strong>{instance.name}</strong> 选择目标{typeNames[type] ?? type}
     </>
   );
 
   const modalTitle = !type ? (
-    "Choose migration method"
+    "选择迁移方式"
   ) : (
     <BackLink
-      title={target ? "Confirm migration" : selectStepTitle}
+      title={target ? "确认迁移" : selectStepTitle}
       onClick={handleGoBack}
-      linkText={target ? `Choose ${type}` : "Choose migration method"}
+      linkText={target ? `选择${typeNames[type] ?? type}` : "选择迁移方式"}
     />
   );
 
@@ -79,10 +85,10 @@ const MigrateInstanceModal: FC<Props> = ({ close, instance }) => {
         </h2>
         <button
           className="p-modal__close"
-          aria-label="Close active modal"
+          aria-label="关闭窗口"
           onClick={close}
         >
-          Close
+          关闭
         </button>
       </header>
       {!type && (
@@ -90,7 +96,7 @@ const MigrateInstanceModal: FC<Props> = ({ close, instance }) => {
           {isClustered && (
             <FormLink
               icon="cluster-host"
-              title="Migrate instance to a different cluster member"
+              title="将实例迁移到其他集群成员"
               onClick={() => {
                 setType("cluster member");
               }}
@@ -98,14 +104,14 @@ const MigrateInstanceModal: FC<Props> = ({ close, instance }) => {
           )}
           <FormLink
             icon="switcher-dashboard"
-            title="Move instance root storage to a different pool"
+            title="将实例根存储移动到其他存储池"
             onClick={() => {
               setType("root storage pool");
             }}
           />
           <FormLink
             icon="folder"
-            title="Move instance to a different project"
+            title="将实例移动到其他项目"
             onClick={() => {
               setType("project");
             }}

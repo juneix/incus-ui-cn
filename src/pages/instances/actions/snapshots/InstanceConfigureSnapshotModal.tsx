@@ -75,14 +75,14 @@ const InstanceConfigureSnapshotModal: FC<Props> = ({
     <Modal
       close={close}
       className="edit-snapshot-config"
-      title="Snapshot configuration"
+      title="快照配置"
       buttonRow={
         formik.values.readOnly ? (
           <Button
             className="u-no-margin--bottom u-no-margin--right"
             onClick={close}
           >
-            Close
+            关闭
           </Button>
         ) : (
           <>
@@ -92,7 +92,7 @@ const InstanceConfigureSnapshotModal: FC<Props> = ({
               type="button"
               onClick={close}
             >
-              Cancel
+              取消
             </Button>
             <ActionButton
               appearance="positive"
@@ -101,7 +101,7 @@ const InstanceConfigureSnapshotModal: FC<Props> = ({
               disabled={formik.isSubmitting}
               onClick={() => void formik.submitForm()}
             >
-              Save
+              保存
             </ActionButton>
           </>
         )

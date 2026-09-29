@@ -32,13 +32,13 @@ const DeleteNetworkForwardBtn: FC<Props> = ({ network, forward, project }) => {
       .then(() => {
         toastNotify.success(
           <>
-            Network forward with listen address{" "}
+            监听地址为{" "}
             <ResourceLabel
               type="network-forward"
               value={forward.listen_address}
               bold
             />{" "}
-            deleted.
+            的网络转发已删除。
           </>,
         );
         queryClient.invalidateQueries({
@@ -51,7 +51,7 @@ const DeleteNetworkForwardBtn: FC<Props> = ({ network, forward, project }) => {
       })
       .catch((e) => {
         setLoading(false);
-        notify.failure("Network forward deletion failed", e);
+        notify.failure("删除网络转发失败", e);
       });
   };
 
@@ -60,23 +60,22 @@ const DeleteNetworkForwardBtn: FC<Props> = ({ network, forward, project }) => {
       appearance="base"
       onHoverText={
         canEditNetwork(network)
-          ? "Delete network forward"
-          : "You do not have permission to delete this network forward"
+          ? "删除网络转发"
+          : "您没有权限删除此网络转发"
       }
       confirmationModalProps={{
-        title: "Confirm delete",
+        title: "确认删除",
         confirmButtonAppearance: "negative",
-        confirmButtonLabel: "Delete",
+        confirmButtonLabel: "删除",
         children: (
           <p>
-            Are you sure you want to delete the network forward with listen
-            address{" "}
+            确定要删除监听地址为{" "}
             <ResourceLabel
               type="network-forward"
               value={forward.listen_address}
               bold
-            />
-            ?<br />
+            />{" "}
+            的网络转发吗？<br />
           </p>
         ),
         onConfirm: handleDelete,

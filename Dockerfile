@@ -10,6 +10,8 @@ RUN yarn build
 
 FROM nginx:1.28.2-alpine
 
+RUN apk add --no-cache openssl
+
 ENV port=5566
 ENV backend=https://127.0.0.1:8443
 ENV tls_verify=off

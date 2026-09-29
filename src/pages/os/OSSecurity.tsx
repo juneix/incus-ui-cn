@@ -46,27 +46,27 @@ const OSSecurity: FC<Props> = ({ target }) => {
       target,
     )
       .then(() => {
-        toastNotify.success(<>Security updated</>);
+        toastNotify.success(<>安全配置已更新</>);
         queryClient.invalidateQueries({
           queryKey: [queryKeys.osSecurity, target],
         });
         handleSuccess();
       })
       .catch((e) => {
-        toastNotify.failure("Security update failed", e);
+        toastNotify.failure("安全配置更新失败", e);
         handleFailure();
       });
   };
 
   if (error) {
-    notify.failure("Loading security data failed", error);
+    notify.failure("加载安全数据失败", error);
   }
 
   return (
     <>
       <NotificationRow />
       {isLoading && (
-        <Spinner className="u-loader" text="Loading security data..." />
+        <Spinner className="u-loader" text="正在加载安全数据..." />
       )}
       {!isLoading && !error && (
         <OSYamlEditor

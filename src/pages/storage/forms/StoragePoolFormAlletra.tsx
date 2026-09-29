@@ -16,21 +16,21 @@ const StoragePoolFormAlletra: FC<Props> = ({ formik }) => {
       rows={[
         getConfigurationRow({
           formik,
-          label: "Verify Certificate",
+          label: "验证证书",
           name: "alletra_wsapi_verify",
           defaultValue: "",
           children: <Select options={optionTrueFalse} />,
         }),
         getConfigurationRow({
           formik,
-          label: "Target",
+          label: "目标",
           name: "alletra_target",
           defaultValue: "",
           children: <Input type="text" />,
         }),
         getConfigurationRow({
           formik,
-          label: "Mode",
+          label: "模式",
           name: "alletra_mode",
           defaultValue: "",
           children: <Select options={optionIscsiNvme} />,

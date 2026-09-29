@@ -21,23 +21,23 @@ const NetworkAclDetail: FC = () => {
   }>();
 
   if (!name) {
-    return <>Missing name</>;
+    return <>缺少名称参数</>;
   }
 
   if (!project) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
 
   const { data: networkAcl, error, isLoading } = useNetworkAcl(name, project);
 
   useEffect(() => {
     if (error) {
-      notify.failure("Loading ACL failed", error);
+      notify.failure("加载 ACL 失败", error);
     }
   }, [error]);
 
   if (isLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="正在加载..." isMainComponent />;
   }
 
   return (

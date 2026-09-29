@@ -63,23 +63,23 @@ const MigrateVolumeModal: FC<Props> = ({ close, migrate, storageVolume }) => {
 
   const selectStepTitle = (
     <>
-      Choose {type} for custom volume <strong>{storageVolume.name}</strong>
+      为自定义存储卷 <strong>{storageVolume.name}</strong> 选择目标{type === "cluster member" ? "集群成员" : "存储池"}
     </>
   );
 
   const modalTitle = !type ? (
-    "Choose migration method"
+    "选择迁移方式"
   ) : (
     <>
       {allowChooseMigrationType && (
         <BackLink
-          title={target ? "Confirm migration" : selectStepTitle}
+          title={target ? "确认迁移" : selectStepTitle}
           onClick={handleGoBack}
-          linkText={target ? `Choose ${type}` : "Choose migration method"}
+          linkText={target ? `选择目标${type === "cluster member" ? "集群成员" : "存储池"}` : "选择迁移方式"}
         />
       )}
       {!allowChooseMigrationType &&
-        (target ? "Confirm migration" : selectStepTitle)}
+        (target ? "确认迁移" : selectStepTitle)}
     </>
   );
 
@@ -90,17 +90,17 @@ const MigrateVolumeModal: FC<Props> = ({ close, migrate, storageVolume }) => {
       title={modalTitle}
       onKeyDown={handleEscKey}
     >
-      {isLoading && <Spinner className="u-loader" text="Loading instance preview..." isMainComponent />}
+      {isLoading && <Spinner className="u-loader" text="正在加载预览..." isMainComponent />}
       {!isLoading && allowChooseMigrationType && !type && (
         <div className="choose-migration-type">
           <FormLink
             icon="cluster-host"
-            title="Migrate custom volume to a different cluster member"
+            title="迁移自定义存储卷到其他集群成员"
             onClick={() => setType("cluster member")}
           />
           <FormLink
             icon="switcher-dashboard"
-            title="Migrate custom volume to a different pool"
+            title="迁移自定义存储卷到其他存储池"
             onClick={() => setType("storage pool")}
           />
         </div>

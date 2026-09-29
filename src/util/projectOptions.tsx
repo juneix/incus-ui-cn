@@ -1,55 +1,55 @@
 export const optionAllowBlock = [
   {
-    label: "Select option",
+    label: "请选择",
     value: "",
     disabled: true,
   },
   {
-    label: "Allow",
+    label: "允许 (allow)",
     value: "allow",
   },
   {
-    label: "Block",
+    label: "阻止 (block)",
     value: "block",
   },
 ];
 
 export const optionAllowIsolatedUnprivileged = [
   {
-    label: "Select option",
+    label: "请选择",
     value: "",
     disabled: true,
   },
   {
-    label: "Allow",
+    label: "允许 (allow)",
     value: "allow",
   },
   {
-    label: "Isolated",
+    label: "隔离 (isolated)",
     value: "isolated",
   },
   {
-    label: "Unprivileged",
+    label: "非特权 (unprivileged)",
     value: "unprivileged",
   },
 ];
 
 export const optionAllowBlockManaged = [
   {
-    label: "Select option",
+    label: "请选择",
     value: "",
     disabled: true,
   },
   {
-    label: "Allow",
+    label: "允许 (allow)",
     value: "allow",
   },
   {
-    label: "Block",
+    label: "阻止 (block)",
     value: "block",
   },
   {
-    label: "Managed",
+    label: "托管 (managed)",
     value: "managed",
   },
 ];

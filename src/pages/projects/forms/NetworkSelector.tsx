@@ -56,9 +56,9 @@ const NetworkSelector: FC<
 
     if (options.length === 0) {
       options.unshift({
-        label: <span>No networks available</span>,
+        label: <span>无可用网络</span>,
         value: "",
-        text: "None",
+        text: "无",
         disabled: true,
       });
     }
@@ -67,14 +67,14 @@ const NetworkSelector: FC<
       options.push({
         label: (
           <div className="label">
-            <span title="No network" className="network-option u-truncate">
-              No network
+            <span title="不使用网络" className="network-option u-truncate">
+              不使用网络
             </span>
-            <span title="No network type" className="network-option u-truncate">
+            <span title="无网络类型" className="network-option u-truncate">
               -
             </span>
             <span
-              title="network ACLs"
+              title="网络 ACL"
               className="network-option u-truncate u-align--right"
             >
               -
@@ -82,7 +82,7 @@ const NetworkSelector: FC<
           </div>
         ),
         value: "none",
-        text: "No network",
+        text: "不使用网络",
         disabled: false,
       });
     }
@@ -93,10 +93,10 @@ const NetworkSelector: FC<
   const getHeader = () => {
     return (
       <div className="header">
-        <span className="network-option u-no-margin--bottom">Name</span>
-        <span className="network-option u-no-margin--bottom">Type</span>
+        <span className="network-option u-no-margin--bottom">名称</span>
+        <span className="network-option u-no-margin--bottom">类型</span>
         <span className="network-option u-no-margin--bottom u-align--right">
-          ACLs
+          ACL
         </span>
       </div>
     );
@@ -104,7 +104,7 @@ const NetworkSelector: FC<
 
   return (
     <CustomSelect
-      label="Network"
+      label="网络"
       {...selectProps}
       onChange={(e) => {
         setValue(e);
@@ -113,7 +113,7 @@ const NetworkSelector: FC<
       options={getNetworkOptions()}
       header={getHeader()}
       dropdownClassName="network-select-dropdown"
-      aria-label="Network"
+      aria-label="网络"
     />
   );
 };

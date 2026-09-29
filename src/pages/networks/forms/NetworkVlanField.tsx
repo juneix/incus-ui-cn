@@ -30,7 +30,7 @@ const NetworkVlanField: FC<Props> = ({ formik }) => {
               className="u-no-margin--bottom"
               type="button"
               appearance="base"
-              title={formik.values.editRestriction ?? "Edit"}
+              title={formik.values.editRestriction ?? "编辑"}
               hasIcon
               disabled={!!formik.values.editRestriction}
             >
@@ -42,8 +42,8 @@ const NetworkVlanField: FC<Props> = ({ formik }) => {
             {...formik.getFieldProps("vlan")}
             id="vlan"
             type="number"
-            placeholder="Enter VLAN ID"
-            help="The VLAN ID to attach to"
+            placeholder="输入 VLAN ID"
+            help="要连接的 VLAN ID"
           />
         )}
       </div>

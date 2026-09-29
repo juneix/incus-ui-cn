@@ -54,7 +54,7 @@ const HostPathDeviceModal: FC<Props> = ({
             type="button"
             onClick={onCancel}
           >
-            Back
+            返回
           </Button>
           <Button
             appearance=""
@@ -64,7 +64,7 @@ const HostPathDeviceModal: FC<Props> = ({
             disabled={!source || !path || formik.isSubmitting}
             onClick={handleFinish}
           >
-            Attach
+            挂载
           </Button>
         </>
       }
@@ -77,14 +77,14 @@ const HostPathDeviceModal: FC<Props> = ({
           setSource(e.target.value);
         }}
         type="text"
-        label="Host path"
+        label="宿主机路径"
         required
         error={
           !source && touchedRef.current.source
-            ? "Host path is required"
+            ? "宿主机路径为必填项"
             : undefined
         }
-        placeholder="Enter full path (e.g. /home)"
+        placeholder="请输入完整路径（如 /home）"
       />
       <Input
         value={path}
@@ -93,14 +93,14 @@ const HostPathDeviceModal: FC<Props> = ({
           setPath(e.target.value);
         }}
         type="text"
-        label="Mount point"
+        label="挂载点路径"
         required
         error={
           !path && touchedRef.current.path
-            ? "Mount point is required"
+            ? "挂载点路径为必填项"
             : undefined
         }
-        placeholder="Enter full path (e.g. /data)"
+        placeholder="请输入完整路径（如 /data）"
       />
     </Modal>
   );

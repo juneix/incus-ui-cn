@@ -24,7 +24,7 @@ const ProjectSelectorList: FC<Props> = ({
 
   const getInstanceCount = (project: LxdProject) => {
     const count = filterUsedByType("instance", project.used_by).length;
-    return `${count} ${pluralize("instance", count)}`;
+    return `${count} 个实例`;
   };
 
   return (

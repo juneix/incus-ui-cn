@@ -33,12 +33,12 @@ const EditStorageBucketBtn: FC<Props> = ({
       }}
       title={
         canEditBucket(bucket)
-          ? "Edit bucket"
-          : "You do not have permission to edit this bucket"
+          ? "编辑存储桶"
+          : "您没有权限编辑此存储桶"
       }
     >
       <Icon name="edit" />
-      {isDetailPage && <span>Configure</span>}
+      {isDetailPage && <span>配置</span>}
     </Button>
   );
 };

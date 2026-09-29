@@ -45,7 +45,7 @@ const InstanceSnapshotsForm: FC<Props> = ({ formik }) => {
       {snapshotDisabled && (
         <Notification
           severity="caution"
-          title={`Snapshot creation has been disabled for instances in the project ${project?.name}`}
+          title={`项目 ${project?.name} 中已禁用实例的快照创建`}
         >
           <SnapshotDisabledWarningLink project={project} />
         </Notification>
@@ -54,25 +54,25 @@ const InstanceSnapshotsForm: FC<Props> = ({ formik }) => {
         rows={[
           getConfigurationRow({
             formik,
-            label: "Snapshot name pattern",
+            label: "快照名称格式",
             name: "snapshots_pattern",
             defaultValue: "",
-            children: <Input placeholder="Enter name pattern" type="text" />,
+            children: <Input placeholder="输入名称格式 (如 snap-%d)" type="text" />,
           }),
 
           getConfigurationRow({
             formik,
-            label: "Expire after",
+            label: "过期时间",
             name: "snapshots_expiry",
             defaultValue: "",
             children: (
-              <Input placeholder="Enter expiry expression" type="text" />
+              <Input placeholder="输入过期表达式 (如 30d)" type="text" />
             ),
           }),
 
           getConfigurationRow({
             formik,
-            label: "Snapshot stopped instances",
+            label: "对已停止的实例创建快照",
             name: "snapshots_schedule_stopped",
             defaultValue: "",
             readOnlyRenderer: (val) => optionRenderer(val, optionYesNo),
@@ -81,7 +81,7 @@ const InstanceSnapshotsForm: FC<Props> = ({ formik }) => {
 
           getConfigurationRow({
             formik,
-            label: "Schedule",
+            label: "计划表达式",
             name: "snapshots_schedule",
             defaultValue: "",
             children: (

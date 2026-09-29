@@ -40,11 +40,11 @@ const VolumeEditSnapshotBtn: FC<Props> = ({
         }
         onClick={openPortal}
         type="button"
-        aria-label="Edit snapshot"
+        aria-label="编辑快照"
         title={
           canManageStorageVolumeSnapshots(volume)
-            ? "Edit"
-            : "You do not have permission to edit this snapshot"
+            ? "编辑"
+            : "您没有权限编辑此快照"
         }
       >
         <Icon name="edit" />

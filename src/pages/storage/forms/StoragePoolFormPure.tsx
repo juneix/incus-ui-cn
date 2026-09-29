@@ -16,14 +16,14 @@ const StoragePoolFormPure: FC<Props> = ({ formik }) => {
       rows={[
         getConfigurationRow({
           formik,
-          label: "Gateway verify",
+          label: "验证网关证书",
           name: "pure_gateway_verify",
           defaultValue: "",
           children: <Select options={optionTrueFalse} />,
         }),
         getConfigurationRow({
           formik,
-          label: "Mode",
+          label: "模式",
           name: "pure_mode",
           defaultValue: "",
           disabled: !formik.values.isCreating,
@@ -31,7 +31,7 @@ const StoragePoolFormPure: FC<Props> = ({ formik }) => {
         }),
         getConfigurationRow({
           formik,
-          label: "Target",
+          label: "目标",
           name: "pure_target",
           defaultValue: "",
           children: <Input type="text" />,

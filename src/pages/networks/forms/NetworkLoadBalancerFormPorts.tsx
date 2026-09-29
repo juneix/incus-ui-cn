@@ -32,7 +32,7 @@ const NetworkLoadBalancerFormPorts: FC<Props> = ({ formik, network }) => {
               forId="ports.0.listenPort"
               className="u-no-margin--bottom"
             >
-              Listen port
+              监听端口
             </Label>
           </th>
           <th className="protocol">
@@ -41,7 +41,7 @@ const NetworkLoadBalancerFormPorts: FC<Props> = ({ formik, network }) => {
               forId="ports.0.protocol"
               className="u-no-margin--bottom"
             >
-              Protocol
+              协议
             </Label>
           </th>
           <th className="target-backend">
@@ -50,10 +50,10 @@ const NetworkLoadBalancerFormPorts: FC<Props> = ({ formik, network }) => {
               forId="ports.0.targetBackend"
               className="u-no-margin--bottom"
             >
-              Target backend
+              目标后端
             </Label>
           </th>
-          <th className="u-off-screen">Actions</th>
+          <th className="u-off-screen">操作</th>
         </tr>
       </thead>
       <tbody>
@@ -69,11 +69,11 @@ const NetworkLoadBalancerFormPorts: FC<Props> = ({ formik, network }) => {
                   {...formik.getFieldProps(`ports.${index}.listenPort`)}
                   id={`ports.${index}.listenPort`}
                   type="text"
-                  aria-label={`Port ${index} listen port`}
-                  placeholder="Port number(s)"
+                  aria-label={`端口 ${index} 监听端口`}
+                  placeholder="端口号"
                   help={
                     index === formik.values.ports.length - 1 && (
-                      <>e.g. 80,90-99.</>
+                      <>例如 80,90-99。</>
                     )
                   }
                   error={
@@ -91,7 +91,7 @@ const NetworkLoadBalancerFormPorts: FC<Props> = ({ formik, network }) => {
                     { label: "TCP", value: "tcp" },
                     { label: "UDP", value: "udp" },
                   ]}
-                  aria-label={`Port ${index} protocol`}
+                  aria-label={`端口 ${index} 协议`}
                 />
               </td>
               <td className="target-backend">
@@ -99,8 +99,8 @@ const NetworkLoadBalancerFormPorts: FC<Props> = ({ formik, network }) => {
                   {...formik.getFieldProps(`ports.${index}.targetBackend`)}
                   id={`ports.${index}.targetAddress`}
                   type="text"
-                  aria-label={`Port ${index} target backends`}
-                  placeholder="Enter target backend name(s)"
+                  aria-label={`端口 ${index} 目标后端`}
+                  placeholder="输入目标后端名称"
                   error={
                     formik.touched.ports?.[index]?.targetBackend
                       ? portError?.targetBackend
@@ -119,7 +119,7 @@ const NetworkLoadBalancerFormPorts: FC<Props> = ({ formik, network }) => {
                   hasIcon
                   className="u-no-margin--bottom"
                   type="button"
-                  aria-label={`Delete port ${index}`}
+                  aria-label={`删除端口 ${index}`}
                 >
                   <Icon name="delete" />
                 </Button>

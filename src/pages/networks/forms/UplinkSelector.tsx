@@ -33,7 +33,7 @@ const UplinkSelector: FC<Props> = ({ project: projectName, props, formik }) => {
 
   useEffect(() => {
     if (networkError) {
-      notify.failure("Loading networks failed", networkError);
+      notify.failure("加载网络失败", networkError);
     }
   }, [networkError]);
 
@@ -45,7 +45,7 @@ const UplinkSelector: FC<Props> = ({ project: projectName, props, formik }) => {
 
   useEffect(() => {
     if (projectError) {
-      notify.failure("Loading projects failed", projectError);
+      notify.failure("加载项目失败", projectError);
     }
   }, [projectError]);
 
@@ -64,19 +64,19 @@ const UplinkSelector: FC<Props> = ({ project: projectName, props, formik }) => {
     };
   });
   options.unshift({
-    label: options.length === 0 ? "No networks available" : "Select option",
+    label: options.length === 0 ? "无可用网络" : "选择选项",
     value: "",
   });
 
   if (isNetworkLoading || isProjectLoading) {
-    return <Spinner className="u-loader" text="Loading..." />;
+    return <Spinner className="u-loader" text="加载中..." />;
   }
 
   return (
     <div className="general-field">
       <div className="general-field-label can-edit">
         <Label forId="network" required={formik.values.isCreating}>
-          Uplink
+          上行网络 (Uplink)
         </Label>
       </div>
       <div
@@ -94,7 +94,7 @@ const UplinkSelector: FC<Props> = ({ project: projectName, props, formik }) => {
               className="u-no-margin--bottom"
               type="button"
               appearance="base"
-              title={formik.values.editRestriction ?? "Edit"}
+              title={formik.values.editRestriction ?? "编辑"}
               hasIcon
               disabled={!!formik.values.editRestriction}
             >
@@ -103,7 +103,7 @@ const UplinkSelector: FC<Props> = ({ project: projectName, props, formik }) => {
           </>
         ) : (
           <Select
-            help="Uplink network to use for external network access"
+            help="用于外部网络访问的上行链路网络"
             options={options}
             required
             {...props}

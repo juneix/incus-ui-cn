@@ -26,14 +26,14 @@ const ExportVolumeBtn: FC<Props> = ({ volume, classname, onClose }) => {
 
   const getTitle = () => {
     if (!canManageVolumeBackups(volume)) {
-      return "You do not have permission to export this volume.";
+      return "你没有导出此存储卷的权限。";
     }
 
     if (backupDisabled) {
-      return `Project "${project?.name}" doesn't allow for backup creation.`;
+      return `项目 "${project?.name}" 不允许创建备份。`;
     }
 
-    return "Export volume";
+    return "导出存储卷";
   };
 
   return (
@@ -51,7 +51,7 @@ const ExportVolumeBtn: FC<Props> = ({ volume, classname, onClose }) => {
         disabled={!canManageVolumeBackups(volume) || backupDisabled}
       >
         <Icon name="export" />
-        <span>Export</span>
+        <span>导出</span>
       </Button>
     </>
   );

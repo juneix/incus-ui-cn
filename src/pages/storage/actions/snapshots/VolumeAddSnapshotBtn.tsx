@@ -22,12 +22,12 @@ const VolumeAddSnapshotBtn: FC<Props> = ({
 
   const getDisabledReason = () => {
     if (isDisabled) {
-      return `Snapshot creation is blocked for project ${volume.project}`;
+      return `项目 ${volume.project} 已禁用快照创建`;
     }
     if (!canManageStorageVolumeSnapshots(volume)) {
-      return "You do not have permission to create snapshots of this volume.";
+      return "您没有权限为此存储卷创建快照。";
     }
-    return "Add Snapshot";
+    return "添加快照";
   };
 
   return (
@@ -44,7 +44,7 @@ const VolumeAddSnapshotBtn: FC<Props> = ({
           dense={true}
           onClick={openPortal}
           type="button"
-          aria-label="Add Snapshot"
+          aria-label="添加快照"
           title={getDisabledReason()}
           disabled={isDisabled || !canManageStorageVolumeSnapshots(volume)}
           className={className}
@@ -61,12 +61,12 @@ const VolumeAddSnapshotBtn: FC<Props> = ({
         >
           {isDisabled ? (
             <Tooltip
-              message={`Snapshot creation has been disabled for volumes in the project ${volume.project}`}
+              message={`项目 ${volume.project} 中已禁用存储卷的快照创建`}
             >
-              Create snapshot
+              创建快照
             </Tooltip>
           ) : (
-            "Create snapshot"
+            "创建快照"
           )}
         </Button>
       )}

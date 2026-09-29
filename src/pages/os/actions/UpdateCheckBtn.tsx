@@ -16,10 +16,10 @@ const UpdateCheckBtn: FC<Props> = ({ target }) => {
   const handleUpdateCheck = () => {
     updateCheck(target)
       .then(() => {
-        toastNotify.success(<>Update check</>);
+        toastNotify.success(<>已检查更新</>);
       })
       .catch((e) => {
-        toastNotify.failure("Update check failed", e);
+        toastNotify.failure("检查更新失败", e);
       });
   };
 
@@ -28,7 +28,7 @@ const UpdateCheckBtn: FC<Props> = ({ target }) => {
       appearance="base"
       className="has-icon is-dense"
       onClick={handleUpdateCheck}
-      title="Update check"
+      title="检查更新"
     >
       <Icon name="export" />
     </ActionButton>

@@ -29,13 +29,13 @@ const StorageBucketDetail: FC = () => {
   }>();
 
   if (!pool) {
-    return <>Missing storage pool</>;
+    return <>缺少存储池参数</>;
   }
   if (!project) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
   if (!bucketName) {
-    return <>Missing bucket</>;
+    return <>缺少存储桶参数</>;
   }
   const {
     data: bucket,
@@ -46,13 +46,13 @@ const StorageBucketDetail: FC = () => {
   const panelParams = usePanelParams();
 
   if (error) {
-    notify.failure("Loading storage bucket failed", error);
+    notify.failure("加载存储桶失败", error);
   }
 
   if (isLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="加载中..." isMainComponent />;
   } else if (!bucket) {
-    return <>Loading storage bucket failed</>;
+    return <>加载存储桶失败</>;
   }
 
   return (

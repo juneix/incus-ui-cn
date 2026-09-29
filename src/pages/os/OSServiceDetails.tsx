@@ -48,27 +48,27 @@ const OSServiceDetails: FC<Props> = ({ name, target }) => {
       target,
     )
       .then(() => {
-        toastNotify.success(<>Service updated</>);
+        toastNotify.success(<>服务配置已更新</>);
         queryClient.invalidateQueries({
           queryKey: [queryKeys.osServiceDetails, name, target],
         });
         handleSuccess();
       })
       .catch((e) => {
-        toastNotify.failure("Service update failed", e);
+        toastNotify.failure("服务配置更新失败", e);
         handleFailure();
       });
   };
 
   if (error) {
-    notify.failure("Loading service data failed", error);
+    notify.failure("加载服务配置失败", error);
   }
 
   return (
     <>
       <NotificationRow />
       {isLoading && (
-        <Spinner className="u-loader" text="Loading service data..." />
+        <Spinner className="u-loader" text="正在加载服务配置..." />
       )}
       {!isLoading && !error && (
         <OSYamlEditor

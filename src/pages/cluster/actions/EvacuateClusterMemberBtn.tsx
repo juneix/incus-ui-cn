@@ -53,20 +53,20 @@ const EvacuateClusterMemberBtn: FC<Props> = ({
   const handleSuccess = () => {
     toastNotify.success(
       <>
-        Member{" "}
+        集群成员{" "}
         <ResourceLink
           type="cluster-member"
           value={member.server_name}
           to={`/ui/cluster/member/${encodeURIComponent(member.server_name)}`}
         />{" "}
-        evacuation completed.
+        撤离完成。
       </>,
     );
   };
 
   const handleFailure = (msg: string) => {
     toastNotify.failure(
-      "Member evacuation failed",
+      "集群成员撤离失败",
       new Error(msg),
       <ResourceLink
         type="cluster-member"
@@ -82,13 +82,13 @@ const EvacuateClusterMemberBtn: FC<Props> = ({
       .then((operation) => {
         toastNotify.info(
           <>
-            Member{" "}
+            集群成员{" "}
             <ResourceLink
               type="cluster-member"
               value={member.server_name}
               to={`/ui/cluster/member/${encodeURIComponent(member.server_name)}`}
             />{" "}
-            evacuation started.
+            撤离已开始。
           </>,
         );
         eventQueue.set(
@@ -100,7 +100,7 @@ const EvacuateClusterMemberBtn: FC<Props> = ({
         onClose?.();
       })
       .catch((e) => {
-        notify.failure("Member evacuation failed", e);
+        notify.failure("集群成员撤离失败", e);
       })
       .finally(() => {
         setLoading(false);
@@ -118,54 +118,54 @@ const EvacuateClusterMemberBtn: FC<Props> = ({
       loading={isLoading || loadingType === "Evacuating"}
       disabled={isDisabled}
       confirmationModalProps={{
-        title: "Confirm evacuation",
+        title: "确认撤离",
         children: (
           <>
             <Select
-              label="Evacuation action"
+              label="撤离操作"
               options={[
-                { label: "Auto", value: "" },
+                { label: "自动", value: "" },
                 {
-                  label: "Stop all instances",
+                  label: "停止所有实例",
                   value: "stop",
                 },
                 {
-                  label: "Migrate instances to other members",
+                  label: "迁移实例到其他成员",
                   value: "migrate",
                 },
                 {
-                  label: "Live migrate instances to other members",
+                  label: "热迁移实例到其他成员",
                   value: "live-migrate",
                 },
               ]}
-              help="Chose what to do with instances on this member."
+              help="选择如何处理该成员上的实例。"
               onChange={(e) => {
                 setMode(e.target.value);
               }}
               value={mode}
             />
             <p>
-              This will evacuate cluster member{" "}
+              这将撤离集群成员{" "}
               <ResourceLabel
                 type="cluster-member"
                 value={member.server_name}
                 bold
               />
-              .
+              。
             </p>
           </>
         ),
         confirmButtonLabel: hasPermission
-          ? "Evacuate cluster member"
-          : "You do not have permission to evacuate cluster members",
+          ? "撤离集群成员"
+          : "你没有权限撤离集群成员",
         onConfirm: handleEvacuate,
       }}
       shiftClickEnabled
-      title="Evacuate cluster member"
+      title="撤离集群成员"
       className={classnames(className, "has-icon u-no-margin--bottom")}
     >
       <Icon name="stop" />
-      {hasLabel && <span>Evacuate</span>}
+      {hasLabel && <span>撤离</span>}
     </ConfirmationButton>
   );
 };

@@ -20,7 +20,7 @@ const UploadVolumeFileModal: FC<Props> = ({ close, name }) => {
     <Modal
       close={close}
       className="upload-volume-modal"
-      title="Upload volume file"
+      title="上传存储卷文件"
       closeOnOutsideClick={false}
     >
       <NotificationRow className="u-no-padding u-no-margin" />
@@ -28,7 +28,7 @@ const UploadVolumeFileModal: FC<Props> = ({ close, name }) => {
         <>
           <ProgressBar percentage={Math.floor(uploadState.percentage)} />
           <p>
-            {humanFileSize(uploadState.loaded)} loaded of{" "}
+            已上传 {humanFileSize(uploadState.loaded)} /{" "}
             {humanFileSize(uploadState.total ?? 0)}
           </p>
         </>

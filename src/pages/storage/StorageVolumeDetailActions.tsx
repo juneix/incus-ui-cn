@@ -45,7 +45,7 @@ const StorageVolumeDetailActions: FC<Props> = ({ volume, project }) => {
     <ExportVolumeBtn key="export" volume={volume} classname={classname} />,
     <DeleteStorageVolumeBtn
       key="delete"
-      label="Delete"
+      label="删除"
       volume={volume}
       project={project}
       appearance=""
@@ -54,8 +54,8 @@ const StorageVolumeDetailActions: FC<Props> = ({ volume, project }) => {
         navigate(`/ui/project/${encodeURIComponent(project)}/storage/volumes`);
         toastNotify.success(
           <>
-            Storage volume{" "}
-            <ResourceLabel bold type="volume" value={volume.name} /> deleted.
+            存储卷{" "}
+            <ResourceLabel bold type="volume" value={volume.name} /> 已删除。
           </>,
         );
       }}
@@ -68,10 +68,10 @@ const StorageVolumeDetailActions: FC<Props> = ({ volume, project }) => {
       {isSmallScreen ? (
         <ContextualMenu
           closeOnOutsideClick={false}
-          toggleLabel="Actions"
+          toggleLabel="操作"
           position="left"
           hasToggleIcon
-          title="actions"
+          title="操作"
         >
           {(close: () => void) => (
             <span>

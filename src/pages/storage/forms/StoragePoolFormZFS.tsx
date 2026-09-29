@@ -20,39 +20,39 @@ const StoragePoolFormZFS: FC<Props> = ({ formik }) => {
       rows={[
         getConfigurationRow({
           formik,
-          label: "ZFS pool name",
+          label: "ZFS 池名称",
           name: "zfs_pool_name",
           defaultValue: "",
           children: isClustered ? (
             <ClusteredZfsNameSelector
               formik={formik}
-              placeholder="Enter ZFS pool name"
+              placeholder="请输入 ZFS 池名称"
             />
           ) : (
-            <Input type="text" placeholder="Enter ZFS pool name" />
+            <Input type="text" placeholder="请输入 ZFS 池名称" />
           ),
           readOnlyRenderer: (value) =>
             isClustered && value !== "-" ? (
               <ClusteredZfsNameSelector
                 formik={formik}
-                placeholder="Enter ZFS pool name"
+                placeholder="请输入 ZFS 池名称"
               />
             ) : (
               <>{value}</>
             ),
           disabled: !formik.values.isCreating || formik.values.readOnly,
-          disabledReason: "ZFS pool name cannot be modified",
+          disabledReason: "ZFS 池名称创建后无法修改",
         }),
         getConfigurationRow({
           formik,
-          label: "Clone copy",
+          label: "克隆副本",
           name: "zfs_clone_copy",
           defaultValue: "",
           children: <Select options={optionTrueFalse} />,
         }),
         getConfigurationRow({
           formik,
-          label: "Export",
+          label: "导出",
           name: "zfs_export",
           defaultValue: "",
           children: <Select options={optionTrueFalse} />,

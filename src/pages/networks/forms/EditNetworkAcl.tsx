@@ -52,7 +52,7 @@ const EditNetworkAcl: FC<Props> = ({ networkAcl, project }) => {
     entityType: "network-acl",
     editRestriction: canEditNetworkAcl(networkAcl)
       ? undefined
-      : "You do not have permission to edit this ACL",
+      : "您没有权限编辑此 ACL",
   };
 
   const formik = useFormik<NetworkAclFormValues>({
@@ -76,18 +76,18 @@ const EditNetworkAcl: FC<Props> = ({ networkAcl, project }) => {
 
           toastNotify.success(
             <>
-              Network ACL{" "}
+              网络 ACL{" "}
               <ResourceLink
                 type="network-acl"
                 value={networkAcl.name}
                 to={`/ui/project/${encodeURIComponent(project)}/network-acl/${encodeURIComponent(networkAcl.name)}`}
               />{" "}
-              updated.
+              已更新。
             </>,
           );
         })
         .catch((e) => {
-          notify.failure("ACL update failed", e);
+          notify.failure("更新 ACL 失败", e);
         })
         .finally(() => {
           formik.setSubmitting(false);
@@ -136,7 +136,7 @@ const EditNetworkAcl: FC<Props> = ({ networkAcl, project }) => {
                 void formik.setValues(initialValues);
               }}
             >
-              Cancel
+              取消
             </Button>
             <FormSubmitBtn
               formik={formik}

@@ -38,7 +38,7 @@ const CreateNetworkForward: FC = () => {
 
   useEffect(() => {
     if (networkError) {
-      notify.failure("Loading networks failed", networkError);
+      notify.failure("加载网络失败", networkError);
     }
   }, [networkError]);
 
@@ -78,12 +78,12 @@ const CreateNetworkForward: FC = () => {
             `/ui/project/${encodeURIComponent(project ?? "")}/network/${encodeURIComponent(networkName ?? "")}/forwards`,
           );
           toastNotify.success(
-            `Network forward with listen address ${listenAddress} created.`,
+            `已创建监听地址为 ${listenAddress} 的网络转发。`,
           );
         })
         .catch((e) => {
           formik.setSubmitting(false);
-          notify.failure("Network forward creation failed", e);
+          notify.failure("网络转发创建失败", e);
         });
     },
   });
@@ -93,9 +93,9 @@ const CreateNetworkForward: FC = () => {
       title={
         <HelpLink
           docPath="/howto/network_forwards/"
-          title="Learn more about network forwards"
+          title="了解更多网络转发信息"
         >
-          Create a network forward
+          创建网络转发
         </HelpLink>
       }
       contentClassName="create-network"
@@ -106,7 +106,7 @@ const CreateNetworkForward: FC = () => {
           className="p-button--base"
           to={`/ui/project/${encodeURIComponent(project ?? "")}/network/${encodeURIComponent(networkName ?? "")}/forwards`}
         >
-          Cancel
+          取消
         </Link>
         <ActionButton
           loading={formik.isSubmitting}
@@ -117,7 +117,7 @@ const CreateNetworkForward: FC = () => {
           }
           onClick={() => void formik.submitForm()}
         >
-          Create
+          创建网络转发
         </ActionButton>
       </FormFooterLayout>
     </BaseLayout>

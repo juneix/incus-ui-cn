@@ -39,13 +39,13 @@ const CreateInstanceFromSnapshotBtn: FC<Props> = ({
         appearance="base"
         hasIcon
         dense
-        aria-label="Create instance"
+        aria-label="从快照创建实例"
         disabled={isDeleting || isRestoring || !validTargetProjects.length}
         onClick={openPortal}
         title={
           validTargetProjects.length > 0
-            ? "Create instance"
-            : "You do not have permission to create instances"
+            ? "从快照创建实例"
+            : "您没有创建实例的权限"
         }
       >
         <Icon name="plus" />

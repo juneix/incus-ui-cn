@@ -51,25 +51,25 @@ export const toNetworkLoadBalancer = (
 
 export const NetworkLoadBalancerSchema = Yup.object().shape({
   listenAddress: Yup.string()
-    .test("valid-ip", "Invalid IP address", testValidIp)
-    .required("Listen address is required"),
+    .test("valid-ip", "IP 地址无效", testValidIp)
+    .required("监听地址为必填项"),
   ports: Yup.array().of(
     Yup.object().shape({
       listenPort: Yup.string()
-        .test("valid-port", "Invalid port number", testValidPort)
-        .required("Listen port required"),
-      protocol: Yup.string().required("Protocol is required"),
-      targetBackend: Yup.string().required("Target backend is required"),
+        .test("valid-port", "端口号无效", testValidPort)
+        .required("监听端口为必填项"),
+      protocol: Yup.string().required("协议为必填项"),
+      targetBackend: Yup.string().required("目标后端为必填项"),
     }),
   ),
   backends: Yup.array().of(
     Yup.object().shape({
       targetAddress: Yup.string()
-        .test("valid-ip", "Invalid IP address", testValidIp)
-        .required("Target address is required"),
+        .test("valid-ip", "IP 地址无效", testValidIp)
+        .required("目标地址为必填项"),
       targetPort: Yup.string().test(
         "valid-port",
-        "Invalid port number",
+        "端口号无效",
         testValidPort,
       ),
     }),
@@ -132,10 +132,10 @@ const NetworkLoadBalancerForm: FC<Props> = ({ formik, isEdit, network }) => {
               <NotificationRow />
               <Notification
                 severity="information"
-                title="Network information"
+                title="网络信息"
                 titleElement="h2"
               >
-                Name: {network?.name}
+                名称: {network?.name}
                 <br />
                 {network?.config["ipv4.address"] && (
                   <>
@@ -150,21 +150,21 @@ const NetworkLoadBalancerForm: FC<Props> = ({ formik, isEdit, network }) => {
             </Row>
             <Row>
               <Col size={4}>
-                <Label forId="listenAddress">Listen address</Label>
+                <Label forId="listenAddress">监听地址</Label>
               </Col>
               <Col size={8}>
                 <Input
                   {...formik.getFieldProps("listenAddress")}
                   id="listenAddress"
                   type="text"
-                  placeholder="Enter IP address"
+                  placeholder="输入 IP 地址"
                   autoFocus
                   required
                   disabled={isEdit}
                   help={
                     isEdit
-                      ? "Listen address can't be changed after creation."
-                      : "Any address routed to Incus."
+                      ? "创建后无法修改监听地址。"
+                      : "任何路由至 Incus 的地址。"
                   }
                   error={
                     formik.touched.listenAddress
@@ -178,8 +178,8 @@ const NetworkLoadBalancerForm: FC<Props> = ({ formik, isEdit, network }) => {
               {...formik.getFieldProps("description")}
               id="description"
               type="text"
-              label="Description"
-              placeholder="Enter description"
+              label="描述"
+              placeholder="输入描述"
               stacked
             />
             {formik.values.backends.length > 0 && (
@@ -192,7 +192,7 @@ const NetworkLoadBalancerForm: FC<Props> = ({ formik, isEdit, network }) => {
               <Col size={12}>
                 <Button hasIcon onClick={addBackend} type="button">
                   <Icon name="plus" />
-                  <span>Add backend</span>
+                  <span>添加后端</span>
                 </Button>
               </Col>
             </Row>
@@ -203,7 +203,7 @@ const NetworkLoadBalancerForm: FC<Props> = ({ formik, isEdit, network }) => {
               <Col size={12}>
                 <Button hasIcon onClick={addPort} type="button">
                   <Icon name="plus" />
-                  <span>Add port</span>
+                  <span>添加端口</span>
                 </Button>
               </Col>
             </Row>

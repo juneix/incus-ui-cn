@@ -22,7 +22,7 @@ const ProfileUsedByDefaultProject: FC<Props> = ({
         <tr key={project.name} className="instances-by-project list-wrapper">
           <th className={headingClassName}>
             <div className="flexible-container">
-              <div className="u-truncate" title={`Project ${project.name}`}>
+              <div className="u-truncate" title={`项目 ${project.name}`}>
                 {project.name}
               </div>
               <div className="u-float-right">({project.instances.length})</div>
@@ -30,7 +30,7 @@ const ProfileUsedByDefaultProject: FC<Props> = ({
           </th>
           <td>
             {project.instances.length === 0 && (
-              <i className="u-text--muted no-instances">No instances</i>
+              <i className="u-text--muted no-instances">暂无实例</i>
             )}
             {project.instances.length > 0 && (
               <ViewProfileInstancesLink

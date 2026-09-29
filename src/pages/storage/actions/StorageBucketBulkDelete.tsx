@@ -31,12 +31,12 @@ const StorageBucketBulkDelete: FC<Props> = ({ buckets, onStart, onFinish }) => {
   const totalCount = buckets.length;
   const deleteCount = deleteableBuckets.length;
 
-  const buttonText = `Delete ${buckets.length} ${pluralize("bucket", buckets.length)}`;
+  const buttonText = `删除 ${buckets.length} 个存储桶`;
 
   const handleDelete = () => {
     setLoading(true);
     onStart();
-    const successMessage = `${deleteableBuckets.length} ${pluralize("bucket", deleteableBuckets.length)} successfully deleted`;
+    const successMessage = `成功删除 ${deleteableBuckets.length} 个存储桶`;
 
     deleteStorageBucketBulk(deleteableBuckets, projectName)
       .then((results) => {
@@ -47,24 +47,21 @@ const StorageBucketBulkDelete: FC<Props> = ({ buckets, onStart, onFinish }) => {
           toastNotify.success(successMessage, viewBulkDetails(results));
         } else if (rejectedCount === deleteCount) {
           toastNotify.failure(
-            "Bucket bulk deletion failed",
+            "存储桶批量删除失败",
             undefined,
             <>
-              <b>{deleteCount}</b> {pluralize("bucket", deleteCount)} could not
-              be deleted.
+              <b>{deleteCount}</b> 个存储桶未能删除。
             </>,
             viewBulkDetails(results),
           );
         } else {
           toastNotify.failure(
-            "Bucket bulk deletion partially failed",
+            "存储桶批量删除部分失败",
             undefined,
             <>
-              <b>{fulfilledCount}</b> {pluralize("bucket", fulfilledCount)}{" "}
-              deleted.
+              <b>{fulfilledCount}</b> 个存储桶已删除。
               <br />
-              <b>{rejectedCount}</b> {pluralize("bucket", rejectedCount)} could
-              not be deleted.
+              <b>{rejectedCount}</b> 个存储桶未能删除。
             </>,
             viewBulkDetails(results),
           );
@@ -78,7 +75,7 @@ const StorageBucketBulkDelete: FC<Props> = ({ buckets, onStart, onFinish }) => {
       })
       .catch((e) => {
         setLoading(false);
-        toastNotify.failure("Bucket bulk deletion failed", e);
+        toastNotify.failure("存储桶批量删除失败", e);
       });
   };
 
@@ -89,8 +86,8 @@ const StorageBucketBulkDelete: FC<Props> = ({ buckets, onStart, onFinish }) => {
 
     const restrictedCount = totalCount - deleteCount;
     return [
-      `${deleteCount} ${pluralize("bucket", deleteCount)} will be deleted.`,
-      `${restrictedCount} ${pluralize("bucket", restrictedCount)} that you do not have permission to delete will be ignored.`,
+      `将删除 ${deleteCount} 个存储桶。`,
+      `您没有权限删除的 ${restrictedCount} 个存储桶将被忽略。`,
     ];
   };
 
@@ -102,7 +99,7 @@ const StorageBucketBulkDelete: FC<Props> = ({ buckets, onStart, onFinish }) => {
       onDelete={handleDelete}
       disabledReason={
         deleteCount === 0
-          ? `You do not have permission to delete the selected ${pluralize("bucket", buckets.length)}`
+          ? `您没有权限删除所选存储桶`
           : undefined
       }
       confirmationButtonProps={{

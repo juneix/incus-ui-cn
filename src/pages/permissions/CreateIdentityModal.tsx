@@ -14,17 +14,15 @@ const CreateIdentityModal: FC<Props> = ({ onClose, token, identityName }) => {
     <Modal
       close={onClose}
       className="create-tls-identity"
-      title="Identity created"
+      title="身份已创建"
     >
       {token && (
         <>
           <p>
-            The identity trust token below can be used to log in with the newly
-            created identity{" "}
-            <ResourceLabel type="certificate" value={identityName} /> .{" "}
+            下面的身份信任令牌可用于以新创建的身份{" "}
+            <ResourceLabel type="certificate" value={identityName} /> 登录。{" "}
             <b>
-              Once this modal is closed, the identity trust token can&rsquo;t be
-              generated again.
+              此窗口关闭后，身份信任令牌将无法再次查看或生成。
             </b>
           </p>
 

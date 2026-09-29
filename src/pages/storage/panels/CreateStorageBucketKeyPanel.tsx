@@ -54,15 +54,16 @@ const CreateStorageBucketKeyPanel: FC<Props> = ({ bucket }) => {
           controllerState,
         ),
       )
-      .required("Key name is required"),
+      .required("密钥名称为必填项"),
   });
 
   const handleSuccess = (keyName: string) => {
     toastNotify.success(
       <>
-        Key <ResourceLink type="bucket-key" value={keyName} to={bucketURL} />{" "}
-        created for bucket{" "}
-        <ResourceLink type="bucket" value={bucket.name} to={bucketURL} />.
+        已为存储桶{" "}
+        <ResourceLink type="bucket" value={bucket.name} to={bucketURL} />{" "}
+        创建密钥{" "}
+        <ResourceLink type="bucket-key" value={keyName} to={bucketURL} />。
       </>,
     );
     closePanel();
@@ -103,7 +104,7 @@ const CreateStorageBucketKeyPanel: FC<Props> = ({ bucket }) => {
         })
         .catch((e) => {
           formik.setSubmitting(false);
-          notify.failure(`Key creation failed`, e);
+          notify.failure(`密钥创建失败`, e);
         });
     },
   });
@@ -112,7 +113,7 @@ const CreateStorageBucketKeyPanel: FC<Props> = ({ bucket }) => {
     <>
       <SidePanel>
         <SidePanel.Header>
-          <SidePanel.HeaderTitle>Create key</SidePanel.HeaderTitle>
+          <SidePanel.HeaderTitle>创建密钥</SidePanel.HeaderTitle>
         </SidePanel.Header>
         <NotificationRow className="u-no-padding" />
         <SidePanel.Content className="u-no-padding">
@@ -129,7 +130,7 @@ const CreateStorageBucketKeyPanel: FC<Props> = ({ bucket }) => {
             onClick={closePanel}
             className="u-no-margin--bottom"
           >
-            Cancel
+            取消
           </Button>
           <ActionButton
             appearance="positive"
@@ -140,7 +141,7 @@ const CreateStorageBucketKeyPanel: FC<Props> = ({ bucket }) => {
               !formik.isValid || formik.isSubmitting || !formik.values.name
             }
           >
-            Create key
+            创建密钥
           </ActionButton>
         </SidePanel.Footer>
       </SidePanel>

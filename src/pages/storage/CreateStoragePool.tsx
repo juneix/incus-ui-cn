@@ -48,13 +48,13 @@ const CreateStoragePool: FC = () => {
   const { data: settings } = useSettings();
 
   if (!project) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
 
   const CreateStoragePoolSchema = Yup.object().shape({
     name: Yup.string()
       .test(...testDuplicateStoragePoolName(project, controllerState))
-      .required("This field is required"),
+      .required("此项为必填项"),
   });
 
   const supportedStorageDrivers = getSupportedStorageDrivers(settings);
@@ -96,19 +96,19 @@ const CreateStoragePool: FC = () => {
           navigate(`/ui/project/${encodeURIComponent(project)}/storage/pools`);
           toastNotify.success(
             <>
-              Storage pool{" "}
+              存储池{" "}
               <ResourceLink
                 type="pool"
                 value={storagePool.name}
                 to={`/ui/project/${encodeURIComponent(project)}/storage/pool/${encodeURIComponent(values.name)}`}
               />{" "}
-              created.
+              创建成功。
             </>,
           );
         })
         .catch((e) => {
           formik.setSubmitting(false);
-          notify.failure("Storage pool creation failed", e);
+          notify.failure("创建存储池失败", e);
         });
     },
   });
@@ -119,7 +119,7 @@ const CreateStoragePool: FC = () => {
 
   return (
     <BaseLayout
-      title="Create a storage pool"
+      title="创建存储池"
       contentClassName="create-storage-pool"
     >
       <NotificationRow />
@@ -137,7 +137,7 @@ const CreateStoragePool: FC = () => {
             disableReason={
               formik.values.name
                 ? undefined
-                : "Please enter a storage pool name to enable this section"
+                : "请输入存储池名称以启用此配置"
             }
           />
         </div>
@@ -147,7 +147,7 @@ const CreateStoragePool: FC = () => {
             navigate(`/ui/project/${encodeURIComponent(project)}/storage/pools`)
           }
         >
-          Cancel
+          取消
         </Button>
         <ActionButton
           appearance="positive"
@@ -162,7 +162,7 @@ const CreateStoragePool: FC = () => {
           }
           onClick={() => void formik.submitForm()}
         >
-          Create
+          创建
         </ActionButton>
       </FormFooterLayout>
     </BaseLayout>

@@ -37,15 +37,15 @@ const DownloadNetworkAclLogsBtn: FC<Props> = ({ networkAcl, project }) => {
 
         toastNotify.success(
           <>
-            Logs download for ACL{" "}
+            已开始下载网络 ACL{" "}
             <ResourceLabel bold type="network-acl" value={networkAcl.name} />{" "}
-            started.
+            的日志。
           </>,
         );
       })
       .catch((error) => {
         toastNotify.failure(
-          `Failed to download logs for ACL ${networkAcl.name}`,
+          `下载网络 ACL ${networkAcl.name} 的日志失败`,
           error,
         );
       });
@@ -54,7 +54,7 @@ const DownloadNetworkAclLogsBtn: FC<Props> = ({ networkAcl, project }) => {
   return (
     <Button appearance="" type="button" onClick={startDownload} hasIcon>
       {!isSmallScreen && <Icon name="begin-downloading" />}
-      <span>Download logs</span>
+      <span>下载日志</span>
     </Button>
   );
 };

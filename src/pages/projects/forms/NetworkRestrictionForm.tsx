@@ -40,33 +40,33 @@ const NetworkRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restricted_network_access",
-          label: "Available networks",
+          label: "可用网络列表",
           defaultValue: "",
-          children: <Textarea placeholder="Enter network names" />,
+          children: <Textarea placeholder="输入网络名称" />,
         }),
 
         getConfigurationRow({
           formik,
           name: "restricted_network_subnets",
-          label: "Network subnets",
+          label: "可用网络子网",
           defaultValue: "",
-          children: <Textarea placeholder="Enter network subnets" />,
+          children: <Textarea placeholder="输入网络子网" />,
         }),
 
         getConfigurationRow({
           formik,
           name: "restricted_network_uplinks",
-          label: "Network uplinks",
+          label: "可用网络上行链路",
           defaultValue: "",
-          children: <Textarea placeholder="Enter network names" />,
+          children: <Textarea placeholder="输入网络名称" />,
         }),
 
         getConfigurationRow({
           formik,
           name: "restricted_network_zones",
-          label: "Network zones",
+          label: "可用网络区域",
           defaultValue: "",
-          children: <Textarea placeholder="Enter network zones" />,
+          children: <Textarea placeholder="输入网络区域" />,
         }),
       ]}
     />

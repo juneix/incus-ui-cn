@@ -57,9 +57,9 @@ const DeviceUsageRestrictionForm: FC<Props> = ({ formik }) => {
           name: "restricted_devices_disk",
           label: (
             <>
-              Disk devices
+              磁盘设备
               <br />
-              (except the root one)
+              (根磁盘除外)
             </>
           ),
           defaultValue: "",
@@ -71,15 +71,15 @@ const DeviceUsageRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restricted_devices_disk_paths",
-          label: "Disk devices path",
+          label: "磁盘设备路径限制",
           defaultValue: "",
-          children: <Input placeholder="Enter paths" type="text" />,
+          children: <Input placeholder="输入路径" type="text" />,
         }),
 
         getConfigurationRow({
           formik,
           name: "restricted_devices_gpu",
-          label: "GPU devices",
+          label: "GPU 设备",
           defaultValue: "",
           readOnlyRenderer: (val) => optionRenderer(val, optionAllowBlock),
           children: <Select options={optionAllowBlock} />,
@@ -88,7 +88,7 @@ const DeviceUsageRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restricted_devices_infiniband",
-          label: "Infiniband devices",
+          label: "Infiniband 设备",
           defaultValue: "",
           readOnlyRenderer: (val) => optionRenderer(val, optionAllowBlock),
           children: <Select options={optionAllowBlock} />,
@@ -97,7 +97,7 @@ const DeviceUsageRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restricted_devices_nic",
-          label: "Network devices",
+          label: "网络设备 (NIC)",
           defaultValue: "",
           readOnlyRenderer: (val) =>
             optionRenderer(val, optionAllowBlockManaged),
@@ -107,7 +107,7 @@ const DeviceUsageRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restricted_devices_pci",
-          label: "PCI devices",
+          label: "PCI 设备",
           defaultValue: "",
           readOnlyRenderer: (val) => optionRenderer(val, optionAllowBlock),
           children: <Select options={optionAllowBlock} />,
@@ -116,7 +116,7 @@ const DeviceUsageRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restricted_devices_unix_block",
-          label: "Unix-block devices",
+          label: "Unix-block 块设备",
           defaultValue: "",
           readOnlyRenderer: (val) => optionRenderer(val, optionAllowBlock),
           children: <Select options={optionAllowBlock} />,
@@ -125,7 +125,7 @@ const DeviceUsageRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restricted_devices_unix_char",
-          label: "Unix-char devices",
+          label: "Unix-char 字符设备",
           defaultValue: "",
           readOnlyRenderer: (val) => optionRenderer(val, optionAllowBlock),
           children: <Select options={optionAllowBlock} />,
@@ -134,7 +134,7 @@ const DeviceUsageRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restricted_devices_unix_hotplug",
-          label: "Unix-hotplug devices",
+          label: "Unix-hotplug 热插拔设备",
           defaultValue: "",
           readOnlyRenderer: (val) => optionRenderer(val, optionAllowBlock),
           children: <Select options={optionAllowBlock} />,
@@ -143,7 +143,7 @@ const DeviceUsageRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restricted_devices_usb",
-          label: "USB devices",
+          label: "USB 设备",
           defaultValue: "",
           readOnlyRenderer: (val) => optionRenderer(val, optionAllowBlock),
           children: <Select options={optionAllowBlock} />,

@@ -52,7 +52,7 @@ const StorageVolumeFormMain: FC<Props> = ({
             forId="storage-pool-selector-volume"
             required={formik.values.isCreating}
           >
-            Storage pool
+            所属存储池
           </Label>
           <StoragePoolSelector
             value={formik.values.pool}
@@ -76,7 +76,7 @@ const StorageVolumeFormMain: FC<Props> = ({
               error: poolError,
               help: formik.values.isCreating
                 ? undefined
-                : "Use the migrate button in the header to move the volume to a different storage pool.",
+                : "如需移动存储卷到其他存储池，请使用顶部的迁移按钮。",
             }}
             project={project}
           />
@@ -84,7 +84,7 @@ const StorageVolumeFormMain: FC<Props> = ({
             formik.values.clusterMember !== "none" && (
               <Select
                 id="clusterMember"
-                label="Cluster member"
+                label="集群成员"
                 onChange={(e) => {
                   formik.setFieldValue("clusterMember", e.target.value);
                 }}
@@ -100,32 +100,32 @@ const StorageVolumeFormMain: FC<Props> = ({
                 help={
                   formik.values.isCreating
                     ? undefined
-                    : "Cluster member is immutable after creation."
+                    : "创建后无法更改所属集群成员。"
                 }
               />
             )}
           <Input
             {...getFormProps(formik, "name")}
             type="text"
-            label="Name"
+            label="名称"
             disabled={!formik.values.isCreating}
             required={formik.values.isCreating}
             help={
               formik.values.isCreating
                 ? undefined
-                : "Click the name in the header to rename the volume."
+                : "点击顶部的名称可重命名此存储卷。"
             }
           />
           <DiskSizeSelector
-            label="Size"
+            label="容量大小"
             value={formik.values.size}
             help={
               (
                 <>
                   <DiskSizeQuotaLimitation driver={poolDriver} />
                   {formik.values.volumeType === "custom"
-                    ? "Size of storage volume. If empty, volume will not have a size limit within its storage pool."
-                    : "Size is immutable for non-custom volumes."}
+                    ? "存储卷容量限制。留空表示在存储池内不设容量上限。"
+                    : "非自定义存储卷的容量不可修改。"}
                 </>
               ) as unknown as string
             }
@@ -142,19 +142,19 @@ const StorageVolumeFormMain: FC<Props> = ({
             {...getFormProps(formik, "content_type")}
             options={[
               {
-                label: "filesystem",
+                label: "文件系统 (filesystem)",
                 value: "filesystem",
               },
               {
-                label: "block",
+                label: "块设备 (block)",
                 value: "block",
               },
             ]}
-            label="Content type"
+            label="内容类型"
             help={
               formik.values.isCreating
-                ? "Type filesystem is ready to mount and write files to. Type block can only be attached to VMs, and is treated like an empty block device."
-                : "Content type is immutable after creation."
+                ? "文件系统类型可直接挂载并写入文件；块设备类型只能挂载给虚拟机，作为裸块设备使用。"
+                : "创建后内容类型不可更改。"
             }
             onChange={(e) => {
               if (e.target.value === "block") {
@@ -172,7 +172,7 @@ const StorageVolumeFormMain: FC<Props> = ({
             <ClusterMemberSelector
               {...getFormProps(formik, "clusterMember")}
               id="clusterMember"
-              label="Cluster member"
+              label="集群成员"
               value={formik.values.clusterMember}
               setMember={setMember}
               disabled={!formik.values.isCreating}
@@ -185,23 +185,23 @@ const StorageVolumeFormMain: FC<Props> = ({
           rows={[
             getConfigurationRow({
               formik,
-              label: "Security shifted",
+              label: "安全 uid/gid 映射转换 (shifted)",
               name: "security_shifted",
               defaultValue: "",
               disabled: formik.values.security_unmapped === "true",
               disabledReason:
-                "This setting can't be changed while security unmapped is set to true",
+                "当启用 security_unmapped 时无法修改此设置",
               children: <Select options={optionTrueFalse} />,
             }),
 
             getConfigurationRow({
               formik,
-              label: "Security unmapped",
+              label: "禁用安全 uid/gid 映射 (unmapped)",
               name: "security_unmapped",
               defaultValue: "",
               disabled: formik.values.security_shifted === "true",
               disabledReason:
-                "This setting can't be changed while security shifted is set to true",
+                "当启用 security_shifted 时无法修改此设置",
               children: <Select options={optionTrueFalse} />,
             }),
           ]}

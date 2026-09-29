@@ -1,10 +1,10 @@
-export const NAME_COL = "Name";
-export const POOL_COL = "Pool";
-export const SIZE_COL = "Size";
-export const DESCRIPTION_COL = "Description";
+export const NAME_COL = "名称";
+export const POOL_COL = "存储池";
+export const SIZE_COL = "大小";
+export const DESCRIPTION_COL = "描述";
 export const URL_COL = "S3 URL";
-export const KEY_COL = "Keys";
-export const ACTIONS_COL = "Actions";
+export const KEY_COL = "密钥数";
+export const ACTIONS_COL = "操作";
 
 export const COLUMN_WIDTHS: Record<string, string> = {
   [NAME_COL]: "8rem",

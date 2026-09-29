@@ -54,10 +54,10 @@ If the problem continues, ensure your connection to the LXD server is active or 
 
   return (
     <Strip className="u-no-padding--bottom">
-      <Notification severity="negative" title="Error">
-        Something has gone wrong. If this issue persists,{" "}
+      <Notification severity="negative" title="发生错误">
+        发生了一些问题。如果该问题仍然存在，{" "}
         <a href={url} rel="noopener noreferrer" target="_blank">
-          please raise an issue on GitHub.
+          请在 GitHub 上提交反馈。
         </a>
       </Notification>
       <CodeSnippet

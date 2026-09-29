@@ -5,6 +5,16 @@ interface Props {
   resourceType: string;
 }
 
+const columnNames: Record<string, string> = {
+  name: "名称",
+  project: "项目",
+  pool: "存储池",
+  description: "描述",
+  aliases: "别名",
+  fingerprint: "指纹",
+  imageType: "镜像类型",
+};
+
 const ResourceOptionHeader: FC<Props> = ({ resourceType }) => {
   const columns = getResourceOptionColumns(resourceType);
 
@@ -15,7 +25,7 @@ const ResourceOptionHeader: FC<Props> = ({ resourceType }) => {
   const headerSegments = columns.map((column) => {
     return (
       <span key={column} className="resource u-no-margin--bottom">
-        {column === "imageType" ? "image type" : column}
+        {columnNames[column] ?? column}
       </span>
     );
   });

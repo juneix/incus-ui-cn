@@ -42,7 +42,7 @@ const HostPathDeviceModal: FC<Props> = ({
             type="button"
             onClick={onCancel}
           >
-            Back
+            返回
           </Button>
           <Button
             appearance=""
@@ -51,7 +51,7 @@ const HostPathDeviceModal: FC<Props> = ({
             loading={formik.isSubmitting}
             onClick={handleFinish}
           >
-            Attach
+            挂载
           </Button>
         </>
       }
@@ -62,10 +62,10 @@ const HostPathDeviceModal: FC<Props> = ({
         onChange={(e) => {
           setSource(e.target.value);
         }}
-        label="Source"
+        label="源设备"
         required
         options={getSpecialDiskSourceOptions()}
-        error={!source ? "Source is required" : undefined}
+        error={!source ? "源设备为必填项" : undefined}
       />
     </Modal>
   );

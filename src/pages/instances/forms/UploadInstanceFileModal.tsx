@@ -21,7 +21,7 @@ const UploadInstanceFileModal: FC<Props> = ({ close, name }) => {
     <Modal
       close={close}
       className="upload-instance-modal"
-      title="Upload instance file"
+      title="上传实例文件"
       closeOnOutsideClick={false}
     >
       <NotificationRow className="u-no-padding u-no-margin" />
@@ -29,7 +29,7 @@ const UploadInstanceFileModal: FC<Props> = ({ close, name }) => {
         <>
           <ProgressBar percentage={Math.floor(uploadState.percentage)} />
           <p>
-            {humanFileSize(uploadState.loaded)} loaded of{" "}
+            已加载 {humanFileSize(uploadState.loaded)} /{" "}
             {humanFileSize(uploadState.total ?? 0)}
           </p>
         </>

@@ -37,13 +37,13 @@ const EditStorageBucketPanel: FC<Props> = ({ bucket }) => {
   const handleSuccess = (bucketName: string) => {
     toastNotify.success(
       <>
-        Bucket{" "}
+        存储桶{" "}
         <ResourceLink
           type="bucket"
           value={bucketName}
           to={`/ui/project/${encodeURIComponent(project?.name ?? "")}/storage/buckets`}
         />{" "}
-        updated.
+        更新成功。
       </>,
     );
     closePanel();
@@ -92,7 +92,7 @@ const EditStorageBucketPanel: FC<Props> = ({ bucket }) => {
         })
         .catch((e) => {
           formik.setSubmitting(false);
-          notify.failure(`Bucket update failed`, e);
+          notify.failure(`存储桶更新失败`, e);
         });
     },
   });
@@ -106,7 +106,7 @@ const EditStorageBucketPanel: FC<Props> = ({ bucket }) => {
       <SidePanel>
         <SidePanel.Header>
           <SidePanel.HeaderTitle>
-            Edit storage bucket {bucket.name}
+            编辑存储桶 {bucket.name}
           </SidePanel.HeaderTitle>
         </SidePanel.Header>
         <NotificationRow className="u-no-padding" />
@@ -124,7 +124,7 @@ const EditStorageBucketPanel: FC<Props> = ({ bucket }) => {
             onClick={closePanel}
             className="u-no-margin--bottom"
           >
-            Cancel
+            取消
           </Button>
           <ActionButton
             appearance="positive"
@@ -136,8 +136,8 @@ const EditStorageBucketPanel: FC<Props> = ({ bucket }) => {
             }
           >
             {changeCount === 0
-              ? "Save changes"
-              : `Save ${changeCount} ${pluralize("change", changeCount)}`}
+              ? "保存更改"
+              : `保存 ${changeCount} 项更改`}
           </ActionButton>
         </SidePanel.Footer>
       </SidePanel>

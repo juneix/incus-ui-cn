@@ -132,7 +132,7 @@ const CustomIsoSelector: FC<Props> = ({
           type="button"
           className="iso-btn u-no-margin--bottom"
         >
-          <span>Upload custom ISO</span>
+          <span>上传自定义 ISO</span>
         </Button>
       </footer>
     </>

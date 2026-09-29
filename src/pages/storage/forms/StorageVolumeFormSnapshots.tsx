@@ -23,7 +23,7 @@ const StorageVolumeFormSnapshots: FC<Props> = ({ formik }) => {
       {snapshotDisabled && (
         <Notification
           severity="caution"
-          title={`Snapshot creation has been disabled for volumes in the project ${project?.name}`}
+          title={`项目 ${project?.name} 中的存储卷已禁用快照创建`}
         >
           <SnapshotDisabledWarningLink project={project} />
         </Notification>
@@ -32,18 +32,17 @@ const StorageVolumeFormSnapshots: FC<Props> = ({ formik }) => {
         rows={[
           getConfigurationRow({
             formik,
-            label: "Snapshot name pattern",
+            label: "快照命名模式",
             name: "snapshots_pattern",
             defaultValue: "",
             children: (
               <Input
-                placeholder="Enter name pattern"
+                placeholder="请输入命名模式"
                 help={
                   <>
-                    Pongo2 template string that represents the snapshot name
-                    (used for scheduled snapshots and unnamed snapshots), see{" "}
+                    表示快照名称的 Pongo2 模板字符串（用于定时计划快照与未命名快照），详见{" "}
                     <DocLink docPath="/reference/instance_options/#instance-options-snapshots-names">
-                      Automatic snapshot names
+                      自动快照命名
                     </DocLink>
                   </>
                 }
@@ -54,21 +53,21 @@ const StorageVolumeFormSnapshots: FC<Props> = ({ formik }) => {
 
           getConfigurationRow({
             formik,
-            label: "Expire after",
+            label: "过期时间",
             name: "snapshots_expiry",
             defaultValue: "",
             children: (
               <Input
-                placeholder="Enter expiry expression"
+                placeholder="请输入过期表达式"
                 type="text"
-                help="Expects an expression like 1M 2H 3d 4w 5m 6y"
+                help="格式形如：1M（分钟）2H（小时）3d（天）4w（周）5m（月）6y（年）"
               />
             ),
           }),
 
           getConfigurationRow({
             formik,
-            label: "Schedule",
+            label: "计划周期",
             name: "snapshots_schedule",
             defaultValue: "",
             children: (

@@ -65,7 +65,7 @@ const EditNetwork: FC<Props> = ({ network, project }) => {
 
   useEffect(() => {
     if (error) {
-      notify.failure("Loading network from cluster members failed", error);
+      notify.failure("从集群成员加载网络失败", error);
     }
   }, [error]);
 
@@ -73,15 +73,15 @@ const EditNetwork: FC<Props> = ({ network, project }) => {
     name: Yup.string()
       .test(
         "deduplicate",
-        "A network with this name already exists",
+        "同名网络已存在",
         async (value) =>
           value === network.name ||
           checkDuplicateName(value, project, controllerState, "networks"),
       )
-      .required("Network name is required"),
+      .required("网络名称为必填项"),
     network: Yup.string().test(
       "required",
-      "Uplink network is required",
+      "上行网络为必填项",
       (value, context) =>
         (context.parent as NetworkFormValues).networkType !== ovnType ||
         Boolean(value),
@@ -90,7 +90,7 @@ const EditNetwork: FC<Props> = ({ network, project }) => {
 
   const editRestriction = canEditNetwork(network)
     ? undefined
-    : "You do not have permission to edit this network";
+    : "您没有权限编辑此网络";
 
   const formik = useFormik<NetworkFormValues>({
     initialValues: toNetworkFormValues(
@@ -150,18 +150,18 @@ const EditNetwork: FC<Props> = ({ network, project }) => {
 
           toastNotify.success(
             <>
-              Network{""}
+              网络{""}
               <ResourceLink
                 type="network"
                 value={network.name}
                 to={`/ui/project/${encodeURIComponent(project)}/network/${encodeURIComponent(network.name)}`}
               />{" "}
-              updated.
+              更新成功。
             </>,
           );
         })
         .catch((e) => {
-          notify.failure("Network update failed", e);
+          notify.failure("网络更新失败", e);
         })
         .finally(() => {
           formik.setSubmitting(false);
@@ -224,7 +224,7 @@ const EditNetwork: FC<Props> = ({ network, project }) => {
           disableReason={
             formik.values.name
               ? undefined
-              : "Please enter a network name to enable this section"
+              : "请先输入网络名称以启用此部分"
           }
         />
         {readOnly ? null : (
@@ -238,7 +238,7 @@ const EditNetwork: FC<Props> = ({ network, project }) => {
                 );
               }}
             >
-              Cancel
+              取消
             </Button>
             <FormSubmitBtn
               formik={formik}

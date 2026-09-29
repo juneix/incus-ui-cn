@@ -13,72 +13,90 @@ import { getIdentityName } from "util/permissionIdentities";
 
 export const noneAvailableOption = {
   disabled: true,
-  label: "None available",
+  label: "暂无可选项",
   value: "",
 };
 
 // the resource types comes from the openFGA authorisation model in lxd
 // ref: https://discourse.ubuntu.com/t/identity-and-access-management-for-lxd/41516
+export const resourceTypeNames: Record<string, string> = {
+  server: "服务器 (Server)",
+  identity: "身份 (Identity)",
+  group: "用户组 (Group)",
+  certificate: "证书 (Certificate)",
+  project: "项目 (Project)",
+  profile: "配置模板 (Profile)",
+  instance: "实例 (Instance)",
+  image: "镜像 (Image)",
+  image_alias: "镜像别名 (Image alias)",
+  storage_pool: "存储池 (Storage pool)",
+  storage_volume: "存储卷 (Storage volume)",
+  storage_bucket: "存储桶 (Storage bucket)",
+  network: "网络 (Network)",
+  network_acl: "网络访问控制列表 (Network ACL)",
+  network_zone: "网络区域 (Network zone)",
+};
+
 export const resourceTypeOptions = [
   {
     value: "server",
-    label: "Server",
+    label: "服务器 (Server)",
   },
   {
     value: "identity",
-    label: "Identity",
+    label: "身份 (Identity)",
   },
   {
     value: "group",
-    label: "Group",
+    label: "用户组 (Group)",
   },
   {
     value: "certificate",
-    label: "Certificate",
+    label: "证书 (Certificate)",
   },
   {
     value: "project",
-    label: "Project",
+    label: "项目 (Project)",
   },
   {
     value: "profile",
-    label: "Profile",
+    label: "配置模板 (Profile)",
   },
   {
     value: "instance",
-    label: "Instance",
+    label: "实例 (Instance)",
   },
   {
     value: "image",
-    label: "Image",
+    label: "镜像 (Image)",
   },
   {
     value: "image_alias",
-    label: "Image alias",
+    label: "镜像别名 (Image alias)",
   },
   {
     value: "storage_pool",
-    label: "Storage pool",
+    label: "存储池 (Storage pool)",
   },
   {
     value: "storage_volume",
-    label: "Storage volume",
+    label: "存储卷 (Storage volume)",
   },
   {
     value: "storage_bucket",
-    label: "Storage bucket",
+    label: "存储桶 (Storage bucket)",
   },
   {
     value: "network",
-    label: "Network",
+    label: "网络 (Network)",
   },
   {
     value: "network_acl",
-    label: "Network ACL",
+    label: "网络访问控制列表 (Network ACL)",
   },
   {
     value: "network_zone",
-    label: "Network zone",
+    label: "网络区域 (Network zone)",
   },
 ];
 
@@ -103,11 +121,9 @@ export const getResourceTypeOptions = (
 
   const resourceTypes = Object.keys(metadata.entities);
   for (const resourceType of resourceTypes) {
-    const label = resourceType.split("_");
-    label[0] = capitalizeFirstLetter(label[0]);
     options.push({
       value: resourceType,
-      label: label.join(" "),
+      label: resourceTypeNames[resourceType] ?? resourceType.replace(/_/g, " "),
     });
   }
 
@@ -212,13 +228,13 @@ export const generateEntitlementOptions = (
   ) {
     genericEntitlementOptions.unshift({
       disabled: true,
-      label: "Built-in roles",
+      label: "内置角色 (Built-in roles)",
       value: "group",
     });
 
     granularEntitlementOptions.unshift({
       disabled: true,
-      label: "Granular entitlements",
+      label: "细粒度权限 (Granular entitlements)",
       value: "group",
     });
   }

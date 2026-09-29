@@ -16,50 +16,50 @@ const StoragePoolFormCeph: FC<Props> = ({ formik }) => {
       rows={[
         getConfigurationRow({
           formik,
-          label: "Cluster name",
+          label: "集群名称",
           name: "ceph_cluster_name",
           defaultValue: "",
-          children: <Input type="text" placeholder="Enter cluster name" />,
+          children: <Input type="text" placeholder="请输入集群名称" />,
         }),
         getConfigurationRow({
           formik,
-          label: "Placement groups",
+          label: "PG 数量 (Placement groups)",
           name: "ceph_osd_pg_num",
           defaultValue: "",
           children: (
             <Input
               type="number"
-              placeholder="Enter number of placement groups"
+              placeholder="请输入 PG 数量"
             />
           ),
         }),
         getConfigurationRow({
           formik,
-          label: "RBD clone copy",
+          label: "RBD 克隆副本",
           name: "ceph_rbd_clone_copy",
           defaultValue: "",
           children: <Select options={optionTrueFalse} />,
         }),
         getConfigurationRow({
           formik,
-          label: "RBD disk usage",
+          label: "RBD 磁盘用量 (du)",
           name: "ceph_rbd_du",
           defaultValue: "",
           children: <Select options={optionTrueFalse} />,
         }),
         getConfigurationRow({
           formik,
-          label: "Ceph user name",
+          label: "Ceph 用户名",
           name: "ceph_user_name",
           defaultValue: "",
-          children: <Input type="text" placeholder="Enter Ceph user name" />,
+          children: <Input type="text" placeholder="请输入 Ceph 用户名" />,
         }),
         getConfigurationRow({
           formik,
-          label: "RBD features",
+          label: "RBD 特性",
           name: "ceph_rbd_features",
           defaultValue: "",
-          children: <Input type="text" placeholder="Enter RBD features" />,
+          children: <Input type="text" placeholder="请输入 RBD 特性" />,
         }),
       ]}
     />

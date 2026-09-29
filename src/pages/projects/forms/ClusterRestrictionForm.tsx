@@ -38,7 +38,7 @@ const ClusterRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restricted_cluster_groups",
-          label: "Cluster groups targeting",
+          label: "指定集群组限制",
           defaultValue: "",
           children: <ClusterGroupSelector formik={formik} />,
           readOnlyRenderer: (val): ReactNode => {
@@ -65,7 +65,7 @@ const ClusterRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restricted_cluster_target",
-          label: "Direct cluster targeting",
+          label: "直接指定集群成员限制",
           defaultValue: "",
           readOnlyRenderer: (val) => optionRenderer(val, optionAllowBlock),
           children: <Select options={optionAllowBlock} />,

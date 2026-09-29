@@ -41,20 +41,20 @@ const NetworkLeases: FC<Props> = ({ network, project }) => {
   });
 
   if (error) {
-    notify.failure("Loading network leases failed", error);
+    notify.failure("加载网络租约失败", error);
   }
 
   const hasNetworkLeases = leases.length > 0;
 
   const headers = [
-    { content: "Type", sortKey: "type" },
-    { content: "Hostname", sortKey: "hostname" },
-    { content: "IP Address", sortKey: "address" },
-    { content: "Project", sortKey: "project" },
+    { content: "类型", sortKey: "type" },
+    { content: "主机名", sortKey: "hostname" },
+    { content: "IP 地址", sortKey: "address" },
+    { content: "项目", sortKey: "project" },
     ...(isClustered
-      ? [{ content: "Cluster member", sortKey: "clusterMember" }]
+      ? [{ content: "集群成员", sortKey: "clusterMember" }]
       : []),
-    { content: "MAC address", sortKey: "macAddress" },
+    { content: "MAC 地址", sortKey: "macAddress" },
   ];
 
   const rows = leases.map((lease) => {
@@ -64,17 +64,17 @@ const NetworkLeases: FC<Props> = ({ network, project }) => {
         {
           content: lease.type,
           role: "cell",
-          "aria-label": "Type",
+          "aria-label": "类型",
         },
         {
           content: lease.hostname,
           role: "rowheader",
-          "aria-label": "Hostname",
+          "aria-label": "主机名",
         },
         {
           content: lease.address,
           role: "cell",
-          "aria-label": "MAC address",
+          "aria-label": "IP 地址",
         },
         {
           content: lease.project && (
@@ -85,7 +85,7 @@ const NetworkLeases: FC<Props> = ({ network, project }) => {
             />
           ),
           role: "cell",
-          "aria-label": "project",
+          "aria-label": "项目",
         },
         ...(isClustered
           ? [
@@ -98,14 +98,14 @@ const NetworkLeases: FC<Props> = ({ network, project }) => {
                   />
                 ),
                 role: "cell",
-                "aria-label": "Cluster member",
+                "aria-label": "集群成员",
               },
             ]
           : []),
         {
           content: lease.hwaddr,
           role: "cell",
-          "aria-label": "Description",
+          "aria-label": "MAC 地址",
         },
       ],
       sortData: {
@@ -120,7 +120,7 @@ const NetworkLeases: FC<Props> = ({ network, project }) => {
   });
 
   if (isLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="正在加载..." isMainComponent />;
   }
 
   return (
@@ -139,7 +139,7 @@ const NetworkLeases: FC<Props> = ({ network, project }) => {
             responsive
             sortable
             className="u-table-layout--auto"
-            emptyStateMsg="No data to display"
+            emptyStateMsg="暂无数据"
           />
         </ScrollableTable>
       )}
@@ -147,15 +147,15 @@ const NetworkLeases: FC<Props> = ({ network, project }) => {
         <EmptyState
           className="empty-state"
           image={<Icon className="empty-state-icon" name="exposed" />}
-          title="No network leases found"
+          title="未找到网络租约"
         >
-          <p>There are no network leases in this project.</p>
+          <p>当前网络下没有网络租约。</p>
           <p>
             <DocLink
               docPath="/howto/network_ipam/#view-dhcp-leases-for-fully-controlled-networks"
               hasExternalIcon
             >
-              Learn more about network leases
+              了解更多关于网络租约的信息
             </DocLink>
           </p>
         </EmptyState>

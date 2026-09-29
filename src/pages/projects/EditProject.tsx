@@ -58,7 +58,7 @@ const EditProject: FC<Props> = ({ project }) => {
 
   const editRestriction = canEditProject(project)
     ? undefined
-    : "You do not have permission to edit this project";
+    : "您没有权限编辑此项目";
   const initialValues = getProjectEditValues(project, profile, editRestriction);
 
   const formik: FormikProps<ProjectFormValues> = useFormik({
@@ -82,19 +82,19 @@ const EditProject: FC<Props> = ({ project }) => {
         .then(() => {
           toastNotify.success(
             <>
-              Project{" "}
+              项目{" "}
               <ResourceLink
                 type="project"
                 value={project.name}
                 to={`/ui/project/${encodeURIComponent(project.name)}/instances`}
               />{" "}
-              updated.
+              已更新。
             </>,
           );
           formik.setFieldValue("readOnly", true);
         })
         .catch((e: Error) => {
-          notify.failure("Project update failed", e);
+          notify.failure("更新项目失败", e);
         })
         .finally(() => {
           formik.setSubmitting(false);
@@ -135,7 +135,7 @@ const EditProject: FC<Props> = ({ project }) => {
                 appearance="base"
                 onClick={async () => formik.setValues(initialValues)}
               >
-                Cancel
+                取消
               </Button>
               <FormSubmitBtn
                 formik={formik}

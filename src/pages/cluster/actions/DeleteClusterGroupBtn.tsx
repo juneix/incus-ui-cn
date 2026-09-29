@@ -32,14 +32,14 @@ const DeleteClusterGroupBtn: FC<Props> = ({ group }) => {
         navigate(`/ui/cluster/groups`);
         toastNotify.success(
           <>
-            Cluster group{" "}
-            <ResourceLabel type="cluster-group" value={group} bold /> deleted.
+            集群组{" "}
+            <ResourceLabel type="cluster-group" value={group} bold /> 已删除。
           </>,
         );
       })
       .catch((e) => {
         setLoading(false);
-        toastNotify.failure("Cluster group deletion failed", e);
+        toastNotify.failure("删除集群组失败", e);
       })
       .finally(() => {
         queryClient.invalidateQueries({
@@ -51,12 +51,12 @@ const DeleteClusterGroupBtn: FC<Props> = ({ group }) => {
   const isDefaultGroup = group === "default";
   const getHoverText = () => {
     if (isDefaultGroup) {
-      return "The default cluster group cannot be deleted";
+      return "默认集群组无法删除";
     }
     if (!hasPermission) {
-      return "You do not have permission to delete cluster groups";
+      return "你没有权限删除集群组";
     }
-    return "Delete group";
+    return "删除集群组";
   };
 
   return (
@@ -65,20 +65,20 @@ const DeleteClusterGroupBtn: FC<Props> = ({ group }) => {
       appearance="base"
       loading={isLoading}
       confirmationModalProps={{
-        title: "Confirm delete",
+        title: "确认删除",
         children: (
           <p>
-            This will permanently delete cluster group{" "}
-            <ResourceLabel type="cluster-group" value={group} bold />.
+            这将永久删除集群组{" "}
+            <ResourceLabel type="cluster-group" value={group} bold />。
           </p>
         ),
-        confirmButtonLabel: "Delete",
+        confirmButtonLabel: "删除",
         onConfirm: handleDelete,
       }}
       disabled={isDefaultGroup || isLoading || !hasPermission}
       shiftClickEnabled
       showShiftClickHint
-      title="Delete group"
+      title="删除集群组"
       className="has-icon"
     >
       <Icon name="delete" />

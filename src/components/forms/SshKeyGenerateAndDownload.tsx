@@ -87,11 +87,11 @@ const SshKeyGenerateAndDownload: FC<Props> = ({ keyName, setSSHPublicKey }) => {
     <>
       <p className="u-text--muted">
         {isDownloaded
-          ? "Your private key was downloaded successfully."
-          : "Your key pair was generated successfully."}
+          ? "私钥已成功下载。"
+          : "密钥对已成功生成。"}
       </p>
       <Button disabled={!privateKey} type="button" onClick={downloadPrivateKey}>
-        Download private key
+        下载私钥
       </Button>
     </>
   );

@@ -32,7 +32,7 @@ const NetworkLoadBalancerFormBackends: FC<Props> = ({ formik, network }) => {
               forId="backends.0.name"
               className="u-no-margin--bottom"
             >
-              Name
+              名称
             </Label>
           </th>
           <th className="target-address">
@@ -41,7 +41,7 @@ const NetworkLoadBalancerFormBackends: FC<Props> = ({ formik, network }) => {
               forId="backends.0.targetAddress"
               className="u-no-margin--bottom"
             >
-              Target address
+              目标地址
             </Label>
           </th>
           <th className="target-port">
@@ -49,16 +49,16 @@ const NetworkLoadBalancerFormBackends: FC<Props> = ({ formik, network }) => {
               forId="backends.0.targetPort"
               className="u-no-margin--bottom"
             >
-              Target port
+              目标端口
             </Label>
           </th>
-          <th className="u-off-screen">Actions</th>
+          <th className="u-off-screen">操作</th>
         </tr>
       </thead>
       <tbody>
         {formik.values.backends.map((_backend, index) => {
           const backendError = formik.errors.backends?.[
-            index
+             index
           ] as NetworkLoadBalancerBackendFormValues | null;
 
           return (
@@ -68,8 +68,8 @@ const NetworkLoadBalancerFormBackends: FC<Props> = ({ formik, network }) => {
                   {...formik.getFieldProps(`backends.${index}.name`)}
                   id={`backends.${index}.name`}
                   type="text"
-                  aria-label={`Backend ${index} name`}
-                  placeholder="Backend name"
+                  aria-label={`后端 ${index} 名称`}
+                  placeholder="后端名称"
                   error={
                     formik.touched.backends?.[index]?.name
                       ? backendError?.name
@@ -82,12 +82,12 @@ const NetworkLoadBalancerFormBackends: FC<Props> = ({ formik, network }) => {
                   {...formik.getFieldProps(`backends.${index}.targetAddress`)}
                   id={`backends.${index}.targetAddress`}
                   type="text"
-                  aria-label={`Backend ${index} target address`}
-                  placeholder="Enter backend target address"
+                  aria-label={`后端 ${index} 目标地址`}
+                  placeholder="输入后端目标地址"
                   help={
                     index === formik.values.backends.length - 1 && (
                       <>
-                        Must be from the network <b>{network?.name}</b>.
+                        必须属于网络 <b>{network?.name}</b>。
                       </>
                     )
                   }
@@ -103,8 +103,8 @@ const NetworkLoadBalancerFormBackends: FC<Props> = ({ formik, network }) => {
                   {...formik.getFieldProps(`backends.${index}.targetPort`)}
                   id={`backends.${index}.targetPort`}
                   type="text"
-                  aria-label={`Backend ${index} target port`}
-                  placeholder="Enter backend target port"
+                  aria-label={`后端 ${index} 目标端口`}
+                  placeholder="输入后端目标端口"
                   error={
                     formik.touched.backends?.[index]?.targetPort
                       ? backendError?.targetPort
@@ -123,7 +123,7 @@ const NetworkLoadBalancerFormBackends: FC<Props> = ({ formik, network }) => {
                   hasIcon
                   className="u-no-margin--bottom"
                   type="button"
-                  aria-label={`Delete backend ${index}`}
+                  aria-label={`删除后端 ${index}`}
                 >
                   <Icon name="delete" />
                 </Button>

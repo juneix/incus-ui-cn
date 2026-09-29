@@ -32,7 +32,7 @@ const OSServices: FC<Props> = ({ target }) => {
 
   const headers = [
     {
-      content: "Name",
+      content: "名称",
       className: "name",
     },
   ];
@@ -62,7 +62,7 @@ const OSServices: FC<Props> = ({ target }) => {
               </>
             ),
             role: "rowheader",
-            "aria-label": "Name",
+            "aria-label": "名称",
             className: "name",
           },
         ],
@@ -75,13 +75,13 @@ const OSServices: FC<Props> = ({ target }) => {
   const { rows: sortedRows, updateSort } = useSortTableData({ rows });
 
   if (error) {
-    notify.failure("Loading services failed", error);
+    notify.failure("加载服务列表失败", error);
   }
 
   return (
     <div>
       <NotificationRow />
-      {isLoading && <Spinner className="u-loader" text="Loading services..." />}
+      {isLoading && <Spinner className="u-loader" text="正在加载服务..." />}
       {!isLoading && !error && services?.length > 0 && (
         <>
           <ScrollableTable
@@ -92,15 +92,15 @@ const OSServices: FC<Props> = ({ target }) => {
             <TablePagination
               data={sortedRows}
               id="pagination"
-              itemName="service"
+              itemName="个服务"
               className="u-no-margin--top"
-              aria-label="Table pagination control"
+              aria-label="表格分页控件"
             >
               <MainTable
                 id="incusos-services-table"
                 headers={headers}
                 sortable
-                emptyStateMsg="No service found matching this search"
+                emptyStateMsg="未找到匹配的服务"
                 onUpdateSort={updateSort}
               />
             </TablePagination>

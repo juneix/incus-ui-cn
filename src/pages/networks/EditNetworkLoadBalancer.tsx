@@ -48,7 +48,7 @@ const EditNetworkLoadBalancer: FC = () => {
 
   useEffect(() => {
     if (error) {
-      notify.failure("Loading network failed", error);
+      notify.failure("加载网络失败", error);
     }
   }, [error]);
 
@@ -109,12 +109,12 @@ const EditNetworkLoadBalancer: FC = () => {
             `/ui/project/${encodeURIComponent(project ?? "")}/network/${encodeURIComponent(networkName ?? "")}/load-balancers`,
           );
           toastNotify.success(
-            `Network load balancer ${loadBalancer.listen_address} updated.`,
+            `网络负载均衡 ${loadBalancer.listen_address} 已更新。`,
           );
         })
         .catch((e) => {
           formik.setSubmitting(false);
-          notify.failure("Network load balancer update failed", e);
+          notify.failure("更新网络负载均衡失败", e);
         });
     },
   });
@@ -124,9 +124,9 @@ const EditNetworkLoadBalancer: FC = () => {
       title={
         <HelpLink
           href={`${docBaseLink}/howto/network_load_balancers/`}
-          title="Learn more about network load balancers"
+          title="了解更多关于网络负载均衡的信息"
         >
-          Edit a network load balancer
+          编辑网络负载均衡
         </HelpLink>
       }
       contentClassName="edit-network"
@@ -137,7 +137,7 @@ const EditNetworkLoadBalancer: FC = () => {
           className="p-button--base"
           to={`/ui/project/${encodeURIComponent(project ?? "")}/network/${encodeURIComponent(networkName ?? "")}/load-balancers`}
         >
-          Cancel
+          取消
         </Link>
         <ActionButton
           appearance="positive"
@@ -149,7 +149,7 @@ const EditNetworkLoadBalancer: FC = () => {
           }
           onClick={() => void formik.submitForm()}
         >
-          Update
+          更新
         </ActionButton>
       </FormFooterLayout>
     </BaseLayout>

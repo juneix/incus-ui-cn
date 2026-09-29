@@ -11,18 +11,18 @@ const DetachDiskDeviceBtn: FC<Props> = ({ onDetach, disabledReason }) => {
     <ConfirmationButton
       appearance="base"
       type="button"
-      title={disabledReason ?? "Detach disk"}
+      title={disabledReason ?? "卸载磁盘"}
       className="has-icon u-no-margin--bottom is-dense"
       confirmationModalProps={{
-        title: "Confirm disk detachment",
+        title: "确认卸载磁盘",
         children: (
           <p>
-            Are you sure you want to clear this disk attachment?
+            确定要移除该磁盘挂载吗？
             <br />
-            This action may result in data loss if the disk is still mounted.
+            如果磁盘仍处于挂载状态，此操作可能会导致数据丢失。
           </p>
         ),
-        confirmButtonLabel: "Detach",
+        confirmButtonLabel: "卸载",
         onConfirm: onDetach,
       }}
       shiftClickEnabled
@@ -30,7 +30,7 @@ const DetachDiskDeviceBtn: FC<Props> = ({ onDetach, disabledReason }) => {
       disabled={!!disabledReason}
     >
       <Icon name="disconnect" />
-      <span>Detach</span>
+      <span>卸载</span>
     </ConfirmationButton>
   );
 };

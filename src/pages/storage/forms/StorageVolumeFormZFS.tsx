@@ -16,14 +16,14 @@ const StorageVolumeFormZFS: FC<Props> = ({ formik }) => {
       rows={[
         getConfigurationRow({
           formik,
-          label: "ZFS blocksize",
+          label: "ZFS 块大小",
           name: "zfs_blocksize",
           defaultValue: "",
           children: (
             <Select
               options={[
                 {
-                  label: "default",
+                  label: "默认",
                   value: "",
                 },
                 {
@@ -57,7 +57,7 @@ const StorageVolumeFormZFS: FC<Props> = ({ formik }) => {
 
         getConfigurationRow({
           formik,
-          label: "ZFS block mode",
+          label: "ZFS 块模式",
           name: "zfs_block_mode",
           defaultValue: "",
           children: <Select options={optionTrueFalse} />,
@@ -65,7 +65,7 @@ const StorageVolumeFormZFS: FC<Props> = ({ formik }) => {
 
         getConfigurationRow({
           formik,
-          label: "ZFS delegate",
+          label: "ZFS 权限委托",
           name: "zfs_delegate",
           defaultValue: "",
           children: <Select options={optionTrueFalse} />,
@@ -73,7 +73,7 @@ const StorageVolumeFormZFS: FC<Props> = ({ formik }) => {
 
         getConfigurationRow({
           formik,
-          label: "ZFS remove snapshots",
+          label: "删除卷时自动删除快照",
           name: "zfs_remove_snapshots",
           defaultValue: "",
           children: <Select options={optionTrueFalse} />,
@@ -81,7 +81,7 @@ const StorageVolumeFormZFS: FC<Props> = ({ formik }) => {
 
         getConfigurationRow({
           formik,
-          label: "ZFS use refquota",
+          label: "使用 refquota 配额",
           name: "zfs_use_refquota",
           defaultValue: "",
           children: <Select options={optionTrueFalse} />,
@@ -89,7 +89,7 @@ const StorageVolumeFormZFS: FC<Props> = ({ formik }) => {
 
         getConfigurationRow({
           formik,
-          label: "ZFS reserve space",
+          label: "ZFS 预留空间",
           name: "zfs_reserve_space",
           defaultValue: "",
           children: <Select options={optionTrueFalse} />,

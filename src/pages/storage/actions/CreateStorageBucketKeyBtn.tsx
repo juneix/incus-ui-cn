@@ -26,12 +26,12 @@ const CreateStorageBucketKeyBtn: FC<Props> = ({ className }) => {
       disabled={!canCreateStorageBuckets(project)}
       title={
         canCreateStorageBuckets(project)
-          ? "Create bucket key"
-          : "You do not have permission to create keys for this bucket"
+          ? "创建存储桶密钥"
+          : "您没有权限为此存储桶创建密钥"
       }
     >
       {!isSmallScreen && <Icon name="plus" light />}
-      <span>Create key</span>
+      <span>创建密钥</span>
     </Button>
   );
 };

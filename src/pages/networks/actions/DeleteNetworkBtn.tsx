@@ -43,14 +43,14 @@ const DeleteNetworkBtn: FC<Props> = ({ network, project }) => {
         navigate(`/ui/project/${encodeURIComponent(project)}/networks`);
         toastNotify.success(
           <>
-            Network <ResourceLabel bold type="network" value={network.name} />{" "}
-            deleted.
+            网络 <ResourceLabel bold type="network" value={network.name} />{" "}
+            已删除。
           </>,
         );
       })
       .catch((e) => {
         setLoading(false);
-        notify.failure("Network deletion failed", e);
+        notify.failure("删除网络失败", e);
       });
   };
 
@@ -59,15 +59,15 @@ const DeleteNetworkBtn: FC<Props> = ({ network, project }) => {
 
   const getOnHoverText = () => {
     if (!canDeleteNetwork(network)) {
-      return "You do not have permission to delete this network";
+      return "您没有权限删除此网络";
     }
 
     if (!isManaged) {
-      return "Can not delete, network is not managed";
+      return "无法删除，该网络为非托管网络";
     }
 
     if (isUsed) {
-      return "Can not delete, network is currently in use";
+      return "无法删除，该网络当前正在使用中";
     }
 
     return "";
@@ -77,14 +77,14 @@ const DeleteNetworkBtn: FC<Props> = ({ network, project }) => {
     <ConfirmationButton
       onHoverText={getOnHoverText()}
       confirmationModalProps={{
-        title: "Confirm delete",
+        title: "确认删除",
         confirmButtonAppearance: "negative",
-        confirmButtonLabel: "Delete",
+        confirmButtonLabel: "删除",
         children: (
           <p>
-            Are you sure you want to delete the network{" "}
-            <ResourceLabel type="network" value={network.name} bold />?<br />
-            This action cannot be undone, and can result in data loss.
+            确定要删除网络{" "}
+            <ResourceLabel type="network" value={network.name} bold /> 吗？<br />
+            此操作无法撤销，并可能导致数据丢失。
           </p>
         ),
         onConfirm: handleDelete,
@@ -98,7 +98,7 @@ const DeleteNetworkBtn: FC<Props> = ({ network, project }) => {
       showShiftClickHint
     >
       {!isSmallScreen && <Icon name="delete" />}
-      <span>Delete network</span>
+      <span>删除网络</span>
     </ConfirmationButton>
   );
 };

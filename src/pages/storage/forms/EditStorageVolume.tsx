@@ -42,16 +42,16 @@ const EditStorageVolume: FC<Props> = ({ volume }) => {
   const { hasStorageAndProfileOperations } = useSupportedFeatures();
 
   if (!project) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
 
   const StorageVolumeSchema = Yup.object().shape({
-    name: Yup.string().required("This field is required"),
+    name: Yup.string().required("此项为必填项"),
   });
 
   const editRestriction = canEditVolume(volume)
     ? undefined
-    : "You do not have permission to edit this volume";
+    : "你没有编辑此存储卷的权限";
 
   const handleSuccess = (saveVolume: LxdStorageVolume) => {
     void formik.setValues(getStorageVolumeEditValues(saveVolume));
@@ -69,13 +69,13 @@ const EditStorageVolume: FC<Props> = ({ volume }) => {
     });
     toastNotify.success(
       <>
-        Storage volume <VolumeLinkChip volume={volume} /> updated.
+        存储卷 <VolumeLinkChip volume={volume} /> 更新成功。
       </>,
     );
   };
 
   const handleFailure = (error: Error) => {
-    notify.failure("Storage volume update failed", error);
+    notify.failure("更新存储卷失败", error);
   };
 
   const handleFinish = () => {
@@ -144,7 +144,7 @@ const EditStorageVolume: FC<Props> = ({ volume }) => {
                 formik.setValues(getStorageVolumeEditValues(volume))
               }
             >
-              Cancel
+              取消
             </Button>
             <FormSubmitBtn
               formik={formik}

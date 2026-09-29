@@ -47,8 +47,8 @@ const ClusterGroupForm: FC<Props> = ({ formik }) => {
         <Input
           {...formik.getFieldProps("name")}
           type="text"
-          label="Name"
-          placeholder="Enter name"
+          label="名称"
+          placeholder="输入名称"
           required
           autoFocus
           error={formik.touched.name ? formik.errors.name : null}
@@ -57,13 +57,13 @@ const ClusterGroupForm: FC<Props> = ({ formik }) => {
       <Input
         {...formik.getFieldProps("description")}
         type="text"
-        label="Description"
-        placeholder="Enter description"
+        label="描述"
+        placeholder="输入描述"
       />
-      <p className="u-sv-1">Cluster members</p>
+      <p className="u-sv-1">集群成员</p>
       <SelectableMainTable
-        itemName="member"
-        parentName="cluster group"
+        itemName="个成员"
+        parentName="集群组"
         className="member-selection-table"
         filteredNames={members?.map((member) => member.server_name) ?? []}
         selectedNames={formik.values.members}
@@ -78,17 +78,17 @@ const ClusterGroupForm: FC<Props> = ({ formik }) => {
         disabledNames={[]}
         headers={[
           {
-            content: "Name",
+            content: "名称",
             sortKey: "name",
             className: "name",
           },
           {
-            content: "Groups",
+            content: "所属组",
             className: "groups u-align--right",
           },
           {
             content: "",
-            "aria-label": "Modified status",
+            "aria-label": "修改状态",
             className: "modified-status",
           },
         ]}
@@ -122,14 +122,14 @@ const ClusterGroupForm: FC<Props> = ({ formik }) => {
                   onClick: toggleRow,
                   role: "rowheader",
                   className: "name u-truncate clickable-cell",
-                  "aria-label": "Name",
+                  "aria-label": "名称",
                 },
                 {
                   content: groups,
                   onClick: toggleRow,
                   role: "cell",
                   className: "groups u-truncate clickable-cell u-align--right",
-                  "aria-label": "groups",
+                  "aria-label": "所属组",
                 },
                 {
                   content: isModified && (
@@ -137,13 +137,13 @@ const ClusterGroupForm: FC<Props> = ({ formik }) => {
                       name="status-in-progress-small"
                       aria-label={
                         addedMembers.includes(name)
-                          ? "was added"
-                          : "was removed"
+                          ? "已添加"
+                          : "已移除"
                       }
                     />
                   ),
                   role: "cell",
-                  "aria-label": "Modified status",
+                  "aria-label": "修改状态",
                   className: "modified-status u-align--right",
                 },
               ],

@@ -13,7 +13,7 @@ const NetworkGARPField: FC<Props> = ({ formik }) => {
   return (
     <div className="general-field">
       <div className="general-field-label can-edit">
-        <Label forId="gvrp">GARP Registration</Label>
+        <Label forId="gvrp">GARP 注册</Label>
       </div>
       <div
         className="general-field-content"
@@ -23,8 +23,8 @@ const NetworkGARPField: FC<Props> = ({ formik }) => {
           <>
             {(formik.values.gvrp?.length ?? 0 > 0)
               ? formik.values.gvrp === "true"
-                ? "Yes"
-                : "No"
+                ? "是"
+                : "否"
               : "-"}
             <Button
               onClick={() => {
@@ -34,7 +34,7 @@ const NetworkGARPField: FC<Props> = ({ formik }) => {
               className="u-no-margin--bottom"
               type="button"
               appearance="base"
-              title={formik.values.editRestriction ?? "Edit"}
+              title={formik.values.editRestriction ?? "编辑"}
               hasIcon
               disabled={!!formik.values.editRestriction}
             >
@@ -47,19 +47,19 @@ const NetworkGARPField: FC<Props> = ({ formik }) => {
             id={"gvrp"}
             options={[
               {
-                label: "Select option",
+                label: "选择选项",
                 value: "",
               },
               {
-                label: "Yes",
+                label: "是",
                 value: "true",
               },
               {
-                label: "No",
+                label: "否",
                 value: "false",
               },
             ]}
-            help="Register VLAN using GARP VLAN Registration Protocol"
+            help="使用 GARP VLAN 注册协议注册 VLAN"
           />
         )}
       </div>

@@ -30,7 +30,7 @@ const StorageBucketForm: FC<Props> = ({ formik, bucket }) => {
       onChange: formik.handleChange,
       value: formik.values[id] ?? "",
       error: formik.touched[id] ? (formik.errors[id] as ReactNode) : null,
-      placeholder: `Enter ${id.replaceAll("_", " ")}`,
+      placeholder: id === "name" ? "输入名称" : "输入描述",
     };
   };
 
@@ -39,7 +39,7 @@ const StorageBucketForm: FC<Props> = ({ formik, bucket }) => {
   const bucketEditRestriction =
     !isEditing || canEditBucket(bucket)
       ? ""
-      : "You do not have permission to modify this bucket";
+      : "您没有权限修改此存储桶";
 
   return (
     <Form onSubmit={formik.handleSubmit} className={"bucket-create-form"}>
@@ -51,10 +51,10 @@ const StorageBucketForm: FC<Props> = ({ formik, bucket }) => {
         invalidDrivers={[]}
         selectProps={{
           id: "bucket-create-pool",
-          label: "Storage pool",
+          label: "存储池",
           disabled: !!bucketEditRestriction || isEditing,
           help: isEditing
-            ? "Storage bucket pool can't be changed"
+            ? "存储桶所属存储池不可更改"
             : "",
         }}
       />
@@ -62,15 +62,15 @@ const StorageBucketForm: FC<Props> = ({ formik, bucket }) => {
       <Input
         {...getFormProps("name")}
         type="text"
-        label="Name"
+        label="名称"
         required
         disabled={!!bucketEditRestriction || isEditing}
-        help={isEditing && "Storage bucket name can't be changed"}
+        help={isEditing && "存储桶名称不可更改"}
         title={bucketEditRestriction}
       />
 
       <DiskSizeSelector
-        label="Size"
+        label="大小"
         value={formik.values.size}
         setMemoryLimit={(val?: string) => {
           formik.setFieldValue("size", val);
@@ -80,7 +80,7 @@ const StorageBucketForm: FC<Props> = ({ formik, bucket }) => {
       />
       <AutoExpandingTextArea
         {...getFormProps("description")}
-        label="Description"
+        label="描述"
         disabled={!!bucketEditRestriction}
         title={bucketEditRestriction}
       />

@@ -18,14 +18,14 @@ const StorageBucketHeader: FC<Props> = ({ bucket, project }) => {
           to={`/ui/project/${encodeURIComponent(project)}/storage/buckets`}
           key={1}
         >
-          Storage buckets
+          存储桶
         </Link>,
       ]}
       controls={
         bucket ? <StorageBucketActions bucket={bucket} isDetailPage /> : null
       }
       isLoaded={true}
-      renameDisabledReason="Storage buckets cannot be renamed"
+      renameDisabledReason="存储桶不支持重命名"
     />
   );
 };

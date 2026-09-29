@@ -40,7 +40,7 @@ const GpuDeviceInput: FC<Props> = ({ device, onChange, disableReason }) => {
       <Input
         key={key}
         type="text"
-        label={isPci ? "PCI Address" : "ID"}
+        label={isPci ? "PCI 地址" : "设备 ID"}
         value={isPci ? device.pci : device.id}
         onChange={(e) =>
           onChange?.(

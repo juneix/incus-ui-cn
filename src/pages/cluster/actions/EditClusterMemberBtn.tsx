@@ -34,13 +34,13 @@ const EditClusterMemberBtn: FC<Props> = ({
         }}
         title={
           hasPermission
-            ? "Edit cluster member"
-            : "You do not have permission to edit cluster members"
+            ? "编辑集群成员"
+            : "你没有权限编辑集群成员"
         }
         hasIcon
       >
         <Icon name="edit" />
-        {hasLabel && <span>Edit</span>}
+        {hasLabel && <span>编辑</span>}
       </Button>
       {panelParams.panel === panels.editClusterMember &&
         panelParams.member === member && (

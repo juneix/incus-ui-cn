@@ -48,31 +48,31 @@ const ProjectResourceLimitsForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "limits_instances",
-          label: "Max number of instances",
+          label: "最大实例数",
           defaultValue: "",
-          children: <Input placeholder="Enter number" min={0} type="number" />,
+          children: <Input placeholder="输入数值" min={0} type="number" />,
         }),
 
         getConfigurationRow({
           formik,
           name: "limits_containers",
-          label: "Max number of containers",
+          label: "最大容器数",
           defaultValue: "",
-          children: <Input placeholder="Enter number" min={0} type="number" />,
+          children: <Input placeholder="输入数值" min={0} type="number" />,
         }),
 
         getConfigurationRow({
           formik,
           name: "limits_virtual_machines",
-          label: "Max number of VMs",
+          label: "最大虚拟机数",
           defaultValue: "",
-          children: <Input placeholder="Enter number" min={0} type="number" />,
+          children: <Input placeholder="输入数值" min={0} type="number" />,
         }),
 
         getConfigurationRow({
           formik,
           name: "limits_disk",
-          label: "Max disk space (used by all instances)",
+          label: "最大磁盘空间 (所有实例合计)",
           defaultValue: "",
           children: (
             <DiskSizeSelector
@@ -86,23 +86,23 @@ const ProjectResourceLimitsForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "limits_networks",
-          label: "Max number of networks",
+          label: "最大网络数",
           defaultValue: "",
-          children: <Input placeholder="Enter number" min={0} type="number" />,
+          children: <Input placeholder="输入数值" min={0} type="number" />,
         }),
 
         getConfigurationRow({
           formik,
           name: "limits_cpu",
-          label: "Max sum of CPU",
+          label: "最大 CPU 核心总数",
           defaultValue: "",
-          children: <CpuLimitInput placeholder="Enter number" type="number" />,
+          children: <CpuLimitInput placeholder="输入数值" type="number" />,
         }),
 
         getConfigurationRow({
           formik,
           name: "limits_memory",
-          label: "Max sum of memory limits",
+          label: "最大内存限制总和",
           defaultValue: "",
           children: (
             <DiskSizeSelector
@@ -117,9 +117,9 @@ const ProjectResourceLimitsForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "limits_processes",
-          label: "Max sum of processes",
+          label: "最大进程总数",
           defaultValue: "-",
-          children: <Input placeholder="Enter number" min={0} type="number" />,
+          children: <Input placeholder="输入数值" min={0} type="number" />,
         }),
       ]}
     />

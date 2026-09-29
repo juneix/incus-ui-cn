@@ -16,10 +16,10 @@ const ShutdownOSBtn: FC<Props> = ({ target }) => {
   const handlePoweroff = () => {
     poweroffOS(target)
       .then(() => {
-        toastNotify.success(<>OS shutdown</>);
+        toastNotify.success(<>操作系统正在关机</>);
       })
       .catch((e) => {
-        toastNotify.failure("OS poweroff failed", e);
+        toastNotify.failure("系统关机失败", e);
       });
   };
 
@@ -28,10 +28,10 @@ const ShutdownOSBtn: FC<Props> = ({ target }) => {
       appearance="base"
       className="has-icon is-dense"
       confirmationModalProps={{
-        title: "Confirm shutdown",
-        children: <p>This will shutdown server</p>,
+        title: "确认关机",
+        children: <p>这将关闭该服务器系统</p>,
         onConfirm: handlePoweroff,
-        confirmButtonLabel: "Poweroff",
+        confirmButtonLabel: "关机",
       }}
       shiftClickEnabled
       showShiftClickHint

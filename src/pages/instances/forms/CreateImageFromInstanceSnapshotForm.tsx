@@ -137,7 +137,7 @@ const CreateImageFromInstanceSnapshotForm: FC<Props> = ({
   return (
     <Modal
       close={close}
-      title="Create image from instance snapshot"
+      title="从实例快照创建镜像"
       buttonRow={
         <>
           <Button
@@ -146,7 +146,7 @@ const CreateImageFromInstanceSnapshotForm: FC<Props> = ({
             type="button"
             onClick={close}
           >
-            Cancel
+            取消
           </Button>
           <ActionButton
             appearance="positive"
@@ -155,30 +155,30 @@ const CreateImageFromInstanceSnapshotForm: FC<Props> = ({
             disabled={!formik.isValid || formik.isSubmitting}
             onClick={() => void formik.submitForm()}
           >
-            Create image
+            创建镜像
           </ActionButton>
         </>
       }
     >
       <Form onSubmit={formik.handleSubmit}>
-        <Input type="text" label="Instance" value={instance.name} disabled />
-        <Input type="text" label="Snapshot" value={snapshot.name} disabled />
+        <Input type="text" label="实例" value={instance.name} disabled />
+        <Input type="text" label="快照" value={snapshot.name} disabled />
         <Input
           {...formik.getFieldProps("alias")}
           type="text"
-          label="Alias"
+          label="别名"
           error={formik.touched.alias ? formik.errors.alias : null}
           disabled={!canCreateImageAliases(project)}
           title={
             canCreateImageAliases(project)
               ? ""
-              : "You do not have permission to create image aliases in this project"
+              : "你没有权限在此项目中创建镜像别名"
           }
         />
         <Input
           {...formik.getFieldProps("isPublic")}
           type="checkbox"
-          label="Make the image publicly available"
+          label="将镜像设为公开可用"
           error={formik.touched.isPublic ? formik.errors.isPublic : null}
         />
         {/* hidden submit to enable enter key in inputs */}

@@ -20,16 +20,28 @@ const NetworkAclRuleTable: FC<Props> = ({
     return port ? `${address ?? "*"}:${port}` : `${address ?? "*"}`;
   };
 
+  const actionMap: Record<string, string> = {
+    allow: "允许",
+    reject: "拒绝",
+    drop: "丢弃",
+  };
+
+  const stateMap: Record<string, string> = {
+    enabled: "已启用",
+    disabled: "已禁用",
+    logged: "已记录日志",
+  };
+
   return (
     <MainTable
       sortable
       headers={[
-        { content: "Action", sortKey: "action" },
-        { content: "Protocol", sortKey: "protocol" },
-        { content: "State", sortKey: "state" },
-        { content: "Description", sortKey: "description" },
-        { content: "Source", sortKey: "source" },
-        { content: "Destination", sortKey: "destination" },
+        { content: "动作", sortKey: "action" },
+        { content: "协议", sortKey: "protocol" },
+        { content: "状态", sortKey: "state" },
+        { content: "描述", sortKey: "description" },
+        { content: "源地址", sortKey: "source" },
+        { content: "目标地址", sortKey: "destination" },
         { content: "" },
       ]}
       rows={rules.map((rule, index) => {
@@ -39,34 +51,34 @@ const NetworkAclRuleTable: FC<Props> = ({
         return {
           columns: [
             {
-              content: capitalizeFirstLetter(rule.action ?? ""),
+              content: rule.action ? actionMap[rule.action] ?? capitalizeFirstLetter(rule.action) : "",
               role: "rowheader",
-              "aria-label": "Action",
+              "aria-label": "动作",
             },
             {
-              content: `${(rule.protocol ?? "").length === 0 ? "Any" : rule.protocol?.toUpperCase()}`,
+              content: `${(rule.protocol ?? "").length === 0 ? "任意" : rule.protocol?.toUpperCase()}`,
               role: "cell",
-              "aria-label": "Protocol",
+              "aria-label": "协议",
             },
             {
-              content: capitalizeFirstLetter(rule.state ?? ""),
+              content: rule.state ? stateMap[rule.state] ?? capitalizeFirstLetter(rule.state) : "",
               role: "cell",
-              "aria-label": "State",
+              "aria-label": "状态",
             },
             {
               content: rule.description,
               role: "cell",
-              "aria-label": "Description",
+              "aria-label": "描述",
             },
             {
               content: source,
               role: "cell",
-              "aria-label": "Source",
+              "aria-label": "源地址",
             },
             {
               content: destination,
               role: "cell",
-              "aria-label": "Destination",
+              "aria-label": "目标地址",
             },
             {
               content: (
@@ -81,7 +93,7 @@ const NetworkAclRuleTable: FC<Props> = ({
                     appearance="base"
                     disabled={!!editRestriction}
                     title={
-                      "Edit rule" +
+                      "编辑规则" +
                       (editRestriction ? ` - ${editRestriction}` : "")
                     }
                   >
@@ -97,7 +109,7 @@ const NetworkAclRuleTable: FC<Props> = ({
                     appearance="base"
                     disabled={!!editRestriction}
                     title={
-                      "Remove rule" +
+                      "删除规则" +
                       (editRestriction ? ` - ${editRestriction}` : "")
                     }
                   >

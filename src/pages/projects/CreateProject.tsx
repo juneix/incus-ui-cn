@@ -72,7 +72,7 @@ const CreateProject: FC = () => {
     name: Yup.string()
       .test(
         "deduplicate",
-        "A project with this name already exists",
+        "已存在同名的项目",
         async (value) =>
           checkDuplicateName(value, "", controllerState, "projects"),
       )
@@ -89,13 +89,13 @@ const CreateProject: FC = () => {
     navigate(`/ui/project/${encodeURIComponent(values.name)}/instances`);
     toastNotify.success(
       <>
-        Project{" "}
+        项目{" "}
         <ResourceLink
           type="project"
           value={values.name}
           to={`/ui/project/${encodeURIComponent(values.name)}/instances`}
         />{" "}
-        created.
+        已创建。
       </>,
     );
   };
@@ -182,14 +182,14 @@ const CreateProject: FC = () => {
                 `/ui/project/${encodeURIComponent(values.name)}/instances`,
               );
               toastNotify.failure(
-                `Successfully created ${values.name} project. Failed to attach storage pool${hasNetwork ? " and network" : ""}.`,
+                `成功创建项目 ${values.name}。但关联存储池${hasNetwork ? "和网络" : ""}失败。`,
                 e,
               );
             });
         })
         .catch((e: Error) => {
           formik.setSubmitting(false);
-          notify.failure("Project creation failed", e);
+          notify.failure("创建项目失败", e);
         })
         .finally(() => {
           queryClient.invalidateQueries({
@@ -200,7 +200,7 @@ const CreateProject: FC = () => {
   });
 
   return (
-    <BaseLayout title="Create a project" contentClassName="create-project">
+    <BaseLayout title="创建项目" contentClassName="create-project">
       <ProjectForm
         formik={formik}
         section={section}
@@ -211,7 +211,7 @@ const CreateProject: FC = () => {
       />
       <FormFooterLayout>
         <Button appearance="base" onClick={async () => navigate(-1)}>
-          Cancel
+          取消
         </Button>
         <ActionButton
           appearance="positive"
@@ -221,7 +221,7 @@ const CreateProject: FC = () => {
           }
           onClick={() => void formik.submitForm()}
         >
-          Create
+          创建
         </ActionButton>
       </FormFooterLayout>
     </BaseLayout>

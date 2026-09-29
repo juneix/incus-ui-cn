@@ -43,15 +43,15 @@ const DeleteNetworkAclBtn: FC<Props> = ({ networkAcl, project }) => {
         navigate(`/ui/project/${encodeURIComponent(project)}/network-acls`);
         toastNotify.success(
           <>
-            Network ACL{" "}
+            网络 ACL{" "}
             <ResourceLabel bold type="network-acl" value={networkAcl.name} />{" "}
-            deleted.
+            已删除。
           </>,
         );
       })
       .catch((e) => {
         setLoading(false);
-        notify.failure("ACL deletion failed", e);
+        notify.failure("删除 ACL 失败", e);
       });
   };
 
@@ -59,11 +59,11 @@ const DeleteNetworkAclBtn: FC<Props> = ({ networkAcl, project }) => {
 
   const getOnHoverText = () => {
     if (!canDeleteNetworkAcl(networkAcl)) {
-      return "You do not have permission to delete this ACL";
+      return "您没有权限删除此 ACL";
     }
 
     if (isUsed) {
-      return "Can not delete, ACL is currently in use";
+      return "无法删除，该 ACL 当前正在使用中";
     }
 
     return "";
@@ -73,15 +73,15 @@ const DeleteNetworkAclBtn: FC<Props> = ({ networkAcl, project }) => {
     <ConfirmationButton
       onHoverText={getOnHoverText()}
       confirmationModalProps={{
-        title: "Confirm delete",
+        title: "确认删除",
         confirmButtonAppearance: "negative",
-        confirmButtonLabel: "Delete",
+        confirmButtonLabel: "删除",
         children: (
           <p>
-            Are you sure you want to delete the ACL{" "}
-            <ResourceLabel type="network-acl" value={networkAcl.name} bold />?
+            确定要删除网络 ACL{" "}
+            <ResourceLabel type="network-acl" value={networkAcl.name} bold /> 吗？
             <br />
-            This action cannot be undone, and can result in data loss.
+            此操作无法撤销，并可能导致数据丢失。
           </p>
         ),
         onConfirm: handleDelete,
@@ -95,7 +95,7 @@ const DeleteNetworkAclBtn: FC<Props> = ({ networkAcl, project }) => {
       showShiftClickHint
     >
       {!isSmallScreen && <Icon name="delete" />}
-      <span>Delete ACL</span>
+      <span>删除 ACL</span>
     </ConfirmationButton>
   );
 };

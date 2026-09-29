@@ -10,10 +10,9 @@ const ProjectNotFound: FC = () => {
     <CustomLayout mainClassName="no-match">
       <Row>
         <Col size={6} className="col-start-large-4">
-          <h1 className="p-heading--4">Project not found</h1>
+          <h1 className="p-heading--4">项目未找到</h1>
           <p>
-            The project <code>{project}</code> is missing or you do not have
-            access.
+            项目 <code>{project}</code> 不存在或您没有访问权限。
           </p>
         </Col>
       </Row>

@@ -44,7 +44,7 @@ const EditNetworkForward: FC = () => {
 
   useEffect(() => {
     if (error) {
-      notify.failure("Loading network failed", error);
+      notify.failure("加载网络失败", error);
     }
   }, [error]);
 
@@ -114,12 +114,12 @@ const EditNetworkForward: FC = () => {
             `/ui/project/${encodeURIComponent(project ?? "")}/network/${encodeURIComponent(networkName ?? "")}/forwards`,
           );
           toastNotify.success(
-            `Network forward ${forward.listen_address} updated.`,
+            `网络转发 ${forward.listen_address} 更新成功。`,
           );
         })
         .catch((e) => {
           formik.setSubmitting(false);
-          notify.failure("Network forward update failed", e);
+          notify.failure("网络转发更新失败", e);
         });
     },
   });
@@ -129,9 +129,9 @@ const EditNetworkForward: FC = () => {
       title={
         <HelpLink
           docPath="/howto/network_forwards/"
-          title="Learn more about network forwards"
+          title="了解更多网络转发信息"
         >
-          Edit a network forward
+          编辑网络转发
         </HelpLink>
       }
       contentClassName="edit-network"
@@ -142,7 +142,7 @@ const EditNetworkForward: FC = () => {
           className="p-button--base"
           to={`/ui/project/${encodeURIComponent(project ?? "")}/network/${encodeURIComponent(networkName ?? "")}/forwards`}
         >
-          Cancel
+          取消
         </Link>
         <ActionButton
           appearance="positive"
@@ -154,7 +154,7 @@ const EditNetworkForward: FC = () => {
           }
           onClick={() => void formik.submitForm()}
         >
-          Update
+          保存更改
         </ActionButton>
       </FormFooterLayout>
     </BaseLayout>

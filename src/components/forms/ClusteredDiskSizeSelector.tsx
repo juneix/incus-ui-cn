@@ -52,11 +52,11 @@ const ClusteredDiskSizeSelector: FC<Props> = ({
 
   return (
     <div className="u-sv3">
-      <Label forId="sizePerClusterMember">Size</Label>
+      <Label forId="sizePerClusterMember">容量大小</Label>
       {
         <CheckboxInput
           id={`${id}-same-for-all-toggle`}
-          label="Same for all cluster members"
+          label="对所有集群成员使用相同大小"
           checked={!isSpecific}
           onChange={() => {
             setValueForAllMembers(firstValue);

@@ -46,11 +46,11 @@ const EditGroupPermissionsForm: FC<Props> = ({
 
   const getEditRestriction = () => {
     if (group && !canEditGroup(group)) {
-      return "You do not have permission to edit this group";
+      return "你没有权限编辑此用户组";
     }
 
     if (!canViewPermissions()) {
-      return "You are not allowed to view permissions";
+      return "你没有权限查看权限配置";
     }
 
     return "";
@@ -119,17 +119,17 @@ const EditGroupPermissionsForm: FC<Props> = ({
 
   const headers = [
     {
-      content: "Resource type",
+      content: "资源类型",
       sortKey: "resourceType",
       className: "resource-type",
     },
-    { content: "Resource", sortKey: "resource", className: "resource" },
+    { content: "资源", sortKey: "resource", className: "resource" },
     {
-      content: "Entitlement",
+      content: "操作权限",
       sortKey: "entitlement",
       className: "entitlement",
     },
-    { "aria-label": "Actions", className: "u-align--right actions" },
+    { "aria-label": "操作", className: "u-align--right actions" },
   ];
 
   const rows = sortedPermissions.map((permission) => {
@@ -146,20 +146,20 @@ const EditGroupPermissionsForm: FC<Props> = ({
           content: permission.entity_type,
           title: permission.entity_type,
           role: "rowheader",
-          "aria-label": "Resource type",
+          "aria-label": "资源类型",
           className: "resource-type",
         },
         {
           content: permission.resourceLabel,
           role: "cell",
-          "aria-label": "Resource",
+          "aria-label": "资源",
           className: "u-truncate resource",
           title: permission.resourceLabel,
         },
         {
           content: permission.entitlement,
           role: "cell",
-          "aria-label": "Entitlement",
+          "aria-label": "操作权限",
           className: "u-truncate entitlement",
           title: permission.entitlement,
         },
@@ -176,8 +176,8 @@ const EditGroupPermissionsForm: FC<Props> = ({
                     addPermission(permission);
                   }}
                   type="button"
-                  aria-label="Restore permission"
-                  title="Restore permission"
+                  aria-label="恢复权限"
+                  title="恢复权限"
                   className="u-no-margin--right"
                 >
                   <Icon name="restart" className="u-no-margin--right" />
@@ -191,8 +191,8 @@ const EditGroupPermissionsForm: FC<Props> = ({
                     deletePermission(permission.id ?? "");
                   }}
                   type="button"
-                  aria-label="Delete permission"
-                  title={getEditRestriction() ?? "Delete permission"}
+                  aria-label="删除权限"
+                  title={getEditRestriction() ?? "删除权限"}
                   className="u-no-margin--right"
                   disabled={!!getEditRestriction()}
                 >
@@ -205,12 +205,12 @@ const EditGroupPermissionsForm: FC<Props> = ({
                   "hide-modified-status": !isModified,
                 })}
                 aria-hidden={!isModified}
-                aria-label="Permission modified"
+                aria-label="权限已修改"
               />
             </>
           ),
           role: "cell",
-          "aria-label": "Delete permission",
+          "aria-label": "删除权限",
         },
       ],
       sortData: {
@@ -228,12 +228,10 @@ const EditGroupPermissionsForm: FC<Props> = ({
     >
       <Card>
         <strong>
-          <p className="u-no-margin--bottom">Add permissions</p>
+          <p className="u-no-margin--bottom">添加权限</p>
         </strong>
         <span>
-          Entitlements need to be given in relation to a specific resource.
-          Select the appropriate resource and entitlement below and add it to
-          the list of permissions for this group.
+          操作权限需针对特定资源授予。请在下方选择相应的资源和操作权限，并将其添加到该组的权限列表中。
         </span>
         <PermissionSelector
           onAddPermission={addPermission}
@@ -245,9 +243,9 @@ const EditGroupPermissionsForm: FC<Props> = ({
         <EmptyState
           className="empty-state empty-state__full-width"
           image={<Icon name="plans" className="empty-state-icon" />}
-          title="No permissions"
+          title="暂无权限"
         >
-          <p>Select a permission above and add to the group</p>
+          <p>在上方选择权限并添加到用户组</p>
         </EmptyState>
       ) : (
         <MainTable
@@ -255,7 +253,7 @@ const EditGroupPermissionsForm: FC<Props> = ({
           headers={headers}
           sortable
           responsive
-          emptyStateMsg={"No permissions match the search criteria."}
+          emptyStateMsg={"没有匹配搜索条件的权限。"}
           rows={rows}
           className="permissions-table"
         />

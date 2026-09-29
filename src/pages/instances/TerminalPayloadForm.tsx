@@ -148,20 +148,20 @@ const TerminalPayloadForm: FC<Props> = ({
             aria-label="cancel reconnect"
             onClick={close}
           >
-            Cancel
+            取消
           </Button>
           <Button
             className="u-no-margin--bottom"
             type="button"
-            title="Save as default for this instance"
+            title="保存为此实例的默认设置"
             onClick={handleSaveDefaults}
           >
-            Save as default
+            保存为默认设置
           </Button>
           <ActionButton
             className="u-no-margin--bottom"
             appearance="positive"
-            aria-label="submit reconnect"
+            aria-label="重新连接"
             onClick={() => void formik.submitForm()}
           >
             重新连接
@@ -259,11 +259,11 @@ const TerminalPayloadForm: FC<Props> = ({
           ))}
           <div ref={ref}>
             <Button
-              aria-label="add variable"
+              aria-label="添加环境变量"
               onClick={addEnvironmentRow}
               type="button"
             >
-              <span>Add variable</span>
+              <span>添加变量</span>
             </Button>
           </div>
         </div>

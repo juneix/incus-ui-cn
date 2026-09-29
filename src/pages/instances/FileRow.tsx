@@ -69,8 +69,8 @@ const FileRow: FC<FileRowProps> = ({ instance, path }) => {
           aria-hidden={!isOpen}
         >
           <code>
-            {isLoading && <>Downloading file content...</>}
-            {isSuccess && !logContent && <>This file is empty.</>}
+            {isLoading && <>正在下载文件内容...</>}
+            {isSuccess && !logContent && <>此文件为空。</>}
             {isSuccess && logContent && <>{logContent}</>}
           </code>
         </pre>

@@ -41,8 +41,8 @@ const InstanceEditSnapshotBtn: FC<Props> = ({
         disabled={isDeleting || isRestoring || !!disabledReason}
         onClick={openPortal}
         type="button"
-        aria-label="Edit snapshot"
-        title={disabledReason ?? "Edit"}
+        aria-label="编辑快照"
+        title={disabledReason ?? "编辑"}
       >
         <Icon name="edit" />
       </Button>

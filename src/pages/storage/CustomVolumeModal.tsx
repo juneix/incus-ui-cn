@@ -44,16 +44,16 @@ const CustomVolumeModal: FC<Props> = ({
     setContent(SELECT_VOLUME);
   };
 
-  let modalTitle = title ?? "Choose custom volume";
+  let modalTitle = title ?? "选择自定义卷";
   if (content === CREATE_VOLUME) {
     modalTitle = title ? (
       <BackLink
-        title="Create volume"
+        title="创建卷"
         onClick={handleGoBack}
-        linkText="Attach custom volume"
+        linkText="附加自定义卷"
       />
     ) : (
-      "Create volume"
+      "创建卷"
     );
   }
 

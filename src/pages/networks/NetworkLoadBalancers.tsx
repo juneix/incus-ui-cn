@@ -49,17 +49,17 @@ const NetworkLoadBalancers: FC<Props> = ({ network, project }) => {
   });
 
   if (error) {
-    notify.failure("Loading network load balancers failed", error);
+    notify.failure("加载网络负载均衡失败", error);
   }
 
   const hasNetworkLoadBalancers = loadBalancers.length > 0;
 
   const headers = [
-    { content: "Listen address", sortKey: "listenAddress" },
-    { content: "Description", sortKey: "description" },
-    { content: "Ports" },
+    { content: "监听地址", sortKey: "listenAddress" },
+    { content: "描述", sortKey: "description" },
+    { content: "端口" },
     {
-      "aria-label": "Actions",
+      "aria-label": "操作",
       className: "u-align--right actions",
     },
   ];
@@ -71,12 +71,12 @@ const NetworkLoadBalancers: FC<Props> = ({ network, project }) => {
         {
           content: loadBalancer.listen_address,
           role: "rowheader",
-          "aria-label": "Listen address",
+          "aria-label": "监听地址",
         },
         {
           content: loadBalancer.description,
           role: "cell",
-          "aria-label": "Description",
+          "aria-label": "描述",
         },
         {
           content: (
@@ -89,7 +89,7 @@ const NetworkLoadBalancers: FC<Props> = ({ network, project }) => {
             />
           ),
           role: "cell",
-          "aria-label": "Forwarded ports",
+          "aria-label": "转发端口",
         },
         {
           content: (
@@ -98,7 +98,7 @@ const NetworkLoadBalancers: FC<Props> = ({ network, project }) => {
                 <Link
                   className="p-button--base u-no-margin--bottom has-icon"
                   to={`/ui/project/${encodeURIComponent(project)}/network/${encodeURIComponent(network.name)}/load-balancers/${encodeURIComponent(loadBalancer.listen_address)}/edit`}
-                  title="Edit network load balancer"
+                  title="编辑网络负载均衡"
                 >
                   <Icon name="edit" />
                 </Link>
@@ -111,7 +111,7 @@ const NetworkLoadBalancers: FC<Props> = ({ network, project }) => {
                   dense
                   hasIcon
                   type="button"
-                  title="You do not have permission to edit load balancers for this network"
+                  title="您没有权限编辑此网络上的负载均衡"
                   disabled
                 >
                   <Icon name="edit" />
@@ -127,7 +127,7 @@ const NetworkLoadBalancers: FC<Props> = ({ network, project }) => {
           ),
           role: "cell",
           className: "u-align--right actions",
-          "aria-label": "Actions",
+          "aria-label": "操作",
         },
       ],
       sortData: {
@@ -138,7 +138,7 @@ const NetworkLoadBalancers: FC<Props> = ({ network, project }) => {
   });
 
   if (isLoading) {
-    return <Spinner className="u-loader" text="Loading instance preview..." isMainComponent />;
+    return <Spinner className="u-loader" text="正在加载..." isMainComponent />;
   }
 
   return (
@@ -148,7 +148,7 @@ const NetworkLoadBalancers: FC<Props> = ({ network, project }) => {
           className="p-button--positive u-no-margin--bottom u-float-right"
           to={`/ui/project/${encodeURIComponent(project)}/network/${encodeURIComponent(network.name)}/load-balancers/create`}
         >
-          Create load balancer
+          创建负载均衡
         </Link>
       )}
       {!canEditNetwork(network) && (
@@ -156,9 +156,9 @@ const NetworkLoadBalancers: FC<Props> = ({ network, project }) => {
           appearance="positive"
           className="u-float-right u-no-margin--bottom"
           disabled
-          title="You do not have permission to create network load balancers for this network"
+          title="您没有权限为此网络创建负载均衡"
         >
-          <span>Create load balancer</span>
+          <span>创建负载均衡</span>
         </Button>
       )}
       <Row>
@@ -178,7 +178,7 @@ const NetworkLoadBalancers: FC<Props> = ({ network, project }) => {
               defaultSort="listenAddress"
               defaultSortDirection="ascending"
               className="u-table-layout--auto network-load-balancers-table"
-              emptyStateMsg="No data to display"
+              emptyStateMsg="暂无数据"
             />
           </ScrollableTable>
         )}
@@ -186,16 +186,16 @@ const NetworkLoadBalancers: FC<Props> = ({ network, project }) => {
           <EmptyState
             className="empty-state"
             image={<Icon className="empty-state-icon" name="exposed" />}
-            title="No network load balancers found"
+            title="未找到网络负载均衡"
           >
-            <p>There are no network load balancers in this project.</p>
+            <p>该网络下没有负载均衡。</p>
             <p>
               <a
                 href={`${docBaseLink}/howto/network_load_balancers/`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Learn more about network load balancers
+                了解更多关于网络负载均衡的信息
                 <Icon className="external-link-icon" name="external-link" />
               </a>
             </p>

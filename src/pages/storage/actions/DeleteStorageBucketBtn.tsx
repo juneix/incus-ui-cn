@@ -39,8 +39,8 @@ const DeleteStorageBucketBtn: FC<Props> = ({
     navigate(`/ui/project/${project?.name}/storage/buckets`);
     toastNotify.success(
       <>
-        Storage bucket <ResourceLabel bold type="bucket" value={bucket.name} />{" "}
-        deleted.
+        存储桶 <ResourceLabel bold type="bucket" value={bucket.name} />{" "}
+        已删除。
       </>,
     );
   };
@@ -50,7 +50,7 @@ const DeleteStorageBucketBtn: FC<Props> = ({
     deleteStorageBucket(bucket.name, bucket.pool, projectName)
       .then(onFinish)
       .catch((e) => {
-        notify.failure("Storage bucket deletion failed", e);
+        notify.failure("存储桶删除失败", e);
       })
       .finally(() => {
         setLoading(false);
@@ -64,15 +64,15 @@ const DeleteStorageBucketBtn: FC<Props> = ({
     <ConfirmationButton
       loading={isLoading}
       confirmationModalProps={{
-        title: "Confirm delete",
+        title: "确认删除",
         children: (
           <p>
-            This will permanently delete bucket{" "}
-            <ResourceLabel type="bucket" value={bucket.name} bold />.<br />
-            This action cannot be undone, and can result in data loss.
+            此操作将永久删除存储桶{" "}
+            <ResourceLabel type="bucket" value={bucket.name} bold />。<br />
+            此操作无法撤销，并可能导致数据丢失。
           </p>
         ),
-        confirmButtonLabel: "Delete",
+        confirmButtonLabel: "删除",
         onConfirm: handleDelete,
       }}
       appearance={isDetailPage ? "default" : "base"}
@@ -82,12 +82,12 @@ const DeleteStorageBucketBtn: FC<Props> = ({
       disabled={!canDeleteBucket(bucket)}
       onHoverText={
         canDeleteBucket(bucket)
-          ? "Delete bucket"
-          : "You do not have permission to delete this bucket."
+          ? "删除存储桶"
+          : "您没有权限删除此存储桶。"
       }
     >
       <Icon name="delete" />
-      {isDetailPage && <span>Delete</span>}
+      {isDetailPage && <span>删除</span>}
     </ConfirmationButton>
   );
 };

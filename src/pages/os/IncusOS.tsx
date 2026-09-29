@@ -15,13 +15,13 @@ import OSStorage from "./OSStorage";
 import ClusterMemberSelector from "pages/cluster/ClusterMemberSelector";
 import OSActions from "pages/os/actions/OSActions";
 
-const tabs: string[] = [
-  "Overview",
-  "Logs",
-  "Network",
-  "Storage",
-  "Security",
-  "Services",
+const tabs: TabLink[] = [
+  { label: "概览", path: "overview" },
+  { label: "日志", path: "logs" },
+  { label: "网络", path: "network" },
+  { label: "存储", path: "storage" },
+  { label: "安全", path: "security" },
+  { label: "服务", path: "services" },
 ];
 
 const IncusOS: FC = () => {
@@ -62,43 +62,43 @@ const IncusOS: FC = () => {
         <TabLinks tabs={renderTabs} activeTab={activeTab} tabUrl={`/ui/os`} />
 
         {!activeTab && (
-          <div role="tabpanel" aria-labelledby="overview">
+          <div role="tabpanel" aria-labelledby="概览">
             <OSOverview target={currentMember} />
           </div>
         )}
 
         {activeTab === "logs" && (
-          <div role="tabpanel" aria-labelledby="logs">
+          <div role="tabpanel" aria-labelledby="日志">
             <OSLogs target={currentMember} />
           </div>
         )}
 
         {activeTab === "network" && (
-          <div role="tabpanel" aria-labelledby="network">
+          <div role="tabpanel" aria-labelledby="网络">
             <OSNetwork target={currentMember} />
           </div>
         )}
 
         {activeTab === "storage" && (
-          <div role="tabpanel" aria-labelledby="storage">
+          <div role="tabpanel" aria-labelledby="存储">
             <OSStorage target={currentMember} />
           </div>
         )}
 
         {activeTab === "security" && (
-          <div role="tabpanel" aria-labelledby="security">
+          <div role="tabpanel" aria-labelledby="安全">
             <OSSecurity target={currentMember} />
           </div>
         )}
 
         {activeTab === "services" && !itemName && (
-          <div role="tabpanel" aria-labelledby="services">
+          <div role="tabpanel" aria-labelledby="服务">
             <OSServices target={currentMember} />
           </div>
         )}
 
         {activeTab === "services" && itemName && (
-          <div role="tabpanel" aria-labelledby="services">
+          <div role="tabpanel" aria-labelledby="服务">
             <OSServiceDetails name={itemName} target={currentMember} />
           </div>
         )}

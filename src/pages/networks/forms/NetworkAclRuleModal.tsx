@@ -50,21 +50,30 @@ const NetworkAclRuleModal: FC<Props> = ({
     },
   });
 
+  const titleText =
+    direction === "ingress"
+      ? editRule
+        ? "更新入站规则"
+        : "添加入站规则"
+      : editRule
+        ? "更新出站规则"
+        : "添加出站规则";
+
   return (
     <Modal
       close={onClose}
-      title={editRule ? `Update ${direction} rule` : `Add ${direction} rule`}
+      title={titleText}
       buttonRow={
         <>
           <Button className="u-no-margin--bottom" onClick={onClose}>
-            Cancel
+            取消
           </Button>
           <Button
             appearance="positive"
             className="u-no-margin--bottom"
             onClick={formik.submitForm}
           >
-            {editRule ? "Update rule" : "Add rule"}
+            {editRule ? "更新规则" : "添加规则"}
           </Button>
         </>
       }
@@ -74,37 +83,37 @@ const NetworkAclRuleModal: FC<Props> = ({
         <Input type="submit" hidden value="Hidden input" />
         <Select
           id="action"
-          label="Action"
+          label="动作"
           options={[
-            { label: "Allow", value: "allow" },
-            { label: "Reject", value: "reject" },
-            { label: "Drop", value: "drop" },
+            { label: "允许 (Allow)", value: "allow" },
+            { label: "拒绝 (Reject)", value: "reject" },
+            { label: "丢弃 (Drop)", value: "drop" },
           ]}
           {...formik.getFieldProps("action")}
         />
         <Select
           id="state"
-          label="State"
+          label="状态"
           options={[
-            { label: "Enabled", value: "enabled" },
-            { label: "Disabled", value: "disabled" },
-            { label: "Logged", value: "logged" },
+            { label: "已启用 (Enabled)", value: "enabled" },
+            { label: "已禁用 (Disabled)", value: "disabled" },
+            { label: "已记录日志 (Logged)", value: "logged" },
           ]}
-          help="Possible values are enabled, disabled, and logged."
+          help="可选值：已启用 (enabled)、已禁用 (disabled)、已记录日志 (logged)。"
           {...formik.getFieldProps("state")}
         />
         <Input
           id="description"
-          label="Description"
+          label="描述"
           type="text"
-          placeholder="Enter description"
+          placeholder="输入描述"
           {...formik.getFieldProps("description")}
         />
         <Select
           id="protocol"
-          label="Protocol"
+          label="协议"
           options={[
-            { label: "Any", value: "" },
+            { label: "任意 (Any)", value: "" },
             { label: "ICMP4", value: "icmp4" },
             { label: "ICMP6", value: "icmp6" },
             { label: "TCP", value: "tcp" },
@@ -126,37 +135,37 @@ const NetworkAclRuleModal: FC<Props> = ({
         />
         <Input
           id="source"
-          label="Source"
-          placeholder="Enter source"
+          label="源地址"
+          placeholder="输入源地址"
           type="text"
-          help="Sources can be specified as CIDR or IP ranges, source subject name selectors (for ingress rules), or be left empty for any."
+          help="源地址可以指定为 CIDR 或 IP 范围、源主体名称选择器（针对入站规则），留空表示任意。"
           {...formik.getFieldProps("source")}
         />
         {["tcp", "udp"].includes(formik.values.protocol ?? "") && (
           <Input
             id="source_port"
-            label="Source port"
-            placeholder="Enter source port"
+            label="源端口"
+            placeholder="输入源端口"
             type="text"
-            help="Specify a comma-separated list of ports or port ranges (start-end inclusive), or leave the value empty for any."
+            help="指定以逗号分隔的端口或端口范围（如 80,90-99），留空表示任意。"
             {...formik.getFieldProps("source_port")}
           />
         )}
         <Input
           id="destination"
-          label="Destination"
-          placeholder="Enter destination"
+          label="目标地址"
+          placeholder="输入目标地址"
           type="text"
-          help="Destinations can be specified as CIDR or IP ranges, destination subject name selectors (for egress rules), or be left empty for any."
+          help="目标地址可以指定为 CIDR 或 IP 范围、目标主体名称选择器（针对出站规则），留空表示任意。"
           {...formik.getFieldProps("destination")}
         />
         {["tcp", "udp"].includes(formik.values.protocol ?? "") && (
           <Input
             id="destination_port"
-            label="Destination port"
-            placeholder="Enter destination port"
+            label="目标端口"
+            placeholder="输入目标端口"
             type="text"
-            help="Specify a comma-separated list of ports or port ranges (start-end inclusive), or leave the value empty for any."
+            help="指定以逗号分隔的端口或端口范围（如 80,90-99），留空表示任意。"
             {...formik.getFieldProps("destination_port")}
           />
         )}
@@ -164,18 +173,18 @@ const NetworkAclRuleModal: FC<Props> = ({
           <>
             <Input
               id="icmp_code"
-              label="ICMP code"
-              placeholder="Enter ICMP code"
+              label="ICMP 代码"
+              placeholder="输入 ICMP 代码"
               type="text"
-              help="Specify the ICMP code number, or leave the value empty for any."
+              help="指定 ICMP 代码编号，留空表示任意。"
               {...formik.getFieldProps("icmp_code")}
             />
             <Input
               id="icmp_type"
-              label="ICMP type"
-              placeholder="Enter ICMP type"
+              label="ICMP 类型"
+              placeholder="输入 ICMP 类型"
               type="text"
-              help="Specify the ICMP type number, or leave the value empty for any."
+              help="指定 ICMP 类型编号，留空表示任意。"
               {...formik.getFieldProps("icmp_type")}
             />
           </>

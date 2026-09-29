@@ -34,22 +34,22 @@ const CustomIsoList: FC = () => {
   }>();
 
   if (!project) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
 
   const { data: images = [], isLoading } = useLoadIsoVolumes(project);
 
   const headers = [
-    { content: "Name", sortKey: "name" },
-    { content: "Storage pool", sortKey: "storagePool", className: "pool" },
-    { content: "Upload date", sortKey: "uploadedAt", className: "uploaded_at" },
-    { content: "Size", sortKey: "size", className: "u-align--right size" },
+    { content: "名称", sortKey: "name" },
+    { content: "存储池", sortKey: "storagePool", className: "pool" },
+    { content: "上传时间", sortKey: "uploadedAt", className: "uploaded_at" },
+    { content: "大小", sortKey: "size", className: "u-align--right size" },
     {
-      content: "Used by",
+      content: "使用中",
       sortKey: "usedBy",
       className: "u-align--right used_by",
     },
-    { "aria-label": "Actions", className: "actions" },
+    { "aria-label": "操作", className: "actions" },
   ];
 
   const filteredImages = images.filter(
@@ -75,9 +75,9 @@ const CustomIsoList: FC = () => {
             onFinish={() =>
               toastNotify.success(
                 <>
-                  Custom iso{" "}
+                  自定义 ISO{" "}
                   <ResourceLabel bold type="iso-volume" value={image.aliases} />{" "}
-                  deleted.
+                  已删除。
                 </>,
               )
             }
@@ -92,7 +92,7 @@ const CustomIsoList: FC = () => {
         {
           content: image.aliases,
           role: "rowheader",
-          "aria-label": "Name",
+          "aria-label": "名称",
         },
         {
           content: (
@@ -105,13 +105,13 @@ const CustomIsoList: FC = () => {
             </div>
           ),
           role: "cell",
-          "aria-label": "Storage pool",
+          "aria-label": "存储池",
           className: "pool",
         },
         {
           content: isoTimeToString(new Date(image.created_at).toISOString()),
           role: "cell",
-          "aria-label": "Uploaded at",
+          "aria-label": "上传时间",
           className: "uploaded_at",
         },
         {
@@ -119,19 +119,19 @@ const CustomIsoList: FC = () => {
             image.volume?.config.size &&
             humanFileSize(+image.volume.config.size),
           role: "cell",
-          "aria-label": "Size",
+          "aria-label": "大小",
           className: "u-align--right size",
         },
         {
           content: image.volume?.used_by?.length ?? 0,
           role: "cell",
-          "aria-label": "Used by",
+          "aria-label": "使用中",
           className: "u-align--right used_by",
         },
         {
           content: actions,
           role: "cell",
-          "aria-label": "Actions",
+          "aria-label": "操作",
           className: "u-align--right actions",
         },
       ],
@@ -148,7 +148,7 @@ const CustomIsoList: FC = () => {
   const { rows: sortedRows, updateSort } = useSortTableData({ rows });
 
   if (isLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="加载中..." isMainComponent />;
   }
 
   const hasImages = images.length !== 0;
@@ -157,15 +157,15 @@ const CustomIsoList: FC = () => {
     <EmptyState
       className="empty-state"
       image={<Icon name="iso" className="empty-state-icon" />}
-      title="No custom ISOs found in this project"
+      title="当前项目中未找到自定义 ISO"
     >
-      <p>Custom ISOs will appear here</p>
+      <p>上传的自定义 ISO 将显示在此处</p>
       <p>
         <DocLink
           docPath="/howto/instances_create/#instances-create-iso"
           hasExternalIcon
         >
-          Learn how to create a VM that boots from an ISO
+          了解如何创建从 ISO 启动的虚拟机
         </DocLink>
       </p>
       <UploadCustomIsoBtn
@@ -183,9 +183,9 @@ const CustomIsoList: FC = () => {
         <TablePagination
           data={sortedRows}
           id="pagination"
-          itemName="custom ISO"
+          itemName="个自定义 ISO"
           className="u-no-margin--top"
-          aria-label="Table pagination control"
+          aria-label="表格分页控件"
         >
           <MainTable
             id="custom-iso-table"
@@ -193,7 +193,7 @@ const CustomIsoList: FC = () => {
             sortable
             className="custom-iso-table"
             onUpdateSort={updateSort}
-            emptyStateMsg="No custom ISOs found matching this search"
+            emptyStateMsg="未找到匹配的自定义 ISO"
           />
         </TablePagination>
       </ScrollableTable>
@@ -209,9 +209,9 @@ const CustomIsoList: FC = () => {
             <PageHeader.Title>
               <HelpLink
                 docPath="/howto/instances_create/#instances-create-iso"
-                title="Learn how to create a VM that boots from an ISO"
+                title="了解如何创建从 ISO 启动的虚拟机"
               >
-                Custom ISOs
+                自定义 ISO
               </HelpLink>
             </PageHeader.Title>
             {hasImages && (
@@ -224,9 +224,9 @@ const CustomIsoList: FC = () => {
                     onChange={(value) => {
                       setQuery(value);
                     }}
-                    placeholder="Search for custom ISOs"
+                    placeholder="搜索自定义 ISO"
                     value={query}
-                    aria-label="Search for custom ISOs"
+                    aria-label="搜索自定义 ISO"
                   />
                 </div>
               </PageHeader.Search>

@@ -100,14 +100,14 @@ const CreateProfile: FC = () => {
   const [section, setSection] = useState(MAIN_CONFIGURATION);
 
   if (!project) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
 
   const ProfileSchema = Yup.object().shape({
     name: Yup.string()
       .test(
         "deduplicate",
-        "A profile with this name already exists",
+        "已存在同名的配置模板",
         async (value) =>
           checkDuplicateName(value, project, controllerState, "profiles"),
       )
@@ -139,19 +139,19 @@ const CreateProfile: FC = () => {
           navigate(`/ui/project/${encodeURIComponent(project)}/profiles`);
           toastNotify.success(
             <>
-              Profile{" "}
+              配置模板{" "}
               <ResourceLink
                 type="profile"
                 value={values.name}
                 to={`/ui/project/${encodeURIComponent(project)}/profile/${encodeURIComponent(values.name)}`}
               />{" "}
-              created.
+              已创建。
             </>,
           );
         })
         .catch((e: Error) => {
           formik.setSubmitting(false);
-          notify.failure("Profile creation failed", e);
+          notify.failure("创建配置模板失败", e);
         })
         .finally(() => {
           queryClient.invalidateQueries({
@@ -193,7 +193,7 @@ const CreateProfile: FC = () => {
   }
 
   return (
-    <BaseLayout title="Create a profile" contentClassName="create-profile">
+    <BaseLayout title="创建配置模板" contentClassName="create-profile">
       <Form onSubmit={formik.handleSubmit} className="form">
         {section !== YAML_CONFIGURATION && (
           <ProfileFormMenu
@@ -266,7 +266,7 @@ const CreateProfile: FC = () => {
             disableReason={
               formik.values.name
                 ? undefined
-                : "Please enter a profile name before adding custom configuration"
+                : "请先输入配置模板名称，再添加自定义配置"
             }
           />
         </div>
@@ -276,7 +276,7 @@ const CreateProfile: FC = () => {
             navigate(`/ui/project/${encodeURIComponent(project)}/profiles`)
           }
         >
-          Cancel
+          取消
         </Button>
         <ActionButton
           appearance="positive"
@@ -290,7 +290,7 @@ const CreateProfile: FC = () => {
           }
           onClick={() => void formik.submitForm()}
         >
-          Create
+          创建
         </ActionButton>
       </FormFooterLayout>
     </BaseLayout>

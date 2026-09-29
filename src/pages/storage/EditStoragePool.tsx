@@ -52,7 +52,7 @@ const EditStoragePool: FC<Props> = ({ pool }) => {
   const { canEditPool } = useStoragePoolEntitlements();
 
   if (!project) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
 
   const { data: poolOnMembers = [], error } = usePoolFromClusterMembers(
@@ -61,7 +61,7 @@ const EditStoragePool: FC<Props> = ({ pool }) => {
 
   useEffect(() => {
     if (error) {
-      notify.failure("Loading storage pool from cluster members failed", error);
+      notify.failure("从集群成员加载存储池失败", error);
     }
   }, [error]);
 
@@ -69,17 +69,17 @@ const EditStoragePool: FC<Props> = ({ pool }) => {
     name: Yup.string()
       .test(
         "deduplicate",
-        "A pool with this name already exists",
+        "该存储池名称已存在",
         async (value) =>
           value === pool.name ||
           checkDuplicateName(value, project, controllerState, `storage-pools`),
       )
-      .required("This field is required"),
+      .required("此项为必填项"),
   });
 
   const editRestriction = canEditPool(pool)
     ? undefined
-    : "You do not have permission to edit this pool";
+    : "你没有编辑此存储池的权限";
 
   const formik = useFormik<StoragePoolFormValues>({
     initialValues: toStoragePoolFormValues(
@@ -110,18 +110,18 @@ const EditStoragePool: FC<Props> = ({ pool }) => {
         .then(() => {
           toastNotify.success(
             <>
-              Storage pool{" "}
+              存储池{" "}
               <ResourceLink
                 type="pool"
                 value={savedPool.name}
                 to={`/ui/project/${encodeURIComponent(project)}/storage/pool/${encodeURIComponent(savedPool.name)}`}
               />{" "}
-              updated.
+              更新成功。
             </>,
           );
         })
         .catch((e) => {
-          notify.failure("Storage pool update failed", e);
+          notify.failure("更新存储池失败", e);
         })
         .finally(() => {
           formik.setSubmitting(false);
@@ -185,7 +185,7 @@ const EditStoragePool: FC<Props> = ({ pool }) => {
                 );
               }}
             >
-              Cancel
+              取消
             </Button>
             <FormSubmitBtn
               formik={formik}

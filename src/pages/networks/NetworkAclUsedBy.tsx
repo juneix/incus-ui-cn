@@ -32,7 +32,7 @@ const NetworkAclUsedBy: FC<Props> = ({ networkAcl }) => {
       <tbody>
         <tr>
           <th className="u-text--muted">
-            Instances ({data[INSTANCES].length})
+            实例 ({data[INSTANCES].length})
           </th>
           <td>
             <ExpandableList
@@ -49,7 +49,7 @@ const NetworkAclUsedBy: FC<Props> = ({ networkAcl }) => {
           </td>
         </tr>
         <tr>
-          <th className="u-text--muted">Profiles ({data[PROFILES].length})</th>
+          <th className="u-text--muted">配置模板 ({data[PROFILES].length})</th>
           <td>
             <ExpandableList
               items={data[PROFILES].map((item) => (
@@ -65,7 +65,7 @@ const NetworkAclUsedBy: FC<Props> = ({ networkAcl }) => {
           </td>
         </tr>
         <tr>
-          <th className="u-text--muted">Networks ({data[NETWORKS].length})</th>
+          <th className="u-text--muted">网络 ({data[NETWORKS].length})</th>
           <td>
             <ExpandableList
               items={data[NETWORKS].map((item) => (

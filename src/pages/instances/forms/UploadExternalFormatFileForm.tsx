@@ -285,24 +285,24 @@ const UploadExternalFormatFileForm: FC<Props> = ({
         <Select
           {...formik.getFieldProps("architecture")}
           id="architecture"
-          label="Image architecture"
+          label="镜像架构"
           options={archOptions}
           disabled={!!noFileSelectedMessage}
           title={noFileSelectedMessage}
         />
-        <label htmlFor="">Conversion options</label>
+        <label htmlFor="">转换选项</label>
         <Input
           {...formik.getFieldProps("formatConversion")}
           type="checkbox"
           label={
             <span title={noFileSelectedMessage}>
-              Convert to raw format{" "}
+              转换为 raw 格式{" "}
               <Icon
                 name="information"
                 title={
                   noFileSelectedMessage
                     ? noFileSelectedMessage
-                    : "Can be skipped if the image is already in raw format to speed up the import."
+                    : "若镜像已是 raw 格式，可跳过以加快导入速度。"
                 }
               />
             </span>
@@ -315,13 +315,13 @@ const UploadExternalFormatFileForm: FC<Props> = ({
           type="checkbox"
           label={
             <span title={noFileSelectedMessage}>
-              Add Virtio drivers{" "}
+              添加 Virtio 驱动{" "}
               <Icon
                 name="information"
                 title={
                   noFileSelectedMessage
                     ? noFileSelectedMessage
-                    : "Mandatory, if the image does not have Virtio drivers installed."
+                    : "若镜像未安装 Virtio 驱动，则必须勾选此项。"
                 }
               />
             </span>
@@ -337,7 +337,7 @@ const UploadExternalFormatFileForm: FC<Props> = ({
           type="button"
           onClick={handleCloseModal}
         >
-          Cancel
+          取消
         </Button>
         <ActionButton
           appearance="positive"
@@ -351,7 +351,7 @@ const UploadExternalFormatFileForm: FC<Props> = ({
           }
           onClick={() => void formik.submitForm()}
         >
-          Upload and create
+          上传并创建
         </ActionButton>
       </footer>
     </>

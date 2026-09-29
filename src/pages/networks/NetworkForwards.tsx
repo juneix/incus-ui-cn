@@ -50,29 +50,29 @@ const NetworkForwards: FC<Props> = ({ network, project }) => {
   });
 
   if (error) {
-    notify.failure("Loading network forwards failed", error);
+    notify.failure("加载网络转发失败", error);
   }
 
   const hasNetworkForwards = forwards.length > 0;
 
   const headers = [
-    { content: "Listen address", sortKey: "listenAddress" },
-    { content: "Description", sortKey: "description" },
+    { content: "监听地址", sortKey: "listenAddress" },
+    { content: "描述", sortKey: "description" },
     {
-      content: "Default target address",
+      content: "默认目标地址",
       sortKey: "defaultTarget",
     },
-    { content: "Ports" },
+    { content: "端口" },
     ...(isClusterMemberSpecific
       ? [
           {
-            content: "Location",
+            content: "位置",
             sortKey: "location",
           },
         ]
       : []),
     {
-      "aria-label": "Actions",
+      "aria-label": "操作",
       className: "u-align--right actions",
     },
   ];
@@ -84,17 +84,17 @@ const NetworkForwards: FC<Props> = ({ network, project }) => {
         {
           content: forward.listen_address,
           role: "rowheader",
-          "aria-label": "Listen address",
+          "aria-label": "监听地址",
         },
         {
           content: forward.description,
           role: "cell",
-          "aria-label": "Description",
+          "aria-label": "描述",
         },
         {
           content: forward.config.target_address,
           role: "cell",
-          "aria-label": "Default target address",
+          "aria-label": "默认目标地址",
         },
         {
           content: (
@@ -105,7 +105,7 @@ const NetworkForwards: FC<Props> = ({ network, project }) => {
             />
           ),
           role: "cell",
-          "aria-label": "Forwarded ports",
+          "aria-label": "转发端口",
         },
         ...(isClusterMemberSpecific
           ? [
@@ -132,7 +132,7 @@ const NetworkForwards: FC<Props> = ({ network, project }) => {
                       ? `/ui/project/${encodeURIComponent(project)}/network/${encodeURIComponent(network.name)}/member/${encodeURIComponent(forward.location ?? "")}/forwards/${encodeURIComponent(forward.listen_address)}/edit`
                       : `/ui/project/${encodeURIComponent(project)}/network/${encodeURIComponent(network.name)}/forwards/${encodeURIComponent(forward.listen_address)}/edit`
                   }
-                  title="Edit network forward"
+                  title="编辑网络转发"
                 >
                   <Icon name="edit" />
                 </Link>
@@ -145,7 +145,7 @@ const NetworkForwards: FC<Props> = ({ network, project }) => {
                   dense
                   hasIcon
                   type="button"
-                  title="You do not have permission to edit forwards for this network"
+                  title="您没有权限编辑此网络的前向转发"
                   disabled
                 >
                   <Icon name="edit" />
@@ -161,7 +161,7 @@ const NetworkForwards: FC<Props> = ({ network, project }) => {
           ),
           role: "cell",
           className: "u-align--right actions",
-          "aria-label": "Actions",
+          "aria-label": "操作",
         },
       ],
       sortData: {
@@ -174,7 +174,7 @@ const NetworkForwards: FC<Props> = ({ network, project }) => {
   });
 
   if (isLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="正在加载..." isMainComponent />;
   }
 
   return (
@@ -184,7 +184,7 @@ const NetworkForwards: FC<Props> = ({ network, project }) => {
           className="p-button--positive u-no-margin--bottom u-float-right"
           to={`/ui/project/${encodeURIComponent(project)}/network/${encodeURIComponent(network.name)}/forwards/create`}
         >
-          Create forward
+          创建转发
         </Link>
       )}
       {!canEditNetwork(network) && (
@@ -192,9 +192,9 @@ const NetworkForwards: FC<Props> = ({ network, project }) => {
           appearance="positive"
           className="u-float-right u-no-margin--bottom"
           disabled
-          title="You do not have permission to create network forwards for this network"
+          title="您没有权限为此网络创建前向转发"
         >
-          <span>Create forward</span>
+          <span>创建转发</span>
         </Button>
       )}
       <Row>
@@ -214,7 +214,7 @@ const NetworkForwards: FC<Props> = ({ network, project }) => {
               defaultSort="listenAddress"
               defaultSortDirection="ascending"
               className="u-table-layout--auto network-forwards-table"
-              emptyStateMsg="No data to display"
+              emptyStateMsg="暂无数据"
             />
           </ScrollableTable>
         )}
@@ -222,12 +222,12 @@ const NetworkForwards: FC<Props> = ({ network, project }) => {
           <EmptyState
             className="empty-state"
             image={<Icon className="empty-state-icon" name="exposed" />}
-            title="No network forwards found"
+            title="未找到网络转发"
           >
-            <p>There are no network forwards in this project.</p>
+            <p>该网络下没有网络转发。</p>
             <p>
               <DocLink docPath="/howto/network_forwards/" hasExternalIcon>
-                Learn more about network forwards
+                了解更多关于网络转发的信息
               </DocLink>
             </p>
           </EmptyState>

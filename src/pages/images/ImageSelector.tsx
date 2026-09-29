@@ -298,33 +298,33 @@ const ImageSelector: FC<Props> = ({ onSelect, onClose }) => {
     });
 
   const headers = [
-    { content: "Distribution", sortKey: "os" },
-    { content: "Release", sortKey: "release" },
-    { content: "Variant", sortKey: "variant" },
-    { content: "Type", sortKey: "type" },
+    { content: "发行版", sortKey: "os" },
+    { content: "版本", sortKey: "release" },
+    { content: "变体", sortKey: "variant" },
+    { content: "类型", sortKey: "type" },
     {
-      content: "Alias",
+      content: "别名",
       sortKey: "alias",
       className: "u-hide--small u-hide--medium",
     },
     {
-      content: "Source",
+      content: "来源",
     },
     {
       className: "u-hide--small u-hide--medium",
-      content: "Cached",
+      content: "已缓存",
     },
     {
       className: "u-hide--small u-hide--medium",
       content: "",
-      "aria-label": "Actions",
+      "aria-label": "操作",
     },
   ];
 
   return (
     <Modal
       close={onClose}
-      title="Select base image"
+      title="选择基础镜像"
       className="image-select-modal"
     >
       <Row className="u-no-padding--left u-no-padding--right">
@@ -332,7 +332,7 @@ const ImageSelector: FC<Props> = ({ onSelect, onClose }) => {
           <div className="image-select-filters">
             <Select
               id="imageFilterDistribution"
-              label="Distribution"
+              label="发行版"
               name="distribution"
               onChange={(v) => {
                 setOs(v.target.value);
@@ -343,7 +343,7 @@ const ImageSelector: FC<Props> = ({ onSelect, onClose }) => {
             />
             <Select
               id="imageFilterRelease"
-              label="Release"
+              label="版本"
               name="release"
               onChange={(v) => {
                 setRelease(v.target.value);
@@ -357,14 +357,14 @@ const ImageSelector: FC<Props> = ({ onSelect, onClose }) => {
             />
             <Select
               id="imageFilterVariant"
-              label="Variant"
+              label="变体"
               name="variant"
               onChange={(v) => {
                 setVariant(v.target.value);
               }}
               options={[
                 {
-                  label: "Any",
+                  label: "全部",
                   value: ANY,
                 },
               ].concat(
@@ -381,7 +381,7 @@ const ImageSelector: FC<Props> = ({ onSelect, onClose }) => {
             />
             <Select
               id="imageFilterArchitecture"
-              label="Architecture"
+              label="架构"
               name="architecture"
               onChange={(v) => {
                 setArch(v.target.value);
@@ -396,7 +396,7 @@ const ImageSelector: FC<Props> = ({ onSelect, onClose }) => {
             />
             <Select
               id="imageFilterType"
-              label="Type"
+              label="类型"
               name="type"
               onChange={(v) => {
                 setType(
@@ -407,7 +407,7 @@ const ImageSelector: FC<Props> = ({ onSelect, onClose }) => {
               }}
               options={[
                 {
-                  label: "Any",
+                  label: "全部",
                   value: ANY,
                 },
                 ...instanceCreationTypes,
@@ -415,9 +415,9 @@ const ImageSelector: FC<Props> = ({ onSelect, onClose }) => {
               value={type ?? ""}
             />
             <CheckboxInput
-              aria-label="Only show cached images"
+              aria-label="仅显示已缓存的镜像"
               checked={hideRemote}
-              label="Show only cached images"
+              label="仅显示已缓存的镜像"
               onChange={() => {
                 setHideRemote((prev) => !prev);
               }}
@@ -437,7 +437,7 @@ const ImageSelector: FC<Props> = ({ onSelect, onClose }) => {
                   setOs("");
                   setRelease("");
                 }}
-                placeholder="Search an image"
+                placeholder="搜索镜像"
               />
             </div>
           </div>
@@ -451,9 +451,9 @@ const ImageSelector: FC<Props> = ({ onSelect, onClose }) => {
                 className="table-image-select"
                 emptyStateMsg={
                   isLoading ? (
-                    <Spinner className="u-loader" text="Loading images..." />
+                    <Spinner className="u-loader" text="正在加载镜像..." />
                   ) : (
-                    "No matching images found"
+                    "未找到匹配的镜像"
                   )
                 }
                 headers={headers}

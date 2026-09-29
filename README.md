@@ -13,7 +13,10 @@ Incus 是 LXD 的社区分支版本，二者均基于 LXC 项目。因为 Incus 
 
 ## 🚀 快速开始
 
-### Docker Compose
+### 运行方式
+
+#### 1. 默认免密直登（内网极简）
+只需将生成的客户端证书挂载到容器中，访问即可直接进入控制台管理，无需每次在浏览器导入证书或输入 Token：
 
 ```yaml
 services:
@@ -24,28 +27,39 @@ services:
     network_mode: host
     environment:
       port: 5566
+      backend: https://127.0.0.1:8443
       tls_verify: off
     volumes:
       - /opt/incus/cert:/run/incus:ro
 ```
 
-### 内网登录验证
+#### 2. 简易账号密码保护（可选）
+如果需要在公网或受限内网暴露，希望增加轻量访问控制，只需添加 `BASIC_AUTH_USER` 和 `BASIC_AUTH_PASS` 环境变量，容器将自动启用浏览器原生 HTTP Basic Auth 弹窗认证，零额外性能开销：
 
-```bash
-# 创建证书目录
-sudo mkdir -p /opt/incus/cert
-
-# 生成证书
-sudo openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
-  -keyout /opt/incus/cert/incus-ui.key \
-  -out /opt/incus/cert/incus-ui.crt \
-  -subj "/CN=incus-ui-cn"
-
-# 加入 Incus 信任列表
-sudo incus config trust add-certificate /opt/incus/cert/incus-ui.crt
+```yaml
+services:
+  incus-ui-cn:
+    image: ghcr.io/juneix/incus-ui-cn
+    container_name: incus-ui-cn
+    restart: always
+    network_mode: host
+    environment:
+      port: 5566
+      backend: https://127.0.0.1:8443
+      tls_verify: off
+      BASIC_AUTH_USER: admin
+      BASIC_AUTH_PASS: your_strong_password
+    volumes:
+      - /opt/incus/cert:/run/incus:ro
 ```
 
-### 访问 web 面板
+#### 3. 进阶生产部署（推荐配合外部反代）
+在生产或公网环境中，推荐使用专业反代工具进行统一鉴权与 HTTPS 加密：
+- **Nginx Proxy Manager / 宝塔**：配置 SSL 证书并开启 Access List（基础认证）或转发到 Authelia。
+- **Traefik**：添加 `BasicAuth` 或 `ForwardAuth` 中间件。
+- **Cloudflare Zero Trust / Access**：配置域名直接挂载 Cloudflare 访问策略（邮箱验证码/Github/OIDC SSO）。
+
+### 访问 Web 面板
 
 ```bash
 http://ip:5566/ui/

@@ -34,7 +34,7 @@ const NetworkParentSelector: FC<Props> = ({ props, formik, isClustered }) => {
   const notify = useNotify();
 
   if (!project) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
 
   const networksQueryEnabled = !isClustered;
@@ -46,7 +46,7 @@ const NetworkParentSelector: FC<Props> = ({ props, formik, isClustered }) => {
 
   useEffect(() => {
     if (networkError) {
-      notify.failure("Loading networks failed", networkError);
+      notify.failure("加载网络失败", networkError);
     }
   }, [networkError]);
 
@@ -58,7 +58,7 @@ const NetworkParentSelector: FC<Props> = ({ props, formik, isClustered }) => {
 
   useEffect(() => {
     if (clusterNetworkError) {
-      notify.failure("Loading cluster networks failed", clusterNetworkError);
+      notify.failure("加载集群网络失败", clusterNetworkError);
     }
   }, [clusterNetworkError]);
 
@@ -71,19 +71,19 @@ const NetworkParentSelector: FC<Props> = ({ props, formik, isClustered }) => {
       };
     });
   options.unshift({
-    label: options.length === 0 ? "No networks available" : "Select option",
+    label: options.length === 0 ? "无可用网络" : "选择选项",
     value: "",
   });
 
   if (isNetworkLoading || isClusterNetworksLoading) {
-    return <Spinner className="u-loader" text="Loading..." />;
+    return <Spinner className="u-loader" text="加载中..." />;
   }
 
   const getHelpText = () => {
     if (formik.values.networkType === macvlanType) {
       return (
         <>
-          Parent interface to create <code>Macvlan</code> NICs on
+          用于在其上创建 <code>Macvlan</code> 网卡的父级接口
         </>
       );
     }
@@ -91,12 +91,12 @@ const NetworkParentSelector: FC<Props> = ({ props, formik, isClustered }) => {
     if (formik.values.networkType === sriovType) {
       return (
         <>
-          Parent interface to create <code>SR-IOV</code> NICs on
+          用于在其上创建 <code>SR-IOV</code> 网卡的父级接口
         </>
       );
     }
 
-    return "Existing interface to use for network";
+    return "用于此网络的现有网络接口";
   };
 
   if (isClustered) {
@@ -121,7 +121,7 @@ const NetworkParentSelector: FC<Props> = ({ props, formik, isClustered }) => {
       <div className="general-field">
         <div className="general-field-label can-edit">
           <Label forId="parent" required={formik.values.isCreating}>
-            Parent
+            父级网络 (Parent)
           </Label>
         </div>
         <div className="general-field-content">
@@ -153,7 +153,7 @@ const NetworkParentSelector: FC<Props> = ({ props, formik, isClustered }) => {
     <div className="general-field">
       <div className="general-field-label can-edit">
         <Label forId="parent" required={formik.values.isCreating}>
-          Parent
+          父级网络 (Parent)
         </Label>
       </div>
       <div
@@ -171,7 +171,7 @@ const NetworkParentSelector: FC<Props> = ({ props, formik, isClustered }) => {
               className="u-no-margin--bottom"
               type="button"
               appearance="base"
-              title={formik.values.editRestriction ?? "Edit"}
+              title={formik.values.editRestriction ?? "编辑"}
               hasIcon
               disabled={!!formik.values.editRestriction}
             >

@@ -46,27 +46,27 @@ const OSStorage: FC<Props> = ({ target }) => {
       target,
     )
       .then(() => {
-        toastNotify.success(<>Storage updated</>);
+        toastNotify.success(<>存储配置已更新</>);
         queryClient.invalidateQueries({
           queryKey: [queryKeys.osStorage, target],
         });
         handleSuccess();
       })
       .catch((e) => {
-        toastNotify.failure("Storage update failed", e);
+        toastNotify.failure("存储配置更新失败", e);
         handleFailure();
       });
   };
 
   if (error) {
-    notify.failure("Loading storage data failed", error);
+    notify.failure("加载存储数据失败", error);
   }
 
   return (
     <>
       <NotificationRow />
       {isLoading && (
-        <Spinner className="u-loader" text="Loading storage data..." />
+        <Spinner className="u-loader" text="正在加载存储数据..." />
       )}
       {!isLoading && !error && (
         <OSYamlEditor

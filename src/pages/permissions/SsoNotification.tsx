@@ -32,15 +32,15 @@ const SsoNotification: FC<Props> = ({ hasOidc }: Props) => {
     <>
       <Notification
         severity="information"
-        title="Did you know?"
+        title="您知道吗？"
         onDismiss={handleClose}
         actions={[
           <DocLink docPath="/howto/oidc/" key="sso-doc-link">
-            Show me how
+            查看说明
           </DocLink>,
         ]}
       >
-        LXD can be configured to log in using a single sign-on provider.
+        Incus 可以配置为使用单点登录 (SSO) 提供方进行登录。
       </Notification>
     </>
   );

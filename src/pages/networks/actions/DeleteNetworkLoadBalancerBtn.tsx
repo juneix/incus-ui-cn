@@ -34,7 +34,7 @@ const DeleteNetworkLoadBalancerBtn: FC<Props> = ({
     deleteNetworkLoadBalancer(network, loadBalancer, project)
       .then(() => {
         toastNotify.success(
-          `Network load balancer with listen address ${loadBalancer.listen_address} deleted.`,
+          `监听地址为 ${loadBalancer.listen_address} 的网络负载均衡已删除。`,
         );
         queryClient.invalidateQueries({
           predicate: (query) =>
@@ -46,7 +46,7 @@ const DeleteNetworkLoadBalancerBtn: FC<Props> = ({
       })
       .catch((e) => {
         setLoading(false);
-        notify.failure("Network load balancer deletion failed", e);
+        notify.failure("删除网络负载均衡失败", e);
       });
   };
 
@@ -55,17 +55,16 @@ const DeleteNetworkLoadBalancerBtn: FC<Props> = ({
       appearance="base"
       onHoverText={
         canEditNetwork(network)
-          ? "Delete network load balancer"
-          : "You do not have permission to delete this network load balancer"
+          ? "删除网络负载均衡"
+          : "您没有权限删除此网络负载均衡"
       }
       confirmationModalProps={{
-        title: "Confirm delete",
+        title: "确认删除",
         confirmButtonAppearance: "negative",
-        confirmButtonLabel: "Delete",
+        confirmButtonLabel: "删除",
         children: (
           <p>
-            Are you sure you want to delete the network load balancer with
-            listen address {loadBalancer.listen_address}?<br />
+            确定要删除监听地址为 {loadBalancer.listen_address} 的网络负载均衡吗？<br />
           </p>
         ),
         onConfirm: handleDelete,

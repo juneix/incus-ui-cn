@@ -30,7 +30,14 @@ const StorageBucketKeyForm: FC<Props> = ({ formik, bucket }) => {
       onChange: formik.handleChange,
       value: formik.values[id] ?? "",
       error: formik.touched[id] ? (formik.errors[id] as ReactNode) : null,
-      placeholder: `Enter ${id.replaceAll("-", " ")}`,
+      placeholder:
+        id === "name"
+          ? "输入名称"
+          : id === "description"
+            ? "输入描述"
+            : id === "access-key"
+              ? "输入访问密钥 (Access Key)"
+              : "输入私有密钥 (Secret Key)",
     };
   };
 
@@ -39,7 +46,7 @@ const StorageBucketKeyForm: FC<Props> = ({ formik, bucket }) => {
   const bucketEditRestriction =
     !isEditing || canEditBucket(bucket)
       ? ""
-      : "You do not have permission to edit this bucket";
+      : "您没有权限编辑此存储桶";
 
   return (
     <Form onSubmit={formik.handleSubmit} className={"bucket-create-form"}>
@@ -48,7 +55,7 @@ const StorageBucketKeyForm: FC<Props> = ({ formik, bucket }) => {
       <Input
         {...getFormProps("name")}
         type="text"
-        label="Name"
+        label="名称"
         required
         autoFocus
         disabled={!!bucketEditRestriction || isEditing}
@@ -56,39 +63,39 @@ const StorageBucketKeyForm: FC<Props> = ({ formik, bucket }) => {
       />
       <Select
         id="bucketKey"
-        label="Role"
+        label="角色权限"
         onChange={(e) => {
           formik.setFieldValue("role", e.target.value);
         }}
         value={formik.values.role}
         options={[
           {
-            label: "Admin",
+            label: "管理员 (Admin)",
             value: "admin",
           },
           {
-            label: "Read-only",
+            label: "只读 (Read-only)",
             value: "read-only",
           },
         ]}
       />
       <AutoExpandingTextArea
         {...getFormProps("description")}
-        label="Description"
+        label="描述"
         disabled={!!bucketEditRestriction}
         title={bucketEditRestriction}
       />
       <Input
         {...getFormProps("access-key")}
         type="text"
-        label="Access Key"
+        label="Access Key (访问密钥)"
         disabled={!!bucketEditRestriction}
         title={bucketEditRestriction}
       />
       <Input
         {...getFormProps("secret-key")}
         type="text"
-        label="Secret Key"
+        label="Secret Key (私有密钥)"
         disabled={!!bucketEditRestriction}
         title={bucketEditRestriction}
       />

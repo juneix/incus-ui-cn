@@ -23,8 +23,8 @@ const EditStorageBucketKeyBtn: FC<Props> = ({ bucket, bucketKey }) => {
       }}
       title={
         canEditBucket(bucket)
-          ? "Edit bucket"
-          : "You do not have permission to edit this bucket"
+          ? "编辑存储桶密钥"
+          : "您没有权限编辑此存储桶密钥"
       }
     >
       <Icon name="edit" />

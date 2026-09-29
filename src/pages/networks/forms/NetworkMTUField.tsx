@@ -30,7 +30,7 @@ const NetworkMTUField: FC<Props> = ({ formik }) => {
               className="u-no-margin--bottom"
               type="button"
               appearance="base"
-              title={formik.values.editRestriction ?? "Edit"}
+              title={formik.values.editRestriction ?? "编辑"}
               hasIcon
               disabled={!!formik.values.editRestriction}
             >
@@ -42,8 +42,8 @@ const NetworkMTUField: FC<Props> = ({ formik }) => {
             {...formik.getFieldProps("mtu")}
             id="mtu"
             type="number"
-            placeholder="Enter MTU"
-            help="The MTU of the interface"
+            placeholder="输入 MTU"
+            help="网络接口的 MTU 大小"
           />
         )}
       </div>

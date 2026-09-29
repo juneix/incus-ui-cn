@@ -18,13 +18,13 @@ const NetworkFormOvn: FC<Props> = ({ formik, filterRows }) => {
     getConfigurationRow({
       formik,
       name: "ovn_ingress_mode",
-      label: "OVN ingress mode",
+      label: "OVN 入口模式",
       defaultValue: "",
       children: (
         <Select
           options={[
             {
-              label: "Select option",
+              label: "选择选项",
               value: "",
               disabled: true,
             },

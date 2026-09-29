@@ -46,15 +46,15 @@ const EditStorageBucketKeyPanel: FC<Props> = ({ bucket }) => {
     const bucketURL = getStorageBucketURL(bucket.name, bucket.pool, project);
     toastNotify.success(
       <>
-        Key{" "}
+        存储桶{" "}
+        <ResourceLink type="bucket" value={bucket?.name ?? ""} to={bucketURL} />{" "}
+        的密钥{" "}
         <ResourceLink
           type="bucket-key"
           value={bucketKey?.name ?? ""}
           to={bucketURL}
         />{" "}
-        updated for bucket{" "}
-        <ResourceLink type="bucket" value={bucket?.name ?? ""} to={bucketURL} />
-        .
+        更新成功。
       </>,
     );
     closePanel();
@@ -110,26 +110,26 @@ const EditStorageBucketKeyPanel: FC<Props> = ({ bucket }) => {
         })
         .catch((e) => {
           formik.setSubmitting(false);
-          notify.failure(`Key update failed`, e);
+          notify.failure(`密钥更新失败`, e);
         });
     },
   });
 
   if (!project) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
   if (!key) {
-    return <>Missing key</>;
+    return <>缺少密钥参数</>;
   }
 
   if (error) {
-    notify.failure("Loading key failed", error);
+    notify.failure("加载密钥失败", error);
   }
 
   if (isLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="加载中..." isMainComponent />;
   } else if (!bucketKey) {
-    return <>Loading key failed</>;
+    return <>加载密钥失败</>;
   }
   const changeCount =
     (formik.values.description !== bucketKey.description ? 1 : 0) +
@@ -142,7 +142,7 @@ const EditStorageBucketKeyPanel: FC<Props> = ({ bucket }) => {
       <SidePanel>
         <SidePanel.Header>
           <SidePanel.HeaderTitle>
-            Edit key {bucketKey.name}
+            编辑密钥 {bucketKey.name}
           </SidePanel.HeaderTitle>
         </SidePanel.Header>
         <NotificationRow className="u-no-padding" />
@@ -160,7 +160,7 @@ const EditStorageBucketKeyPanel: FC<Props> = ({ bucket }) => {
             onClick={closePanel}
             className="u-no-margin--bottom"
           >
-            Cancel
+            取消
           </Button>
           <ActionButton
             appearance="positive"
@@ -172,8 +172,8 @@ const EditStorageBucketKeyPanel: FC<Props> = ({ bucket }) => {
             }
           >
             {changeCount === 0
-              ? "Save changes"
-              : `Save ${changeCount} ${pluralize("change", changeCount)}`}
+              ? "保存更改"
+              : `保存 ${changeCount} 项更改`}
           </ActionButton>
         </SidePanel.Footer>
       </SidePanel>

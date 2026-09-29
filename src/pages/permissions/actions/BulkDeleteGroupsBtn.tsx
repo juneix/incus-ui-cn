@@ -32,15 +32,15 @@ const BulkDeleteGroupsBtn: FC<Props> = ({ groups, className, onDelete }) => {
         onClick={handleConfirmDelete}
         title={
           deletableGroups.length
-            ? "Delete groups"
-            : `You do not have permission to delete the selected ${pluralize("group", groups.length)}`
+            ? "删除用户组"
+            : "你没有权限删除所选用户组"
         }
         className={className}
         hasIcon
         disabled={!deletableGroups.length}
       >
         <Icon name="delete" />
-        <span>{`Delete ${groups.length} ${pluralize("group", groups.length)}`}</span>
+        <span>{`删除 ${groups.length} 个用户组`}</span>
       </Button>
       {confirming && (
         <DeleteGroupModal groups={groups} close={handleCloseConfirm} />

@@ -30,12 +30,12 @@ const ProfileDetailHeader: FC<Props> = ({ name, profile, project }) => {
     name: Yup.string()
       .test(
         "deduplicate",
-        "A profile with this name already exists",
+        "已存在同名的配置模板",
         async (value) =>
           profile?.name === value ||
           checkDuplicateName(value, project, controllerState, "profiles"),
       )
-      .required("Profile name is required"),
+      .required("配置模板名称为必填项"),
   });
 
   const formik = useFormik<RenameHeaderValues>({
@@ -57,19 +57,19 @@ const ProfileDetailHeader: FC<Props> = ({ name, profile, project }) => {
           );
           toastNotify.success(
             <>
-              Profile <strong>{name}</strong> renamed to{" "}
+              配置模板 <strong>{name}</strong> 已重命名为{" "}
               <ResourceLink
                 type="profile"
                 value={values.name}
                 to={`/ui/project/${encodeURIComponent(project)}/profile/${encodeURIComponent(values.name)}`}
               />
-              .
+              。
             </>,
           );
           formik.setFieldValue("isRenaming", false);
         })
         .catch((e) => {
-          notify.failure("Renaming failed", e);
+          notify.failure("重命名失败", e);
         })
         .finally(() => {
           formik.setSubmitting(false);
@@ -79,11 +79,11 @@ const ProfileDetailHeader: FC<Props> = ({ name, profile, project }) => {
 
   const getRenameDisabledReason = () => {
     if (!canEditProfile(profile)) {
-      return "You do not have permission to rename this profile";
+      return "您没有权限重命名此配置模板";
     }
 
     if (profile && profile.name === "default") {
-      return "Cannot rename the default profile";
+      return "无法重命名默认配置模板";
     }
 
     return undefined;
@@ -97,7 +97,7 @@ const ProfileDetailHeader: FC<Props> = ({ name, profile, project }) => {
           to={`/ui/project/${encodeURIComponent(project)}/profiles`}
           key={1}
         >
-          Profiles
+          配置模板
         </Link>,
       ]}
       renameDisabledReason={getRenameDisabledReason()}

@@ -54,7 +54,7 @@ const ExportVolumeModal: FC<Props> = ({ volume, close }) => {
 
     toastNotify.success(
       <>
-        Volume {volumeLink} download started:
+        存储卷 {volumeLink} 开始下载：
         <br />
         <a href={url}>{backupName}</a>
       </>,
@@ -89,8 +89,8 @@ const ExportVolumeModal: FC<Props> = ({ volume, close }) => {
       .then((operation) => {
         toastNotify.info(
           <>
-            Backing up volume {volumeLink}.<br />
-            Download will start, when the export is ready.
+            正在备份存储卷 {volumeLink}。<br />
+            导出准备就绪后将自动开始下载。
           </>,
         );
         eventQueue.set(
@@ -100,7 +100,7 @@ const ExportVolumeModal: FC<Props> = ({ volume, close }) => {
           },
           (msg) =>
             toastNotify.failure(
-              `Could not download volume ${volume.name}`,
+              `无法下载存储卷 ${volume.name}`,
               new Error(msg),
               volumeLink,
             ),
@@ -108,7 +108,7 @@ const ExportVolumeModal: FC<Props> = ({ volume, close }) => {
       })
       .catch((e) =>
         toastNotify.failure(
-          `Could not download volume ${volume.name}`,
+          `无法下载存储卷 ${volume.name}`,
           e,
           volumeLink,
         ),
@@ -135,7 +135,7 @@ const ExportVolumeModal: FC<Props> = ({ volume, close }) => {
     <Modal
       close={close}
       className="export-volume-modal"
-      title="Export Volume"
+      title="导出存储卷"
       buttonRow={
         <>
           <Button
@@ -144,7 +144,7 @@ const ExportVolumeModal: FC<Props> = ({ volume, close }) => {
             type="button"
             onClick={close}
           >
-            Cancel
+            取消
           </Button>
           <ActionButton
             appearance="positive"
@@ -153,7 +153,7 @@ const ExportVolumeModal: FC<Props> = ({ volume, close }) => {
             disabled={formik.isSubmitting}
             onClick={() => void formik.submitForm()}
           >
-            Export volume
+            导出存储卷
           </ActionButton>
         </>
       }
@@ -162,33 +162,33 @@ const ExportVolumeModal: FC<Props> = ({ volume, close }) => {
         <Select
           {...formik.getFieldProps("compression")}
           id="project"
-          label="Compression"
-          help="No compression will be faster, but larger"
+          label="压缩格式"
+          help="不压缩速度更快，但备份体积更大"
           options={[
             { value: "gzip", label: "Gzip" },
-            { value: "none", label: "None" },
+            { value: "none", label: "不压缩 (None)" },
           ]}
         />
         <Select
           {...formik.getFieldProps("expirationHours")}
           id="project"
-          label="Expiration"
-          help="Duration that the backup remains on the server"
+          label="保留时间"
+          help="备份文件在服务器上的保留时长"
           options={[
-            { value: 1, label: "1 hour" },
-            { value: 6, label: "6 hours" },
-            { value: 12, label: "12 hours" },
-            { value: 24, label: "1 day" },
-            { value: 72, label: "3 days" },
-            { value: 168, label: "7 days" },
+            { value: 1, label: "1 小时" },
+            { value: 6, label: "6 小时" },
+            { value: 12, label: "12 小时" },
+            { value: 24, label: "1 天" },
+            { value: 72, label: "3 天" },
+            { value: 168, label: "7 天" },
           ]}
         />
         {hasBackupMetadataVersion && (
           <Select
             {...formik.getFieldProps("exportVersion")}
             id="exportVersion"
-            label="Export version"
-            help="Lower versions allow imports on older LXD versions"
+            label="导出版本"
+            help="较低版本允许导入到旧版 Incus/LXD"
             options={backupMetadataVersionRange.map((version) => ({
               value: version.toString(),
               label: version.toString(),
@@ -198,14 +198,14 @@ const ExportVolumeModal: FC<Props> = ({ volume, close }) => {
         <Input
           {...formik.getFieldProps("optimizedStorage")}
           type="checkbox"
-          label="Use storage driver optimized format"
-          help="Can only be restored on a similar pool"
+          label="使用存储驱动优化格式"
+          help="仅支持恢复到同类型的存储池"
           checked={formik.values.optimizedStorage}
         />
         <Input
           {...formik.getFieldProps("volumeOnly")}
           type="checkbox"
-          label="Export without volume snapshots"
+          label="仅导出存储卷本身（不包含快照）"
           error={formik.touched.volumeOnly ? formik.errors.volumeOnly : null}
           checked={formik.values.volumeOnly}
         />

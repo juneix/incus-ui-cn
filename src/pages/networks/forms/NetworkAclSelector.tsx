@@ -26,7 +26,7 @@ const NetworkAclSelector: FC<Props> = ({
   const toOptionList = (list: string[], inheritedAcls?: string[]) => {
     return list.map((item) => {
       return {
-        label: inheritedAcls?.includes(item) ? `${item} (from network)` : item,
+        label: inheritedAcls?.includes(item) ? `${item} (继承自网络)` : item,
         value: item,
       };
     });
@@ -39,10 +39,10 @@ const NetworkAclSelector: FC<Props> = ({
       return "-";
     }
     if (!hasAcls) {
-      return "No ACLs available";
+      return "无可用 ACL";
     }
     if (hasAcls) {
-      return "Select ACLs";
+      return "选择 ACL";
     }
   };
 

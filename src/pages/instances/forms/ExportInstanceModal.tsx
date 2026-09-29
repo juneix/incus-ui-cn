@@ -142,7 +142,7 @@ const ExportInstanceModal: FC<Props> = ({ instance, close }) => {
     <Modal
       close={close}
       className="export-instance-modal"
-      title="Export Instance"
+      title="导出实例"
       buttonRow={
         <>
           <Button
@@ -151,7 +151,7 @@ const ExportInstanceModal: FC<Props> = ({ instance, close }) => {
             type="button"
             onClick={close}
           >
-            Cancel
+            取消
           </Button>
           <ActionButton
             appearance="positive"
@@ -160,7 +160,7 @@ const ExportInstanceModal: FC<Props> = ({ instance, close }) => {
             disabled={formik.isSubmitting}
             onClick={() => void formik.submitForm()}
           >
-            Export instance
+            导出实例
           </ActionButton>
         </>
       }
@@ -169,43 +169,41 @@ const ExportInstanceModal: FC<Props> = ({ instance, close }) => {
         {hasCustomDisks && (
           <Notification
             severity="information"
-            title="Custom disks wil be ignored"
+            title="自定义磁盘将被忽略"
           >
-            This instance has {customDiskDevices.length} custom{" "}
-            {pluralize("disk", customDiskDevices.length)}, which will be ignored
-            in the export.
+            此实例包含 {customDiskDevices.length} 个自定义磁盘，在导出时将被忽略。
           </Notification>
         )}
         <Select
           {...formik.getFieldProps("compression")}
           id="project"
-          label="Compression"
-          help="No compression will be faster, but larger"
+          label="压缩方式"
+          help="不压缩速度更快，但生成文件较大"
           options={[
             { value: "gzip", label: "Gzip" },
-            { value: "none", label: "None" },
+            { value: "none", label: "不压缩" },
           ]}
         />
         <Select
           {...formik.getFieldProps("expirationHours")}
           id="project"
-          label="Expiration"
-          help="Duration that the backup remains on the server"
+          label="过期时间"
+          help="备份在服务器上保留的时长"
           options={[
-            { value: 1, label: "1 hour" },
-            { value: 6, label: "6 hours" },
-            { value: 12, label: "12 hours" },
-            { value: 24, label: "1 day" },
-            { value: 72, label: "3 days" },
-            { value: 168, label: "7 days" },
+            { value: 1, label: "1 小时" },
+            { value: 6, label: "6 小时" },
+            { value: 12, label: "12 小时" },
+            { value: 24, label: "1 天" },
+            { value: 72, label: "3 天" },
+            { value: 168, label: "7 天" },
           ]}
         />
         {hasBackupMetadataVersion && (
           <Select
             {...formik.getFieldProps("exportVersion")}
             id="exportVersion"
-            label="Export version"
-            help="Lower versions allow imports on older LXD versions"
+            label="导出格式版本"
+            help="较低版本允许在较旧的 Incus/LXD 版本上导入"
             options={backupMetadataVersionRange.map((version) => ({
               value: version.toString(),
               label: version.toString(),
@@ -215,14 +213,14 @@ const ExportInstanceModal: FC<Props> = ({ instance, close }) => {
         <Input
           {...formik.getFieldProps("optimizedStorage")}
           type="checkbox"
-          label="Use storage driver optimized format"
-          help="Can only be restored on a similar pool"
+          label="使用存储驱动优化的格式"
+          help="仅能在相同类型的存储池上恢复"
           checked={formik.values.optimizedStorage}
         />
         <Input
           {...formik.getFieldProps("instanceOnly")}
           type="checkbox"
-          label="Export without instance snapshots"
+          label="仅导出实例（不含快照）"
           error={
             formik.touched.instanceOnly ? formik.errors.instanceOnly : null
           }

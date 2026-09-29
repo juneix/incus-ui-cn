@@ -67,7 +67,7 @@ const ClusterSpecificSelect: FC<Props> = ({
       });
     }
     result.unshift({
-      label: result.length === 0 ? "No option available" : "Select option",
+      label: result.length === 0 ? "无可用选项" : "选择选项",
       value: "",
     });
     return result;
@@ -101,7 +101,7 @@ const ClusterSpecificSelect: FC<Props> = ({
       {canToggleSpecific && !isReadOnly && (
         <CheckboxInput
           id={`${id}-same-for-all-toggle`}
-          label="Same for all cluster members"
+          label="所有集群成员相同"
           checked={!isSpecific}
           onChange={() => {
             if (isSpecific) {
@@ -118,7 +118,7 @@ const ClusterSpecificSelect: FC<Props> = ({
             const selectOptions = item.values.map(toSelectOption);
             selectOptions.unshift({
               label:
-                selectOptions.length === 0 ? "None available" : "Select option",
+                selectOptions.length === 0 ? "无可用选项" : "选择选项",
               value: "",
             });
 

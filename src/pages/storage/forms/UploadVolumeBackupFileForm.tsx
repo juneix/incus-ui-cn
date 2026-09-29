@@ -79,14 +79,15 @@ const UploadVolumeBackupFileForm: FC<Props> = ({
 
     const message = (
       <>
-        Created volume{" "}
-        <ResourceLink type="volume" value={volumeName} to={volumeDetailURL} />.
+        存储卷{" "}
+        <ResourceLink type="volume" value={volumeName} to={volumeDetailURL} />{" "}
+        创建成功。
       </>
     );
 
     const actions = [
       {
-        label: "Configure",
+        label: "配置",
         onClick: async () => navigate(`${volumeDetailURL}/configuration`),
       },
     ];
@@ -95,7 +96,7 @@ const UploadVolumeBackupFileForm: FC<Props> = ({
   };
 
   const handleFailure = (msg: string) => {
-    toastNotify.failure("Volume creation failed.", new Error(msg));
+    toastNotify.failure("创建存储卷失败。", new Error(msg));
   };
 
   const handleFinish = () => {
@@ -124,8 +125,8 @@ const UploadVolumeBackupFileForm: FC<Props> = ({
       .then((operation) => {
         toastNotify.info(
           <>
-            Upload completed. Now creating volume{" "}
-            <ResourceLabel bold type="volume" value={values.name} />.
+            上传完成。正在创建存储卷{" "}
+            <ResourceLabel bold type="volume" value={values.name} />。
           </>,
         );
 
@@ -145,7 +146,7 @@ const UploadVolumeBackupFileForm: FC<Props> = ({
       })
       .catch((e: AxiosError<LxdSyncResponse<null>>) => {
         const error = new Error(e.response?.data.error);
-        notify.failure("Volume upload failed", error);
+        notify.failure("上传存储卷失败", error);
         formik.setSubmitting(false);
         setUploadState(null);
       });
@@ -209,7 +210,7 @@ const UploadVolumeBackupFileForm: FC<Props> = ({
   };
 
   const noFileSelectedMessage = !formik.values.volumeFile
-    ? "Please select a file before adding custom configuration."
+    ? "请在添加自定义配置前先选择文件。"
     : "";
 
   return (
@@ -223,15 +224,15 @@ const UploadVolumeBackupFileForm: FC<Props> = ({
           name="volumeFile"
           type="file"
           accept=".tar, application/gzip, application/x-bzip, application/x-xz, application/x-lzma, application/x-squashfs, application/x-qcow2, application/zstd"
-          label="LXD backup archive (.tar.gz)"
+          label="Incus/LXD 备份归档文件 (.tar.gz)"
           onChange={(e) => void changeFile(e)}
         />
         <Input
           {...formik.getFieldProps("name")}
           id="name"
           type="text"
-          label="New volume name"
-          placeholder="Enter name"
+          label="新存储卷名称"
+          placeholder="请输入名称"
           error={formik.touched.name ? formik.errors.name : null}
           disabled={!!noFileSelectedMessage}
           title={noFileSelectedMessage}
@@ -243,7 +244,7 @@ const UploadVolumeBackupFileForm: FC<Props> = ({
           }}
           selectProps={{
             id: "volume-import-pool",
-            label: "Storage pool",
+            label: "所属存储池",
             disabled: isLoading || !!noFileSelectedMessage,
             title: noFileSelectedMessage,
           }}
@@ -251,11 +252,11 @@ const UploadVolumeBackupFileForm: FC<Props> = ({
         <ClusterMemberSelector
           {...formik.getFieldProps("clusterMember")}
           id="clusterMember"
-          label="Target cluster member"
+          label="目标集群成员"
           disabled={!!noFileSelectedMessage || !isCMSDriver}
           disableReason={
             !isCMSDriver
-              ? "The selected pool is not cluster specific"
+              ? "所选存储池非集群特定池"
               : noFileSelectedMessage
           }
         />
@@ -267,7 +268,7 @@ const UploadVolumeBackupFileForm: FC<Props> = ({
           type="button"
           onClick={handleCloseModal}
         >
-          Cancel
+          取消
         </Button>
         <ActionButton
           appearance="positive"
@@ -281,7 +282,7 @@ const UploadVolumeBackupFileForm: FC<Props> = ({
           }
           onClick={() => void formik.submitForm()}
         >
-          Upload and create
+          上传并创建
         </ActionButton>
       </footer>
     </>

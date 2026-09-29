@@ -17,14 +17,14 @@ const StorageVolumeFormBlock: FC<Props> = ({ formik, poolDriver }) => {
       rows={[
         getConfigurationRow({
           formik,
-          label: "Block filesystem",
+          label: "块文件系统",
           name: "block_filesystem",
           defaultValue: "",
           children: (
             <Select
               options={[
                 {
-                  label: "auto",
+                  label: "自动 (auto)",
                   value: "",
                 },
                 {
@@ -46,7 +46,7 @@ const StorageVolumeFormBlock: FC<Props> = ({ formik, poolDriver }) => {
 
         getConfigurationRow({
           formik,
-          label: "Block mount options",
+          label: "挂载选项",
           name: "block_mount_options",
           defaultValue: "",
           children: (
@@ -54,13 +54,13 @@ const StorageVolumeFormBlock: FC<Props> = ({ formik, poolDriver }) => {
               type="text"
               help={
                 <>
-                  For a list of available options visit{" "}
+                  关于可用挂载选项列表，请参考{" "}
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
                     href="https://manpages.ubuntu.com/manpages/jammy/en/man8/mount.8.html#filesystem-independent%20mount%20options"
                   >
-                    mount manpages
+                    mount 手册
                   </a>
                 </>
               }
@@ -72,18 +72,18 @@ const StorageVolumeFormBlock: FC<Props> = ({ formik, poolDriver }) => {
           ? [
               getConfigurationRow({
                 formik,
-                label: "Block type",
+                label: "置备类型",
                 name: "block_type",
                 defaultValue: "thin",
                 children: (
                   <Select
                     options={[
                       {
-                        label: "thin",
+                        label: "精简置备 (thin)",
                         value: "thin",
                       },
                       {
-                        label: "thick",
+                        label: "厚置备 (thick)",
                         value: "thick",
                       },
                     ]}

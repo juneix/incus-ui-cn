@@ -15,26 +15,26 @@ const StoragePoolFormCephObject: FC<Props> = ({ formik }) => {
       rows={[
         getConfigurationRow({
           formik,
-          label: "Bucket name prefix",
+          label: "存储桶名称前缀",
           name: "cephobject_bucket_name_prefix",
           defaultValue: "",
           children: (
-            <Input type="text" placeholder="Enter bucket name prefix" />
+            <Input type="text" placeholder="请输入存储桶名称前缀" />
           ),
         }),
         getConfigurationRow({
           formik,
-          label: "Cluster name",
+          label: "集群名称",
           name: "cephobject_cluster_name",
           defaultValue: "",
-          children: <Input type="text" placeholder="Enter cluster name" />,
+          children: <Input type="text" placeholder="请输入集群名称" />,
         }),
         getConfigurationRow({
           formik,
-          label: "Ceph user name",
+          label: "Ceph 用户名",
           name: "cephobject_user_name",
           defaultValue: "",
-          children: <Input type="text" placeholder="Enter pool name" />,
+          children: <Input type="text" placeholder="请输入 Ceph 用户名" />,
         }),
       ]}
     />

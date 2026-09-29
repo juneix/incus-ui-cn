@@ -26,7 +26,7 @@ const ProfileDetailPanel: FC = () => {
   } = useProfile(profileName ?? "", projectName);
 
   if (error) {
-    notify.failure("Loading profile failed", error);
+    notify.failure("加载配置模板失败", error);
   }
 
   const isLoading = isProfileLoading || isProjectLoading;
@@ -41,14 +41,14 @@ const ProfileDetailPanel: FC = () => {
     >
       <SidePanel.Sticky>
         <SidePanel.Header>
-          <SidePanel.HeaderTitle>Profile summary</SidePanel.HeaderTitle>
+          <SidePanel.HeaderTitle>配置模板概览</SidePanel.HeaderTitle>
           <SidePanel.HeaderControls>
             <Button
               appearance="base"
               className="u-no-margin--bottom"
               hasIcon
               onClick={panelParams.clear}
-              aria-label="Close"
+              aria-label="关闭"
             >
               <Icon name="close" />
             </Button>

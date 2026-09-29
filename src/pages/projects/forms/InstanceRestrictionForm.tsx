@@ -56,7 +56,7 @@ const InstanceRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restricted_virtual_machines_low_level",
-          label: "Low level VM operations",
+          label: "虚拟机底层操作限制",
           defaultValue: "",
           readOnlyRenderer: (val) => optionRenderer(val, optionAllowBlock),
           children: <Select options={optionAllowBlock} />,
@@ -65,7 +65,7 @@ const InstanceRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restricted_containers_low_level",
-          label: "Low level container operations",
+          label: "容器底层操作限制",
           defaultValue: "",
           readOnlyRenderer: (val) => optionRenderer(val, optionAllowBlock),
           children: <Select options={optionAllowBlock} />,
@@ -74,7 +74,7 @@ const InstanceRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restricted_containers_nesting",
-          label: "Container nesting",
+          label: "容器嵌套限制",
           defaultValue: "",
           readOnlyRenderer: (val) => optionRenderer(val, optionAllowBlock),
           children: <Select options={optionAllowBlock} />,
@@ -83,7 +83,7 @@ const InstanceRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restricted_containers_privilege",
-          label: "Container privilege",
+          label: "容器特权限制",
           defaultValue: "",
           readOnlyRenderer: (val) =>
             optionRenderer(val, optionAllowIsolatedUnprivileged),
@@ -93,7 +93,7 @@ const InstanceRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restricted_container_interception",
-          label: "Container interception",
+          label: "容器系统调用拦截限制",
           defaultValue: "",
           readOnlyRenderer: (val) => optionRenderer(val, optionAllowBlock),
           children: <Select options={optionAllowBlock} />,
@@ -102,7 +102,7 @@ const InstanceRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restrict_backups",
-          label: "Backup creation",
+          label: "备份创建限制",
           defaultValue: "",
           readOnlyRenderer: (val) => optionRenderer(val, optionAllowBlock),
           children: <Select options={optionAllowBlock} />,
@@ -111,7 +111,7 @@ const InstanceRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restrict_snapshots",
-          label: "Snapshot creation",
+          label: "快照创建限制",
           defaultValue: "",
           readOnlyRenderer: (val) => optionRenderer(val, optionAllowBlock),
           children: <Select options={optionAllowBlock} />,
@@ -120,17 +120,17 @@ const InstanceRestrictionForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "restricted_idmap_uid",
-          label: "Idmap UID",
+          label: "ID 映射 UID 限制",
           defaultValue: "",
-          children: <Input placeholder="Enter UID ranges" type="text" />,
+          children: <Input placeholder="输入 UID 范围" type="text" />,
         }),
 
         getConfigurationRow({
           formik,
           name: "restricted_idmap_gid",
-          label: "Idmap GID",
+          label: "ID 映射 GID 限制",
           defaultValue: "",
-          children: <Input placeholder="Enter GID ranges" type="text" />,
+          children: <Input placeholder="输入 GID 范围" type="text" />,
         }),
       ]}
     />

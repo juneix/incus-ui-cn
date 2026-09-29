@@ -18,8 +18,8 @@ const BulkDeleteIdpGroupsBtn: FC<Props> = ({ idpGroups }) => {
     }
 
     return [
-      `将删除 ${deletableIdpGroups.length} 个${pluralize("IDP group", deletableIdpGroups.length)}。`,
-      `其中 ${restrictedIdpGroups.length} 个你无权删除的${pluralize("IDP group", restrictedIdpGroups.length)}会被忽略。`,
+      `将删除 ${deletableIdpGroups.length} 个 IDP 用户组。`,
+      `其中 ${restrictedIdpGroups.length} 个你无权删除的 IDP 用户组会被忽略。`,
     ];
   };
 
@@ -31,11 +31,11 @@ const BulkDeleteIdpGroupsBtn: FC<Props> = ({ idpGroups }) => {
       onDelete={deleteIdpGroups}
       disabledReason={
         !deletableIdpGroups.length
-          ? `你没有权限删除所选${pluralize("idp group", idpGroups.length)}`
+          ? "你没有权限删除所选 IDP 用户组"
           : undefined
       }
       className="u-no-margin--bottom"
-      buttonLabel={`删除 ${idpGroups.length} 个${pluralize("IDP group", idpGroups.length)}`}
+      buttonLabel={`删除 ${idpGroups.length} 个 IDP 用户组`}
       bulkDeleteBreakdown={getBulkDeleteBreakdown()}
     />
   );

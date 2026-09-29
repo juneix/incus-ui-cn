@@ -31,9 +31,8 @@ const DeleteStorageBucketKeyBtn: FC<Props> = ({ bucket, bucketKey }) => {
   const onFinish = () => {
     toastNotify.success(
       <>
-        Bucket key{" "}
-        <ResourceLabel bold type="bucket-key" value={bucketKey.name} /> deleted
-        for bucket <ResourceLabel bold type="bucket" value={bucket.name} />.
+        存储桶 <ResourceLabel bold type="bucket" value={bucket.name} /> 的密钥{" "}
+        <ResourceLabel bold type="bucket-key" value={bucketKey.name} /> 已删除。
       </>,
     );
   };
@@ -48,7 +47,7 @@ const DeleteStorageBucketKeyBtn: FC<Props> = ({ bucket, bucketKey }) => {
     )
       .then(onFinish)
       .catch((e) => {
-        notify.failure("Bucket key deletion failed", e);
+        notify.failure("存储桶密钥删除失败", e);
       })
       .finally(() => {
         setLoading(false);
@@ -69,16 +68,16 @@ const DeleteStorageBucketKeyBtn: FC<Props> = ({ bucket, bucketKey }) => {
     <ConfirmationButton
       loading={isLoading}
       confirmationModalProps={{
-        title: "Confirm delete",
+        title: "确认删除",
         children: (
           <p>
-            This will permanently delete key{" "}
-            <ResourceLabel type="bucket-key" value={bucketKey.name} bold />.
+            此操作将永久删除密钥{" "}
+            <ResourceLabel type="bucket-key" value={bucketKey.name} bold />。
             <br />
-            This action cannot be undone, and can result in data loss.
+            此操作无法撤销，并可能导致数据无法访问。
           </p>
         ),
-        confirmButtonLabel: "Delete",
+        confirmButtonLabel: "删除",
         onConfirm: handleDelete,
       }}
       appearance="base"
@@ -88,8 +87,8 @@ const DeleteStorageBucketKeyBtn: FC<Props> = ({ bucket, bucketKey }) => {
       disabled={!canEditBucket(bucket)}
       onHoverText={
         canEditBucket(bucket)
-          ? "Delete key"
-          : "You do not have permission to delete this key."
+          ? "删除密钥"
+          : "您没有权限删除此密钥。"
       }
     >
       <Icon name="delete" />

@@ -357,7 +357,7 @@ const NetworkForm: FC<Props> = ({
               readOnly={!!formik.values.editRestriction || isUnmanagedNetwork}
               readOnlyMessage={
                 isUnmanagedNetwork
-                  ? "Unmanaged networks are read only"
+                  ? "未托管网络为只读状态"
                   : formik.values.editRestriction
               }
             >
@@ -368,7 +368,7 @@ const NetworkForm: FC<Props> = ({
             </YamlForm>
           )}
           {hasEmptySearchResult && (
-            <div>No configuration found matching this search.</div>
+            <div>未找到匹配此搜索的配置项。</div>
           )}
         </Form>
       </ScrollableContainer>
@@ -383,7 +383,7 @@ const NetworkForm: FC<Props> = ({
               value={query}
               name="search-setting"
               type="text"
-              placeholder="Search for key"
+              placeholder="搜索配置键"
             />
             <NetworkFormMenu
               active={section}

@@ -53,20 +53,20 @@ const RestoreClusterMemberBtn: FC<Props> = ({
   const handleSuccess = () => {
     toastNotify.success(
       <>
-        Member{" "}
+        集群成员{" "}
         <ResourceLink
           type="cluster-member"
           value={member.server_name}
           to={`/ui/cluster/member/${encodeURIComponent(member.server_name)}`}
         />{" "}
-        restore completed.
+        恢复完成。
       </>,
     );
   };
 
   const handleFailure = (msg: string) => {
     toastNotify.failure(
-      "Member restore failed",
+      "集群成员恢复失败",
       new Error(msg),
       <ResourceLink
         type="cluster-member"
@@ -82,13 +82,13 @@ const RestoreClusterMemberBtn: FC<Props> = ({
       .then((operation) => {
         toastNotify.info(
           <>
-            Member{" "}
+            集群成员{" "}
             <ResourceLink
               to={`/ui/cluster/member/${encodeURIComponent(member.server_name)}`}
               type="cluster-member"
               value={member.server_name}
             />{" "}
-            restore started.
+            恢复已开始。
           </>,
         );
         eventQueue.set(
@@ -100,7 +100,7 @@ const RestoreClusterMemberBtn: FC<Props> = ({
         onClose?.();
       })
       .catch((e) => {
-        notify.failure("Member restore failed", e);
+        notify.failure("集群成员恢复失败", e);
       })
       .finally(() => {
         setLoading(false);
@@ -122,42 +122,42 @@ const RestoreClusterMemberBtn: FC<Props> = ({
       loading={isLoading || loadingType === "Restoring"}
       disabled={isDisabled}
       confirmationModalProps={{
-        title: "Confirm restore",
+        title: "确认恢复",
         children: (
           <>
             <CheckboxInput
-              label="Restore instances"
+              label="恢复实例"
               onChange={() => {
                 setMode(mode === "" ? "skip" : "");
               }}
               checked={mode === ""}
             />
             <p className="p-form-help-text">
-              Chose whether to restore instances that were stopped or migrated
+              选择是否恢复已停止或迁移的实例
             </p>
             <p>
-              This will restore cluster member{" "}
+              这将恢复集群成员{" "}
               <ResourceLabel
                 type="cluster-member"
                 value={member.server_name}
                 bold
               />
-              .
+              。
             </p>
           </>
         ),
         confirmButtonLabel: hasPermission
-          ? "Restore cluster member"
-          : "You do not have permission to restore cluster members",
+          ? "恢复集群成员"
+          : "你没有权限恢复集群成员",
         onConfirm: handleRestore,
         confirmButtonAppearance: "positive",
       }}
       shiftClickEnabled
-      title="Restore cluster member"
+      title="恢复集群成员"
       className={classnames(className, "has-icon u-no-margin--bottom")}
     >
       <Icon name="play" />
-      {hasLabel && <span>Restore</span>}
+      {hasLabel && <span>恢复</span>}
     </ConfirmationButton>
   );
 };

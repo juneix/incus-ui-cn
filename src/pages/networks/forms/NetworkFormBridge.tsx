@@ -31,7 +31,7 @@ const NetworkFormBridge: FC<Props> = ({ formik, filterRows }) => {
     getConfigurationRow({
       formik,
       name: "bridge_hwaddr",
-      label: "Hardware address",
+      label: "MAC 硬件地址",
       defaultValue: "",
       children: <Input type="text" />,
     }),
@@ -41,13 +41,13 @@ const NetworkFormBridge: FC<Props> = ({ formik, filterRows }) => {
           getConfigurationRow({
             formik,
             name: "bridge_driver",
-            label: "Driver",
+            label: "驱动",
             defaultValue: "",
             children: (
               <Select
                 options={[
                   {
-                    label: "Select option",
+                    label: "选择选项",
                     value: "",
                     disabled: true,
                   },
@@ -66,14 +66,14 @@ const NetworkFormBridge: FC<Props> = ({ formik, filterRows }) => {
           getConfigurationRow({
             formik,
             name: "bridge_external_interfaces",
-            label: "External interfaces",
+            label: "外部接口",
             defaultValue: "",
             hideOverrideBtn:
               isClustered && formik.values.bridge_external_interfaces === "set",
             children: isClustered ? (
               <ClusteredBridgeInterfaceInput
                 formik={formik}
-                placeholder="Enter interface name"
+                placeholder="输入接口名称"
               />
             ) : (
               <Input type="text" />
@@ -85,7 +85,7 @@ const NetworkFormBridge: FC<Props> = ({ formik, filterRows }) => {
                     formik.values.bridge_external_interfaces_per_member ?? {},
                   )}
                   formik={formik}
-                  placeholder="Enter interface name"
+                  placeholder="输入接口名称"
                 />
               ) : (
                 <>{value}</>
@@ -102,7 +102,7 @@ const NetworkFormBridge: FC<Props> = ({ formik, filterRows }) => {
   return (
     <>
       <h2 className="p-heading--4" id={slugify(BRIDGE)}>
-        Bridge
+        网桥
       </h2>
       <ConfigurationTable rows={rows} />
     </>

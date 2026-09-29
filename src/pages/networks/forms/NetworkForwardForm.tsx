@@ -48,20 +48,20 @@ export const toNetworkForward = (
 
 export const NetworkForwardSchema = Yup.object().shape({
   listenAddress: Yup.string()
-    .test("valid-ip", "Invalid IP address", testValidIp)
-    .required("Listen address is required"),
+    .test("valid-ip", "无效的 IP 地址", testValidIp)
+    .required("监听地址为必填项"),
   ports: Yup.array().of(
     Yup.object().shape({
       listenPort: Yup.string()
-        .test("valid-port", "Invalid port number", testValidPort)
-        .required("Listen port required"),
-      protocol: Yup.string().required("Protocol is required"),
+        .test("valid-port", "无效的端口号", testValidPort)
+        .required("监听端口为必填项"),
+      protocol: Yup.string().required("协议为必填项"),
       targetAddress: Yup.string()
-        .test("valid-ip", "Invalid IP address", testValidIp)
-        .required("Target address is required"),
+        .test("valid-ip", "无效的 IP 地址", testValidIp)
+        .required("目标地址为必填项"),
       targetPort: Yup.string()
         .nullable()
-        .test("valid-port", "Invalid port number", testValidPort),
+        .test("valid-port", "无效的端口号", testValidPort),
     }),
   ),
 });
@@ -125,10 +125,10 @@ const NetworkForwardForm: FC<Props> = ({ formik, isEdit, network }) => {
               <NotificationRow />
               <Notification
                 severity="information"
-                title="Network information"
+                title="网络信息"
                 titleElement="h2"
               >
-                Name: {network?.name}
+                名称: {network?.name}
                 <br />
                 {network?.config["ipv4.address"] && (
                   <>
@@ -143,14 +143,14 @@ const NetworkForwardForm: FC<Props> = ({ formik, isEdit, network }) => {
             </Row>
             <Row>
               <Col size={4}>
-                <Label forId="listenAddress">Listen address</Label>
+                <Label forId="listenAddress">监听地址</Label>
               </Col>
               <Col size={8}>
                 {isOvnNetwork && !isEdit && (
                   <>
                     {network?.config["ipv4.address"] !== "none" && (
                       <RadioInput
-                        label="Auto-assign IPv4 address"
+                        label="自动分配 IPv4 地址"
                         checked={formik.values.listenAddress === "0.0.0.0"}
                         onChange={() => {
                           formik.setFieldValue("listenAddress", "0.0.0.0");
@@ -159,7 +159,7 @@ const NetworkForwardForm: FC<Props> = ({ formik, isEdit, network }) => {
                     )}
                     {network?.config["ipv6.address"] !== "none" && (
                       <RadioInput
-                        label="Auto-assign IPv6 address"
+                        label="自动分配 IPv6 地址"
                         checked={formik.values.listenAddress === "::"}
                         onChange={() => {
                           formik.setFieldValue("listenAddress", "::");
@@ -167,7 +167,7 @@ const NetworkForwardForm: FC<Props> = ({ formik, isEdit, network }) => {
                       />
                     )}
                     <RadioInput
-                      label="Manually enter address"
+                      label="手动输入地址"
                       checked={isManualListenAddress}
                       onChange={() => {
                         formik.setFieldValue("listenAddress", "");
@@ -179,14 +179,14 @@ const NetworkForwardForm: FC<Props> = ({ formik, isEdit, network }) => {
                   {...formik.getFieldProps("listenAddress")}
                   id="listenAddress"
                   type="text"
-                  placeholder="Enter IP address"
+                  placeholder="输入 IP 地址"
                   autoFocus
                   required
                   disabled={isEdit || !isManualListenAddress}
                   help={
                     isEdit
-                      ? "Listen address can't be changed after creation."
-                      : "Any address routed to LXD."
+                      ? "创建后无法更改监听地址。"
+                      : "路由到 Incus 的任意地址。"
                   }
                   error={
                     formik.touched.listenAddress
@@ -200,27 +200,26 @@ const NetworkForwardForm: FC<Props> = ({ formik, isEdit, network }) => {
               {...formik.getFieldProps("defaultTargetAddress")}
               id="defaultTargetAddress"
               type="text"
-              label="Default target address"
+              label="默认目标地址"
               help={
                 <>
-                  Fallback target for traffic that does not match a port
-                  specified below.
+                  未匹配下方指定端口时的回退目标地址。
                   <br />
-                  Must be from the network <b>{network?.name}</b>.
+                  必须属于网络 <b>{network?.name}</b>。
                 </>
               }
-              placeholder="Enter IP address"
+              placeholder="输入 IP 地址"
               stacked
             />
             {isClusterMemberSpecific && (
               <ClusterMemberSelector
                 {...formik.getFieldProps("location")}
                 id="location"
-                label="Location"
+                label="所在节点位置"
                 help={
                   isEdit
-                    ? "Location can't be changed after creation."
-                    : "Cluster member to create the forward on."
+                    ? "创建后无法更改所在节点。"
+                    : "在其上创建转发的集群节点。"
                 }
                 disabled={isEdit}
                 stacked
@@ -230,8 +229,8 @@ const NetworkForwardForm: FC<Props> = ({ formik, isEdit, network }) => {
               {...formik.getFieldProps("description")}
               id="description"
               type="text"
-              label="Description"
-              placeholder="Enter description"
+              label="描述"
+              placeholder="输入描述"
               stacked
             />
             {formik.values.ports.length > 0 && (
@@ -239,7 +238,7 @@ const NetworkForwardForm: FC<Props> = ({ formik, isEdit, network }) => {
             )}
             <Button hasIcon onClick={addPort} type="button">
               <Icon name="plus" />
-              <span>Add port</span>
+              <span>添加端口</span>
             </Button>
           </ScrollableForm>
         </Col>

@@ -18,7 +18,7 @@ const UseOCIBtn: FC<Props> = ({ onSelect }) => {
   return (
     <>
       <Button onClick={openPortal} type="button">
-        <span>Use OCI</span>
+        <span>使用 OCI</span>
       </Button>
       {isOpen && (
         <Portal>

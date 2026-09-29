@@ -61,18 +61,18 @@ const AttachDiskDeviceModal: FC<Props> = ({
 
   const modalTitle =
     type === "choose type" ? (
-      "Choose disk type"
+      "选择磁盘类型"
     ) : (
       <BackLink
         title={
           type === "host path"
-            ? "Mount host path"
+            ? "挂载宿主机路径"
             : type === "custom volume"
-              ? "Attach custom volume"
-              : "Attach special disk"
+              ? "挂载自定义存储卷"
+              : "挂载特殊磁盘设备"
         }
         onClick={handleGoBack}
-        linkText="Choose disk type"
+        linkText="选择磁盘类型"
       />
     );
 
@@ -88,14 +88,14 @@ const AttachDiskDeviceModal: FC<Props> = ({
           <div className="choose-migration-type">
             <FormLink
               icon="add-logical-volume"
-              title="Attach custom volume"
+              title="挂载自定义存储卷"
               onClick={() => {
                 setType("custom volume");
               }}
             />
             <FormLink
               icon="mount"
-              title="Mount host path"
+              title="挂载宿主机路径"
               onClick={() => {
                 setType("host path");
               }}
@@ -103,7 +103,7 @@ const AttachDiskDeviceModal: FC<Props> = ({
             {showSpecialDisk && (
               <FormLink
                 icon="file"
-                title="Special disk device"
+                title="特殊磁盘设备"
                 onClick={() => setType("special device")}
               />
             )}

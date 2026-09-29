@@ -41,18 +41,18 @@ const CreateNetworkAcl: FC = () => {
   const controllerState = useState<AbortController | null>(null);
 
   if (!project) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
 
   const NetworkAclSchema = Yup.object().shape({
     name: Yup.string()
       .test(
         "deduplicate",
-        "An ACL with this name already exists",
+        "已存在同名的网络 ACL",
         async (value) =>
           checkDuplicateName(value, project, controllerState, "network-acls"),
       )
-      .required("ACL name is required"),
+      .required("ACL 名称为必填项"),
   });
 
   const formik = useFormik<NetworkAclFormValues>({
@@ -78,19 +78,19 @@ const CreateNetworkAcl: FC = () => {
           navigate(`/ui/project/${encodeURIComponent(project)}/network-acls`);
           toastNotify.success(
             <>
-              Network ACL{" "}
+              网络 ACL{" "}
               <ResourceLink
                 type="network-acl"
                 value={values.name}
                 to={`/ui/project/${encodeURIComponent(project)}/network-acl/${encodeURIComponent(values.name)}`}
               />{" "}
-              created.
+              已创建。
             </>,
           );
         })
         .catch((e) => {
           formik.setSubmitting(false);
-          notify.failure("Network ACL creation failed", e);
+          notify.failure("创建网络 ACL 失败", e);
         });
     },
   });
@@ -111,7 +111,7 @@ const CreateNetworkAcl: FC = () => {
 
   return (
     <BaseLayout
-      title="Create a network ACL"
+      title="创建网络 ACL"
       contentClassName="create-network-acl"
     >
       <Row>
@@ -133,7 +133,7 @@ const CreateNetworkAcl: FC = () => {
             disableReason={
               formik.values.name
                 ? undefined
-                : "Please enter a network ACL name to enable this section"
+                : "请输入网络 ACL 名称以启用此区域"
             }
           />
         </div>
@@ -143,7 +143,7 @@ const CreateNetworkAcl: FC = () => {
             navigate(`/ui/project/${encodeURIComponent(project)}/network-acls`)
           }
         >
-          Cancel
+          取消
         </Button>
         <ActionButton
           appearance="positive"
@@ -151,7 +151,7 @@ const CreateNetworkAcl: FC = () => {
           disabled={formik.values.name.length === 0 || formik.isSubmitting}
           onClick={() => void formik.submitForm()}
         >
-          Create
+          创建
         </ActionButton>
       </FormFooterLayout>
     </BaseLayout>

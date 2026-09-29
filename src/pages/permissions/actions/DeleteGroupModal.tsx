@@ -71,12 +71,12 @@ const DeleteGroupModal: FC<Props> = ({ groups, close }) => {
 
     const successMessage = hasSingleGroup ? (
       <>
-        Group{" "}
+        用户组{" "}
         <ResourceLabel bold type="auth-group" value={deletableGroups[0].name} />{" "}
-        deleted.
+        已删除。
       </>
     ) : (
-      `${deletableGroups.length} groups deleted.`
+      `已删除 ${deletableGroups.length} 个用户组。`
     );
 
     deleteGroups(deletableGroups.map((group) => group.name))
@@ -93,7 +93,7 @@ const DeleteGroupModal: FC<Props> = ({ groups, close }) => {
       })
       .catch((e) => {
         notify.failure(
-          `Failed deleting ${deletableGroups.length} ${pluralize("group", deletableGroups.length)}.`,
+          `删除 ${deletableGroups.length} 个用户组失败。`,
           e,
         );
       })
@@ -107,11 +107,11 @@ const DeleteGroupModal: FC<Props> = ({ groups, close }) => {
       <>
         <li className="p-list__item">
           -{" "}
-          {`${deletableGroups.length} ${pluralize("group", deletableGroups.length)} will be deleted.`}
+          {`将删除 ${deletableGroups.length} 个用户组。`}
         </li>
         <li className="p-list__item">
           -{" "}
-          {`${restrictedGroups.length} ${pluralize("group", restrictedGroups.length)} that you do not have permission to delete will be ignored.`}
+          {`将忽略 ${restrictedGroups.length} 个你无权删除的用户组。`}
         </li>
       </>
     ) : null;
@@ -119,13 +119,12 @@ const DeleteGroupModal: FC<Props> = ({ groups, close }) => {
     const deleteText = hasOneGroup ? (
       <>
         {" "}
-        the group{" "}
+        用户组{" "}
         <ResourceLabel type="auth-group" value={deletableGroups[0].name} bold />
       </>
     ) : (
       <>
-        <strong>{deletableGroups.length}</strong>{" "}
-        {pluralize("group", deletableGroups.length)}
+        <strong>{deletableGroups.length}</strong> 个用户组
       </>
     );
 
@@ -134,23 +133,20 @@ const DeleteGroupModal: FC<Props> = ({ groups, close }) => {
         {breakdown && (
           <>
             <p>
-              <b>{groups.length}</b> {pluralize("group", groups.length)}{" "}
-              selected:
+              已选择 <b>{groups.length}</b> 个用户组：
             </p>
             <ul className="p-list">{breakdown}</ul>
           </>
         )}
         <p className="u-no-padding--top">
-          This will permanently delete {deleteText}.{"\n"}This action cannot be
-          undone and may result in users losing access to LXD, including the
-          possibility that all users lose admin access.
+          这将永久删除 {deleteText}。{"\n"}此操作无法撤销，并可能导致用户失去访问 Incus 的权限，甚至可能导致所有用户失去管理员权限。
         </p>
         {hasGroupsForLoggedInUser && (
           <div className="u-sv1">
             <LoggedInUserNotification isVisible={hasGroupsForLoggedInUser} />
           </div>
         )}
-        <p>To continue, please type the confirmation text below.</p>
+        <p>如需继续，请在下方输入确认文字。</p>
         <p>
           <strong>{confirmText}</strong>
         </p>
@@ -160,7 +156,7 @@ const DeleteGroupModal: FC<Props> = ({ groups, close }) => {
 
   return (
     <Modal
-      title="Confirm group deletion"
+      title="确认删除用户组"
       className="delete-group-confirm-modal"
       close={close}
       buttonRow={[
@@ -184,7 +180,7 @@ const DeleteGroupModal: FC<Props> = ({ groups, close }) => {
           loading={submitting}
           disabled={disableConfirm || submitting}
         >
-          {`Permanently delete ${deletableGroups.length} ${pluralize("group", deletableGroups.length)}`}
+          {`永久删除 ${deletableGroups.length} 个用户组`}
         </ActionButton>,
       ]}
     >

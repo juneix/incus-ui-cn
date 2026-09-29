@@ -20,13 +20,13 @@ import {
   isPureStorageIncomplete,
 } from "util/storagePool";
 
-export const MAIN_CONFIGURATION = "Main configuration";
+export const MAIN_CONFIGURATION = "基础配置";
 export const CEPH_CONFIGURATION = "Ceph";
 export const CEPHFS_CONFIGURATION = "CephFS";
 export const CEPHOBJECT_CONFIGURATION = "Ceph Object";
 export const POWERFLEX = "Powerflex";
 export const ZFS_CONFIGURATION = "ZFS";
-export const YAML_CONFIGURATION = "YAML configuration";
+export const YAML_CONFIGURATION = "YAML 配置";
 export const PURE_STORAGE = "Pure Storage";
 export const ALLETRA_CONFIGURATION = "HPE Alletra";
 
@@ -59,16 +59,16 @@ const StoragePoolFormMenu: FC<Props> = ({
   const hasName = formik.values.name.length > 0;
   const getDisableReason = () => {
     if (!hasName) {
-      return "Please enter a storage pool name to enable this section";
+      return "请输入存储池名称以启用此部分";
     }
     if (isPowerflexIncomplete(formik)) {
-      return "Please enter a domain, gateway, pool, and user name to enable this section";
+      return "请输入 domain、gateway、pool 和用户名以启用此部分";
     }
     if (isPureStorageIncomplete(formik)) {
-      return "Please enter an API token and gateway to enable this section";
+      return "请输入 API Token 和网关地址以启用此部分";
     }
     if (isAlletraIncomplete(formik)) {
-      return "Please enter an address, user, password and common provisioning group to enable this section";
+      return "请输入地址、用户名、密码和通用配置组以启用此部分";
     }
     return undefined;
   };
@@ -82,7 +82,7 @@ const StoragePoolFormMenu: FC<Props> = ({
 
   return (
     <div className="p-side-navigation--accordion form-navigation">
-      <nav aria-label="Storage pool form navigation">
+      <nav aria-label="存储池表单导航">
         <ul className="p-side-navigation__list">
           {isSupportedStorageDriver && (
             <MenuItem label={MAIN_CONFIGURATION} {...menuItemProps} />

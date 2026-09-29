@@ -31,12 +31,12 @@ const NetworkAclDetailHeader: FC<Props> = ({ name, networkAcl, project }) => {
     name: Yup.string()
       .test(
         "deduplicate",
-        "An ACL with this name already exists",
+        "已存在同名的网络 ACL",
         async (value) =>
           networkAcl?.name === value ||
           checkDuplicateName(value, project, controllerState, "network-acls"),
       )
-      .required("ACL name is required"),
+      .required("ACL 名称为必填项"),
   });
 
   const formik = useFormik<RenameHeaderValues>({
@@ -57,14 +57,14 @@ const NetworkAclDetailHeader: FC<Props> = ({ name, networkAcl, project }) => {
           navigate(url);
           toastNotify.success(
             <>
-              Network ACL <strong>{name}</strong> renamed to{" "}
-              <ResourceLink type="network-acl" value={values.name} to={url} />.
+              网络 ACL <strong>{name}</strong> 已重命名为{" "}
+              <ResourceLink type="network-acl" value={values.name} to={url} />。
             </>,
           );
           formik.setFieldValue("isRenaming", false);
         })
         .catch((e) => {
-          notify.failure("Renaming failed", e);
+          notify.failure("重命名失败", e);
         })
         .finally(() => {
           formik.setSubmitting(false);
@@ -76,11 +76,11 @@ const NetworkAclDetailHeader: FC<Props> = ({ name, networkAcl, project }) => {
 
   const getRenameDisableReason = () => {
     if (!canEditNetworkAcl(networkAcl)) {
-      return "You do not have permission to rename this ACL";
+      return "您没有权限重命名此 ACL";
     }
 
     if (isUsed) {
-      return "Can not rename, ACL is currently in use.";
+      return "无法重命名，此 ACL 当前正在使用中。";
     }
 
     return undefined;
@@ -94,7 +94,7 @@ const NetworkAclDetailHeader: FC<Props> = ({ name, networkAcl, project }) => {
           to={`/ui/project/${encodeURIComponent(project)}/network-acls`}
           key={1}
         >
-          Network ACLs
+          网络 ACL
         </Link>,
       ]}
       renameDisabledReason={getRenameDisableReason()}

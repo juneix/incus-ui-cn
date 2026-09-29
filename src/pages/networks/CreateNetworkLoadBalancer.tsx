@@ -40,7 +40,7 @@ const CreateNetworkLoadBalancer: FC = () => {
 
   useEffect(() => {
     if (networkError) {
-      notify.failure("Loading networks failed", networkError);
+      notify.failure("加载网络失败", networkError);
     }
   }, [networkError]);
 
@@ -68,12 +68,12 @@ const CreateNetworkLoadBalancer: FC = () => {
             `/ui/project/${encodeURIComponent(project ?? "")}/network/${encodeURIComponent(networkName ?? "")}/load-balancers`,
           );
           toastNotify.success(
-            `Network load balancer with listen address ${listenAddress} created.`,
+            `已创建监听地址为 ${listenAddress} 的网络负载均衡。`,
           );
         })
         .catch((e) => {
           formik.setSubmitting(false);
-          notify.failure("Network load balancer creation failed", e);
+          notify.failure("创建网络负载均衡失败", e);
         });
     },
   });
@@ -83,9 +83,9 @@ const CreateNetworkLoadBalancer: FC = () => {
       title={
         <HelpLink
           href={`${docBaseLink}/howto/network_load_balancers/`}
-          title="Learn more about network load balancers"
+          title="了解更多关于网络负载均衡的信息"
         >
-          Create a network load balancer
+          创建网络负载均衡
         </HelpLink>
       }
       contentClassName="create-network"
@@ -96,7 +96,7 @@ const CreateNetworkLoadBalancer: FC = () => {
           className="p-button--base"
           to={`/ui/project/${encodeURIComponent(project ?? "")}/network/${encodeURIComponent(networkName ?? "")}/load-balancers`}
         >
-          Cancel
+          取消
         </Link>
         <ActionButton
           loading={formik.isSubmitting}
@@ -107,7 +107,7 @@ const CreateNetworkLoadBalancer: FC = () => {
           }
           onClick={() => void formik.submitForm()}
         >
-          Create
+          创建
         </ActionButton>
       </FormFooterLayout>
     </BaseLayout>

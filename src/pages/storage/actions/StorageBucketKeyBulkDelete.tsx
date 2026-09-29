@@ -34,14 +34,14 @@ const StorageBucketKeyBulkDelete: FC<Props> = ({
   const projectName = project?.name || "";
   const totalCount = keys.length;
 
-  const buttonText = `Delete ${keys.length} ${pluralize("key", keys.length)}`;
+  const buttonText = `删除 ${keys.length} 个密钥`;
 
   const handleDelete = () => {
     setLoading(true);
     onStart();
     const successMessage = (
       <>
-        {keys.length} {pluralize("key", keys.length)} deleted for bucket{" "}
+        已成功删除存储桶{" "}
         <ResourceLink
           type="bucket"
           value={bucket.name}
@@ -50,8 +50,8 @@ const StorageBucketKeyBulkDelete: FC<Props> = ({
             bucket.pool,
             project?.name ?? "",
           )}
-        />
-        .
+        />{" "}
+        的 {keys.length} 个密钥。
       </>
     );
 
@@ -64,24 +64,21 @@ const StorageBucketKeyBulkDelete: FC<Props> = ({
           toastNotify.success(successMessage, viewBulkDetails(results));
         } else if (rejectedCount === totalCount) {
           toastNotify.failure(
-            "Key bulk deletion failed",
+            "批量删除密钥失败",
             undefined,
             <>
-              <b>{totalCount}</b> {pluralize("key", totalCount)} could not be
-              deleted.
+              <b>{totalCount}</b> 个密钥未能删除。
             </>,
             viewBulkDetails(results),
           );
         } else {
           toastNotify.failure(
-            "Key bulk deletion partially failed",
+            "批量删除密钥部分失败",
             undefined,
             <>
-              <b>{fulfilledCount}</b> {pluralize("key", fulfilledCount)}{" "}
-              deleted.
+              <b>{fulfilledCount}</b> 个密钥已删除。
               <br />
-              <b>{rejectedCount}</b> {pluralize("key", rejectedCount)} could not
-              be deleted.
+              <b>{rejectedCount}</b> 个密钥未能删除。
             </>,
             viewBulkDetails(results),
           );
@@ -103,7 +100,7 @@ const StorageBucketKeyBulkDelete: FC<Props> = ({
       .catch((e) => {
         setLoading(false);
         toastNotify.failure(
-          `Key bulk deletion failed for bucket ${bucket.name}`,
+          `存储桶 ${bucket.name} 的密钥批量删除失败`,
           e,
         );
       });
@@ -117,7 +114,7 @@ const StorageBucketKeyBulkDelete: FC<Props> = ({
       onDelete={handleDelete}
       disabledReason={
         totalCount === 0
-          ? `You do not have permission to delete the selected ${pluralize("key", keys.length)}`
+          ? `您没有权限删除所选密钥`
           : undefined
       }
       confirmationButtonProps={{

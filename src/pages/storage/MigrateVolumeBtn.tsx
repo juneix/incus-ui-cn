@@ -19,7 +19,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import ResourceLabel from "components/ResourceLabel";
 import ResourceLink from "components/ResourceLink";
-import { migrateStorageVolume } from "api/storage-volumes";
 import { useStorageVolumeEntitlements } from "util/entitlements/storage-volumes";
 import { hasLocation } from "util/storageVolume";
 import VolumeLinkChip from "pages/storage/VolumeLinkChip";
@@ -72,7 +71,7 @@ const MigrateVolumeBtn: FC<Props> = ({
     );
     toastNotify.success(
       <>
-        Volume {volumeLink} successfully migrated to pool {poolLink}
+        存储卷 {volumeLink} 已成功迁移到存储池 {poolLink}
       </>,
     );
 
@@ -92,7 +91,7 @@ const MigrateVolumeBtn: FC<Props> = ({
     );
     toastNotify.success(
       <>
-        Volume {volumeLink} successfully migrated to {newTarget}
+        存储卷 {volumeLink} 已成功迁移到 {newTarget}
       </>,
     );
   };
@@ -138,6 +137,7 @@ const MigrateVolumeBtn: FC<Props> = ({
 
   const handleStoragePoolMigration = (targetPool: string) => {
     setVolumeLoading(true);
+    const failureMsg = `迁移存储卷 ${volume.name} 到存储池 ${targetPool} 失败`;
     migrateStorageVolume(volume, targetPool, volume.project, volume.location)
       .then((operation) => {
         eventQueue.set(
@@ -162,7 +162,7 @@ const MigrateVolumeBtn: FC<Props> = ({
         );
         toastNotify.info(
           <>
-            Migration started for volume {volumeLabel} to pool {poolLink}
+            已开始迁移存储卷 {volumeLabel} 到存储池 {poolLink}
           </>,
         );
         queryClient.invalidateQueries({
@@ -194,14 +194,14 @@ const MigrateVolumeBtn: FC<Props> = ({
         notifyFailure(
           e,
           volume.name,
-          `Migration failed for volume ${oldVolume.name} to target ${newTarget}`,
+          `迁移存储卷 ${oldVolume.name} 到目标 ${newTarget} 失败`,
         );
       });
   };
 
   const handleClusterMemberMigration = (targetMember: string) => {
     setVolumeLoading(true);
-    const failureMsg = `Migration failed for volume ${volume.name} to target ${targetMember}`;
+    const failureMsg = `迁移存储卷 ${volume.name} 到目标 ${targetMember} 失败`;
     copyCustomVolumeToTarget(volume.project, volume, targetMember)
       .then((operation) => {
         eventQueue.set(
@@ -215,7 +215,7 @@ const MigrateVolumeBtn: FC<Props> = ({
         );
         toastNotify.info(
           <>
-            Migration started for volume {volumeLink} to {targetMember}
+            已开始迁移存储卷 {volumeLink} 到 {targetMember}
           </>,
         );
         void queryClient.invalidateQueries({
@@ -252,12 +252,12 @@ const MigrateVolumeBtn: FC<Props> = ({
         disabled={!canEditVolume(volume) || isVolumeLoading}
         title={
           canEditVolume(volume)
-            ? "Migrate volume"
-            : "You do not have permission to migrate this volume"
+            ? "迁移存储卷"
+            : "你没有迁移此存储卷的权限"
         }
       >
         <Icon name="machines" />
-        <span>Migrate</span>
+        <span>迁移</span>
       </ActionButton>
     </>
   );

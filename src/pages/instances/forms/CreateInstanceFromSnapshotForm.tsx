@@ -225,7 +225,7 @@ const CreateInstanceFromSnapshotForm: FC<Props> = ({
     <Modal
       close={close}
       className="create-instance-from-snapshot-modal"
-      title="Create instance from snapshot"
+      title="从快照创建实例"
       buttonRow={
         <>
           <Button
@@ -234,7 +234,7 @@ const CreateInstanceFromSnapshotForm: FC<Props> = ({
             type="button"
             onClick={close}
           >
-            Cancel
+            取消
           </Button>
           <ActionButton
             appearance="positive"
@@ -248,7 +248,7 @@ const CreateInstanceFromSnapshotForm: FC<Props> = ({
             }
             onClick={() => void formik.submitForm()}
           >
-            Create
+            创建
           </ActionButton>
         </>
       }
@@ -256,25 +256,25 @@ const CreateInstanceFromSnapshotForm: FC<Props> = ({
       <Form onSubmit={formik.handleSubmit}>
         <Input
           type="text"
-          label="Snapshot name"
+          label="快照名称"
           disabled
           value={snapshot.name}
         />
         <Input
           {...formik.getFieldProps("instanceName")}
           type="text"
-          label="New instance name"
+          label="新实例名称"
           error={formik.errors.instanceName}
         />
         <ClusterMemberSelector
           {...formik.getFieldProps("targetClusterMember")}
           id="targetClusterMember"
-          label="Target cluster member"
+          label="目标集群成员"
         />
         <Select
           {...formik.getFieldProps("targetStoragePool")}
           id="storagePool"
-          label="Storage pool"
+          label="存储池"
           options={storagePools.map((storagePool) => {
             return {
               label: storagePool.name,
@@ -285,7 +285,7 @@ const CreateInstanceFromSnapshotForm: FC<Props> = ({
         <Select
           {...formik.getFieldProps("targetProject")}
           id="project"
-          label="Target project"
+          label="目标项目"
           options={validTargetProjects.map((project) => {
             return {
               label: project.name,
@@ -298,7 +298,7 @@ const CreateInstanceFromSnapshotForm: FC<Props> = ({
           <Input
             {...formik.getFieldProps("stateful")}
             type="checkbox"
-            label="Copy stateful"
+            label="复制状态信息 (Stateful)"
           />
         )}
         {/* hidden submit to enable enter key in inputs */}

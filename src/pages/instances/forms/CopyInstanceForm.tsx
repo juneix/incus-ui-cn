@@ -199,7 +199,7 @@ const CopyInstanceForm: FC<Props> = ({ instance, close }) => {
     <Modal
       close={close}
       className="copy-instances-modal"
-      title="Copy Instance"
+      title="复制实例"
       buttonRow={
         <>
           <Button
@@ -208,7 +208,7 @@ const CopyInstanceForm: FC<Props> = ({ instance, close }) => {
             type="button"
             onClick={close}
           >
-            Cancel
+            取消
           </Button>
           <ActionButton
             appearance="positive"
@@ -222,7 +222,7 @@ const CopyInstanceForm: FC<Props> = ({ instance, close }) => {
             }
             onClick={() => void formik.submitForm()}
           >
-            Copy
+            复制
           </ActionButton>
         </>
       }

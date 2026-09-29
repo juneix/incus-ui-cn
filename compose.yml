@@ -1,0 +1,14 @@
+services:
+  incus-ui-cn:
+    image: ghcr.io/juneix/incus-ui-cn
+    container_name: incus-ui-cn
+    restart: always
+    network_mode: host
+    environment:
+      port: 5566
+      backend: https://127.0.0.1:8443
+      tls_verify: off
+      BASIC_AUTH_USER: admin
+      BASIC_AUTH_PASS: your_strong_password
+    volumes:
+      - /opt/incus/cert:/run/incus:ro

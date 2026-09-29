@@ -16,28 +16,28 @@ const StoragePoolFormPowerflex: FC<Props> = ({ formik }) => {
       rows={[
         getConfigurationRow({
           formik,
-          label: "Clone copy",
+          label: "克隆副本",
           name: "powerflex_clone_copy",
           defaultValue: "",
           children: <Select options={optionTrueFalse} />,
         }),
         getConfigurationRow({
           formik,
-          label: "SDT",
+          label: "SDT (存储数据目标)",
           name: "powerflex_sdt",
           defaultValue: "",
           children: <Input type="text" />,
         }),
         getConfigurationRow({
           formik,
-          label: "Gateway verify",
+          label: "验证网关证书",
           name: "powerflex_gateway_verify",
           defaultValue: "",
           children: <Select options={optionTrueFalse} />,
         }),
         getConfigurationRow({
           formik,
-          label: "Mode",
+          label: "模式",
           name: "powerflex_mode",
           defaultValue: "",
           children: <Select options={optionNvmeSdc} />,

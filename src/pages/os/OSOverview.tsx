@@ -50,11 +50,11 @@ const OSOverview: FC<Props> = ({ target }) => {
   });
 
   if (isLoading) {
-    return <Spinner className="u-loader" text="Loading OS overview..." />;
+    return <Spinner className="u-loader" text="正在加载操作系统概览..." />;
   }
 
   if (error) {
-    notify.failure("Loading overview failed", error);
+    notify.failure("加载概览失败", error);
   }
 
   return (
@@ -62,21 +62,21 @@ const OSOverview: FC<Props> = ({ target }) => {
       <NotificationRow />
       <Row className="general">
         <Col size={3}>
-          <h2 className="p-heading--5">General</h2>
+          <h2 className="p-heading--5">常规</h2>
         </Col>
         <Col size={7}>
           <table>
             <tbody>
               <tr>
-                <th className="u-text--muted">Version</th>
+                <th className="u-text--muted">版本</th>
                 <td>{incusOSData.environment.os_version}</td>
               </tr>
               <tr>
-                <th className="u-text--muted">Update status</th>
+                <th className="u-text--muted">更新状态</th>
                 <td>{systemUpdate?.state?.status}</td>
               </tr>
               <tr>
-                <th className="u-text--muted">Installed applications</th>
+                <th className="u-text--muted">已安装应用</th>
                 <td>
                   {apps.data?.map((app) => (
                     <div key={app.name}>

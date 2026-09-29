@@ -16,10 +16,10 @@ const RebootOSBtn: FC<Props> = ({ target }) => {
   const handleReboot = () => {
     rebootOS(target)
       .then(() => {
-        toastNotify.success(<>OS rebooted.</>);
+        toastNotify.success(<>操作系统正在重启。</>);
       })
       .catch((e) => {
-        toastNotify.failure("OS reboot failed", e);
+        toastNotify.failure("系统重启失败", e);
       });
   };
 
@@ -29,10 +29,10 @@ const RebootOSBtn: FC<Props> = ({ target }) => {
       loading={false}
       className="has-icon is-dense"
       confirmationModalProps={{
-        title: "Confirm reboot",
-        children: <p>This will reboot server</p>,
+        title: "确认重启",
+        children: <p>这将重启该服务器系统</p>,
         onConfirm: handleReboot,
-        confirmButtonLabel: "Reboot",
+        confirmButtonLabel: "重启",
       }}
       shiftClickEnabled
       showShiftClickHint

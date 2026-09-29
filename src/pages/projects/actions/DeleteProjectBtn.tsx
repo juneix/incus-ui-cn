@@ -32,7 +32,7 @@ const generateProjectUsedByTooltip = (project: LxdProject) => {
         link: `/ui/project/${encodeURIComponent(project.name)}/instances`,
       },
       profile: {
-        label: "配置文件",
+        label: "配置模板",
         link: `/ui/project/${encodeURIComponent(project.name)}/profiles`,
       },
       image: {

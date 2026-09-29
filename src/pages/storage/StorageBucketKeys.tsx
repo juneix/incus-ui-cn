@@ -64,23 +64,23 @@ const StorageBucketKeys: FC<Props> = ({ bucket }) => {
 
   const headers = [
     {
-      content: "Name",
+      content: "名称",
       sortKey: "name",
       className: "name",
     },
     {
-      content: "Role",
+      content: "角色",
       sortKey: "role",
       className: "role",
     },
     {
-      content: "Description",
+      content: "描述",
       sortKey: "description",
       className: "description",
     },
-    { content: "Access key", className: "key-field", sortKey: "access-key" },
-    { content: "Secret key", className: "key-field", sortKey: "secret-key" },
-    { "aria-label": "Actions", className: "actions" },
+    { content: "Access Key", className: "key-field", sortKey: "access-key" },
+    { content: "Secret Key", className: "key-field", sortKey: "secret-key" },
+    { "aria-label": "操作", className: "actions" },
   ];
 
   const rows = filteredKeys.map((key) => {
@@ -91,43 +91,43 @@ const StorageBucketKeys: FC<Props> = ({ bucket }) => {
       columns: [
         {
           content: (
-            <div className="u-truncate" title={`Key ${key.name}`}>
+            <div className="u-truncate" title={`密钥 ${key.name}`}>
               <ItemName item={key} />
             </div>
           ),
           role: "rowheader",
-          "aria-label": "Name",
+          "aria-label": "名称",
           className: "name",
         },
         {
           content: capitalizeFirstLetter(key.role),
           role: "cell",
-          "aria-label": "Role",
+          "aria-label": "角色",
           className: "role",
         },
         {
           content: key.description || "-",
           title: key.description,
           role: "cell",
-          "aria-label": "Description",
+          "aria-label": "描述",
           className: "description u-truncate",
         },
         {
           content: key["access-key"],
           role: "cell",
-          "aria-label": "Access key",
+          "aria-label": "Access Key",
           className: "key-field",
         },
         {
           content: key["secret-key"],
           role: "cell",
-          "aria-label": "Secret key",
+          "aria-label": "Secret Key",
           className: "key-field",
         },
         {
           content: <StorageBucketKeyActions bucketKey={key} bucket={bucket} />,
           role: "cell",
-          "aria-label": "Actions",
+          "aria-label": "操作",
           className: "u-align--right actions",
         },
       ],
@@ -165,9 +165,9 @@ const StorageBucketKeys: FC<Props> = ({ bucket }) => {
                   onChange={(value) => {
                     setQuery(value);
                   }}
-                  placeholder="Search for keys"
+                  placeholder="搜索密钥"
                   value={query}
-                  aria-label="Search for keys"
+                  aria-label="搜索密钥"
                 />
               </div>
               <CreateStorageBucketKeyBtn />
@@ -199,15 +199,15 @@ const StorageBucketKeys: FC<Props> = ({ bucket }) => {
             <TablePagination
               data={sortedRows}
               id="pagination"
-              itemName="key"
+              itemName="个密钥"
               className="u-no-margin--top"
-              aria-label="Table pagination control"
+              aria-label="表格分页控件"
               description={
                 selectedNames.length > 0 && (
                   <SelectedTableNotification
                     totalCount={keys?.length ?? 0}
-                    itemName="key"
-                    parentName="bucket"
+                    itemName="密钥"
+                    parentName="存储桶"
                     selectedNames={selectedNames}
                     setSelectedNames={setSelectedNames}
                     filteredNames={filteredKeys.map((item) => item.name)}
@@ -220,9 +220,9 @@ const StorageBucketKeys: FC<Props> = ({ bucket }) => {
                 headers={headers}
                 rows={sortedRows}
                 sortable
-                emptyStateMsg="No key found matching this search"
-                itemName="key"
-                parentName="bucket"
+                emptyStateMsg="未找到匹配的密钥"
+                itemName="密钥"
+                parentName="存储桶"
                 selectedNames={selectedNames}
                 setSelectedNames={setSelectedNames}
                 disabledNames={processingNames}
@@ -239,15 +239,15 @@ const StorageBucketKeys: FC<Props> = ({ bucket }) => {
         <EmptyState
           className="empty-state"
           image={<Icon name="private-key" className="empty-state-icon" />}
-          title="No keys"
+          title="暂无密钥"
         >
-          <p>This bucket does not contain any keys.</p>
+          <p>此存储桶尚未创建任何访问密钥。</p>
           <p>
             <DocLink
               docPath="/howto/storage_buckets/#manage-storage-bucket-keys"
               hasExternalIcon
             >
-              Learn how to manage storage bucket keys
+              了解如何管理存储桶密钥
             </DocLink>
           </p>
           <CreateStorageBucketKeyBtn />

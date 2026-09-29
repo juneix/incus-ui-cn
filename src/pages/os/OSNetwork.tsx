@@ -46,27 +46,27 @@ const OSNetwork: FC<Props> = ({ target }) => {
       target,
     )
       .then(() => {
-        toastNotify.success(<>Network updated</>);
+        toastNotify.success(<>网络配置已更新</>);
         queryClient.invalidateQueries({
           queryKey: [queryKeys.osNetwork, target],
         });
         handleSuccess();
       })
       .catch((e) => {
-        toastNotify.failure("Network update failed", e);
+        toastNotify.failure("网络配置更新失败", e);
         handleFailure();
       });
   };
 
   if (error) {
-    notify.failure("Loading network data failed", error);
+    notify.failure("加载网络数据失败", error);
   }
 
   return (
     <>
       <NotificationRow />
       {isLoading && (
-        <Spinner className="u-loader" text="Loading network data..." />
+        <Spinner className="u-loader" text="正在加载网络数据..." />
       )}
       {!isLoading && !error && (
         <OSYamlEditor

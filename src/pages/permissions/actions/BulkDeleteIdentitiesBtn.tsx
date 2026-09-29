@@ -20,7 +20,7 @@ const BulkDeleteIdentitiesBtn: FC<Props> = ({ identities }) => {
   const queryClient = useQueryClient();
   const notify = useNotify();
   const toastNotify = useToastNotification();
-  const buttonText = `Delete ${pluralize("identity", identities.length)}`;
+  const buttonText = `删除 ${identities.length} 个身份`;
   const [isLoading, setLoading] = useState(false);
   const { canDeleteIdentity } = useIdentityEntitlements();
   const { data: settings } = useSettings();
@@ -42,7 +42,7 @@ const BulkDeleteIdentitiesBtn: FC<Props> = ({ identities }) => {
 
   const handleDelete = () => {
     setLoading(true);
-    const successMessage = `${deletableIdentities.length} ${pluralize("identity", deletableIdentities.length)} successfully deleted`;
+    const successMessage = `已成功删除 ${deletableIdentities.length} 个身份`;
     deleteIdentities(deletableIdentities)
       .then(() => {
         if (isSelf && settings?.auth_user_method === "oidc") {
@@ -64,7 +64,7 @@ const BulkDeleteIdentitiesBtn: FC<Props> = ({ identities }) => {
         setLoading(false);
       })
       .catch((e) => {
-        notify.failure(`Identity deletion failed`, e);
+        notify.failure(`删除身份失败`, e);
         setLoading(false);
       });
   };
@@ -75,8 +75,8 @@ const BulkDeleteIdentitiesBtn: FC<Props> = ({ identities }) => {
     }
 
     return [
-      `${deletableIdentities.length} ${pluralize("identity", deletableIdentities.length)} will be deleted.`,
-      `${restrictedIdentities.length} ${pluralize("identity", restrictedIdentities.length)} that you do not have permission to delete will be ignored.`,
+      `将删除 ${deletableIdentities.length} 个身份。`,
+      `将忽略 ${restrictedIdentities.length} 个你无权删除的身份。`,
     ];
   };
 
@@ -88,7 +88,7 @@ const BulkDeleteIdentitiesBtn: FC<Props> = ({ identities }) => {
       onDelete={handleDelete}
       disabledReason={
         !deletableIdentities.length
-          ? `You do not have permission to delete the selected ${pluralize("identity", identities.length)}`
+          ? "你没有权限删除所选身份"
           : undefined
       }
       className="u-no-margin--bottom"

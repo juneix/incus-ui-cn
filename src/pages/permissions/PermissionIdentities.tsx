@@ -192,7 +192,21 @@ const PermissionIdentities: FC = () => {
           className: "auth-method",
         },
         {
-          content: identity.type,
+          content: (() => {
+            if (identity.type.startsWith("Client certificate")) {
+              return identity.type.replace("Client certificate", "客户端证书");
+            }
+            if (identity.type.startsWith("OIDC client")) {
+              return identity.type.replace("OIDC client", "OIDC 客户端");
+            }
+            if (identity.type.startsWith("Server certificate")) {
+              return identity.type.replace("Server certificate", "服务器证书");
+            }
+            if (identity.type.startsWith("Metrics certificate")) {
+              return identity.type.replace("Metrics certificate", "指标证书");
+            }
+            return identity.type;
+          })(),
           role: "cell",
           "aria-label": "类型",
           className: "u-truncate identity-type",

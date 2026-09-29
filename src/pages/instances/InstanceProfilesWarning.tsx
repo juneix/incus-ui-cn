@@ -14,10 +14,8 @@ const InstanceProfilesWarning: FC<Props> = ({ instanceProfiles, profiles }) => {
 
   if (isMissingSomeProfiles) {
     return (
-      <Notification severity="caution" title="Restricted permissions">
-        You do not have permission to view all profiles applied to this
-        instance. This may cause inherited configuration values to be displayed
-        incorrectly.
+      <Notification severity="caution" title="权限受限">
+        你没有权限查看应用于此实例的所有配置模板。这可能导致继承的配置值显示不正确。
       </Notification>
     );
   }

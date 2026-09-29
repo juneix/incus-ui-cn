@@ -16,14 +16,14 @@ const EditGroupIdentitiesBtn: FC<Props> = ({ groups, className }) => {
         onClick={() => {
           panelParams.openGroupIdentities();
         }}
-        aria-label="Manage identities"
-        title="Manage identities"
+        aria-label="管理身份"
+        title="管理身份"
         className={className}
         disabled={!groups.length}
         hasIcon
       >
         <Icon name="user-group" />
-        <span>Manage identities</span>
+        <span>管理身份</span>
       </Button>
     </>
   );

@@ -47,6 +47,9 @@ const Login: FC = () => {
               </>
               )}
             </div>
+            <div className="u-sv2" style={{ maxWidth: 480, margin: "2rem auto 0", textAlign: "left", fontSize: "0.875rem", color: "#666" }}>
+              <p><strong>💡 提示：</strong>若使用 Docker 部署，请确保已挂载与后端信任的客户端证书（<code>incus-ui.crt</code> / <code>incus-ui.key</code>）。证书配置就绪后刷新页面将自动免密直登。</p>
+            </div>
           </>
         </div>
       </CustomLayout>
