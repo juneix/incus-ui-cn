@@ -2,7 +2,20 @@ name: Build and Push Docker Image
 
 on:
   push:
-    tags: [ 'v*' ]
+    branches:
+      - 'cn-lite'
+    tags:
+      - 'v*'
+    paths:
+      - 'src/**'
+      - 'docker/**'
+      - 'Dockerfile'
+      - 'package.json'
+      - 'yarn.lock'
+      - 'vite.config.ts'
+      - 'tsconfig*.json'
+      - 'index.html'
+      - '.github/workflows/docker-publish.yml'
   workflow_dispatch:
 
 env:
@@ -56,6 +69,8 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
+          build-args: |
+            VITE_APP_VERSION=${{ github.ref_type == 'tag' && github.ref_name || '' }}
           tags: |
             ghcr.io/${{ steps.prep.outputs.repo_lower }}/incus-ui-cn:latest
             ${{ secrets.DOCKER_USER }}/incus-ui-cn:latest

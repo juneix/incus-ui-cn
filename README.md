@@ -65,6 +65,29 @@ services:
 http://ip:5566/ui/
 ```
 
+## 📂 项目结构说明
+
+```text
+incus-ui-cn/
+├── Dockerfile                  # 生产镜像构建文件 (Node 24 构建 + Nginx Alpine 运行)
+├── docker/                     # 容器运行时配置
+│   └── nginx/
+│       ├── default.conf.template  # Nginx 反向代理配置模板 (端口/后端/TLS)
+│       └── render-config.sh       # 容器启动渲染脚本 (自动生成 htpasswd / 证书附加)
+├── src/                        # 前端源码 (React 19 + TypeScript)
+│   ├── components/             # 通用 UI 交互组件、表单与导航控件
+│   ├── context/                # 全局状态管理 (认证、项目上下文、服务器设置)
+│   ├── i18n/                   # 中文轻量字典系统 (dict.ts)
+│   ├── pages/                  # 核心业务页面 (实例、存储卷/池/桶、网络与ACL、配置模板、系统监控等)
+│   └── util/                   # 工具函数、OpenFGA 权限对照表与版本声明
+├── .github/                    # 自动化工作流
+│   └── workflows/
+│       └── docker-publish.yml  # 多架构 Docker 镜像自动化云构建流水线
+├── package.json                # 项目依赖与全局版本定义
+├── vite.config.ts              # 前端打包配置、动态版本注入与本地代理
+└── README.md                   # 项目主说明文档
+```
+
 ## ❤️ 支持项目
 
 - 打赏鼓励：支持我开发更多有趣应用

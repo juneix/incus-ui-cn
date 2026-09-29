@@ -48,6 +48,19 @@ const incusProxyOptions = {
   agent: incusProxyAgent,
 };
 
+const getAppVersion = () => {
+  if (process.env.VITE_APP_VERSION) {
+    return JSON.stringify(process.env.VITE_APP_VERSION);
+  }
+  try {
+    const pkg = JSON.parse(fs.readFileSync("package.json", "utf-8"));
+    if (pkg.version && pkg.version !== "0.0.1") {
+      return JSON.stringify(pkg.version);
+    }
+  } catch {}
+  return JSON.stringify("0.21.7");
+};
+
 export default defineConfig(({ command }) => ({
   base: command === "build" ? "/ui/" : "/",
   css: {
@@ -76,5 +89,8 @@ export default defineConfig(({ command }) => ({
   build: {
     outDir: "./build/ui",
     minify: "esbuild",
+  },
+  define: {
+    __UI_VERSION__: getAppVersion(),
   },
 }));

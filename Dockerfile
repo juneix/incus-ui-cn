@@ -6,6 +6,8 @@ RUN corepack enable && corepack prepare yarn@1.22.22 --activate
 RUN yarn install --frozen-lockfile
 
 COPY . .
+ARG VITE_APP_VERSION
+ENV VITE_APP_VERSION=$VITE_APP_VERSION
 RUN yarn build
 
 FROM nginx:1.28.2-alpine
