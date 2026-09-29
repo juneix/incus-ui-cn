@@ -28,37 +28,37 @@ const ClusterMemberList: FC = () => {
   const { canEditServerConfiguration } = useServerEntitlements();
 
   if (error) {
-    notify.failure("Loading cluster members failed", error);
+    notify.failure("加载集群成员失败", error);
   }
 
   const headers = [
     {
-      content: "Name",
+      content: "名称",
       className: "name",
       sortKey: "name",
     },
     {
-      content: <span className="status-header">Status</span>,
+      content: <span className="status-header">状态</span>,
       className: "status",
       sortKey: "status",
     },
-    { content: "Roles", sortKey: "roles", className: "roles" },
+    { content: "角色", sortKey: "roles", className: "roles" },
     {
-      content: "Failure domain",
+      content: "故障域",
       className: "failure-domain",
       sortKey: "failureDomain",
     },
     {
-      content: "Description",
+      content: "描述",
       sortKey: "description",
       className: "description",
     },
     {
-      content: "Groups",
+      content: "分组",
       className: "groups u-align--right",
       sortKey: "groups",
     },
-    { "aria-label": "Action", className: "u-align--right actions" },
+    { "aria-label": "操作", className: "u-align--right actions" },
   ];
 
   const rows = members.map((member) => {
@@ -86,7 +86,7 @@ const ClusterMemberList: FC = () => {
             </>
           ),
           role: "rowheader",
-          "aria-label": "Name and url",
+          "aria-label": "名称和地址",
           className: "name",
         },
         {
@@ -96,30 +96,30 @@ const ClusterMemberList: FC = () => {
                 <ClusterMemberStatus member={member} />
               </div>
               <div className="u-text--muted status-header">
-                {loadingType ? "In progress" : member.message}
+                {loadingType ? "进行中" : member.message}
               </div>
             </>
           ),
           role: "cell",
-          "aria-label": "Status",
+          "aria-label": "状态",
           className: "status",
         },
         {
           content: member.roles.join(", "),
           role: "cell",
-          "aria-label": "Roles",
+          "aria-label": "角色",
           className: "roles",
         },
         {
           content: member.failure_domain,
           role: "cell",
-          "aria-label": "Failure domain",
+          "aria-label": "故障域",
           className: "failure-domain",
         },
         {
           content: member.description,
           role: "cell",
-          "aria-label": "Description",
+          "aria-label": "描述",
           className: "description",
         },
         {
@@ -132,13 +132,13 @@ const ClusterMemberList: FC = () => {
           ),
           role: "cell",
           className: "groups u-align--right",
-          "aria-label": "Groups",
+          "aria-label": "分组",
         },
         {
           content: <ClusterMemberActions member={member} />,
           role: "cell",
           className: "u-align--right actions",
-          "aria-label": "Action",
+          "aria-label": "操作",
         },
       ],
       sortData: {
@@ -160,9 +160,9 @@ const ClusterMemberList: FC = () => {
       title={
         <HelpLink
           docPath="/explanation/clustering/"
-          title="Learn more about clustering"
+          title="了解更多集群信息"
         >
-          Cluster members
+          集群成员
         </HelpLink>
       }
     >
@@ -176,9 +176,9 @@ const ClusterMemberList: FC = () => {
           <TablePagination
             data={sortedRows}
             id="pagination"
-            itemName="cluster member"
+            itemName="集群成员"
             className="u-no-margin--top"
-            aria-label="Table pagination control"
+            aria-label="表格分页控件"
           >
             <MainTable
               id="cluster-table"
@@ -190,7 +190,7 @@ const ClusterMemberList: FC = () => {
                 isLoading && (
                   <Spinner
                     className="u-loader"
-                    text="Loading cluster members..."
+                    text="正在加载集群成员..."
                   />
                 )
               }

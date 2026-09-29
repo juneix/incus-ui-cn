@@ -8,19 +8,19 @@ const ProjectConfiguration: FC = () => {
   const { project: projectName } = useParams<{ project: string }>();
 
   if (!projectName) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
 
   const { project, isLoading } = useCurrentProject();
 
   if (isLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="正在加载..." isMainComponent />;
   }
 
   return project ? (
     <EditProject project={project} key={project.name} />
   ) : (
-    <>Loading project failed</>
+    <>加载项目失败</>
   );
 };
 

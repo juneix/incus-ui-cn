@@ -45,7 +45,7 @@ const EditIdentitiesForm: FC<Props> = ({
     .map((identity) => identity.id);
 
   if (error) {
-    notify.failure("Loading details failed", error);
+    notify.failure("加载详情失败", error);
   }
 
   const fineGrainedIdentities = identities.filter(
@@ -80,7 +80,7 @@ const EditIdentitiesForm: FC<Props> = ({
     } else {
       const addMe = identities.find((identity) => identity.id === id);
       if (!addMe) {
-        notify.failure("Selection failed", new Error("Identity not found"));
+        notify.failure("选择失败", new Error("未找到身份"));
         return;
       }
       setSelected([...selected, { ...addMe, isAdded: true, isRemoved: false }]);
@@ -114,10 +114,10 @@ const EditIdentitiesForm: FC<Props> = ({
   };
 
   const headers = [
-    { content: "Identity", sortKey: "name" },
+    { content: "身份", sortKey: "name" },
     {
       content: "",
-      "aria-label": "Modified status",
+      "aria-label": "修改状态",
       className: "modified-status",
     },
   ];
@@ -147,17 +147,17 @@ const EditIdentitiesForm: FC<Props> = ({
         {
           content: name,
           role: "rowheader",
-          "aria-label": "Identity",
+          "aria-label": "身份",
           title: canEditIdentity(identity)
             ? name
-            : "You do not have permission to allocate this identity to the group",
+            : "你没有权限将该身份分配到用户组",
           onClick: clickRow,
           className: "clickable-cell",
         },
         {
           content: isModified && <Icon name="status-in-progress-small" />,
           role: "cell",
-          "aria-label": "Modified status",
+          "aria-label": "修改状态",
           className: "modified-status u-align--right",
         },
       ],
@@ -180,6 +180,8 @@ const EditIdentitiesForm: FC<Props> = ({
         onChange={(value) => {
           setFilter(value);
         }}
+        placeholder="搜索身份"
+        aria-label="搜索身份"
       />
       <ScrollableTable
         dependencies={[identities, selected, notify.notification]}
@@ -191,9 +193,9 @@ const EditIdentitiesForm: FC<Props> = ({
           headers={headers}
           rows={sortedRows}
           sortable
-          emptyStateMsg="No identities found"
-          itemName="identity"
-          parentName="server"
+          emptyStateMsg="未找到身份"
+          itemName="身份"
+          parentName="服务器"
           selectedNames={selected
             .filter((id) => !id.isRemoved)
             .map((identity) => identity.id)}

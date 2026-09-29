@@ -43,7 +43,7 @@ const CreateIdpGroupPanel: FC = () => {
     });
 
   if (error) {
-    notify.failure("Loading panel details failed", error);
+    notify.failure("加载面板详情失败", error);
   }
 
   const modifyGroups = (newGroups: string[], isUnselectAll?: boolean) => {
@@ -74,13 +74,13 @@ const CreateIdpGroupPanel: FC = () => {
       .then(() => {
         toastNotify.success(
           <>
-            IDP group{" "}
+            IDP 用户组{" "}
             <ResourceLink
               type="idp-group"
               value={values.name}
               to="/ui/permissions/idp-groups"
             />{" "}
-            created.
+            已创建。
           </>,
         );
         queryClient.invalidateQueries({
@@ -89,7 +89,7 @@ const CreateIdpGroupPanel: FC = () => {
         closePanel();
       })
       .catch((e) => {
-        notify.failure(`IDP group creation failed`, e);
+        notify.failure("创建 IDP 用户组失败", e);
       })
       .finally(() => {
         formik.setSubmitting(false);
@@ -99,7 +99,7 @@ const CreateIdpGroupPanel: FC = () => {
   const groupSchema = Yup.object().shape({
     name: Yup.string()
       .test(...testDuplicateIdpGroupName(controllerState))
-      .required("IDP group name is required"),
+      .required("IDP 用户组名称不能为空"),
   });
 
   const formik = useFormik<IdpGroupFormValues>({
@@ -113,11 +113,11 @@ const CreateIdpGroupPanel: FC = () => {
   return (
     <SidePanel loading={isLoading} hasError={!groups}>
       <SidePanel.Header>
-        <SidePanel.HeaderTitle>Create IDP group</SidePanel.HeaderTitle>
+        <SidePanel.HeaderTitle>创建 IDP 用户组</SidePanel.HeaderTitle>
       </SidePanel.Header>
       <NotificationRow className="u-no-padding" />
       <NameWithGroupForm formik={formik} />
-      <p>Groups</p>
+      <p>用户组</p>
       <SidePanel.Content className="u-no-padding">
         <GroupSelection
           groups={groups}
@@ -148,7 +148,7 @@ const CreateIdpGroupPanel: FC = () => {
           onClick={closePanel}
           className="u-no-margin--bottom"
         >
-          Cancel
+          取消
         </Button>
         <ActionButton
           appearance="positive"
@@ -159,7 +159,7 @@ const CreateIdpGroupPanel: FC = () => {
           }
           loading={formik.isSubmitting}
         >
-          Create IDP group
+          创建 IDP 用户组
         </ActionButton>
       </SidePanel.Footer>
     </SidePanel>

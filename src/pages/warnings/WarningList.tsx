@@ -38,7 +38,7 @@ const WarningList: FC = () => {
   });
 
   if (error) {
-    notify.failure("Loading warnings failed", error);
+    notify.failure("加载告警失败", error);
   }
 
   const hasWarnings = isLoading || warnings.length > 0;
@@ -87,18 +87,18 @@ const WarningList: FC = () => {
   }, [filteredWarnings]);
 
   const headers = [
-    { content: "Type", sortKey: "type", className: "type" },
+    { content: "类型", sortKey: "type", className: "type" },
     {
-      content: "Last message",
+      content: "最新消息",
       sortKey: "lastMessage",
       className: "last_message",
     },
-    { content: "Status", sortKey: "status", className: "status" },
-    { content: "Severity", sortKey: "severity", className: "severity" },
-    { content: "Count", sortKey: "count", className: "count u-align--right" },
-    { content: "Project", sortKey: "project", className: "project" },
-    { content: "First seen", sortKey: "firstSeen", className: "first_seen_at" },
-    { content: "Last seen", sortKey: "lastSeen", className: "last_seen_at" },
+    { content: "状态", sortKey: "status", className: "status" },
+    { content: "严重级别", sortKey: "severity", className: "severity" },
+    { content: "次数", sortKey: "count", className: "count u-align--right" },
+    { content: "项目", sortKey: "project", className: "project" },
+    { content: "首次出现", sortKey: "firstSeen", className: "first_seen_at" },
+    { content: "最近出现", sortKey: "lastSeen", className: "last_seen_at" },
   ];
 
   const rows = filteredWarnings.map((warning) => {
@@ -109,49 +109,49 @@ const WarningList: FC = () => {
         {
           content: warning.type,
           role: "rowheader",
-          "aria-label": "Type",
+          "aria-label": "类型",
           className: "type",
         },
         {
           content: warning.last_message,
           role: "cell",
-          "aria-label": "Last message",
+          "aria-label": "最新消息",
           className: "last_message",
         },
         {
           content: warning.status,
           role: "cell",
-          "aria-label": "Status",
+          "aria-label": "状态",
           className: "status",
         },
         {
           content: warning.severity,
           role: "cell",
-          "aria-label": "Severity",
+          "aria-label": "严重级别",
           className: "severity",
         },
         {
           content: warning.count,
           role: "cell",
           className: "count u-align--right",
-          "aria-label": "Count",
+          "aria-label": "次数",
         },
         {
           content: warning.project,
           role: "cell",
           className: "project u-align--center",
-          "aria-label": "Project",
+          "aria-label": "项目",
         },
         {
           content: isoTimeToString(warning.first_seen_at),
           role: "cell",
-          "aria-label": "First seen",
+          "aria-label": "首次出现",
           className: "first_seen_at",
         },
         {
           content: isoTimeToString(warning.last_seen_at),
           role: "cell",
-          "aria-label": "Last seen",
+          "aria-label": "最近出现",
           className: "last_seen_at",
         },
       ],
@@ -176,11 +176,11 @@ const WarningList: FC = () => {
         <PageHeader>
           <PageHeader.Left>
             <PageHeader.Title>
-              <HelpLink
-                docPath="/howto/troubleshoot/"
-                title="Learn more about troubleshooting"
-              >
-                Warnings
+                <HelpLink
+                  docPath="/howto/troubleshoot/"
+                  title="了解更多排障信息"
+                >
+                告警
               </HelpLink>
             </PageHeader.Title>
             {hasWarnings && selectedNames.length === 0 && (
@@ -221,13 +221,13 @@ const WarningList: FC = () => {
             className="warnings-table"
             emptyStateMsg={
               isLoading ? (
-                <Spinner className="u-loader" text="Loading warnings..." />
+                <Spinner className="u-loader" text="正在加载告警..." />
               ) : (
-                "No data to display"
+                "暂无数据"
               )
             }
-            itemName="warning"
-            parentName="server"
+            itemName="告警"
+            parentName="服务器"
             selectedNames={selectedNames}
             setSelectedNames={setSelectedNames}
             filteredNames={rows.map((item) => item.name)}

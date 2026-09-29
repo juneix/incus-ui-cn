@@ -41,7 +41,7 @@ const PermissionGroups: FC = () => {
   const isSmallScreen = useIsScreenBelow();
 
   if (error) {
-    notify.failure("Loading groups failed", error);
+    notify.failure("加载用户组失败", error);
   }
 
   useEffect(() => {
@@ -60,23 +60,23 @@ const PermissionGroups: FC = () => {
   }, [panelParams.group, groups]);
 
   const headers = [
-    { content: "Name", className: "name", sortKey: "name" },
+    { content: "名称", className: "name", sortKey: "name" },
     {
-      content: "Description",
+      content: "描述",
       className: "description",
       sortKey: "description",
     },
     {
-      content: "Identities",
+      content: "身份",
       sortKey: "identities",
       className: "u-align--right identities",
     },
     {
-      content: "Permissions",
+      content: "权限",
       sortKey: "permissions",
       className: "u-align--right permissions",
     },
-    { "aria-label": "Actions", className: "u-align--right actions" },
+    { "aria-label": "操作", className: "u-align--right actions" },
   ];
 
   const filteredGroups = groups.filter(
@@ -102,14 +102,14 @@ const PermissionGroups: FC = () => {
         {
           content: group.name,
           role: "rowheader",
-          "aria-label": "Name",
+          "aria-label": "名称",
           className: "u-truncate name",
           title: group.name,
         },
         {
           content: <span>{group.description}</span>,
           role: "cell",
-          "aria-label": "Description",
+          "aria-label": "描述",
           className: "description",
           title: group.description,
         },
@@ -127,7 +127,7 @@ const PermissionGroups: FC = () => {
           ),
           role: "cell",
           className: "u-align--right identities",
-          "aria-label": "Identities in this group",
+          "aria-label": "该用户组中的身份",
         },
         {
           content: (
@@ -143,13 +143,13 @@ const PermissionGroups: FC = () => {
           ),
           role: "cell",
           className: "u-align--right permissions",
-          "aria-label": "Permissions for this group",
+          "aria-label": "该用户组的权限",
         },
         {
           className: "actions u-align--right",
           content: <GroupActions group={group} />,
           role: "cell",
-          "aria-label": "Actions",
+          "aria-label": "操作",
         },
       ],
       sortData: {
@@ -167,7 +167,7 @@ const PermissionGroups: FC = () => {
   });
 
   if (isLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="正在加载..." isMainComponent />;
   }
 
   const getTablePaginationDescription = () => {
@@ -175,7 +175,7 @@ const PermissionGroups: FC = () => {
       return (
         <SelectedTableNotification
           totalCount={groups.length ?? 0}
-          itemName="group"
+          itemName="用户组"
           parentName=""
           selectedNames={selectedGroupNames}
           setSelectedNames={setSelectedGroupNames}
@@ -198,9 +198,9 @@ const PermissionGroups: FC = () => {
       <TablePagination
         data={sortedRows}
         id="pagination"
-        itemName="group"
+        itemName="用户组"
         className="u-no-margin--top"
-        aria-label="Table pagination control"
+        aria-label="表格分页控件"
         description={getTablePaginationDescription()}
       >
         <SelectableMainTable
@@ -209,9 +209,9 @@ const PermissionGroups: FC = () => {
           headers={headers}
           rows={sortedRows}
           sortable
-          emptyStateMsg="No groups found matching this search"
+          emptyStateMsg="没有匹配搜索条件的用户组"
           onUpdateSort={updateSort}
-          itemName="group"
+          itemName="用户组"
           parentName=""
           selectedNames={selectedGroupNames}
           setSelectedNames={setSelectedGroupNames}
@@ -225,15 +225,14 @@ const PermissionGroups: FC = () => {
     <EmptyState
       className="empty-state"
       image={<Icon name="user-group" className="empty-state-icon" />}
-      title="No groups"
+      title="暂无用户组"
     >
       <p>
-        Groups are an easy way to manage the structured assignment of
-        permissions
+        用户组可以帮助你更方便地统一管理权限分配。
       </p>
       <p>
         <DocLink docPath="/explanation/authorization" hasExternalIcon>
-          Learn more about permissions
+          了解更多权限管理
         </DocLink>
       </p>
       <Button
@@ -244,12 +243,12 @@ const PermissionGroups: FC = () => {
         }}
         disabled={!canCreateGroups()}
         title={
-          canCreateGroups() ? "" : "You do not have permission to create groups"
+          canCreateGroups() ? "" : "你没有权限创建用户组"
         }
         hasIcon={!isSmallScreen}
       >
         {!isSmallScreen && <Icon name="plus" light />}
-        <span>Create group</span>
+        <span>创建用户组</span>
       </Button>
     </EmptyState>
   );
@@ -265,9 +264,9 @@ const PermissionGroups: FC = () => {
               <PageHeader.Title>
                 <HelpLink
                   docPath="/explanation/authorization"
-                  title="Learn more about permissions"
+                  title="了解更多权限管理"
                 >
-                  Auth groups
+                  授权用户组
                 </HelpLink>
               </PageHeader.Title>
               {!selectedGroupNames.length && hasGroups && (
@@ -309,12 +308,12 @@ const PermissionGroups: FC = () => {
                     title={
                       canCreateGroups()
                         ? ""
-                        : "You do not have permission to create groups"
+                        : "你没有权限创建用户组"
                     }
                     hasIcon={!isSmallScreen}
                   >
                     {!isSmallScreen && <Icon name="plus" light />}
-                    <span>Create group</span>
+                    <span>创建用户组</span>
                   </Button>
                 )}
               </PageHeader.BaseActions>

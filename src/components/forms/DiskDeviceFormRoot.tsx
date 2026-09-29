@@ -64,12 +64,12 @@ const DiskDeviceFormRoot: FC<Props> = ({
 
   return (
     <>
-      <h2 className="p-heading--4">Root storage</h2>
+      <h2 className="p-heading--4">根存储</h2>
       <ConfigurationTable
         rows={[
           getConfigurationRowBase({
             className: "override-with-form",
-            configuration: <b className="device-name">Root storage</b>,
+            configuration: <b className="device-name">根存储</b>,
             inherited: "",
             override: hasRootStorage ? (
               <div>
@@ -80,7 +80,7 @@ const DiskDeviceFormRoot: FC<Props> = ({
                   }}
                   type="button"
                   appearance="base"
-                  title={formik.values.editRestriction ?? "Clear override"}
+                  title={formik.values.editRestriction ?? "清除覆盖值"}
                   hasIcon
                   className="u-no-margin--bottom"
                   disabled={!!formik.values.editRestriction}
@@ -96,7 +96,7 @@ const DiskDeviceFormRoot: FC<Props> = ({
                 }}
                 type="button"
                 appearance="base"
-                title={formik.values.editRestriction ?? "Create override"}
+                title={formik.values.editRestriction ?? "创建覆盖值"}
                 className="u-no-margin--bottom"
                 hasIcon
                 disabled={!!formik.values.editRestriction}
@@ -107,7 +107,7 @@ const DiskDeviceFormRoot: FC<Props> = ({
           }),
 
           getInheritedDeviceRow({
-            label: "Pool",
+            label: "存储池",
             id: "storage-pool-selector-disk",
             className: "override-with-form",
             inheritValue: inheritValue?.pool ?? "",
@@ -150,7 +150,7 @@ const DiskDeviceFormRoot: FC<Props> = ({
                     className: isEditingInstance ? "" : "u-no-margin--bottom",
                     disabled: isEditingInstance,
                     help: isEditingInstance
-                      ? "Use the migrate button in the header to change root storage."
+                      ? "使用页头中的迁移按钮可更改根存储。"
                       : "",
                   }}
                   project={project}
@@ -160,7 +160,7 @@ const DiskDeviceFormRoot: FC<Props> = ({
           }),
 
           getInheritedDeviceRow({
-            label: "Size",
+            label: "大小",
             id: "limits_disk",
             className: "override-with-form",
             inheritValue:
@@ -176,9 +176,9 @@ const DiskDeviceFormRoot: FC<Props> = ({
                     ensureEditMode(formik);
                     focusField("limits_disk");
                   }}
-                  type="button"
-                  appearance="base"
-                  title={formik.values.editRestriction ?? "Edit"}
+                    type="button"
+                    appearance="base"
+                    title={formik.values.editRestriction ?? "编辑"}
                   className="u-no-margin--bottom"
                   hasIcon
                   disabled={!!formik.values.editRestriction}
@@ -197,8 +197,8 @@ const DiskDeviceFormRoot: FC<Props> = ({
                 />
                 <p className="p-form-help-text">
                   <DiskSizeQuotaLimitation driver={poolDriver} />
-                  Size of root storage. If empty, root storage will{" "}
-                  {isVirtualMachine ? "be 10GiB." : "not have a size limit."}
+                  根存储大小。留空时，
+                  {isVirtualMachine ? "根存储将为 10GiB。" : "根存储将不限制大小。"}
                 </p>
               </>
             ),
@@ -208,8 +208,7 @@ const DiskDeviceFormRoot: FC<Props> = ({
       {hasNoRootDisk(formik.values, profiles) && (
         <div className="is-error ">
           <p className="p-form-validation__message">
-            <strong>Error:</strong> Missing root storage. Create an override, or
-            add a profile with root storage.
+            <strong>错误：</strong>缺少根存储。请创建覆盖值，或添加带有根存储的配置模板。
           </p>
         </div>
       )}

@@ -53,7 +53,7 @@ const ResourceLimitsForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "limits_cpu",
-          label: "Exposed CPU limit",
+          label: "可见 CPU 限制",
           defaultValue: DEFAULT_CPU_LIMIT,
           readOnlyRenderer: (val) =>
             cpuLimitToPayload(val as CpuLimit | string | undefined),
@@ -70,7 +70,7 @@ const ResourceLimitsForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "limits_memory",
-          label: "Memory limit",
+          label: "内存限制",
           defaultValue: DEFAULT_MEM_LIMIT,
           readOnlyRenderer: (val) =>
             memoryLimitToPayload(val as MemoryLimit | undefined) ?? "",
@@ -87,11 +87,11 @@ const ResourceLimitsForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "limits_memory_swap",
-          label: "Memory swap (Containers only)",
+          label: "内存交换分区（仅容器）",
           defaultValue: "",
           disabled: isContainerOnlyDisabled,
           disabledReason: isContainerOnlyDisabled
-            ? "Only available for containers"
+            ? "仅容器可用"
             : undefined,
           readOnlyRenderer: (val) => optionRenderer(val, optionAllowDeny),
           children: (
@@ -105,7 +105,7 @@ const ResourceLimitsForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "limits_disk_priority",
-          label: "Disk priority",
+          label: "磁盘优先级",
           defaultValue: "",
           children: <Select options={diskPriorities} />,
         }),
@@ -113,15 +113,15 @@ const ResourceLimitsForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           name: "limits_processes",
-          label: "Max number of processes (Containers only)",
+          label: "最大进程数（仅容器）",
           defaultValue: "",
           disabled: isContainerOnlyDisabled,
           disabledReason: isContainerOnlyDisabled
-            ? "Only available for containers"
+            ? "仅容器可用"
             : undefined,
           children: (
             <Input
-              placeholder="Enter number"
+              placeholder="输入数字"
               min={1}
               type="number"
               disabled={isContainerOnlyDisabled}

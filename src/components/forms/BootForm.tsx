@@ -42,7 +42,7 @@ const BootForm: FC<Props> = ({ formik }) => {
       rows={[
         getConfigurationRow({
           formik,
-          label: "Autostart",
+          label: "自动启动",
           name: "boot_autostart",
           defaultValue: "",
           readOnlyRenderer: (val) =>
@@ -52,34 +52,34 @@ const BootForm: FC<Props> = ({ formik }) => {
 
         getConfigurationRow({
           formik,
-          label: "Autostart delay",
+          label: "自动启动延迟",
           name: "boot_autostart_delay",
           defaultValue: "",
-          children: <Input placeholder="Enter number" type="number" />,
+          children: <Input placeholder="输入数字" type="number" />,
         }),
 
         getConfigurationRow({
           formik,
-          label: "Autostart priority",
+          label: "自动启动优先级",
           name: "boot_autostart_priority",
           defaultValue: "",
-          children: <Input placeholder="Enter number" type="number" />,
+          children: <Input placeholder="输入数字" type="number" />,
         }),
 
         getConfigurationRow({
           formik,
-          label: "Host shutdown timeout",
+          label: "宿主机关机超时",
           name: "boot_host_shutdown_timeout",
           defaultValue: "",
-          children: <Input placeholder="Enter number" type="number" />,
+          children: <Input placeholder="输入数字" type="number" />,
         }),
 
         getConfigurationRow({
           formik,
-          label: "Stop priority",
+          label: "停止优先级",
           name: "boot_stop_priority",
           defaultValue: "",
-          children: <Input placeholder="Enter number" type="number" />,
+          children: <Input placeholder="输入数字" type="number" />,
         }),
       ]}
     />

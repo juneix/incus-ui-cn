@@ -126,7 +126,7 @@ export const getConfigurationRow = ({
           onClick={toggleDefault}
           type="button"
           appearance="base"
-          title={getDisabledReasonOrTitle("Clear override")}
+          title={getDisabledReasonOrTitle("清除覆盖值")}
           disabled={isDisabled()}
           hasIcon
           className="u-no-margin--bottom"
@@ -174,7 +174,7 @@ export const getConfigurationRow = ({
               type="button"
               appearance="base"
               title={getDisabledReasonOrTitle(
-                isOverridden ? "Edit" : "Create override",
+                isOverridden ? "编辑" : "创建覆盖值",
               )}
               disabled={isDisabled()}
               hasIcon
@@ -195,7 +195,7 @@ export const getConfigurationRow = ({
         type="button"
         disabled={isDisabled()}
         appearance="base"
-        title={formik.values.editRestriction ?? "Create override"}
+        title={formik.values.editRestriction ?? "创建覆盖值"}
         hasIcon
       >
         <Icon name="edit" />
@@ -228,7 +228,7 @@ export const getConfigurationRow = ({
         </div>
         {metadata && (
           <div className="p-text--small u-text--muted">
-            From: {metadata.source}
+            来源：{metadata.source}
           </div>
         )}
       </div>

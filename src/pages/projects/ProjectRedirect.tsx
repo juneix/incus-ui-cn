@@ -5,7 +5,7 @@ const ProjectRedirect: FC = () => {
   const { project } = useParams<{ project: string }>();
 
   if (!project) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
 
   return (

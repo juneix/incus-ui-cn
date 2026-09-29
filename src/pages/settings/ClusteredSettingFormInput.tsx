@@ -97,10 +97,10 @@ const ClusteredSettingFormInput: FC<Props> = ({
       {!readonly && (
         <>
           <Button appearance="base" onClick={onCancel}>
-            Cancel
+            取消
           </Button>
           <Button appearance="positive" type="submit">
-            Save
+            保存
           </Button>
           {canBeReset && (
             <Button
@@ -111,7 +111,7 @@ const ClusteredSettingFormInput: FC<Props> = ({
               hasIcon
             >
               <Icon name="restart" className="flip-horizontally" />
-              <span>Reset to default</span>
+              <span>恢复默认值</span>
             </Button>
           )}
         </>

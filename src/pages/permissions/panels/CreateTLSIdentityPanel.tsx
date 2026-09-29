@@ -42,7 +42,7 @@ const CreateTLSIdentityPanel: FC<Props> = ({ onSuccess }) => {
     });
 
   if (error) {
-    notify.failure("Loading panel details failed", error);
+    notify.failure("加载面板详情失败", error);
   }
 
   const modifyGroups = (newGroups: string[], isUnselectAll?: boolean) => {
@@ -77,12 +77,12 @@ const CreateTLSIdentityPanel: FC<Props> = ({ onSuccess }) => {
         closePanel();
       })
       .catch((e) => {
-        notify.failure("TLS Identity failed to be created", e);
+        notify.failure("创建 TLS 身份失败", e);
       });
   };
 
   const groupSchema = Yup.object().shape({
-    name: Yup.string().required("Identity name is required"),
+    name: Yup.string().required("身份名称不能为空"),
   });
 
   const formik = useFormik<TLSIdentityFormValues>({
@@ -98,11 +98,11 @@ const CreateTLSIdentityPanel: FC<Props> = ({ onSuccess }) => {
     <>
       <SidePanel loading={isLoading} hasError={!groups}>
         <SidePanel.Header>
-          <SidePanel.HeaderTitle>Create identity</SidePanel.HeaderTitle>
+          <SidePanel.HeaderTitle>创建身份</SidePanel.HeaderTitle>
         </SidePanel.Header>
         <NotificationRow className="u-no-padding" />
         <NameWithGroupForm formik={formik} />
-        <p>Auth groups</p>
+        <p>授权用户组</p>
         <SidePanel.Content className="u-no-padding">
           <GroupSelection
             groups={groups}
@@ -133,7 +133,7 @@ const CreateTLSIdentityPanel: FC<Props> = ({ onSuccess }) => {
             onClick={closePanel}
             className="u-no-margin--bottom"
           >
-            Cancel
+            取消
           </Button>
           <ActionButton
             appearance="positive"
@@ -144,7 +144,7 @@ const CreateTLSIdentityPanel: FC<Props> = ({ onSuccess }) => {
             }
             loading={formik.isSubmitting}
           >
-            Create identity
+            创建身份
           </ActionButton>
         </SidePanel.Footer>
       </SidePanel>

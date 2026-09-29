@@ -21,8 +21,8 @@ const EditIdentityGroupsBtn: FC<Props & ButtonProps> = ({
   const panelParams = usePanelParams();
   const buttonText =
     identities.length > 1
-      ? `Modify groups for ${identities.length} identities`
-      : "Modify groups";
+      ? `修改 ${identities.length} 个身份的用户组`
+      : "修改用户组";
 
   const restrictedIdentities = identities.filter(
     (identity) => !canEditIdentity(identity),
@@ -32,7 +32,7 @@ const EditIdentityGroupsBtn: FC<Props & ButtonProps> = ({
     const restrictedList = restrictedIdentities
       .map((identity) => `\n- ${getIdentityName(identity)}`)
       .join("");
-    return `You do not have permission to modify ${restrictedIdentities.length > 1 ? "some of the selected" : "the selected"} ${pluralize("identity", restrictedIdentities.length)}:${restrictedList}`;
+    return `你没有权限修改${restrictedIdentities.length > 1 ? "部分已选" : "所选"}${pluralize("identity", restrictedIdentities.length)}：${restrictedList}`;
   };
 
   return (
@@ -41,9 +41,9 @@ const EditIdentityGroupsBtn: FC<Props & ButtonProps> = ({
         onClick={() => {
           panelParams.openIdentityGroups();
         }}
-        aria-label="Modify groups"
+        aria-label="修改用户组"
         title={
-          restrictedIdentities.length ? getRestrictedWarning() : "Modify groups"
+          restrictedIdentities.length ? getRestrictedWarning() : "修改用户组"
         }
         className={className}
         disabled={

@@ -21,12 +21,12 @@ const CreateTlsIdentityBtn: FC<Props> = ({ openPanel }) => {
         title={
           canCreateIdentities()
             ? ""
-            : "You do not have permission to create identities"
+            : "你没有权限创建身份"
         }
         disabled={!canCreateIdentities()}
       >
         {!isSmallScreen && <Icon name="plus" light />}
-        <span>Create TLS Identity</span>
+        <span>创建 TLS 身份</span>
       </Button>
     </>
   );

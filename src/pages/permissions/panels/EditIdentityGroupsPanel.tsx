@@ -40,7 +40,7 @@ const EditIdentityGroupsPanel: FC<Props> = ({ identities, onClose }) => {
   });
 
   if (error) {
-    notify.failure("Loading panel details failed", error);
+    notify.failure("加载面板详情失败", error);
   }
 
   // in case if user refresh the browser while the panel is open
@@ -153,8 +153,8 @@ const EditIdentityGroupsPanel: FC<Props> = ({ identities, onClose }) => {
 
   const panelTitle =
     identities.length > 1
-      ? `Change auth groups for ${identities.length} identities`
-      : `Change auth groups for ${identities[0]?.name}`;
+      ? `修改 ${identities.length} 个身份的授权用户组`
+      : `修改 ${identities[0]?.name} 的授权用户组`;
 
   return (
     <>
@@ -169,7 +169,7 @@ const EditIdentityGroupsPanel: FC<Props> = ({ identities, onClose }) => {
           <GroupSelection
             groups={groups}
             modifiedGroups={modifiedGroups}
-            parentItemName="identity"
+            parentItemName="身份"
             parentItems={identities}
             selectedGroups={selectedGroups}
             setSelectedGroups={modifyGroups}

@@ -54,7 +54,7 @@ const generateRowsFromIdentityGroupChanges = (
         <td>
           <p className="u-no-padding--top u-sv-1">
             {groupChangesForIdentity.name}
-            <Tag isVisible={identityLoggedIn}>You</Tag>
+            <Tag isVisible={identityLoggedIn}>当前用户</Tag>
           </p>
         </td>
         <td>{addedGroups.concat(removedGroups)}</td>
@@ -90,7 +90,7 @@ const generateRowsFromGroupIdentityChanges = (
           key={`${group}-${identity}-added`}
         >
           +&nbsp;{identityNameLookup[identity]}
-          <Tag isVisible={identityLoggedIn}>You</Tag>
+          <Tag isVisible={identityLoggedIn}>当前用户</Tag>
         </p>,
       );
     }
@@ -103,7 +103,7 @@ const generateRowsFromGroupIdentityChanges = (
           key={`${group}-${identity}-removed`}
         >
           -&nbsp;<span className="removed">{identityNameLookup[identity]}</span>
-          <Tag isVisible={identityLoggedIn}>You</Tag>
+          <Tag isVisible={identityLoggedIn}>当前用户</Tag>
         </p>,
       );
     }
@@ -193,7 +193,7 @@ const GroupsOrIdentityChangesTable: FC<Props> = ({
           <thead>
             <tr>
               <th className="display-by-header">
-                {groupBy === "identity" ? "Identity" : "Group"}
+                {groupBy === "identity" ? "身份" : "用户组"}
                 <Button
                   onClick={handleChangeGroupBy}
                   className="display-by-button u-no-margin"
@@ -204,7 +204,7 @@ const GroupsOrIdentityChangesTable: FC<Props> = ({
                   <Icon name="change-version" />
                 </Button>
               </th>
-              <th>{groupBy === "identity" ? "Group" : "Identity"}</th>
+              <th>{groupBy === "identity" ? "用户组" : "身份"}</th>
             </tr>
           </thead>
           <tbody>{rows}</tbody>

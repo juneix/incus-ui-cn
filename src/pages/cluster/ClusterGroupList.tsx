@@ -28,30 +28,30 @@ const ClusterGroupList: FC = () => {
   const { canEditServerConfiguration } = useServerEntitlements();
 
   if (error) {
-    notify.failure("Loading cluster groups failed", error);
+    notify.failure("加载集群分组失败", error);
   }
 
   const headers = [
     {
-      content: "Cluster group",
+      content: "集群分组",
       className: "name",
       sortKey: "name",
     },
     {
-      content: "Description",
+      content: "描述",
       className: "description",
       sortKey: "description",
     },
     {
-      content: "Used by",
+      content: "被使用于",
     },
     {
-      content: "Members",
+      content: "成员数",
       className: "members u-align--right",
       sortKey: "members",
     },
     {
-      "aria-label": "Actions",
+      "aria-label": "操作",
       className: "u-align--right actions",
     },
   ];
@@ -133,9 +133,9 @@ const ClusterGroupList: FC = () => {
       title={
         <HelpLink
           docPath="/explanation/clustering/#cluster-groups"
-          title="Learn more about cluster groups"
+          title="了解更多集群分组"
         >
-          Cluster groups
+          集群分组
         </HelpLink>
       }
       controls={<CreateClusterGroupBtn />}
@@ -150,9 +150,9 @@ const ClusterGroupList: FC = () => {
           <TablePagination
             data={sortedRows}
             id="pagination"
-            itemName="cluster group"
+            itemName="集群分组"
             className="u-no-margin--top"
-            aria-label="Table pagination control"
+            aria-label="表格分页控件"
           >
             <MainTable
               id="cluster-table"
@@ -164,7 +164,7 @@ const ClusterGroupList: FC = () => {
                 isLoading && (
                   <Spinner
                     className="u-loader"
-                    text="Loading cluster groups..."
+                    text="正在加载集群分组..."
                   />
                 )
               }

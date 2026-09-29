@@ -19,13 +19,13 @@ const CreateClusterGroupBtn: FC = () => {
         title={
           hasPermission
             ? undefined
-            : "You do not have permission to create cluster groups"
+            : "你没有权限创建集群分组"
         }
         hasIcon
         onClick={panelParams.openCreateClusterGroup}
       >
         <Icon name="plus" light />
-        <span>Create group</span>
+        <span>创建分组</span>
       </Button>
       {panelParams.panel === panels.createClusterGroup && (
         <CreateClusterGroupPanel />

@@ -7,19 +7,19 @@ import { hasDiskError, hasNetworkError } from "util/instanceValidation";
 import type { InstanceAndProfileFormikProps } from "components/forms/instanceAndProfileFormValues";
 import { useSupportedFeatures } from "context/useSupportedFeatures";
 
-export const MAIN_CONFIGURATION = "Main configuration";
-export const DISK_DEVICES = "Disk";
-export const NETWORK_DEVICES = "Network";
+export const MAIN_CONFIGURATION = "基础配置";
+export const DISK_DEVICES = "磁盘";
+export const NETWORK_DEVICES = "网络";
 export const GPU_DEVICES = "GPU";
-export const PROXY_DEVICES = "Proxy";
-export const OTHER_DEVICES = "Other";
-export const RESOURCE_LIMITS = "Resource limits";
-export const SECURITY_POLICIES = "Security policies";
-export const SNAPSHOTS = "Snapshots";
-export const MIGRATION = "Migration";
-export const BOOT = "Boot";
-export const CLOUD_INIT = "Cloud init";
-export const YAML_CONFIGURATION = "YAML configuration";
+export const PROXY_DEVICES = "代理";
+export const OTHER_DEVICES = "其他";
+export const RESOURCE_LIMITS = "资源限制";
+export const SECURITY_POLICIES = "安全策略";
+export const SNAPSHOTS = "快照";
+export const MIGRATION = "迁移";
+export const BOOT = "启动";
+export const CLOUD_INIT = "Cloud-init";
+export const YAML_CONFIGURATION = "YAML 配置";
 
 interface Props {
   active: string;
@@ -39,7 +39,7 @@ const ProfileFormMenu: FC<Props> = ({
   const { hasMetadataConfiguration } = useSupportedFeatures();
 
   const disableReason = isDisabled
-    ? "Please enter a name before adding custom configuration"
+    ? "请先输入名称，再添加自定义配置"
     : undefined;
 
   const menuItemProps = {
@@ -56,7 +56,7 @@ const ProfileFormMenu: FC<Props> = ({
 
   return (
     <div className="p-side-navigation--accordion form-navigation">
-      <nav aria-label="Profile form navigation">
+      <nav aria-label="配置模板表单导航">
         <ul className="p-side-navigation__list">
           <MenuItem label={MAIN_CONFIGURATION} {...menuItemProps} />
           <li className="p-side-navigation__item">
@@ -72,7 +72,7 @@ const ProfileFormMenu: FC<Props> = ({
               disabled={isDisabled}
               title={disableReason}
             >
-              Devices
+              设备
             </Button>
             <ul
               className="p-side-navigation__list"

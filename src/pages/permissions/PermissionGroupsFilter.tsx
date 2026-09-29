@@ -22,13 +22,13 @@ const PermissionGroupsFilter: FC<Props> = ({
     <div className="permission-groups-filter">
       <SearchBox
         id="search-groups"
-        label="Search groups"
+        label="搜索用户组"
         name="search-groups"
         type="text"
         onSearch={handleSearchChange}
         onChange={handleSearchChange}
         value={value}
-        placeholder="Search groups"
+        placeholder="搜索用户组"
         disabled={disabled}
         className={className}
       />

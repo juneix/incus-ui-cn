@@ -31,8 +31,9 @@ const BrowserImport: FC<Props> = ({ sendPfx }) => {
         <code>Next</code>。
       </li>
       <li className="p-list__item">
-        选择 <code>Automatically select the certificate store</code>，点击
-        <code>Next</code>，然后点击 <code>Finish</code>。
+        选择 <code>Automatically select the certificate store</code>
+        （自动选择证书存储区），点击 <code>Next</code>，然后点击
+        <code>Finish</code>。
       </li>
       <li className="p-list__item">
         重启浏览器并打开 Incus UI，然后选择 Incus UI 证书。
@@ -78,11 +79,11 @@ const BrowserImport: FC<Props> = ({ sendPfx }) => {
               </li>
               <li className="p-list__item">
                 向下滚动到证书部分，然后点击 <code>View Certificates</code>
-                按钮。
+                （查看证书）按钮。
               </li>
               <li className="p-list__item">
-                在弹窗中点击 <code>Your certificates</code>，然后点击
-                <code>Import</code>。
+                在弹窗中点击 <code>Your certificates</code>
+                （你的证书），然后点击 <code>Import</code>。
               </li>
               <li className="p-list__item">
                 选择刚刚下载的 <code>.pfx</code>
@@ -132,8 +133,8 @@ const BrowserImport: FC<Props> = ({ sendPfx }) => {
                 </div>
               </li>
               <li className="p-list__item">
-                向下滚动到 <code>Advanced settings</code>，然后点击
-                <code>Manage device certificates</code>
+                向下滚动到 <code>Advanced settings</code>（高级设置），然后点击
+                <code>Manage device certificates</code>（管理设备证书）
               </li>
               {windowsDialogSteps}
             </ul>
@@ -153,8 +154,8 @@ const BrowserImport: FC<Props> = ({ sendPfx }) => {
                 </div>
               </li>
               <li className="p-list__item">
-                滚动到 <code>Security</code> 部分，然后点击
-                <code>Manage Certificates</code>
+                滚动到 <code>Security</code>（安全）部分，然后点击
+                <code>Manage Certificates</code>（管理证书）
               </li>
               {windowsDialogSteps}
             </ul>
@@ -174,8 +175,8 @@ const BrowserImport: FC<Props> = ({ sendPfx }) => {
               </li>
               {downloadPfx}
               <li className="p-list__item">
-                在 Mac 上打开 Keychain Access 应用，然后选择 login
-                keychain。
+                在 Mac 上打开 Keychain Access 应用，然后选择
+                <code>login</code> keychain。
               </li>
               <li className="p-list__item">
                 将 <code>incus-ui.pfx</code> 文件拖到 Keychain Access 应用中。

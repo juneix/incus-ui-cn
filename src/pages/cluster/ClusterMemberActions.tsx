@@ -63,10 +63,10 @@ const ClusterMemberActions: FC<Props> = ({ member, isDetailPage = false }) => {
     return isSmallScreen ? (
       <ContextualMenu
         closeOnOutsideClick={false}
-        toggleLabel="Actions"
+        toggleLabel="操作"
         position="left"
         hasToggleIcon
-        title="actions"
+        title="操作"
       >
         {(close: () => void) => (
           <span>

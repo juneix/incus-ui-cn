@@ -21,14 +21,14 @@ const ProjectSelectTable: FC<Props> = ({ onSelect, disableProject }) => {
   const { canCreateInstances } = useProjectEntitlements();
 
   const headers = [
-    { content: "Name", sortKey: "name" },
-    { "aria-label": "Actions", className: "actions" },
+    { content: "名称", sortKey: "name" },
+    { "aria-label": "操作", className: "actions" },
   ];
 
   const rows = projects.map((project) => {
     const getDisableReason = () => {
       if (!canCreateInstances(project)) {
-        return "You do not have permission to create instances in this project";
+        return "你没有权限在此项目中创建实例";
       }
 
       return disableProject?.name === project.name
@@ -60,7 +60,7 @@ const ProjectSelectTable: FC<Props> = ({ onSelect, disableProject }) => {
             </div>
           ),
           role: "rowheader",
-          "aria-label": "Name",
+          "aria-label": "名称",
           onClick: selectProject,
         },
         {
@@ -71,11 +71,11 @@ const ProjectSelectTable: FC<Props> = ({ onSelect, disableProject }) => {
               title={getDisableReason()}
               disabled={Boolean(getDisableReason())}
             >
-              Select
+              选择
             </Button>
           ),
           role: "cell",
-          "aria-label": "Actions",
+          "aria-label": "操作",
           className: "u-align--right",
           onClick: selectProject,
         },

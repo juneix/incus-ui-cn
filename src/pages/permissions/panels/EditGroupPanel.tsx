@@ -130,7 +130,7 @@ const EditGroupPanel: FC<Props> = ({ group, onClose }) => {
   const groupSchema = Yup.object().shape({
     name: Yup.string()
       .test(...testDuplicateGroupName(controllerState, panelParams.group ?? ""))
-      .required("Group name is required"),
+      .required("用户组名称不能为空"),
   });
 
   const saveIdentities = async () => {
@@ -188,18 +188,18 @@ const EditGroupPanel: FC<Props> = ({ group, onClose }) => {
         closePanel();
         toastNotify.success(
           <>
-            Auth group{" "}
+            授权用户组{" "}
             <ResourceLink
               type="auth-group"
               value={values.name}
               to="/ui/permissions/groups"
             />{" "}
-            updated.
+            已更新。
           </>,
         );
       })
       .catch((e) => {
-        notify.failure("Group update failed", e);
+        notify.failure("更新用户组失败", e);
       })
       .finally(() => {
         formik.setSubmitting(false);
@@ -306,7 +306,7 @@ const EditGroupPanel: FC<Props> = ({ group, onClose }) => {
             onClick={closePanel}
             className="u-no-margin--bottom"
           >
-            Cancel
+            取消
           </Button>
           <ActionButton
             appearance="positive"
@@ -321,14 +321,14 @@ const EditGroupPanel: FC<Props> = ({ group, onClose }) => {
             }
           >
             {changeCount === 0
-              ? "Save changes"
-              : `Save ${changeCount} ${pluralize("change", changeCount)}`}
+              ? "保存更改"
+              : `保存 ${changeCount} 处更改`}
           </ActionButton>
         </SidePanel.Footer>
       </SidePanel>
       {confirming && (
         <ConfirmationModal
-          confirmButtonLabel="Confirm changes"
+          confirmButtonLabel="确认更改"
           confirmButtonAppearance="positive"
           onConfirm={() => {
             saveGroup(formik.values);
@@ -337,7 +337,7 @@ const EditGroupPanel: FC<Props> = ({ group, onClose }) => {
             setConfirming(false);
             formik.setSubmitting(false);
           }}
-          title="Confirm permission modification"
+          title="确认权限修改"
           className="permission-confirm-modal"
         >
           <LoggedInUserNotification isVisible />

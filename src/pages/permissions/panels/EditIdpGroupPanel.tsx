@@ -53,7 +53,7 @@ const EditIdpGroupPanel: FC<Props> = ({ idpGroup, onClose }) => {
   });
 
   if (error) {
-    notify.failure("Loading panel details failed", error);
+    notify.failure("加载面板详情失败", error);
   }
 
   const selectedGroups = new Set<string>(desiredState.groupsAdded);
@@ -152,13 +152,13 @@ const EditIdpGroupPanel: FC<Props> = ({ idpGroup, onClose }) => {
       .then(() => {
         toastNotify.success(
           <>
-            IDP group{" "}
+            IDP 用户组{" "}
             <ResourceLink
               type="idp-group"
               value={values.name}
               to="/ui/permissions/idp-groups"
             />{" "}
-            updated.
+            已更新。
           </>,
         );
         queryClient.invalidateQueries({
@@ -167,7 +167,7 @@ const EditIdpGroupPanel: FC<Props> = ({ idpGroup, onClose }) => {
         closePanel();
       })
       .catch((e) => {
-        notify.failure(`IDP group update failed`, e);
+        notify.failure("更新 IDP 用户组失败", e);
       })
       .finally(() => {
         formik.setSubmitting(false);
@@ -182,7 +182,7 @@ const EditIdpGroupPanel: FC<Props> = ({ idpGroup, onClose }) => {
           panelParams.idpGroup ?? "",
         ),
       )
-      .required("IDP group name is required"),
+      .required("IDP 用户组名称不能为空"),
   });
 
   const formik = useFormik<IdpGroupFormValues>({
@@ -204,16 +204,16 @@ const EditIdpGroupPanel: FC<Props> = ({ idpGroup, onClose }) => {
   return (
     <SidePanel loading={isLoading} hasError={!groups}>
       <SidePanel.Header>
-        <SidePanel.HeaderTitle className="u-truncate">{`Edit IDP group ${idpGroup?.name}`}</SidePanel.HeaderTitle>
+        <SidePanel.HeaderTitle className="u-truncate">{`编辑 IDP 用户组 ${idpGroup?.name}`}</SidePanel.HeaderTitle>
       </SidePanel.Header>
       <NotificationRow className="u-no-padding" />
       <NameWithGroupForm formik={formik} />
-      <p>Map groups to this idp group</p>
+      <p>为此 IDP 用户组映射用户组</p>
       <SidePanel.Content className="u-no-padding">
         <GroupSelection
           groups={groups}
           modifiedGroups={modifiedGroups}
-          parentItemName="IDP group"
+          parentItemName="IDP 用户组"
           parentItems={[idpGroup]}
           selectedGroups={selectedGroups}
           setSelectedGroups={modifyGroups}

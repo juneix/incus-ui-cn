@@ -68,7 +68,7 @@ const EditGroupIdentitiesPanel: FC<Props> = ({ groups }) => {
   });
 
   if (error) {
-    notify.failure("Loading panel details failed", error);
+    notify.failure("加载面板详情失败", error);
   }
 
   // in case if user refresh the browser while the panel is open
@@ -189,10 +189,10 @@ const EditGroupIdentitiesPanel: FC<Props> = ({ groups }) => {
   const modifiedIdentities = calculatedModifiedIdentities();
 
   const headers = [
-    { content: "Identity", sortKey: "name" },
+    { content: "身份", sortKey: "name" },
     {
       content: "",
-      "aria-label": "Modified status",
+      "aria-label": "修改状态",
       className: "modified-status",
     },
   ];
@@ -230,11 +230,11 @@ const EditGroupIdentitiesPanel: FC<Props> = ({ groups }) => {
 
   const rows = filteredIdentities.map((identity) => {
     const selectedGroupText =
-      groups.length > 1 ? "all selected groups" : `group ${groups[0].name}`;
+      groups.length > 1 ? "所有已选用户组" : `用户组 ${groups[0].name}`;
     const modifiedTitle = desiredState.identitiesAdded.has(identity.id)
-      ? `Identity will be added to ${selectedGroupText}`
+      ? `该身份将添加到${selectedGroupText}`
       : desiredState.identitiesRemoved.has(identity.id)
-        ? `Identity will be removed from ${selectedGroupText}`
+        ? `该身份将从${selectedGroupText}中移除`
         : "";
     const name = getIdentityName(identity);
 
@@ -246,17 +246,17 @@ const EditGroupIdentitiesPanel: FC<Props> = ({ groups }) => {
         {
           content: name,
           role: "rowheader",
-          "aria-label": "Identity",
+          "aria-label": "身份",
           title: canEditIdentity(identity)
             ? name
-            : "You do not have permission to manage this identity",
+            : "你没有权限管理该身份",
         },
         {
           content: modifiedIdentities.has(identity.id) && (
             <Icon name="status-in-progress-small" />
           ),
           role: "cell",
-          "aria-label": "Modified status",
+          "aria-label": "修改状态",
           className: "modified-status u-align--right",
           title: modifiedTitle,
         },
@@ -285,9 +285,9 @@ const EditGroupIdentitiesPanel: FC<Props> = ({ groups }) => {
         headers={headers}
         rows={sortedRows}
         sortable
-        emptyStateMsg="No identities found"
-        itemName="identity"
-        parentName="server"
+        emptyStateMsg="未找到身份"
+        itemName="身份"
+        parentName="服务器"
         selectedNames={Array.from(selectedIdentities)}
         setSelectedNames={modifyIdentities}
         disabledNames={restrictedIdentities.map((identity) => identity.id)}
@@ -301,13 +301,13 @@ const EditGroupIdentitiesPanel: FC<Props> = ({ groups }) => {
   );
 
   const confirmButtonText = modifiedIdentities.size
-    ? `Apply ${modifiedIdentities.size} identity ${pluralize("change", modifiedIdentities.size)}`
-    : "Modify identities";
+    ? `应用 ${modifiedIdentities.size} 处身份变更`
+    : "修改身份";
 
   const panelTitle =
     groups.length > 1
-      ? `Change identities for ${groups.length} groups`
-      : `Change identities for ${groups[0]?.name}`;
+      ? `修改 ${groups.length} 个用户组的身份`
+      : `修改 ${groups[0]?.name} 的身份`;
 
   return (
     <>
@@ -338,7 +338,7 @@ const EditGroupIdentitiesPanel: FC<Props> = ({ groups }) => {
             onClick={closePanel}
             className="u-no-margin--bottom"
           >
-            Cancel
+            取消
           </Button>
           <ActionButton
             appearance="positive"

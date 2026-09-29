@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import type { LxdAuthGroup } from "types/permissions";
 import type { GroupSubForm } from "pages/permissions/panels/CreateGroupPanel";
-import { pluralize } from "util/instanceBulkActions";
 import BackLink from "components/BackLink";
 
 interface Props {
@@ -12,15 +11,15 @@ interface Props {
 
 const GroupHeaderTitle: FC<Props> = ({ subForm, setSubForm, group }) => {
   if (subForm === null) {
-    return group ? `Edit auth group ${group?.name}` : "Create auth group";
+    return group ? `编辑授权用户组 ${group?.name}` : "创建授权用户组";
   }
 
-  const verb = group ? "Edit" : "Add";
+  const action = subForm === "identity" ? "身份" : "权限";
 
   return (
     <BackLink
-      linkText={group ? "Edit auth group" : "Create auth group"}
-      title={`${verb} ${pluralize(subForm, 2)}`}
+      linkText={group ? "编辑授权用户组" : "创建授权用户组"}
+      title={`${group ? "编辑" : "添加"}${action}`}
       onClick={() => {
         setSubForm(null);
       }}

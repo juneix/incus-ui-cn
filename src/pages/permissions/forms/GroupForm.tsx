@@ -43,23 +43,23 @@ const GroupForm: FC<Props> = ({
       onChange: formik.handleChange,
       value: formik.values[id] ?? "",
       error: formik.touched[id] ? (formik.errors[id] as ReactNode) : null,
-      placeholder: `Enter ${id.replaceAll("_", " ")}`,
+      placeholder: `请输入${id === "name" ? "名称" : "描述"}`,
     };
   };
 
   const groupEditRestriction =
     !isEditing || canEditGroup(group)
       ? ""
-      : "You do not have permission to modify this group";
+      : "你没有权限修改该用户组";
 
   return (
     <Form onSubmit={formik.handleSubmit}>
       {/* hidden submit to enable enter key in inputs */}
-      <Input type="submit" hidden value="Hidden input" />
+      <Input type="submit" hidden value="隐藏输入框" />
       <Input
         {...getFormProps("name")}
         type="text"
-        label="Name"
+        label="名称"
         required
         autoFocus
         disabled={!!groupEditRestriction}
@@ -67,12 +67,12 @@ const GroupForm: FC<Props> = ({
       />
       <AutoExpandingTextArea
         {...getFormProps("description")}
-        label="Description"
+        label="描述"
         disabled={!!groupEditRestriction}
         title={groupEditRestriction}
       />
       <FormLink
-        title={(isEditing ? "Edit " : "Add ") + pluralize("identity", 2)}
+        title={`${isEditing ? "编辑" : "添加"}身份`}
         icon="user-group"
         onClick={() => {
           setSubForm("identity");
@@ -80,12 +80,12 @@ const GroupForm: FC<Props> = ({
         isModified={identityModifyCount > 0}
         subText={
           identityCount === 0
-            ? `No ${pluralize("identity", 2)}`
-            : `${identityCount} ${pluralize("identity", identityCount)}`
+            ? "暂无身份"
+            : `${identityCount} 个身份`
         }
       />
       <FormLink
-        title={(isEditing ? "Edit " : "Add ") + pluralize("permission", 2)}
+        title={`${isEditing ? "编辑" : "添加"}权限`}
         icon="lock-locked"
         onClick={() => {
           setSubForm("permission");
@@ -93,8 +93,8 @@ const GroupForm: FC<Props> = ({
         isModified={permissionModifyCount > 0}
         subText={
           permissionCount === 0
-            ? `No ${pluralize("permission", 2)}`
-            : `${permissionCount} ${pluralize("permission", permissionCount)}`
+            ? "暂无权限"
+            : `${permissionCount} 项权限`
         }
       />
     </Form>

@@ -30,8 +30,8 @@ const EnableClusteringModal: FC<Props> = ({ onClose }) => {
   const { data: settings } = useSettings();
 
   const ClusteringSchema = Yup.object().shape({
-    serverName: Yup.string().required("This field is required"),
-    clusterAddress: Yup.string().required("This field is required"),
+    serverName: Yup.string().required("此字段不能为空"),
+    clusterAddress: Yup.string().required("此字段不能为空"),
   });
 
   interface ClusteringValues {
@@ -52,7 +52,7 @@ const EnableClusteringModal: FC<Props> = ({ onClose }) => {
           "cluster.https_address": String(values.clusterAddress),
         });
       } catch (e) {
-        notify.failure("Failed to update cluster address", e);
+        notify.failure("更新集群地址失败", e);
         return;
       }
       const payload = JSON.stringify({
@@ -61,14 +61,14 @@ const EnableClusteringModal: FC<Props> = ({ onClose }) => {
       });
       updateCluster(payload)
         .then(() => {
-          toastNotify.success("Clustering enabled.");
+          toastNotify.success("已启用集群。");
           queryClient.invalidateQueries({
             queryKey: [queryKeys.settings],
           });
           navigate("/ui/cluster/members");
         })
         .catch((e) => {
-          notify.failure("Failed to enable clustering", e);
+          notify.failure("启用集群失败", e);
         })
         .finally(() => {
           formik.setSubmitting(false);
@@ -79,17 +79,17 @@ const EnableClusteringModal: FC<Props> = ({ onClose }) => {
   return (
     <Modal
       close={onClose}
-      title="Enable clustering"
+      title="启用集群"
       className="enable-clustering-modal"
       buttonRow={
         <>
           <Button
-            aria-label="Close"
+            aria-label="关闭"
             className="u-no-margin--bottom"
             onClick={onClose}
             type="button"
           >
-            Close
+            关闭
           </Button>
           <ActionButton
             appearance="positive"
@@ -101,7 +101,7 @@ const EnableClusteringModal: FC<Props> = ({ onClose }) => {
             }
             type="button"
           >
-            Enable clustering
+            启用集群
           </ActionButton>
         </>
       }
@@ -109,20 +109,20 @@ const EnableClusteringModal: FC<Props> = ({ onClose }) => {
       <NotificationConsumer />
       <Notification
         severity="caution"
-        title="Are you sure you want to enable clustering?"
+        title="确定要启用集群吗？"
       >
-        This action cannot be undone.
+        此操作无法撤销。
       </Notification>
       <Input
-        label="Server name"
+        label="服务器名称"
         type="text"
         required
         {...formik.getFieldProps("serverName")}
       />
       <Input
-        label="Cluster address"
+        label="集群地址"
         type="text"
-        help="Address to use for clustering traffic by this server"
+        help="该服务器用于集群通信的地址"
         required
         {...formik.getFieldProps("clusterAddress")}
       />

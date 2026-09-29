@@ -67,19 +67,19 @@ const EditClusterMemberPanel: FC<Props> = ({ onClose }) => {
         .then(() => {
           toastNotify.success(
             <>
-              Cluster member{" "}
+              集群成员{" "}
               <ResourceLink
                 type="cluster-member"
                 value={values.name}
                 to={`/ui/cluster/member/${encodeURIComponent(values.name)}`}
               />{" "}
-              saved.
+              已保存。
             </>,
           );
           closePanel();
         })
         .catch((e) => {
-          notify.failure("Cluster member update failed", e);
+          notify.failure("更新集群成员失败", e);
         })
         .finally(() => {
           formik.setSubmitting(false);
@@ -105,7 +105,7 @@ const EditClusterMemberPanel: FC<Props> = ({ onClose }) => {
     <SidePanel>
       <SidePanel.Header>
         <SidePanel.HeaderTitle>
-          Edit cluster member {panelParams.member}
+          编辑集群成员 {panelParams.member}
         </SidePanel.HeaderTitle>
       </SidePanel.Header>
       <NotificationRow className="u-no-padding" />
@@ -116,24 +116,24 @@ const EditClusterMemberPanel: FC<Props> = ({ onClose }) => {
         >
           <Form onSubmit={formik.handleSubmit}>
             {/* hidden submit to enable enter key in inputs */}
-            <Input type="submit" hidden value="Hidden input" />
+            <Input type="submit" hidden value="隐藏输入框" />
             <Input
               {...formik.getFieldProps("description")}
               type="text"
-              label="Description"
-              placeholder="Enter description"
+              label="描述"
+              placeholder="输入描述"
             />
             <Input
               {...formik.getFieldProps("failureDomain")}
               type="text"
-              label="Failure domain"
-              placeholder="Enter failure domain"
+              label="故障域"
+              placeholder="输入故障域"
             />
-            <p className="u-sv-1">Cluster groups</p>
+            <p className="u-sv-1">集群分组</p>
             <GroupSelection
               groups={clusterGroups}
               modifiedGroups={modifiedGroups}
-              parentItemName="member"
+              parentItemName="成员"
               parentItems={[{ name: formik.values.name }]}
               selectedGroups={new Set(formik.values.groups)}
               setSelectedGroups={(val, isUnselectAll) => {
@@ -165,7 +165,7 @@ const EditClusterMemberPanel: FC<Props> = ({ onClose }) => {
           onClick={closePanel}
           className="u-no-margin--bottom"
         >
-          Cancel
+          取消
         </Button>
         <ActionButton
           appearance="positive"
@@ -176,7 +176,7 @@ const EditClusterMemberPanel: FC<Props> = ({ onClose }) => {
             !formik.isValid || formik.isSubmitting || !formik.values.name
           }
         >
-          Save changes
+          保存更改
         </ActionButton>
       </SidePanel.Footer>
     </SidePanel>

@@ -51,19 +51,19 @@ const CreateGroupPanel: FC = () => {
   const groupSchema = Yup.object().shape({
     name: Yup.string()
       .test(...testDuplicateGroupName(controllerState))
-      .required("Group name is required"),
+      .required("用户组名称不能为空"),
   });
 
   const handleSuccess = (groupName: string) => {
     toastNotify.success(
       <>
-        Group{" "}
+        用户组{" "}
         <ResourceLink
           type="auth-group"
           value={groupName}
           to="/ui/permissions/groups"
         />{" "}
-        created.
+        已创建。
       </>,
     );
     closePanel();
@@ -87,7 +87,7 @@ const CreateGroupPanel: FC = () => {
       })
       .catch((e) => {
         notify.failure(
-          `Group ${groupName} created, failed to add identities.`,
+          `用户组 ${groupName} 已创建，但添加身份失败。`,
           e,
         );
       })
@@ -115,7 +115,7 @@ const CreateGroupPanel: FC = () => {
           addIdentitiesToGroup(values.name);
         })
         .catch((e) => {
-          notify.failure(`Group creation failed`, e);
+          notify.failure("创建用户组失败", e);
         })
         .finally(() => {
           formik.setSubmitting(false);
@@ -176,7 +176,7 @@ const CreateGroupPanel: FC = () => {
             onClick={closePanel}
             className="u-no-margin--bottom"
           >
-            Cancel
+            取消
           </Button>
           <ActionButton
             appearance="positive"
@@ -187,7 +187,7 @@ const CreateGroupPanel: FC = () => {
               !formik.isValid || formik.isSubmitting || !formik.values.name
             }
           >
-            Create group
+            创建用户组
           </ActionButton>
         </SidePanel.Footer>
       </SidePanel>

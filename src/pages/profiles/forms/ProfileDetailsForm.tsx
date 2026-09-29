@@ -38,12 +38,12 @@ const ProfileDetailsForm: FC<Props> = ({ formik, isEdit }) => {
             id="name"
             name="name"
             type="text"
-            label="Profile name"
-            placeholder="Enter name"
+            label="配置模板名称"
+            placeholder="输入名称"
             help={
               isEdit &&
               !isDefaultProfile &&
-              "Click the name in the header to rename the profile"
+              "点击页头中的名称可重命名配置模板"
             }
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
@@ -55,8 +55,8 @@ const ProfileDetailsForm: FC<Props> = ({ formik, isEdit }) => {
           <AutoExpandingTextArea
             id="description"
             name="description"
-            label="Description"
-            placeholder="Enter description"
+            label="描述"
+            placeholder="输入描述"
             onBlur={formik.handleBlur}
             onChange={(e) => {
               if (isEdit) {

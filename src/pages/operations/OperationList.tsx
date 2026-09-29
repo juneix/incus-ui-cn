@@ -29,15 +29,15 @@ const OperationList: FC = () => {
   const [query, setQuery] = useState<string>("");
 
   if (error) {
-    notify.failure("Loading operations failed", error);
+    notify.failure("加载操作记录失败", error);
   }
 
   const headers = [
-    { content: "Time", className: "time", sortKey: "created_at" },
-    { content: "Action", className: "action", sortKey: "action" },
-    { content: "Info", className: "info" },
-    { content: "Status", className: "status status-header", sortKey: "status" },
-    { "aria-label": "Actions", className: "cancel u-align--right" },
+    { content: "时间", className: "time", sortKey: "created_at" },
+    { content: "操作", className: "action", sortKey: "action" },
+    { content: "信息", className: "info" },
+    { content: "状态", className: "status status-header", sortKey: "status" },
+    { "aria-label": "操作", className: "cancel u-align--right" },
   ];
 
   const getIconNameForStatus = (status: LxdOperationStatus) => {
@@ -69,11 +69,11 @@ const OperationList: FC = () => {
           content: (
             <>
               <div className="date-pair">
-                Initiated:{" "}
+                发起时间：{" "}
                 {nonBreakingSpaces(isoTimeToString(operation.created_at))}
               </div>
               <div className="date-pair u-text--muted">
-                Last update:{" "}
+                最后更新：{" "}
                 {nonBreakingSpaces(isoTimeToString(operation.updated_at))}
               </div>
             </>
@@ -88,12 +88,12 @@ const OperationList: FC = () => {
               <div>{operation.description}</div>
               <OperationInstanceName operation={operation} />
               <div className="u-text--muted u-truncate" title={projectName}>
-                Project: {projectName}
+                项目：{projectName}
               </div>
             </>
           ),
           role: "rowheader",
-          "aria-label": "Action",
+          "aria-label": "操作",
           className: "action",
         },
         {
@@ -110,7 +110,7 @@ const OperationList: FC = () => {
             </>
           ),
           role: "cell",
-          "aria-label": "Info",
+          "aria-label": "信息",
           className: "info",
         },
         {
@@ -124,14 +124,14 @@ const OperationList: FC = () => {
             </>
           ),
           role: "cell",
-          "aria-label": "Status",
+          "aria-label": "状态",
           className: "status",
         },
         {
           content: <CancelOperationBtn operation={operation} />,
           role: "cell",
           className: "u-align--right cancel",
-          "aria-label": "Actions",
+          "aria-label": "操作",
         },
       ],
       sortData: {
@@ -152,16 +152,16 @@ const OperationList: FC = () => {
         header={
           <PageHeader>
             <PageHeader.Left>
-              <PageHeader.Title>Ongoing operations</PageHeader.Title>
+              <PageHeader.Title>进行中的操作</PageHeader.Title>
               {operations.length > 0 && (
                 <PageHeader.Search>
                   <SearchBox
                     className="search-box margin-right u-no-margin--bottom"
                     name="search-operations"
                     onChange={setQuery}
-                    placeholder="Search"
+                    placeholder="搜索"
                     value={query}
-                    aria-label="Search"
+                    aria-label="搜索"
                   />
                 </PageHeader.Search>
               )}
@@ -183,9 +183,9 @@ const OperationList: FC = () => {
               <TablePagination
                 data={sortedRows}
                 id="pagination"
-                itemName="operation"
+                itemName="操作"
                 className="u-no-margin--top"
-                aria-label="Table pagination control"
+                aria-label="表格分页控件"
               >
                 <MainTable
                   id="operation-table"
@@ -197,10 +197,10 @@ const OperationList: FC = () => {
                     isLoading ? (
                       <Spinner
                         className="u-loader"
-                        text="Loading operations..."
+                        text="正在加载操作记录..."
                       />
                     ) : (
-                      "No matching operations found"
+                      "没有匹配的操作记录"
                     )
                   }
                 />
@@ -211,9 +211,9 @@ const OperationList: FC = () => {
             <EmptyState
               className="empty-state"
               image={<Icon name="status" className="empty-state-icon" />}
-              title="No operations found"
+              title="未找到操作记录"
             >
-              <p>There are no ongoing operations.</p>
+              <p>当前没有进行中的操作。</p>
             </EmptyState>
           )}
         </Row>

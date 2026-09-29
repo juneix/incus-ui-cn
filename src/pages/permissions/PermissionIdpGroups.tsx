@@ -47,7 +47,7 @@ const PermissionIdpGroups: FC = () => {
   const isSmallScreen = useIsScreenBelow();
 
   if (error) {
-    notify.failure("Loading provider groups failed", error);
+    notify.failure("加载身份提供商用户组失败", error);
   }
 
   useEffect(() => {
@@ -66,13 +66,13 @@ const PermissionIdpGroups: FC = () => {
   }, [panelParams.idpGroup, groups]);
 
   const headers = [
-    { content: "Name", className: "name", sortKey: "name" },
+    { content: "名称", className: "name", sortKey: "name" },
     {
-      content: "Mapped groups",
+      content: "映射用户组",
       sortKey: "groups",
       className: "u-align--right mapped-groups",
     },
-    { "aria-label": "Actions", className: "u-align--right actions" },
+    { "aria-label": "操作", className: "u-align--right actions" },
   ];
 
   const filteredGroups = groups.filter(
@@ -101,7 +101,7 @@ const PermissionIdpGroups: FC = () => {
 
       const groupsText = pluralize("group", idpGroup.groups?.length ?? 0);
       const groupsList = idpGroup.groups?.join("\n- ");
-      const groupsTitle = `Assigned ${groupsText}:\n- ${groupsList}`;
+      const groupsTitle = `已分配${groupsText}：\n- ${groupsList}`;
       return (
         <div title={idpGroup.groups?.length ? groupsTitle : ""}>
           {idpGroup.groups?.length || 0}
@@ -117,7 +117,7 @@ const PermissionIdpGroups: FC = () => {
         {
           content: idpGroup.name,
           role: "rowheader",
-          "aria-label": "Name",
+          "aria-label": "名称",
           className: "u-truncate",
           title: idpGroup.name,
         },
@@ -125,7 +125,7 @@ const PermissionIdpGroups: FC = () => {
           content: getGroupLink(),
           role: "cell",
           className: "u-align--right mapped-groups",
-          "aria-label": "Number of mapped groups",
+          "aria-label": "映射用户组数量",
         },
         {
           className: "actions u-align--right",
@@ -143,11 +143,11 @@ const PermissionIdpGroups: FC = () => {
                     panelParams.openEditIdpGroup(idpGroup.name);
                   }}
                   type="button"
-                  aria-label="Edit IDP group details"
+                  aria-label="编辑 IDP 用户组详情"
                   title={
                     canEditIdpGroup(idpGroup)
-                      ? "Edit details"
-                      : "You do not have permission to modify this IDP group"
+                      ? "编辑详情"
+                      : "你没有权限修改该 IDP 用户组"
                   }
                   disabled={!canEditIdpGroup(idpGroup)}
                 >
@@ -161,7 +161,7 @@ const PermissionIdpGroups: FC = () => {
             />
           ),
           role: "cell",
-          "aria-label": "Actions",
+          "aria-label": "操作",
         },
       ],
       sortData: {
@@ -174,7 +174,7 @@ const PermissionIdpGroups: FC = () => {
   const { rows: sortedRows, updateSort } = useSortTableData({ rows });
 
   if (isLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="正在加载..." isMainComponent />;
   }
 
   const getTablePaginationDescription = () => {
@@ -182,7 +182,7 @@ const PermissionIdpGroups: FC = () => {
       return (
         <SelectedTableNotification
           totalCount={groups.length ?? 0}
-          itemName="IDP group"
+          itemName="IDP 用户组"
           parentName=""
           selectedNames={selectedGroupNames}
           setSelectedNames={setSelectedGroupNames}
@@ -199,22 +199,21 @@ const PermissionIdpGroups: FC = () => {
   const idpGroupsInfo = (
     <>
       <>
-        Identity provider groups map authentication entities from your identity
-        provider to groups within LXD.
+        身份提供商用户组用于将你的身份提供商中的认证实体映射到 LXD 内部的用户组。
       </>
       {!hasCustomClaim && (
         <>
           <br />
-          You need to set your server{" "}
+          你需要在服务器{" "}
           <Link to="/ui/settings">
-            configuration (<code>oidc.groups.claim</code>)
+            配置中设置 <code>oidc.groups.claim</code>
           </Link>{" "}
-          to the name of the custom claim that provides the IDP groups.
+          为提供 IDP 用户组的自定义声明名称。
         </>
       )}
       <br />
       <DocLink docPath="/explanation/authorization/#use-groups-defined-by-the-identity-provider">
-        Learn more about IDP groups
+        了解更多 IDP 用户组
       </DocLink>
     </>
   );
@@ -230,9 +229,9 @@ const PermissionIdpGroups: FC = () => {
         <TablePagination
           data={sortedRows}
           id="pagination"
-          itemName="IDP group"
+          itemName="IDP 用户组"
           className="u-no-margin--top"
-          aria-label="Table pagination control"
+          aria-label="表格分页控件"
           description={getTablePaginationDescription()}
         >
           <SelectableMainTable
@@ -241,9 +240,9 @@ const PermissionIdpGroups: FC = () => {
             headers={headers}
             rows={sortedRows}
             sortable
-            emptyStateMsg="No identity provider groups found matching this search"
+            emptyStateMsg="没有匹配搜索条件的身份提供商用户组"
             onUpdateSort={updateSort}
-            itemName="IDP group"
+            itemName="IDP 用户组"
             parentName=""
             selectedNames={selectedGroupNames}
             setSelectedNames={setSelectedGroupNames}
@@ -258,7 +257,7 @@ const PermissionIdpGroups: FC = () => {
     <EmptyState
       className="empty-state"
       image={<Icon name="user-group" className="empty-state-icon" />}
-      title="No IDP group mappings"
+      title="暂无 IDP 用户组映射"
     >
       <p>{idpGroupsInfo}</p>
       <Button
@@ -269,12 +268,12 @@ const PermissionIdpGroups: FC = () => {
         title={
           canCreateIdpGroups()
             ? ""
-            : "You do not have permission to create IDP groups"
+            : "你没有权限创建 IDP 用户组"
         }
         hasIcon={!isSmallScreen}
       >
         {!isSmallScreen && <Icon name="plus" light />}
-        <span>Create IDP group</span>
+        <span>创建 IDP 用户组</span>
       </Button>
     </EmptyState>
   );
@@ -290,9 +289,9 @@ const PermissionIdpGroups: FC = () => {
               <PageHeader.Title>
                 <HelpLink
                   docPath="/explanation/authorization"
-                  title="Learn more about permissions"
+                  title="了解更多权限管理"
                 >
-                  IDP&nbsp;groups
+                  IDP&nbsp;用户组
                 </HelpLink>
               </PageHeader.Title>
               {!selectedGroupNames.length && hasGroups ? (
@@ -321,12 +320,12 @@ const PermissionIdpGroups: FC = () => {
                     title={
                       canCreateIdpGroups()
                         ? ""
-                        : "You do not have permission to create IDP groups"
+                        : "你没有权限创建 IDP 用户组"
                     }
                     hasIcon={!isSmallScreen}
                   >
                     {!isSmallScreen && <Icon name="plus" light />}
-                    <span>Create IDP group</span>
+                    <span>创建 IDP 用户组</span>
                   </Button>
                 )}
               </PageHeader.BaseActions>

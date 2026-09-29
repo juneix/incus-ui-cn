@@ -24,14 +24,14 @@ const WarningSearchFilter: FC = () => {
   const searchAndFilterData: SearchAndFilterData[] = [
     {
       id: 1,
-      heading: "Status",
+      heading: "状态",
       chips: warningStatuses.map((status) => {
         return { lead: STATUS, value: status };
       }),
     },
     {
       id: 2,
-      heading: "Severity",
+      heading: "严重级别",
       chips: warningSeverities.map((severity) => {
         return { lead: SEVERITY, value: severity };
       }),
@@ -52,7 +52,7 @@ const WarningSearchFilter: FC = () => {
 
   return (
     <>
-      <h2 className="u-off-screen">Search and filter</h2>
+      <h2 className="u-off-screen">搜索和筛选</h2>
       <SearchAndFilter
         existingSearchData={searchParamsToChips(searchParams, QUERY_PARAMS)}
         filterPanelData={searchAndFilterData}

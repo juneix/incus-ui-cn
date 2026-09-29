@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import ModifiedStatusAction from "./ModifiedStatusAction";
 import { ActionButton, Button } from "@canonical/react-components";
-import { pluralize } from "util/instanceBulkActions";
 
 interface Props {
   modifiedGroups: Set<string>;
@@ -25,8 +24,8 @@ const GroupSelectionActions: FC<Props> = ({
   isEdit = false,
 }) => {
   const confirmButtonText = modifiedGroups.size
-    ? `Save ${modifiedGroups.size} group ${pluralize("change", modifiedGroups.size)}`
-    : "Save changes";
+    ? `保存 ${modifiedGroups.size} 处用户组变更`
+    : "保存更改";
 
   return (
     <>
@@ -43,7 +42,7 @@ const GroupSelectionActions: FC<Props> = ({
         onClick={closePanel}
         className="u-no-margin--bottom"
       >
-        Cancel
+        取消
       </Button>
       <ActionButton
         appearance="positive"
@@ -52,7 +51,7 @@ const GroupSelectionActions: FC<Props> = ({
         disabled={disabled || loading}
         loading={loading}
       >
-        {actionText ? "Confirm" : confirmButtonText}
+        {actionText ? "确认" : confirmButtonText}
       </ActionButton>
     </>
   );

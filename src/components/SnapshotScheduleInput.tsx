@@ -4,27 +4,27 @@ import { Input, RadioInput, Select } from "@canonical/react-components";
 
 const snapshotOptions = [
   {
-    label: "Every minute",
+    label: "每分钟",
     value: "* * * * *",
   },
   {
-    label: "Hourly",
+    label: "每小时",
     value: "@hourly",
   },
   {
-    label: "Daily",
+    label: "每天",
     value: "@daily",
   },
   {
-    label: "Weekly",
+    label: "每周",
     value: "@weekly",
   },
   {
-    label: "Monthly",
+    label: "每月",
     value: "@monthly",
   },
   {
-    label: "Yearly",
+    label: "每年",
     value: "@yearly",
   },
 ];
@@ -41,7 +41,7 @@ const SnapshotScheduleInput: FC<Props> = ({ value, setValue }) => {
     <div>
       <div className="snapshot-schedule">
         <RadioInput
-          label="Cron syntax"
+          label="Cron 表达式"
           checked={cronSyntax}
           onChange={() => {
             setCronSyntax(true);
@@ -49,7 +49,7 @@ const SnapshotScheduleInput: FC<Props> = ({ value, setValue }) => {
           }}
         />
         <RadioInput
-          label="Choose interval"
+          label="选择周期"
           checked={!cronSyntax}
           onChange={() => {
             setCronSyntax(false);
@@ -61,8 +61,8 @@ const SnapshotScheduleInput: FC<Props> = ({ value, setValue }) => {
         <Input
           id="snapshots_schedule"
           name="snapshots_schedule"
-          placeholder="Enter cron expression"
-          help="<minute> <hour> <dom> <month> <dow>, a comma-separated list of schedule aliases (@hourly, @daily, @midnight, @weekly, @monthly, @annually, @yearly), or empty to disable automatic snapshots (the default)"
+          placeholder="输入 Cron 表达式"
+          help="<minute> <hour> <dom> <month> <dow>，也可以使用逗号分隔的计划别名（@hourly、@daily、@midnight、@weekly、@monthly、@annually、@yearly）；留空则禁用自动快照（默认）"
           type="text"
           value={value}
           onChange={(e) => {

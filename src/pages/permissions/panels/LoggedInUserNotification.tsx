@@ -14,16 +14,16 @@ const LoggedInUserNotification: FC<Props> = ({ isVisible }) => {
   return (
     <Notification
       severity="caution"
-      title="Self-modification"
+      title="修改当前身份"
       className="u-no-margin--bottom"
       id="current-user-warning"
     >
-      This action will modify the permissions of the current logged-in identity.
+      此操作将修改当前登录身份的权限。
       <br />
       <Tag className="u-no-margin--left" isVisible={isVisible}>
-        You
+        当前用户
       </Tag>{" "}
-      might not be able to reverse this change once you&rsquo;ve made it.
+      执行后你可能无法再撤销此更改。
     </Notification>
   );
 };

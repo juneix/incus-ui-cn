@@ -52,12 +52,12 @@ const ClusterMemberHardware: FC<Props> = ({ member }) => {
   });
 
   const sections = [
-    "System",
+    "系统",
     "CPU",
     "GPU",
-    "Memory",
-    "Networks",
-    "Storage",
+    "内存",
+    "网络",
+    "存储",
     "PCI",
     "USB",
   ];
@@ -76,7 +76,7 @@ const ClusterMemberHardware: FC<Props> = ({ member }) => {
   }, [isLoading, sections]);
 
   if (isLoading || isStateLoading) {
-    return <Spinner className="u-loader" text="Loading..." />;
+    return <Spinner className="u-loader" text="正在加载..." />;
   }
 
   return (
@@ -84,7 +84,7 @@ const ClusterMemberHardware: FC<Props> = ({ member }) => {
       {!resources && (
         <Notification
           severity="negative"
-          title="Could not load details for this member"
+          title="无法加载该成员的硬件详情"
         />
       )}
       {resources && (
@@ -97,7 +97,7 @@ const ClusterMemberHardware: FC<Props> = ({ member }) => {
                 </h2>
               </Col>
               <Col size={10}>
-                {sectionName === "System" && (
+                {sectionName === "系统" && (
                   <ClusterMemberDetailSystem
                     resources={resources}
                     state={state}
@@ -106,7 +106,7 @@ const ClusterMemberHardware: FC<Props> = ({ member }) => {
                 {sectionName === "CPU" && (
                   <ClusterMemberDetailCPU resources={resources} state={state} />
                 )}
-                {sectionName === "Memory" && (
+                {sectionName === "内存" && (
                   <ClusterMemberDetailMemory
                     resources={resources}
                     state={state}
@@ -115,13 +115,13 @@ const ClusterMemberHardware: FC<Props> = ({ member }) => {
                 {sectionName === "GPU" && (
                   <ClusterMemberDetailGPU resources={resources} />
                 )}
-                {sectionName === "Networks" && (
+                {sectionName === "网络" && (
                   <ClusterMemberDetailNetworks resources={resources} />
                 )}
                 {sectionName === "PCI" && (
                   <ClusterMemberDetailPCI resources={resources} />
                 )}
-                {sectionName === "Storage" && (
+                {sectionName === "存储" && (
                   <ClusterMemberDetailStorage resources={resources} />
                 )}
                 {sectionName === "USB" && (
@@ -131,7 +131,7 @@ const ClusterMemberHardware: FC<Props> = ({ member }) => {
             </Row>
           ))}
           <div className="aside">
-            <nav aria-label="Hardware navigation" className="toc-tree">
+            <nav aria-label="硬件导航" className="toc-tree">
               <ul>
                 {sections.map((sectionName) => (
                   <li className="p-side-navigation__item" key={sectionName}>

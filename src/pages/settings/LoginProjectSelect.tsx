@@ -30,7 +30,7 @@ const LoginProjectSelect: FC<Props> = ({ configField }) => {
 
   const projectOptions = [
     {
-      label: "All projects",
+      label: "所有项目",
       value: ALL_PROJECTS,
     },
     ...projects.map((project) => ({
@@ -47,7 +47,7 @@ const LoginProjectSelect: FC<Props> = ({ configField }) => {
     const settingLabel = (
       <ResourceLabel bold type="setting" value={configField.key} />
     );
-    toastNotify.success(<>Setting {settingLabel} updated.</>);
+    toastNotify.success(<>设置 {settingLabel} 已更新。</>);
     setEditMode(false);
   };
 
@@ -87,10 +87,10 @@ const LoginProjectSelect: FC<Props> = ({ configField }) => {
             }}
           />
           <Button appearance="base" onClick={onCancel}>
-            Cancel
+            取消
           </Button>
           <Button appearance="positive" type="submit">
-            Save
+            保存
           </Button>
           {canBeReset && (
             <Button
@@ -100,7 +100,7 @@ const LoginProjectSelect: FC<Props> = ({ configField }) => {
               hasIcon
             >
               <Icon name="restart" className="flip-horizontally" />
-              <span>Reset to default</span>
+              <span>恢复默认值</span>
             </Button>
           )}
         </Form>
@@ -116,7 +116,7 @@ const LoginProjectSelect: FC<Props> = ({ configField }) => {
         >
           <div className="readmode-value u-truncate">
             {value === ALL_PROJECTS
-              ? "All projects"
+              ? "所有项目"
               : value || getDefaultProject(projects)}
           </div>
           <Icon name="edit" className="edit-icon" />

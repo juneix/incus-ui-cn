@@ -71,7 +71,7 @@ const SecurityPoliciesForm: FC<Props> = ({ formik }) => {
       rows={[
         getConfigurationRow({
           formik,
-          label: "Protect deletion",
+          label: "删除保护",
           name: "security_protection_delete",
           defaultValue: "",
           readOnlyRenderer: (val) => optionRenderer(val, optionYesNo),
@@ -80,12 +80,12 @@ const SecurityPoliciesForm: FC<Props> = ({ formik }) => {
 
         getConfigurationRow({
           formik,
-          label: "Privileged (Containers only)",
+          label: "特权模式（仅容器）",
           name: "security_privileged",
           defaultValue: "",
           disabled: isContainerOnlyDisabled,
           disabledReason: isContainerOnlyDisabled
-            ? "Only available for containers"
+            ? "仅容器可用"
             : undefined,
           readOnlyRenderer: (val) => optionRenderer(val, optionAllowDeny),
           children: (
@@ -98,12 +98,12 @@ const SecurityPoliciesForm: FC<Props> = ({ formik }) => {
 
         getConfigurationRow({
           formik,
-          label: "Nesting (Containers only)",
+          label: "嵌套运行（仅容器）",
           name: "security_nesting",
           defaultValue: "",
           disabled: isContainerOnlyDisabled,
           disabledReason: isContainerOnlyDisabled
-            ? "Only available for containers"
+            ? "仅容器可用"
             : undefined,
           readOnlyRenderer: (val) => optionRenderer(val, optionAllowDeny),
           children: (
@@ -116,12 +116,12 @@ const SecurityPoliciesForm: FC<Props> = ({ formik }) => {
 
         getConfigurationRow({
           formik,
-          label: "Protect UID/GID shift (Containers only)",
+          label: "保护 UID/GID 映射位移（仅容器）",
           name: "security_protection_shift",
           defaultValue: "",
           disabled: isContainerOnlyDisabled,
           disabledReason: isContainerOnlyDisabled
-            ? "Only available for containers"
+            ? "仅容器可用"
             : undefined,
           readOnlyRenderer: (val) => optionRenderer(val, optionYesNo),
           children: (
@@ -131,16 +131,16 @@ const SecurityPoliciesForm: FC<Props> = ({ formik }) => {
 
         getConfigurationRow({
           formik,
-          label: "Base host id (Containers only)",
+          label: "宿主机基础 ID（仅容器）",
           name: "security_idmap_base",
           defaultValue: "",
           disabled: isContainerOnlyDisabled,
           disabledReason: isContainerOnlyDisabled
-            ? "Only available for containers"
+            ? "仅容器可用"
             : undefined,
           children: (
             <Input
-              placeholder="Enter ID"
+              placeholder="输入 ID"
               type="text"
               disabled={isContainerOnlyDisabled}
               labelClassName={classnames({
@@ -152,16 +152,16 @@ const SecurityPoliciesForm: FC<Props> = ({ formik }) => {
 
         getConfigurationRow({
           formik,
-          label: "Idmap size (Containers only)",
+          label: "ID 映射大小（仅容器）",
           name: "security_idmap_size",
           defaultValue: "",
           disabled: isContainerOnlyDisabled,
           disabledReason: isContainerOnlyDisabled
-            ? "Only available for containers"
+            ? "仅容器可用"
             : undefined,
           children: (
             <Input
-              placeholder="Enter number"
+              placeholder="输入数字"
               type="number"
               min={0}
               disabled={isContainerOnlyDisabled}
@@ -174,12 +174,12 @@ const SecurityPoliciesForm: FC<Props> = ({ formik }) => {
 
         getConfigurationRow({
           formik,
-          label: "Unique idmap (Containers only)",
+          label: "独立 ID 映射（仅容器）",
           name: "security_idmap_isolated",
           defaultValue: "",
           disabled: isContainerOnlyDisabled,
           disabledReason: isContainerOnlyDisabled
-            ? "Only available for containers"
+            ? "仅容器可用"
             : undefined,
           readOnlyRenderer: (val) => optionRenderer(val, optionYesNo),
           children: (
@@ -189,12 +189,12 @@ const SecurityPoliciesForm: FC<Props> = ({ formik }) => {
 
         getConfigurationRow({
           formik,
-          label: "Allow /dev/lxd in the instance",
+          label: "允许实例内访问 /dev/lxd",
           name: "security_devlxd",
           defaultValue: "",
           disabled: isContainerOnlyDisabled,
           disabledReason: isContainerOnlyDisabled
-            ? "Only available for containers"
+            ? "仅容器可用"
             : undefined,
           readOnlyRenderer: (val) => optionRenderer(val, optionYesNo),
           children: (
@@ -204,13 +204,12 @@ const SecurityPoliciesForm: FC<Props> = ({ formik }) => {
 
         getConfigurationRow({
           formik,
-          label:
-            "Make /1.0/images API available over /dev/lxd (Containers only)",
+          label: "通过 /dev/lxd 暴露 /1.0/images API（仅容器）",
           name: "security_devlxd_images",
           defaultValue: "",
           disabled: isContainerOnlyDisabled,
           disabledReason: isContainerOnlyDisabled
-            ? "Only available for containers"
+            ? "仅容器可用"
             : undefined,
           readOnlyRenderer: (val) => optionRenderer(val, optionYesNo),
           children: (
@@ -220,12 +219,12 @@ const SecurityPoliciesForm: FC<Props> = ({ formik }) => {
 
         getConfigurationRow({
           formik,
-          label: "Enable secureboot (VMs only)",
+          label: "启用 Secure Boot（仅虚拟机）",
           name: "security_secureboot",
           defaultValue: "",
           disabled: isVmOnlyDisabled,
           disabledReason: isVmOnlyDisabled
-            ? "Only available for virtual machines"
+            ? "仅虚拟机可用"
             : undefined,
           readOnlyRenderer: (val) => optionRenderer(val, optionTrueFalse),
           children: (
@@ -235,12 +234,12 @@ const SecurityPoliciesForm: FC<Props> = ({ formik }) => {
 
         getConfigurationRow({
           formik,
-          label: "Enable CSM (VMs only)",
+          label: "启用 CSM（仅虚拟机）",
           name: "security_csm",
           defaultValue: "",
           disabled: isVmOnlyDisabled,
           disabledReason: isVmOnlyDisabled
-            ? "Only available for virtual machines"
+            ? "仅虚拟机可用"
             : undefined,
           readOnlyRenderer: (val) => optionRenderer(val, optionTrueFalse),
           children: (

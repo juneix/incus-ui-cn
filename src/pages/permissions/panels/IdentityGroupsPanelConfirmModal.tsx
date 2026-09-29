@@ -77,15 +77,16 @@ const IdentityGroupsPanelConfirmModal: FC<Props> = ({
         const modifiedGroupNames = Object.keys(identityGroupsChangeSummary);
         const successMessage =
           modifiedGroupNames.length > 1 ? (
-            `Updated groups for ${modifiedGroupNames.length} identities`
+            `已更新 ${modifiedGroupNames.length} 个身份的用户组`
           ) : (
             <>
-              Updated groups for{" "}
+              已更新{" "}
               <ResourceLink
                 type="oidc-identity"
                 value={modifiedGroupNames[0]}
                 to="/ui/permissions/identities"
               />
+              {" "}的用户组
             </>
           );
 
@@ -94,7 +95,7 @@ const IdentityGroupsPanelConfirmModal: FC<Props> = ({
         notify.clear();
       })
       .catch((e) => {
-        notify.failure("Update groups failed", e);
+        notify.failure("更新用户组失败", e);
       })
       .finally(() => {
         setSubmitting(false);
@@ -104,11 +105,11 @@ const IdentityGroupsPanelConfirmModal: FC<Props> = ({
 
   return (
     <ConfirmationModal
-      confirmButtonLabel="Confirm changes"
+      confirmButtonLabel="确认更改"
       confirmButtonAppearance="positive"
       onConfirm={handleSaveGroupsForIdentities}
       close={close}
-      title="Confirm modification"
+      title="确认修改"
       className="permission-confirm-modal"
       confirmButtonLoading={submitting}
     >

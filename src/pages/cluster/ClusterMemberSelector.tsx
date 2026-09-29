@@ -20,7 +20,7 @@ const ClusterMemberSelector: FC<SelectProps & Props> = ({
   return isClustered ? (
     <Select
       {...props}
-      label={label ?? "Cluster member"}
+      label={label ?? "集群成员"}
       options={clusterMembers.map((clusterMember) => {
         return {
           label: clusterMember.server_name,

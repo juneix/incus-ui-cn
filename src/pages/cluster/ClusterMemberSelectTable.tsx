@@ -19,11 +19,11 @@ const ClusterMemberSelectTable: FC<Props> = ({ onSelect, disableMember }) => {
   const { data: members = [], isLoading } = useClusterMembers();
 
   const headers = [
-    { content: "Name", sortKey: "name" },
-    { content: "Roles", sortKey: "roles" },
-    { content: "Architecture", sortKey: "architecture" },
-    { content: "Status", sortKey: "status" },
-    { "aria-label": "Actions", className: "actions" },
+    { content: "名称", sortKey: "name" },
+    { content: "角色", sortKey: "roles" },
+    { content: "架构", sortKey: "architecture" },
+    { content: "状态", sortKey: "status" },
+    { "aria-label": "操作", className: "actions" },
   ];
 
   const rows = members.map((member) => {
@@ -53,25 +53,25 @@ const ClusterMemberSelectTable: FC<Props> = ({ onSelect, disableMember }) => {
             </div>
           ),
           role: "rowheader",
-          "aria-label": "Name",
+          "aria-label": "名称",
           onClick: selectMember,
         },
         {
           content: member.roles.join(", "),
           role: "cell",
-          "aria-label": "Roles",
+          "aria-label": "角色",
           onClick: selectMember,
         },
         {
           content: member.architecture,
           role: "cell",
-          "aria-label": "Architecture",
+          "aria-label": "架构",
           onClick: selectMember,
         },
         {
           content: member.status,
           role: "cell",
-          "aria-label": "Status",
+          "aria-label": "状态",
           onClick: selectMember,
         },
         {
@@ -82,11 +82,11 @@ const ClusterMemberSelectTable: FC<Props> = ({ onSelect, disableMember }) => {
               title={disableReason}
               disabled={Boolean(disableReason)}
             >
-              Select
+              选择
             </Button>
           ),
           role: "cell",
-          "aria-label": "Actions",
+          "aria-label": "操作",
           className: "u-align--right",
           onClick: selectMember,
         },
@@ -114,9 +114,7 @@ const ClusterMemberSelectTable: FC<Props> = ({ onSelect, disableMember }) => {
           sortable
           className="u-table-layout--auto"
           emptyStateMsg={
-            isLoading
-              ? "Loading cluster members..."
-              : "No cluster members available"
+            isLoading ? "正在加载集群成员..." : "暂无可用集群成员"
           }
         />
       </ScrollableTable>

@@ -51,14 +51,14 @@ const DeleteIdentityBtn: FC<Props> = ({ identity }) => {
         });
         toastNotify.success(
           <>
-            Identity{" "}
+            身份{" "}
             <ResourceLabel
               type="certificate"
               value={identity.name}
               bold
               truncate
             />{" "}
-            deleted.
+            已删除。
           </>,
         );
         setDeleting(false);
@@ -67,7 +67,7 @@ const DeleteIdentityBtn: FC<Props> = ({ identity }) => {
       .catch((e) => {
         setDeleting(false);
         notify.failure(
-          `Identity deletion failed`,
+          "删除身份失败",
           e,
           <ResourceLabel
             type="certificate"
@@ -83,27 +83,27 @@ const DeleteIdentityBtn: FC<Props> = ({ identity }) => {
     <ConfirmationButton
       onHoverText={
         canDeleteIdentity(identity)
-          ? "Delete identity"
-          : "You do not have permission to delete this identity"
+          ? "删除身份"
+          : "你没有权限删除该身份"
       }
       appearance="base"
-      aria-label="Delete identity"
+      aria-label="删除身份"
       className="has-icon u-no-margin--bottom is-dense"
       confirmationModalProps={{
-        title: "Confirm delete",
+        title: "确认删除",
         children: (
           <>
             <LoggedInUserNotification isVisible={isSelf} />
             <p>
-              This will permanently delete identity{" "}
+              这将永久删除身份{" "}
               <ResourceLabel type="certificate" value={identity.name} bold />
-              .
+              。
               <br />
-              This action cannot be undone, and can result in data loss.
+              此操作无法撤销，并可能导致数据丢失。
             </p>
           </>
         ),
-        confirmButtonLabel: "Delete",
+        confirmButtonLabel: "删除",
         onConfirm: handleDelete,
       }}
       shiftClickEnabled

@@ -24,14 +24,17 @@ const ClusterMemberDetail: FC = () => {
   const { data: member, error, isLoading } = useClusterMember(memberName ?? "");
 
   if (error) {
-    notify.failure("Loading cluster member details failed", error);
+    notify.failure("加载集群成员详情失败", error);
   }
 
   if (isLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="正在加载..." isMainComponent />;
   }
 
-  const tabs = ["Overview", "Hardware"];
+  const tabs = [
+    { label: "概览", path: "overview" },
+    { label: "硬件信息", path: "hardware" },
+  ];
 
   return (
     <CustomLayout
@@ -40,11 +43,11 @@ const ClusterMemberDetail: FC = () => {
           name={memberName ?? ""}
           parentItems={[
             <Link to="/ui/cluster/members" key={1}>
-              Cluster members
+              集群成员
             </Link>,
           ]}
           isLoaded
-          renameDisabledReason="Cannot rename cluster members"
+          renameDisabledReason="暂不支持重命名集群成员"
           controls={<ClusterMemberActions member={member} isDetailPage />}
         />
       }

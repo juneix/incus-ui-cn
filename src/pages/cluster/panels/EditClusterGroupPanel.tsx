@@ -50,19 +50,19 @@ const EditClusterGroupPanel: FC = () => {
         .then(() => {
           toastNotify.success(
             <>
-              Cluster group{" "}
+              集群分组{" "}
               <ResourceLink
                 type="cluster-group"
                 value={values.name}
                 to="/ui/cluster/groups"
               />{" "}
-              saved.
+              已保存。
             </>,
           );
           closePanel();
         })
         .catch((e) => {
-          notify.failure("Cluster group update failed", e);
+          notify.failure("更新集群分组失败", e);
         })
         .finally(() => {
           formik.setSubmitting(false);
@@ -80,7 +80,7 @@ const EditClusterGroupPanel: FC = () => {
     <SidePanel>
       <SidePanel.Header>
         <SidePanel.HeaderTitle>
-          Edit cluster group {panelParams.group}
+          编辑集群分组 {panelParams.group}
         </SidePanel.HeaderTitle>
       </SidePanel.Header>
       <NotificationRow className="u-no-padding" />
@@ -98,7 +98,7 @@ const EditClusterGroupPanel: FC = () => {
           onClick={closePanel}
           className="u-no-margin--bottom"
         >
-          Cancel
+          取消
         </Button>
         <ActionButton
           appearance="positive"
@@ -109,7 +109,7 @@ const EditClusterGroupPanel: FC = () => {
             !formik.isValid || formik.isSubmitting || !formik.values.name
           }
         >
-          Save changes
+          保存更改
         </ActionButton>
       </SidePanel.Footer>
     </SidePanel>

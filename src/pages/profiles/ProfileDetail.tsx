@@ -13,7 +13,10 @@ import NotificationRow from "components/NotificationRow";
 import TabLinks from "components/TabLinks";
 import { useProfile } from "context/useProfiles";
 
-const tabs: string[] = ["Overview", "Configuration"];
+const tabs = [
+  { label: "概览", path: "overview" },
+  { label: "配置", path: "configuration" },
+];
 
 const ProfileDetail: FC = () => {
   const notify = useNotify();
@@ -28,16 +31,16 @@ const ProfileDetail: FC = () => {
   }>();
 
   if (!name) {
-    return <>Missing name</>;
+    return <>缺少配置模板名称</>;
   }
   if (!projectName) {
-    return <>Missing project</>;
+    return <>缺少项目参数</>;
   }
 
   const { data: profile, error, isLoading } = useProfile(name, projectName);
 
   if (error) {
-    notify.failure("Loading profile failed", error);
+    notify.failure("加载配置模板失败", error);
   }
 
   return (
@@ -53,9 +56,9 @@ const ProfileDetail: FC = () => {
     >
       <NotificationRow />
       {isLoading && (
-        <Spinner className="u-loader" text="Loading profile details..." />
+        <Spinner className="u-loader" text="正在加载配置模板详情..." />
       )}
-      {!isLoading && !profile && <>Loading profile failed</>}
+      {!isLoading && !profile && <>加载配置模板失败</>}
       {!isLoading && profile && (
         <Row>
           <TabLinks
@@ -65,13 +68,13 @@ const ProfileDetail: FC = () => {
           />
 
           {!activeTab && (
-            <div role="tabpanel" aria-labelledby="overview">
+            <div role="tabpanel" aria-labelledby="概览">
               <ProfileDetailOverview profile={profile} />
             </div>
           )}
 
           {activeTab === "configuration" && (
-            <div role="tabpanel" aria-labelledby="configuration">
+            <div role="tabpanel" aria-labelledby="配置">
               <EditProfile profile={profile} />
             </div>
           )}

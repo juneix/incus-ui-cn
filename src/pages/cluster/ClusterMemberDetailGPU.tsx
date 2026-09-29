@@ -11,29 +11,29 @@ const ClusterMemberDetailGPU: FC<Props> = ({ resources }) => {
       <tbody>
         {resources?.gpu.cards?.map((card, index) => (
           <tr key={index}>
-            <th className="u-text--muted">Card #{index + 1}</th>
+            <th className="u-text--muted">显卡 #{index + 1}</th>
             <td>
-              <div>Product: {card.product}</div>
-              <div>Vendor: {card.vendor}</div>
-              <div>PCI Address: {card.pci_address}</div>
+              <div>产品：{card.product}</div>
+              <div>厂商：{card.vendor}</div>
+              <div>PCI 地址：{card.pci_address}</div>
               <div>
-                Driver: {card.driver} ({card.driver_version})
+                驱动：{card.driver} ({card.driver_version})
               </div>
-              <div>NUMA Node: {card.numa_node}</div>
+              <div>NUMA 节点：{card.numa_node}</div>
 
               {/* DRM info */}
               {card.drm && (
                 <div>
-                  DRM:
+                  DRM：
                   <div>
-                    Card: {card.drm.card_name} ({card.drm.card_device})
+                    显卡设备：{card.drm.card_name} ({card.drm.card_device})
                   </div>
                   <div>
-                    Control: {card.drm.control_name} ({card.drm.control_device})
+                    控制设备：{card.drm.control_name} ({card.drm.control_device})
                   </div>
                   {card.drm.render_name && (
                     <div>
-                      Render: {card.drm.render_name} ({card.drm.render_device})
+                      渲染设备：{card.drm.render_name} ({card.drm.render_device})
                     </div>
                   )}
                 </div>
@@ -42,7 +42,7 @@ const ClusterMemberDetailGPU: FC<Props> = ({ resources }) => {
               {/* SR-IOV info */}
               {card.sriov && (
                 <div>
-                  SR-IOV:
+                  SR-IOV：
                   <div>
                     {card.sriov.current_vfs} / {card.sriov.maximum_vfs} VFs
                   </div>

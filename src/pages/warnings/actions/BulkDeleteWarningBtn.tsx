@@ -32,12 +32,10 @@ const BulkDeleteWarningBtn: FC<Props> = ({ warningIds, onStart, onFinish }) => {
         queryClient.invalidateQueries({
           queryKey: [queryKeys.warnings],
         });
-        toastNotify.success(
-          <>{pluralize("Warning", warningIds.length)} deleted.</>,
-        );
+        toastNotify.success(<>已删除 {warningIds.length} 条告警。</>);
       })
       .catch((e) => {
-        toastNotify.failure("Warning deletion failed", e);
+        toastNotify.failure("删除告警失败", e);
       })
       .finally(() => {
         setLoading(false);
@@ -47,9 +45,9 @@ const BulkDeleteWarningBtn: FC<Props> = ({ warningIds, onStart, onFinish }) => {
 
   const getHoverText = () => {
     if (!canDeleteWarnings) {
-      return "You do not have permission to delete warnings";
+      return "你没有权限删除告警";
     }
-    return "Delete Warning";
+    return "删除告警";
   };
 
   return (
@@ -59,27 +57,27 @@ const BulkDeleteWarningBtn: FC<Props> = ({ warningIds, onStart, onFinish }) => {
       className="u-no-margin--bottom has-icon"
       loading={isLoading}
       confirmationModalProps={{
-        title: "Confirm delete",
+        title: "确认删除",
         children: (
           <p>
-            This will permanently delete{" "}
+            这将永久删除{" "}
             <strong>
-              {warningIds.length} {pluralize("warning", warningIds.length)}
+              {warningIds.length} 条告警
             </strong>
             <br />
-            This action cannot be undone, and can result in data loss.
+            此操作无法撤销，并可能导致数据丢失。
           </p>
         ),
         onConfirm: handleDelete,
-        confirmButtonLabel: "Delete",
+        confirmButtonLabel: "删除",
       }}
       disabled={!canDeleteWarnings || isLoading}
       shiftClickEnabled
       showShiftClickHint
-      aria-label="delete"
+      aria-label="删除"
     >
       <Icon name="delete" />
-      <span>Delete {pluralize("warning", warningIds.length)}</span>
+      <span>删除 {warningIds.length} 条告警</span>
     </ConfirmationButton>
   );
 };

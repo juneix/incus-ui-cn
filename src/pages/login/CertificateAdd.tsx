@@ -52,12 +52,12 @@ const CertificateAdd: FC = () => {
               <Row>
                 <Col size={3}>
                   <h2 className="p-stepped-list__title p-heading--5">
-                    创建 Token
+                    创建令牌
                   </h2>
                 </Col>
                 <Col size={6}>
                   <div className="p-stepped-list__content">
-                    <p>在命令行中生成 Token</p>
+                    <p>在命令行中生成令牌</p>
                     <div className="p-code-snippet">
                       <pre className="p-code-snippet__block--icon">
                         <code>incus config trust add incus-ui</code>

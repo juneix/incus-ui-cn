@@ -24,8 +24,8 @@ const EditClusterGroupBtn: FC<Props> = ({ group }) => {
         }}
         title={
           hasPermission
-            ? "Edit group"
-            : "You do not have permission to edit cluster groups"
+            ? "编辑分组"
+            : "你没有权限编辑集群分组"
         }
         hasIcon
       >

@@ -42,18 +42,18 @@ const GroupSelection: FC<Props> = ({
 
   const headers = [
     {
-      content: "Group",
+      content: "用户组",
       sortKey: "name",
       className: "name",
     },
     {
-      content: "Description",
+      content: "描述",
       sortKey: "description",
       className: "description",
     },
     {
       content: "",
-      "aria-label": "Modified status",
+      "aria-label": "修改状态",
       className: "modified-status",
     },
   ];
@@ -70,12 +70,12 @@ const GroupSelection: FC<Props> = ({
 
     const selectedParentsText =
       (parentItems?.length || 0) > 1
-        ? `all selected ${pluralize(parentItemName, 2)}`
+        ? `所有已选${pluralize(parentItemName, 2)}`
         : `${parentItemName} ${parentItems?.[0]?.name}`;
     const modifiedTitle = groupAdded
-      ? `Group will be added to ${selectedParentsText}`
+      ? `该用户组将添加到${selectedParentsText}`
       : groupRemoved
-        ? `Group will be removed from ${selectedParentsText}`
+        ? `该用户组将从${selectedParentsText}中移除`
         : "";
 
     const toggleRow = () => {
@@ -93,14 +93,14 @@ const GroupSelection: FC<Props> = ({
           onClick: toggleRow,
           role: "rowheader",
           className: "name u-truncate clickable-cell",
-          "aria-label": "Name",
+          "aria-label": "名称",
         },
         {
           content: <span>{group.description || ""}</span>,
           onClick: toggleRow,
           role: "cell",
           className: "description clickable-cell",
-          "aria-label": "Description",
+          "aria-label": "描述",
           title: group.description,
         },
         {
@@ -108,7 +108,7 @@ const GroupSelection: FC<Props> = ({
             <Icon name="status-in-progress-small" />
           ),
           role: "cell",
-          "aria-label": "Modified status",
+          "aria-label": "修改状态",
           className: "modified-status u-align--right",
           title: parentItemName ? modifiedTitle : undefined,
         },
@@ -146,8 +146,8 @@ const GroupSelection: FC<Props> = ({
             headers={headers}
             rows={sortedRows}
             sortable
-            emptyStateMsg="No groups found"
-            itemName="group"
+            emptyStateMsg="未找到用户组"
+            itemName="用户组"
             parentName=""
             selectedNames={Array.from(selectedGroups)}
             setSelectedNames={setSelectedGroups}
@@ -162,14 +162,13 @@ const GroupSelection: FC<Props> = ({
         <EmptyState
           className="empty-state empty-state__full-width"
           image={<Icon name="user-group" className="empty-state-icon" />}
-          title="No groups found"
+          title="未找到用户组"
         >
           <p>
-            Groups are an easy way to manage the structured assignment of
-            permissions.
+            用户组可以帮助你更方便地统一管理权限分配。
           </p>
           <Link to={`/ui/permissions/groups?panel=create-groups`}>
-            Create group
+            创建用户组
             <Icon className="external-link-icon" name="external-link" />
           </Link>
         </EmptyState>

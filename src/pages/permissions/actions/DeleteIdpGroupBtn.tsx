@@ -18,31 +18,31 @@ const DeleteIdpGroupBtn: FC<Props> = ({ idpGroup }) => {
     <ConfirmationButton
       onHoverText={
         canDeleteIdpGroup(idpGroup)
-          ? "Delete IDP group"
-          : "You do not have permission to delete this IDP group"
+          ? "删除 IDP 用户组"
+          : "你没有权限删除该 IDP 用户组"
       }
       appearance="base"
       className="has-icon is-dense"
-      aria-label="Delete IDP group"
+      aria-label="删除 IDP 用户组"
       type="button"
       disabled={!canDeleteIdpGroup(idpGroup)}
       shiftClickEnabled
       showShiftClickHint
       confirmationModalProps={{
-        title: "Confirm IDP group deletion",
-        confirmButtonLabel: "Delete",
+        title: "确认删除 IDP 用户组",
+        confirmButtonLabel: "删除",
         confirmButtonLoading: isDeleting,
         onConfirm: deleteIdpGroups,
         className: "permission-confirm-modal",
         children: (
           <p>
-            Are you sure you want to delete the IDP group{" "}
+            确认要删除 IDP 用户组{" "}
             <ResourceLabel
               type="idp-group"
               value={deletableIdpGroups[0]?.name}
               bold
             />
-            ?
+            吗？
           </p>
         ),
       }}

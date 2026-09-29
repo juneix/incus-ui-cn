@@ -37,14 +37,14 @@ const PermissionIdentitiesFilter: FC = () => {
   const searchAndFilterData: SearchAndFilterData[] = [
     {
       id: 1,
-      heading: "Auth method",
+      heading: "认证方式",
       chips: authMethods.map((method) => {
         return { lead: AUTH_METHOD, value: method };
       }),
     },
     {
       id: 2,
-      heading: "System identities",
+      heading: "系统身份",
       chips: [{ lead: SYSTEM_IDENTITIES, value: "hide" }],
     },
   ];
@@ -63,7 +63,7 @@ const PermissionIdentitiesFilter: FC = () => {
 
   return (
     <>
-      <h2 className="u-off-screen">Search and filter</h2>
+      <h2 className="u-off-screen">搜索和筛选</h2>
       <SearchAndFilter
         existingSearchData={searchParamsToChips(searchParams, QUERY_PARAMS)}
         filterPanelData={searchAndFilterData}

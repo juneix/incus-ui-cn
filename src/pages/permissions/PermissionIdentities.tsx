@@ -67,20 +67,20 @@ const PermissionIdentities: FC = () => {
   }, [identities]);
 
   if (error) {
-    notify.failure("Loading identities failed", error);
+    notify.failure("加载身份列表失败", error);
   }
 
   const headers = [
-    { content: "Name", className: "name", sortKey: "name" },
+    { content: "名称", className: "name", sortKey: "name" },
     { content: "ID", sortKey: "id", className: "identity-id" },
-    { content: "Auth method", sortKey: "authmethod", className: "auth-method" },
-    { content: "Type", sortKey: "type", className: "identity-type" },
+    { content: "认证方式", sortKey: "authmethod", className: "auth-method" },
+    { content: "类型", sortKey: "type", className: "identity-type" },
     {
-      content: "Groups",
+      content: "用户组",
       sortKey: "groups",
       className: "u-align--right group-count",
     },
-    { "aria-label": "Actions", className: "u-align--right actions" },
+    { "aria-label": "操作", className: "u-align--right actions" },
   ];
 
   const filters: PermissionIdentitiesFilterType = {
@@ -136,7 +136,7 @@ const PermissionIdentities: FC = () => {
 
       const groupsText = pluralize("group", identity.groups?.length ?? 0);
       const groupsList = identity.groups?.join("\n- ");
-      const groupsTitle = `Assigned ${groupsText}:\n- ${groupsList}`;
+      const groupsTitle = `已分配${groupsText}：\n- ${groupsList}`;
       return (
         <div title={identity.groups?.length ? groupsTitle : ""}>
           {identity.groups?.length || 0}
@@ -170,11 +170,11 @@ const PermissionIdentities: FC = () => {
           content: (
             <>
               <ResourceLabel type={getType()} value={name} />{" "}
-              <Tag isVisible={isLoggedInIdentity}>You</Tag>
+              <Tag isVisible={isLoggedInIdentity}>当前用户</Tag>
             </>
           ),
           role: "rowheader",
-          "aria-label": "Name",
+          "aria-label": "名称",
           className: "u-truncate",
           title: name,
         },
@@ -188,20 +188,20 @@ const PermissionIdentities: FC = () => {
         {
           content: identity.authentication_method.toUpperCase(),
           role: "cell",
-          "aria-label": "Auth method",
+          "aria-label": "认证方式",
           className: "auth-method",
         },
         {
           content: identity.type,
           role: "cell",
-          "aria-label": "Type",
+          "aria-label": "类型",
           className: "u-truncate identity-type",
         },
         {
           content: getGroupLink(),
           role: "cell",
           className: "u-align--right group-count",
-          "aria-label": "Groups for this identity",
+          "aria-label": "该身份所属用户组",
         },
         {
           content: !isUnrestricted(identity) && (
@@ -213,11 +213,11 @@ const PermissionIdentities: FC = () => {
                 dense
                 onClick={openGroupPanelForIdentity}
                 type="button"
-                aria-label="Manage groups"
+                aria-label="管理用户组"
                 title={
                   canEditIdentity()
-                    ? "Manage groups"
-                    : "You do not have permission to modify this identity"
+                    ? "管理用户组"
+                    : "你没有权限修改该身份"
                 }
                 disabled={!canEditIdentity(identity)}
               >
@@ -230,7 +230,7 @@ const PermissionIdentities: FC = () => {
           ),
           className: "actions u-align--right",
           role: "cell",
-          "aria-label": "Actions",
+          "aria-label": "操作",
         },
       ],
       sortData: {
@@ -253,21 +253,21 @@ const PermissionIdentities: FC = () => {
   });
 
   if (isLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="正在加载..." isMainComponent />;
   }
 
   const getTablePaginationDescription = () => {
     // This is needed because TablePagination does not cater for plural identity
     const defaultPaginationDescription =
       rows.length > 1
-        ? `Showing all ${rows.length} identities`
-        : `Showing 1 out of 1 identity`;
+        ? `显示全部 ${rows.length} 个身份`
+        : "显示 1 个身份，共 1 个";
 
     if (selectedIdentityIds.length > 0) {
       return (
         <SelectedTableNotification
           totalCount={fineGrainedIdentities.length ?? 0}
-          itemName="identity"
+          itemName="身份"
           selectedNames={selectedIdentityIds}
           setSelectedNames={setSelectedIdentityIds}
           filteredNames={fineGrainedIdentities.map((item) => item.id)}
@@ -290,9 +290,9 @@ const PermissionIdentities: FC = () => {
               <PageHeader.Title>
                 <HelpLink
                   docPath="/explanation/authorization"
-                  title="Learn more about permissions"
+                  title="了解更多权限管理"
                 >
-                  Identities
+                  身份
                 </HelpLink>
               </PageHeader.Title>
               {!selectedIdentityIds.length && !panelParams.panel && (
@@ -333,9 +333,9 @@ const PermissionIdentities: FC = () => {
             <TablePagination
               data={sortedRows}
               id="pagination"
-              itemName="identity"
+              itemName="身份"
               className="u-no-margin--top"
-              aria-label="Table pagination control"
+              aria-label="表格分页控件"
               description={getTablePaginationDescription()}
             >
               <SelectableMainTable
@@ -344,9 +344,9 @@ const PermissionIdentities: FC = () => {
                 headers={headers}
                 rows={sortedRows}
                 sortable
-                emptyStateMsg="No identities found matching this search"
+                emptyStateMsg="没有匹配搜索条件的身份"
                 onUpdateSort={updateSort}
-                itemName="identity"
+                itemName="身份"
                 parentName=""
                 selectedNames={selectedIdentityIds}
                 setSelectedNames={setSelectedIdentityIds}

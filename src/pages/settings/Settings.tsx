@@ -49,15 +49,15 @@ const Settings: FC = () => {
   const { data: projects = [] } = useProjects();
 
   if (clusterError) {
-    notify.failure("Loading clustered settings failed", clusterError);
+    notify.failure("加载集群设置失败", clusterError);
   }
 
   if (isConfigOptionsLoading || isSettingsLoading) {
-    return <Spinner className="u-loader" text="Loading..." isMainComponent />;
+    return <Spinner className="u-loader" text="正在加载..." isMainComponent />;
   }
 
   if (settingsError) {
-    notify.failure("Loading settings failed", settingsError);
+    notify.failure("加载设置失败", settingsError);
   }
 
   const getValue = (configField: ConfigField): string | undefined => {
@@ -90,9 +90,9 @@ const Settings: FC = () => {
   };
 
   const headers = [
-    { content: "Group", className: "group" },
-    { content: "Key", className: "key" },
-    { content: "Value" },
+    { content: "分组", className: "group" },
+    { content: "键", className: "key" },
+    { content: "值" },
   ];
 
   const configFields = toConfigFields(configOptions?.configs?.server ?? {});
@@ -112,7 +112,7 @@ const Settings: FC = () => {
     key: "user.ui.sso_only",
     category: "user",
     default: "false",
-    shortdesc: "Whether to restrict login options to SSO/OIDC only.",
+    shortdesc: "是否仅允许使用 SSO/OIDC 登录。",
     type: "bool",
   });
 
@@ -120,7 +120,7 @@ const Settings: FC = () => {
     key: "user.ui_login_project",
     category: "user",
     default: getDefaultProject(projects),
-    shortdesc: "Project to display on login.",
+    shortdesc: "登录后默认显示的项目。",
     type: "string",
   });
 
@@ -128,8 +128,7 @@ const Settings: FC = () => {
     key: "user.ui_theme",
     category: "user",
     default: "",
-    shortdesc:
-      "Set UI to dark theme, light theme, or to match the system theme.",
+    shortdesc: "设置界面为深色、浅色，或跟随系统主题。",
     type: "string",
   });
 
@@ -137,7 +136,7 @@ const Settings: FC = () => {
     key: "user.ui.title",
     category: "user",
     default: "",
-    shortdesc: "Title for the LXD-UI web page. Shows the hostname when unset.",
+    shortdesc: "LXD-UI 网页标题。未设置时显示主机名。",
     type: "string",
   });
 
@@ -172,7 +171,7 @@ const Settings: FC = () => {
             ),
             role: "rowheader",
             className: "group",
-            "aria-label": "Group",
+            "aria-label": "分组",
           },
           {
             content: (
@@ -189,7 +188,7 @@ const Settings: FC = () => {
             ),
             role: "cell",
             className: "key",
-            "aria-label": "Key",
+            "aria-label": "键",
           },
           {
             content: (
@@ -201,7 +200,7 @@ const Settings: FC = () => {
               />
             ),
             role: "cell",
-            "aria-label": "Value",
+            "aria-label": "值",
             className: "u-vertical-align-middle",
           },
         ],
@@ -217,9 +216,9 @@ const Settings: FC = () => {
               <PageHeader.Title>
                 <HelpLink
                   docPath="/server/"
-                  title="Learn more about server configuration"
+                  title="了解更多服务器配置"
                 >
-                  Settings
+                  设置
                 </HelpLink>
               </PageHeader.Title>
               <PageHeader.Search>
@@ -230,7 +229,7 @@ const Settings: FC = () => {
                   onChange={(value) => {
                     setQuery(value);
                   }}
-                  placeholder="Search"
+                  placeholder="搜索"
                   value={query}
                 />
               </PageHeader.Search>
@@ -244,19 +243,19 @@ const Settings: FC = () => {
           {!canEditServerConfiguration() && (
             <Notification
               severity="caution"
-              title="Restricted permissions"
+              title="权限受限"
               titleElement="h2"
             >
-              You do not have permission to view or edit server settings
+              你没有权限查看或编辑服务器设置
             </Notification>
           )}
           {!hasMetadataConfiguration && canEditServerConfiguration() && (
             <Notification
               severity="information"
-              title="Get more server settings"
+              title="获取更多服务器设置"
               titleElement="h2"
             >
-              Update to LXD v5.19.0 or later to access more server settings
+              升级到 LXD v5.19.0 或更高版本以访问更多服务器设置
             </Notification>
           )}
           {canEditServerConfiguration() && (
@@ -269,7 +268,7 @@ const Settings: FC = () => {
                 id="settings-table"
                 headers={headers}
                 rows={rows}
-                emptyStateMsg="No data to display"
+                emptyStateMsg="暂无数据"
               />
             </ScrollableTable>
           )}

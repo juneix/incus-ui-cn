@@ -12,11 +12,14 @@ interface Props {
 }
 
 const Server: FC<Props> = ({ activeTab }) => {
-  const tabs = ["Hardware", "Clustering"];
+  const tabs = [
+    { label: "硬件信息", path: "overview" },
+    { label: "集群", path: "clustering" },
+  ];
 
   return (
     <BaseLayout
-      title="Server"
+      title="服务器"
       contentClassName="detail-page cluster-member-details"
     >
       <NotificationRow />
@@ -27,11 +30,11 @@ const Server: FC<Props> = ({ activeTab }) => {
           <EmptyState
             className="empty-state"
             image={<Icon name="cluster-host" className="empty-state-icon" />}
-            title="This server is not clustered"
+            title="当前服务器尚未加入集群"
           >
             <p>
               <DocLink docPath="/explanation/clustering/" hasExternalIcon>
-                Learn more about clustering
+                了解更多集群信息
               </DocLink>
             </p>
             <EnableClusteringBtn />

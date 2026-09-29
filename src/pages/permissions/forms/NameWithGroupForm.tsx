@@ -18,10 +18,10 @@ const NameWithGroupForm: FC<Props> = ({ formik }) => {
   return (
     <Form onSubmit={formik.handleSubmit}>
       {/* hidden submit to enable enter key in inputs */}
-      <Input type="submit" hidden value="Hidden input" />
+      <Input type="submit" hidden value="隐藏输入框" />
       <Input
         type="text"
-        label="Name"
+        label="名称"
         required
         autoFocus
         id="name"
@@ -30,7 +30,7 @@ const NameWithGroupForm: FC<Props> = ({ formik }) => {
         onChange={formik.handleChange}
         value={formik.values.name}
         error={formik.touched.name ? formik.errors.name : null}
-        placeholder="Enter name"
+        placeholder="请输入名称"
       />
     </Form>
   );

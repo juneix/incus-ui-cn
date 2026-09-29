@@ -45,19 +45,19 @@ const CreateClusterGroupPanel: FC = () => {
         .then(() => {
           toastNotify.success(
             <>
-              Cluster group{" "}
+              集群分组{" "}
               <ResourceLink
                 type="cluster-group"
                 value={values.name}
                 to="/ui/cluster/groups"
               />{" "}
-              created.
+              已创建。
             </>,
           );
           closePanel();
         })
         .catch((e) => {
-          notify.failure("Cluster group creation failed", e);
+          notify.failure("创建集群分组失败", e);
         })
         .finally(() => {
           formik.setSubmitting(false);
@@ -74,7 +74,7 @@ const CreateClusterGroupPanel: FC = () => {
   return (
     <SidePanel>
       <SidePanel.Header>
-        <SidePanel.HeaderTitle>Create cluster group</SidePanel.HeaderTitle>
+        <SidePanel.HeaderTitle>创建集群分组</SidePanel.HeaderTitle>
       </SidePanel.Header>
       <NotificationRow className="u-no-padding" />
       <SidePanel.Content className="u-no-padding">
@@ -91,7 +91,7 @@ const CreateClusterGroupPanel: FC = () => {
           onClick={closePanel}
           className="u-no-margin--bottom"
         >
-          Cancel
+          取消
         </Button>
         <ActionButton
           appearance="positive"
@@ -102,7 +102,7 @@ const CreateClusterGroupPanel: FC = () => {
             !formik.isValid || formik.isSubmitting || !formik.values.name
           }
         >
-          Create group
+          创建分组
         </ActionButton>
       </SidePanel.Footer>
     </SidePanel>

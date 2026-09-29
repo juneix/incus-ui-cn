@@ -20,6 +20,13 @@ const ClusterMemberStatus: FC<Props> = ({ member }) => {
     );
   }
 
+  const statusLabel = {
+    Evacuated: "已疏散",
+    Online: "在线",
+    Offline: "离线",
+    Blocked: "已阻塞",
+  };
+
   const getIconName = () => {
     return (
       {
@@ -34,7 +41,7 @@ const ClusterMemberStatus: FC<Props> = ({ member }) => {
   return (
     <>
       <Icon name={getIconName()} className="status-icon" />
-      {member.status}
+      {statusLabel[member.status] ?? member.status}
     </>
   );
 };
